@@ -40,6 +40,10 @@ func Img(props Props) *Element {
 	return NewElement("img", props)
 }
 
+func Script(props Props) *Element {
+	return NewElement("script", props)
+}
+
 func Text(content string) string {
 	return content
 }

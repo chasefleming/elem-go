@@ -53,6 +53,12 @@ func TestP(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestScript(t *testing.T) {
+	expected := `<script src="https://example.com/script.js" />`
+	el := Script(Props{Src: "https://example.com/script.js"})
+	assert.Equal(t, expected, el.Render())
+}
+
 func TestSpan(t *testing.T) {
 	expected := `<span class="highlight">Hello, Elem!</span>`
 	el := Span(Props{Class: "highlight"}, Text("Hello, Elem!"))
