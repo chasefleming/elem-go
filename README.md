@@ -75,8 +75,8 @@ In this example, we transformed a slice of strings into a list of `li` elements 
 
 ```go
 isAdmin := true
-adminLink := elem.A(elem.Attrs{"href": "/admin"}, elem.Text("Admin Panel"))
-guestLink := elem.A(elem.Attrs{"href": "/login"}, elem.Text("Login"))
+adminLink := elem.A(elem.Attrs{attrs.Href: "/admin"}, elem.Text("Admin Panel"))
+guestLink := elem.A(elem.Attrs{attrs.Href: "/login"}, elem.Text("Login"))
 
 content := elem.Div(nil,
     elem.H1(nil, elem.Text("Dashboard")),
