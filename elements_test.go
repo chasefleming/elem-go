@@ -11,6 +11,18 @@ func TestA(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestBody(t *testing.T) {
+	expected := `<body class="page-body"><p>Welcome to Elem!</p></body>`
+	el := Body(Props{Class: "page-body"}, P(nil, Text("Welcome to Elem!")))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestButton(t *testing.T) {
+	expected := `<button class="btn">Click Me</button>`
+	el := Button(Props{Class: "btn"}, Text("Click Me"))
+	assert.Equal(t, expected, el.Render())
+}
+
 func TestDiv(t *testing.T) {
 	expected := `<div class="container">Hello, Elem!</div>`
 	el := Div(Props{Class: "container"}, Text("Hello, Elem!"))
@@ -32,6 +44,18 @@ func TestH2(t *testing.T) {
 func TestH3(t *testing.T) {
 	expected := `<h3>Hello, Elem!</h3>`
 	el := H3(nil, Text("Hello, Elem!"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestHtml(t *testing.T) {
+	expected := `<html lang="en"><head><meta charset="UTF-8" /><title>Elem Page</title></head><body><p>Welcome to Elem!</p></body></html>`
+	el := Html(Props{Lang: "en"},
+		Head(nil,
+			Meta(Props{Charset: "UTF-8"}),
+			Title(nil, Text("Elem Page")),
+		),
+		Body(nil, P(nil, Text("Welcome to Elem!"))),
+	)
 	assert.Equal(t, expected, el.Render())
 }
 
