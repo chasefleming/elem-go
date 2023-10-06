@@ -1,43 +1,44 @@
 package elem
 
 import (
+	"github.com/chasefleming/elem-go/attrs"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestA(t *testing.T) {
 	expected := `<a href="https://example.com">Visit Example</a>`
-	el := A(Props{Href: "https://example.com"}, Text("Visit Example"))
+	el := A(Attrs{attrs.Href: "https://example.com"}, Text("Visit Example"))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestBody(t *testing.T) {
 	expected := `<body class="page-body"><p>Welcome to Elem!</p></body>`
-	el := Body(Props{Class: "page-body"}, P(nil, Text("Welcome to Elem!")))
+	el := Body(Attrs{attrs.Class: "page-body"}, P(nil, Text("Welcome to Elem!")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestButton(t *testing.T) {
 	expected := `<button class="btn">Click Me</button>`
-	el := Button(Props{Class: "btn"}, Text("Click Me"))
+	el := Button(Attrs{attrs.Class: "btn"}, Text("Click Me"))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestDiv(t *testing.T) {
 	expected := `<div class="container">Hello, Elem!</div>`
-	el := Div(Props{Class: "container"}, Text("Hello, Elem!"))
+	el := Div(Attrs{attrs.Class: "container"}, Text("Hello, Elem!"))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestH1(t *testing.T) {
 	expected := `<h1 class="title">Hello, Elem!</h1>`
-	el := H1(Props{Class: "title"}, Text("Hello, Elem!"))
+	el := H1(Attrs{attrs.Class: "title"}, Text("Hello, Elem!"))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestH2(t *testing.T) {
 	expected := `<h2 class="subtitle">Hello, Elem!</h2>`
-	el := H2(Props{Class: "subtitle"}, Text("Hello, Elem!"))
+	el := H2(Attrs{attrs.Class: "subtitle"}, Text("Hello, Elem!"))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -49,9 +50,9 @@ func TestH3(t *testing.T) {
 
 func TestHtml(t *testing.T) {
 	expected := `<html lang="en"><head><meta charset="UTF-8"><title>Elem Page</title></head><body><p>Welcome to Elem!</p></body></html>`
-	el := Html(Props{Lang: "en"},
+	el := Html(Attrs{attrs.Lang: "en"},
 		Head(nil,
-			Meta(Props{Charset: "UTF-8"}),
+			Meta(Attrs{attrs.Charset: "UTF-8"}),
 			Title(nil, Text("Elem Page")),
 		),
 		Body(nil, P(nil, Text("Welcome to Elem!"))),
@@ -61,7 +62,7 @@ func TestHtml(t *testing.T) {
 
 func TestImg(t *testing.T) {
 	expected := `<img alt="An image" src="image.jpg">`
-	el := Img(Props{Src: "image.jpg", Alt: "An image"})
+	el := Img(Attrs{attrs.Src: "image.jpg", attrs.Alt: "An image"})
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -79,13 +80,13 @@ func TestP(t *testing.T) {
 
 func TestScript(t *testing.T) {
 	expected := `<script src="https://example.com/script.js"></script>`
-	el := Script(Props{Src: "https://example.com/script.js"})
+	el := Script(Attrs{attrs.Src: "https://example.com/script.js"})
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestSpan(t *testing.T) {
 	expected := `<span class="highlight">Hello, Elem!</span>`
-	el := Span(Props{Class: "highlight"}, Text("Hello, Elem!"))
+	el := Span(Attrs{attrs.Class: "highlight"}, Text("Hello, Elem!"))
 	assert.Equal(t, expected, el.Render())
 }
 

@@ -4,16 +4,18 @@ import (
 	"sort"
 )
 
+type Attrs map[string]string
+
 type Element struct {
 	Tag      string
-	Props    map[string]string
+	Attrs    Attrs
 	Children []interface{} // Can be either string (for text) or another Element
 }
 
-func NewElement(tag string, props Props, children ...interface{}) *Element {
+func NewElement(tag string, attrs Attrs, children ...interface{}) *Element {
 	return &Element{
 		Tag:      tag,
-		Props:    props,
+		Attrs:    attrs,
 		Children: children,
 	}
 }
@@ -42,15 +44,15 @@ func (e *Element) Render() string {
 	}
 
 	// Sort the keys for consistent order
-	keys := make([]string, 0, len(e.Props))
-	for k := range e.Props {
+	keys := make([]string, 0, len(e.Attrs))
+	for k := range e.Attrs {
 		keys = append(keys, k)
 	}
 	sort.Strings(keys)
 
 	props := ""
 	for _, k := range keys {
-		props += ` ` + k + `="` + e.Props[k] + `"`
+		props += ` ` + k + `="` + e.Attrs[k] + `"`
 	}
 
 	content := ""
