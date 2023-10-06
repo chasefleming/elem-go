@@ -5,6 +5,16 @@ import (
 	"testing"
 )
 
+func TestStyleString(t *testing.T) {
+	style := Style{
+		"background-color": "blue",
+		"color":            "white",
+		"font-size":        "16px",
+	}
+
+	assert.Equal(t, "background-color: blue; color: white; font-size: 16px;", style.String())
+}
+
 func TestShow(t *testing.T) {
 	trueElement := Div(nil, Text("True Condition"))
 	falseElement := Div(nil, Text("False Condition"))
