@@ -48,7 +48,7 @@ func TestH3(t *testing.T) {
 }
 
 func TestHtml(t *testing.T) {
-	expected := `<html lang="en"><head><meta charset="UTF-8" /><title>Elem Page</title></head><body><p>Welcome to Elem!</p></body></html>`
+	expected := `<html lang="en"><head><meta charset="UTF-8"><title>Elem Page</title></head><body><p>Welcome to Elem!</p></body></html>`
 	el := Html(Props{Lang: "en"},
 		Head(nil,
 			Meta(Props{Charset: "UTF-8"}),
@@ -60,7 +60,7 @@ func TestHtml(t *testing.T) {
 }
 
 func TestImg(t *testing.T) {
-	expected := `<img alt="An image" src="image.jpg" />`
+	expected := `<img alt="An image" src="image.jpg">`
 	el := Img(Props{Src: "image.jpg", Alt: "An image"})
 	assert.Equal(t, expected, el.Render())
 }
@@ -78,7 +78,7 @@ func TestP(t *testing.T) {
 }
 
 func TestScript(t *testing.T) {
-	expected := `<script src="https://example.com/script.js" />`
+	expected := `<script src="https://example.com/script.js"></script>`
 	el := Script(Props{Src: "https://example.com/script.js"})
 	assert.Equal(t, expected, el.Render())
 }
