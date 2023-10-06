@@ -26,6 +26,10 @@ func (s Style) String() string {
 	return styleStr
 }
 
+func ApplyStyle(s Style) string {
+	return s.String()
+}
+
 // Show conditionally renders one of the provided elements based on the condition
 func Show(condition bool, ifTrue, ifFalse *Element) *Element {
 	if condition {
