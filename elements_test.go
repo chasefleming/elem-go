@@ -6,11 +6,7 @@ import (
 	"testing"
 )
 
-func TestA(t *testing.T) {
-	expected := `<a href="https://example.com">Visit Example</a>`
-	el := A(Attrs{attrs.Href: "https://example.com"}, Text("Visit Example"))
-	assert.Equal(t, expected, el.Render())
-}
+// ========== Document Structure ==========
 
 func TestBody(t *testing.T) {
 	expected := `<body class="page-body"><p>Welcome to Elem!</p></body>`
@@ -18,9 +14,27 @@ func TestBody(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
-func TestButton(t *testing.T) {
-	expected := `<button class="btn">Click Me</button>`
-	el := Button(Attrs{attrs.Class: "btn"}, Text("Click Me"))
+func TestHead(t *testing.T) {
+	// ... [Code for the Head test here]
+}
+
+func TestHtml(t *testing.T) {
+	expected := `<html lang="en"><head><meta charset="UTF-8"><title>Elem Page</title></head><body><p>Welcome to Elem!</p></body></html>`
+	el := Html(Attrs{attrs.Lang: "en"},
+		Head(nil,
+			Meta(Attrs{attrs.Charset: "UTF-8"}),
+			Title(nil, Text("Elem Page")),
+		),
+		Body(nil, P(nil, Text("Welcome to Elem!"))),
+	)
+	assert.Equal(t, expected, el.Render())
+}
+
+// ========== Text Formatting and Structure ==========
+
+func TestA(t *testing.T) {
+	expected := `<a href="https://example.com">Visit Example</a>`
+	el := A(Attrs{attrs.Href: "https://example.com"}, Text("Visit Example"))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -48,39 +62,9 @@ func TestH3(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
-func TestHtml(t *testing.T) {
-	expected := `<html lang="en"><head><meta charset="UTF-8"><title>Elem Page</title></head><body><p>Welcome to Elem!</p></body></html>`
-	el := Html(Attrs{attrs.Lang: "en"},
-		Head(nil,
-			Meta(Attrs{attrs.Charset: "UTF-8"}),
-			Title(nil, Text("Elem Page")),
-		),
-		Body(nil, P(nil, Text("Welcome to Elem!"))),
-	)
-	assert.Equal(t, expected, el.Render())
-}
-
-func TestImg(t *testing.T) {
-	expected := `<img alt="An image" src="image.jpg">`
-	el := Img(Attrs{attrs.Src: "image.jpg", attrs.Alt: "An image"})
-	assert.Equal(t, expected, el.Render())
-}
-
-func TestLi(t *testing.T) {
-	expected := `<li>Item 1</li>`
-	el := Li(nil, Text("Item 1"))
-	assert.Equal(t, expected, el.Render())
-}
-
 func TestP(t *testing.T) {
 	expected := `<p>Hello, Elem!</p>`
 	el := P(nil, Text("Hello, Elem!"))
-	assert.Equal(t, expected, el.Render())
-}
-
-func TestScript(t *testing.T) {
-	expected := `<script src="https://example.com/script.js"></script>`
-	el := Script(Attrs{attrs.Src: "https://example.com/script.js"})
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -90,8 +74,40 @@ func TestSpan(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+// ========== Lists ==========
+
+func TestLi(t *testing.T) {
+	expected := `<li>Item 1</li>`
+	el := Li(nil, Text("Item 1"))
+	assert.Equal(t, expected, el.Render())
+}
+
 func TestUl(t *testing.T) {
 	expected := `<ul><li>Item 1</li><li>Item 2</li></ul>`
 	el := Ul(nil, Li(nil, Text("Item 1")), Li(nil, Text("Item 2")))
+	assert.Equal(t, expected, el.Render())
+}
+
+// ========== Forms ==========
+
+func TestButton(t *testing.T) {
+	expected := `<button class="btn">Click Me</button>`
+	el := Button(Attrs{attrs.Class: "btn"}, Text("Click Me"))
+	assert.Equal(t, expected, el.Render())
+}
+
+// ========== Hyperlinks and Multimedia ==========
+
+func TestImg(t *testing.T) {
+	expected := `<img alt="An image" src="image.jpg">`
+	el := Img(Attrs{attrs.Src: "image.jpg", attrs.Alt: "An image"})
+	assert.Equal(t, expected, el.Render())
+}
+
+// ========== Meta Elements ==========
+
+func TestScript(t *testing.T) {
+	expected := `<script src="https://example.com/script.js"></script>`
+	el := Script(Attrs{attrs.Src: "https://example.com/script.js"})
 	assert.Equal(t, expected, el.Render())
 }
