@@ -38,9 +38,33 @@ func TestA(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestBlockquote(t *testing.T) {
+	expected := `<blockquote>Quote text</blockquote>`
+	el := Blockquote(nil, Text("Quote text"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestBr(t *testing.T) {
+	expected := `<br>`
+	el := Br(nil)
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestCode(t *testing.T) {
+	expected := `<code>Code snippet</code>`
+	el := Code(nil, Text("Code snippet"))
+	assert.Equal(t, expected, el.Render())
+}
+
 func TestDiv(t *testing.T) {
 	expected := `<div class="container">Hello, Elem!</div>`
 	el := Div(Attrs{attrs.Class: "container"}, Text("Hello, Elem!"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestEm(t *testing.T) {
+	expected := `<em>Italic text</em>`
+	el := Em(nil, Text("Italic text"))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -62,15 +86,33 @@ func TestH3(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestHr(t *testing.T) {
+	expected := `<hr>`
+	el := Hr(nil)
+	assert.Equal(t, expected, el.Render())
+}
+
 func TestP(t *testing.T) {
 	expected := `<p>Hello, Elem!</p>`
 	el := P(nil, Text("Hello, Elem!"))
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestPre(t *testing.T) {
+	expected := `<pre>Preformatted text</pre>`
+	el := Pre(nil, Text("Preformatted text"))
+	assert.Equal(t, expected, el.Render())
+}
+
 func TestSpan(t *testing.T) {
 	expected := `<span class="highlight">Hello, Elem!</span>`
 	el := Span(Attrs{attrs.Class: "highlight"}, Text("Hello, Elem!"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestStrong(t *testing.T) {
+	expected := `<strong>Bold text</strong>`
+	el := Strong(nil, Text("Bold text"))
 	assert.Equal(t, expected, el.Render())
 }
 

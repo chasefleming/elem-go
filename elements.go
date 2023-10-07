@@ -24,8 +24,24 @@ func A(props Attrs, children ...interface{}) *Element {
 	return NewElement("a", props, children...)
 }
 
+func Br(props Attrs) *Element {
+	return NewElement("br", props)
+}
+
+func Blockquote(props Attrs, children ...interface{}) *Element {
+	return NewElement("blockquote", props, children...)
+}
+
+func Code(props Attrs, children ...interface{}) *Element {
+	return NewElement("code", props, children...)
+}
+
 func Div(props Attrs, children ...interface{}) *Element {
 	return NewElement("div", props, children...)
+}
+
+func Em(props Attrs, children ...interface{}) *Element {
+	return NewElement("em", props, children...)
 }
 
 func H1(props Attrs, children ...interface{}) *Element {
@@ -40,12 +56,24 @@ func H3(props Attrs, children ...interface{}) *Element {
 	return NewElement("h3", props, children...)
 }
 
+func Hr(props Attrs) *Element {
+	return NewElement("hr", props)
+}
+
 func P(props Attrs, children ...interface{}) *Element {
 	return NewElement("p", props, children...)
 }
 
+func Pre(props Attrs, children ...interface{}) *Element {
+	return NewElement("pre", props, children...)
+}
+
 func Span(props Attrs, children ...interface{}) *Element {
 	return NewElement("span", props, children...)
+}
+
+func Strong(props Attrs, children ...interface{}) *Element {
+	return NewElement("strong", props, children...)
 }
 
 func Text(content string) string {

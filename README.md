@@ -91,20 +91,27 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 `elem` provides utility functions for creating common HTML elements:
 
 - `A`: Anchor `<a>`
+- `Blockquote`: Blockquote `<blockquote>`
 - `Body`: Body `<body>`
+- `Br`: Break `<br>`
 - `Button`: Button `<button>`
+- `Code`: Code `<code>`
 - `Div`: Division `<div>`
+- `Em`: Emphasis `<em>`
 - `H1`: Heading 1 `<h1>`
 - `H2`: Heading 2 `<h2>`
 - `H3`: Heading 3 `<h3>`
 - `Head`: Head `<head>`
 - `Html`: HTML `<html>`
+- `Hr`: Horizontal Rule `<hr>`
 - `Img`: Image `<img>`
 - `Li`: List Item `<li>`
 - `Meta`: Meta `<meta>`
 - `P`: Paragraph `<p>`
+- `Pre`: Preformatted Text `<pre>`
 - `Script`: Script `<script>`
 - `Span`: Span `<span>`
+- `Strong`: Strong `<strong>`
 - `Title`: Title `<title>`
 - `Ul`: Unordered List `<ul>`
 
