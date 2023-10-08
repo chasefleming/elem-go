@@ -2,14 +2,15 @@ package attrs
 
 const (
 	// Universal Attributes
-	Alt      = "alt"
-	Class    = "class"
-	Dir      = "dir" // Direction, e.g., "ltr" or "rtl"
-	ID       = "id"
-	Lang     = "lang"
-	Style    = "style"
-	Tabindex = "tabindex"
-	Title    = "title"
+	Alt             = "alt"
+	Class           = "class"
+	Contenteditable = "contenteditable"
+	Dir             = "dir" // Direction, e.g., "ltr" or "rtl"
+	ID              = "id"
+	Lang            = "lang"
+	Style           = "style"
+	Tabindex        = "tabindex"
+	Title           = "title"
 
 	// Link/Script Attributes
 	Async       = "async"
@@ -31,23 +32,27 @@ const (
 	Width  = "width"
 
 	// Form/Input Attributes
-	Accept      = "accept"
-	Action      = "action"
-	Autofocus   = "autofocus"
-	Checked     = "checked"
-	Disabled    = "disabled"
-	For         = "for" // Used with label elements
-	Max         = "max"
-	MaxLength   = "maxlength"
-	Method      = "method" // e.g., "GET", "POST"
-	Min         = "min"
-	Multiple    = "multiple"
-	Name        = "name"
-	Placeholder = "placeholder"
-	Readonly    = "readonly"
-	Required    = "required"
-	Type        = "type"
-	Value       = "value"
+	Accept         = "accept"
+	Action         = "action"
+	Autocapitalize = "autocapitalize"
+	Autocomplete   = "autocomplete"
+	Autofocus      = "autofocus"
+	Cols           = "cols"
+	Checked        = "checked"
+	Disabled       = "disabled"
+	For            = "for" // Used with label elements
+	Max            = "max"
+	MaxLength      = "maxlength"
+	Method         = "method" // e.g., "GET", "POST"
+	Min            = "min"
+	Multiple       = "multiple"
+	Name           = "name"
+	Placeholder    = "placeholder"
+	Readonly       = "readonly"
+	Required       = "required"
+	Rows           = "rows"
+	Type           = "type"
+	Value          = "value"
 
 	// Miscellaneous Attributes
 	DataPrefix = "data-" // Used for custom data attributes e.g., "data-custom"
