@@ -138,6 +138,36 @@ func TestButton(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestForm(t *testing.T) {
+	expected := `<form action="/submit" method="post"><input name="username" type="text"></form>`
+	el := Form(Attrs{attrs.Action: "/submit", attrs.Method: "post"}, Input(Attrs{attrs.Type: "text", attrs.Name: "username"}))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestInput(t *testing.T) {
+	expected := `<input name="username" placeholder="Enter your username" type="text">`
+	el := Input(Attrs{attrs.Type: "text", attrs.Name: "username", attrs.Placeholder: "Enter your username"})
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestLabel(t *testing.T) {
+	expected := `<label for="username">Username</label>`
+	el := Label(Attrs{attrs.For: "username"}, "Username")
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestSelectAndOption(t *testing.T) {
+	expected := `<select name="color"><option value="red">Red</option><option value="blue">Blue</option></select>`
+	el := Select(Attrs{attrs.Name: "color"}, Option(Attrs{attrs.Value: "red"}, "Red"), Option(Attrs{attrs.Value: "blue"}, "Blue"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestTextarea(t *testing.T) {
+	expected := `<textarea name="comment" rows="5">Leave a comment...</textarea>`
+	el := Textarea(Attrs{attrs.Name: "comment", attrs.Rows: "5"}, "Leave a comment...")
+	assert.Equal(t, expected, el.Render())
+}
+
 // ========== Hyperlinks and Multimedia ==========
 
 func TestImg(t *testing.T) {

@@ -96,6 +96,30 @@ func Button(props Attrs, children ...interface{}) *Element {
 	return NewElement("button", props, children...)
 }
 
+func Form(attrs Attrs, children ...interface{}) *Element {
+	return NewElement("form", attrs, children...)
+}
+
+func Input(attrs Attrs) *Element {
+	return NewElement("input", attrs)
+}
+
+func Label(attrs Attrs, children ...interface{}) *Element {
+	return NewElement("label", attrs, children...)
+}
+
+func Option(attrs Attrs, content string) *Element {
+	return NewElement("option", attrs, content)
+}
+
+func Select(attrs Attrs, children ...interface{}) *Element {
+	return NewElement("select", attrs, children...)
+}
+
+func Textarea(attrs Attrs, content string) *Element {
+	return NewElement("textarea", attrs, content)
+}
+
 // ========== Hyperlinks and Multimedia ==========
 
 func Img(props Attrs) *Element {

@@ -46,6 +46,7 @@ const (
 	Placeholder = "placeholder"
 	Readonly    = "readonly"
 	Required    = "required"
+	Rows        = "rows"
 	Type        = "type"
 	Value       = "value"
 
