@@ -4,6 +4,28 @@ import (
 	"sort"
 )
 
+// List of HTML5 void elements. Void elements, also known as self-closing or empty elements,
+// are elements that don't have a closing tag because they can't contain any content.
+// For example, the <img> tag cannot wrap text or other tags, it stands alone, so it doesn't have a closing tag.
+var voidElements = map[string]bool{
+	"area":    true,
+	"base":    true,
+	"br":      true,
+	"col":     true,
+	"command": true,
+	"embed":   true,
+	"hr":      true,
+	"img":     true,
+	"input":   true,
+	"keygen":  true,
+	"link":    true,
+	"meta":    true,
+	"param":   true,
+	"source":  true,
+	"track":   true,
+	"wbr":     true,
+}
+
 type Attrs map[string]string
 
 type Element struct {
@@ -12,36 +34,7 @@ type Element struct {
 	Children []interface{} // Can be either string (for text) or another Element
 }
 
-func NewElement(tag string, attrs Attrs, children ...interface{}) *Element {
-	return &Element{
-		Tag:      tag,
-		Attrs:    attrs,
-		Children: children,
-	}
-}
-
 func (e *Element) Render() string {
-	// List of HTML5 void elements. Void elements, also known as self-closing or empty elements,
-	// are elements that don't have a closing tag because they can't contain any content.
-	// For example, the <img> tag cannot wrap text or other tags, it stands alone, so it doesn't have a closing tag.
-	var voidElements = map[string]bool{
-		"area":    true,
-		"base":    true,
-		"br":      true,
-		"col":     true,
-		"command": true,
-		"embed":   true,
-		"hr":      true,
-		"img":     true,
-		"input":   true,
-		"keygen":  true,
-		"link":    true,
-		"meta":    true,
-		"param":   true,
-		"source":  true,
-		"track":   true,
-		"wbr":     true,
-	}
 
 	// Sort the keys for consistent order
 	keys := make([]string, 0, len(e.Attrs))
@@ -71,4 +64,12 @@ func (e *Element) Render() string {
 	}
 
 	return `<` + e.Tag + props + `>` + content + `</` + e.Tag + `>`
+}
+
+func NewElement(tag string, attrs Attrs, children ...interface{}) *Element {
+	return &Element{
+		Tag:      tag,
+		Attrs:    attrs,
+		Children: children,
+	}
 }
