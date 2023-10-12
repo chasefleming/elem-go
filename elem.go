@@ -7,23 +7,23 @@ import (
 // List of HTML5 void elements. Void elements, also known as self-closing or empty elements,
 // are elements that don't have a closing tag because they can't contain any content.
 // For example, the <img> tag cannot wrap text or other tags, it stands alone, so it doesn't have a closing tag.
-var voidElements = map[string]bool{
-	"area":    true,
-	"base":    true,
-	"br":      true,
-	"col":     true,
-	"command": true,
-	"embed":   true,
-	"hr":      true,
-	"img":     true,
-	"input":   true,
-	"keygen":  true,
-	"link":    true,
-	"meta":    true,
-	"param":   true,
-	"source":  true,
-	"track":   true,
-	"wbr":     true,
+var voidElements = map[string]struct{}{
+	"area":    {},
+	"base":    {},
+	"br":      {},
+	"col":     {},
+	"command": {},
+	"embed":   {},
+	"hr":      {},
+	"img":     {},
+	"input":   {},
+	"keygen":  {},
+	"link":    {},
+	"meta":    {},
+	"param":   {},
+	"source":  {},
+	"track":   {},
+	"wbr":     {},
 }
 
 type Attrs map[string]string
@@ -59,8 +59,11 @@ func (e *Element) Render() string {
 	}
 
 	// Check if the tag is a void element and doesn't have any content
-	if content == "" && voidElements[e.Tag] {
-		return `<` + e.Tag + props + `>` // No closing tag for void elements
+	if content == "" {
+		_, exists := voidElements[e.Tag]
+		if exists {
+			return `<` + e.Tag + props + `>` // No closing tag for void elements
+		}
 	}
 
 	return `<` + e.Tag + props + `>` + content + `</` + e.Tag + `>`
