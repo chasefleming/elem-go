@@ -35,9 +35,7 @@ type Element struct {
 	Children []interface{} // Can be either string (for text) or another Element
 }
 
-func (e *Element) Render() string {
-	var builder strings.Builder
-
+func (e *Element) RenderTo(builder *strings.Builder) {
 	// Start with opening tag
 	builder.WriteString("<")
 	builder.WriteString(e.Tag)
@@ -61,7 +59,7 @@ func (e *Element) Render() string {
 	// If it's a void element, close it and return
 	if _, exists := voidElements[e.Tag]; exists {
 		builder.WriteString(`>`)
-		return builder.String()
+		return
 	}
 
 	// Close opening tag
@@ -73,7 +71,7 @@ func (e *Element) Render() string {
 		case string:
 			builder.WriteString(c)
 		case *Element:
-			builder.WriteString(c.Render())
+			c.RenderTo(builder)
 		}
 	}
 
@@ -81,7 +79,11 @@ func (e *Element) Render() string {
 	builder.WriteString(`</`)
 	builder.WriteString(e.Tag)
 	builder.WriteString(`>`)
+}
 
+func (e *Element) Render() string {
+	var builder strings.Builder
+	e.RenderTo(&builder)
 	return builder.String()
 }
 
