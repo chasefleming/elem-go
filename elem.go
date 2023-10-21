@@ -29,10 +29,25 @@ var voidElements = map[string]struct{}{
 
 type Attrs map[string]string
 
+type Node interface {
+	RenderTo(builder *strings.Builder)
+	Render() string
+}
+
+type TextNode string
+
+func (t TextNode) RenderTo(builder *strings.Builder) {
+	builder.WriteString(string(t))
+}
+
+func (t TextNode) Render() string {
+	return string(t)
+}
+
 type Element struct {
 	Tag      string
 	Attrs    Attrs
-	Children []interface{} // Can be either string (for text) or another Element
+	Children []Node
 }
 
 func (e *Element) RenderTo(builder *strings.Builder) {
@@ -65,14 +80,9 @@ func (e *Element) RenderTo(builder *strings.Builder) {
 	// Close opening tag
 	builder.WriteString(`>`)
 
-	// Build the content (either child text or nested elements)
+	// Build the content
 	for _, child := range e.Children {
-		switch c := child.(type) {
-		case string:
-			builder.WriteString(c)
-		case *Element:
-			c.RenderTo(builder)
-		}
+		child.RenderTo(builder)
 	}
 
 	// Append closing tag
@@ -87,7 +97,7 @@ func (e *Element) Render() string {
 	return builder.String()
 }
 
-func NewElement(tag string, attrs Attrs, children ...interface{}) *Element {
+func NewElement(tag string, attrs Attrs, children ...Node) *Element {
 	return &Element{
 		Tag:      tag,
 		Attrs:    attrs,

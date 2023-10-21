@@ -42,14 +42,14 @@ func main() {
 				htmx.HXPost:  "/submit-form",
 				htmx.HXSwap:  "outerHTML",
 			},
-				elem.Label(elem.Attrs{attrs.For: "name"}, "Name: "),
+				elem.Label(elem.Attrs{attrs.For: "name"}, elem.Text("Name: ")),
 				elem.Input(elem.Attrs{
 					attrs.Type: "text",
 					attrs.Name: "name",
 					attrs.ID:   "name",
 				}),
 				elem.Br(nil),
-				elem.Label(elem.Attrs{attrs.For: "email"}, "Email: "),
+				elem.Label(elem.Attrs{attrs.For: "email"}, elem.Text("Email: ")),
 				elem.Input(elem.Attrs{
 					attrs.Type: "email",
 					attrs.Name: "email",

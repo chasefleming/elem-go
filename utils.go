@@ -39,10 +39,10 @@ func Show(condition bool, ifTrue, ifFalse *Element) *Element {
 }
 
 // TransformEach maps a slice of items to a slice of Elements using the provided function
-func TransformEach[T any](items []T, fn func(T) *Element) []*Element {
-	var elements []*Element
+func TransformEach[T any](items []T, fn func(T) Node) []Node {
+	var nodes []Node
 	for _, item := range items {
-		elements = append(elements, fn(item))
+		nodes = append(nodes, fn(item))
 	}
-	return elements
+	return nodes
 }
