@@ -43,7 +43,7 @@ func TestShow(t *testing.T) {
 func TestTransformEach(t *testing.T) {
 	items := []string{"Item 1", "Item 2", "Item 3"}
 
-	elements := TransformEach(items, func(item string) *Element {
+	elements := TransformEach(items, func(item string) Node {
 		return Li(nil, Text(item))
 	})
 

@@ -152,19 +152,19 @@ func TestInput(t *testing.T) {
 
 func TestLabel(t *testing.T) {
 	expected := `<label for="username">Username</label>`
-	el := Label(Attrs{attrs.For: "username"}, "Username")
+	el := Label(Attrs{attrs.For: "username"}, Text("Username"))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestSelectAndOption(t *testing.T) {
 	expected := `<select name="color"><option value="red">Red</option><option value="blue">Blue</option></select>`
-	el := Select(Attrs{attrs.Name: "color"}, Option(Attrs{attrs.Value: "red"}, "Red"), Option(Attrs{attrs.Value: "blue"}, "Blue"))
+	el := Select(Attrs{attrs.Name: "color"}, Option(Attrs{attrs.Value: "red"}, Text("Red")), Option(Attrs{attrs.Value: "blue"}, Text("Blue")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestTextarea(t *testing.T) {
 	expected := `<textarea name="comment" rows="5">Leave a comment...</textarea>`
-	el := Textarea(Attrs{attrs.Name: "comment", attrs.Rows: "5"}, "Leave a comment...")
+	el := Textarea(Attrs{attrs.Name: "comment", attrs.Rows: "5"}, Text("Leave a comment..."))
 	assert.Equal(t, expected, el.Render())
 }
 
