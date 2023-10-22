@@ -30,7 +30,9 @@ const (
 
 	// Box Model Properties
 	Width         = "width"
+	MaxWidth      = "max-width"
 	Height        = "height"
+	MaxHeight     = "max-height"
 	Padding       = "padding"
 	PaddingTop    = "padding-top"
 	PaddingRight  = "padding-right"
