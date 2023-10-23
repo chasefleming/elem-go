@@ -64,7 +64,7 @@ const (
 	BorderBottom  		= "border-bottom"
 	BorderLeft    		= "border-left"
 	BorderColor   		= "border-color"
-	BorderTopColor 		= "borded-top-color"
+	BorderTopColor 		= "border-top-color"
 	BorderRightColor 	= "border-right-color"
 	BorderBottomColor 	= "border-bottom-color"
 	BorderLeftColor 	= "border-left-color"
