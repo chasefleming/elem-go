@@ -202,6 +202,18 @@ func TestImg(t *testing.T) {
 
 // ========== Meta Elements ==========
 
+func TestLink(t *testing.T) {
+	expected := `<link href="https://example.com/styles.css" rel="stylesheet">`
+	el := Link(Attrs{attrs.Rel: "stylesheet", attrs.Href: "https://example.com/styles.css"})
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestMeta(t *testing.T) {
+	expected := `<meta charset="UTF-8">`
+	el := Meta(Attrs{attrs.Charset: "UTF-8"})
+	assert.Equal(t, expected, el.Render())
+}
+
 func TestScript(t *testing.T) {
 	expected := `<script src="https://example.com/script.js"></script>`
 	el := Script(Attrs{attrs.Src: "https://example.com/script.js"})
