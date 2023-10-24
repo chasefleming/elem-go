@@ -90,6 +90,22 @@ func Ul(props Attrs, children ...Node) *Element {
 	return NewElement("ul", props, children...)
 }
 
+func Ol(props Attrs, children ...Node) *Element {
+	return NewElement("ol", props, children...)
+}
+
+func Dl(props Attrs, children ...Node) *Element {
+	return NewElement("dl", props, children...)
+}
+
+func Dt(props Attrs, children ...Node) *Element {
+	return NewElement("dt", props, children...)
+}
+
+func Dd(props Attrs, children ...Node) *Element {
+	return NewElement("dd", props, children...)
+}
+
 // ========== Forms ==========
 
 func Button(props Attrs, children ...Node) *Element {

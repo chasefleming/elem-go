@@ -130,6 +130,30 @@ func TestUl(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestOl(t *testing.T) {
+	expected := `<ol><li>Item 1</li><li>Item 2</li></ol>`
+	el := Ol(nil, Li(nil, Text("Item 1")), Li(nil, Text("Item 2")))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestDl(t *testing.T) {
+	expected := `<dl><dt>Term 1</dt><dd>Description 1</dd><dt>Term 2</dt><dd>Description 2</dd></dl>`
+	el := Dl(nil, Dt(nil, Text("Term 1")), Dd(nil, Text("Description 1")), Dt(nil, Text("Term 2")), Dd(nil, Text("Description 2")))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestDt(t *testing.T) {
+	expected := `<dt>Term 1</dt>`
+	el := Dt(nil, Text("Term 1"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestDd(t *testing.T) {
+	expected := `<dd>Description 1</dd>`
+	el := Dd(nil, Text("Description 1"))
+	assert.Equal(t, expected, el.Render())
+}
+
 // ========== Forms ==========
 
 func TestButton(t *testing.T) {

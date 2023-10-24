@@ -97,6 +97,9 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 - `Button`: Button `<button>`
 - `Code`: Code `<code>`
 - `Div`: Division `<div>`
+- `Dl`: Description List `<dl>`
+- `Dt`: Description Term `<dt>`
+- `Dd`: Description Description `<dd>`
 - `Em`: Emphasis `<em>`
 - `Form`: Form `<form>`
 - `H1`: Heading 1 `<h1>`
@@ -110,6 +113,7 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 - `Label`: Label `<label>`
 - `Li`: List Item `<li>`
 - `Meta`: Meta `<meta>`
+- `Ol`: Ordered List `<ol>`
 - `Option`: Dropdown option `<option>`
 - `P`: Paragraph `<p>`
 - `Pre`: Preformatted Text `<pre>`
