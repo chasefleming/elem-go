@@ -69,9 +69,9 @@ ulElement := elem.Ul(nil, liElements)
 ```
 In this example, we transformed a slice of strings into a list of `li` elements and then wrapped them in a `ul` element.
 
-### Conditional Rendering with Show
+### Conditional Rendering with `If`
 
-`elem` provides a utility function `Show` for conditional rendering of elements.
+`elem` provides a utility function `If` for conditional rendering of elements.
 
 ```go
 isAdmin := true
@@ -80,7 +80,7 @@ guestLink := elem.A(elem.Attrs{attrs.Href: "/login"}, elem.Text("Login"))
 
 content := elem.Div(nil,
     elem.H1(nil, elem.Text("Dashboard")),
-    elem.Show(isAdmin, adminLink, guestLink),
+    elem.If(isAdmin, adminLink, guestLink),
 )
 ```
 
