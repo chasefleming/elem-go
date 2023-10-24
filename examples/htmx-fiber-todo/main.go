@@ -39,28 +39,6 @@ func renderTodosRoute(c *fiber.Ctx) error {
 	return c.SendString(renderTodos(todos))
 }
 
-func renderSingleTodo(todo Todo) string {
-	checkboxAttributes := elem.Attrs{
-		attrs.Type:       "checkbox",
-		htmx.HXPost:      "/toggle/" + strconv.Itoa(todo.ID),
-		htmx.HXTrigger:   "change",
-		htmx.HXIndicator: "#saving-indicator",
-	}
-
-	textAttributes := elem.Attrs{}
-	if todo.Done {
-		checkboxAttributes[attrs.Checked] = "checked"
-		textAttributes[attrs.Style] = elem.ApplyStyle(elem.Style{
-			styles.TextDecoration: "line-through",
-		})
-	}
-
-	checkbox := elem.Input(checkboxAttributes)
-	todoItem := elem.Li(nil, checkbox, elem.Span(textAttributes, elem.Text(todo.Title)))
-
-	return todoItem.Render()
-}
-
 func toggleTodoRoute(c *fiber.Ctx) error {
 	id, _ := strconv.Atoi(c.Params("id"))
 	var updatedTodo Todo
@@ -81,6 +59,32 @@ func addTodoRoute(c *fiber.Ctx) error {
 		todos = append(todos, Todo{ID: len(todos) + 1, Title: newTitle, Done: false})
 	}
 	return c.Redirect("/")
+}
+
+func getTodoAttributes(todo Todo) (elem.Attrs, elem.Attrs) {
+	checkboxAttributes := elem.Attrs{
+		attrs.Type:       "checkbox",
+		htmx.HXPost:      "/toggle/" + strconv.Itoa(todo.ID),
+		htmx.HXTrigger:   "change",
+		htmx.HXIndicator: "#saving-indicator",
+	}
+
+	textAttributes := elem.Attrs{}
+	if todo.Done {
+		checkboxAttributes[attrs.Checked] = "checked"
+		textAttributes[attrs.Style] = elem.ApplyStyle(elem.Style{
+			styles.TextDecoration: "line-through",
+		})
+	}
+
+	return checkboxAttributes, textAttributes
+}
+
+func renderSingleTodo(todo Todo) string {
+	checkboxAttributes, textAttributes := getTodoAttributes(todo)
+	checkbox := elem.Input(checkboxAttributes)
+	todoItem := elem.Li(nil, checkbox, elem.Span(textAttributes, elem.Text(todo.Title)))
+	return todoItem.Render()
 }
 
 func renderTodos(todos []Todo) string {
@@ -164,22 +168,7 @@ func renderTodos(todos []Todo) string {
 
 func renderTodoItems(todos []Todo) []elem.Node {
 	return elem.TransformEach(todos, func(todo Todo) elem.Node {
-		checkboxAttributes := elem.Attrs{
-			attrs.Type:       "checkbox",
-			htmx.HXPost:      "/toggle/" + strconv.Itoa(todo.ID),
-			htmx.HXTrigger:   "change",
-			htmx.HXIndicator: "#saving-indicator",
-			htmx.HXTarget:    "closest li",
-		}
-
-		textAttributes := elem.Attrs{}
-		if todo.Done {
-			checkboxAttributes[attrs.Checked] = "checked"
-			textAttributes[attrs.Style] = elem.ApplyStyle(elem.Style{
-				styles.TextDecoration: "line-through",
-			})
-		}
-
+		checkboxAttributes, textAttributes := getTodoAttributes(todo)
 		checkbox := elem.Input(checkboxAttributes)
 		return elem.Li(nil, checkbox, elem.Span(textAttributes, elem.Text(todo.Title)))
 	})
