@@ -61,7 +61,7 @@ With `elem`, you can easily generate lists of elements from slices of data using
 ```go
 items := []string{"Item 1", "Item 2", "Item 3"}
 
-liElements := elem.TransformEach(items, func(item string) Node {
+liElements := elem.TransformEach(items, func(item string) elem.Node {
     return elem.Li(nil, elem.Text(item))
 })
 
