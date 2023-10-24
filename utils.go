@@ -31,7 +31,7 @@ func ApplyStyle(s Style) string {
 }
 
 // Show conditionally renders one of the provided elements based on the condition
-func Show(condition bool, ifTrue, ifFalse Node) Node {
+func If[T any](condition bool, ifTrue, ifFalse T) T {
 	if condition {
 		return ifTrue
 	}

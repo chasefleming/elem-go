@@ -29,14 +29,14 @@ func TestApplyStyle(t *testing.T) {
 	assert.Equal(t, expected, actual)
 }
 
-func TestShow(t *testing.T) {
+func TestIf(t *testing.T) {
 	trueElement := Div(nil, Text("True Condition"))
 	falseElement := Div(nil, Text("False Condition"))
 
-	resultTrue := Show(true, trueElement, falseElement)
+	resultTrue := If(true, trueElement, falseElement)
 	assert.Equal(t, trueElement.Render(), resultTrue.Render())
 
-	resultFalse := Show(false, trueElement, falseElement)
+	resultFalse := If(false, trueElement, falseElement)
 	assert.Equal(t, falseElement.Render(), resultFalse.Render())
 }
 
