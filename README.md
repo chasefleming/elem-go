@@ -163,10 +163,10 @@ For hands-on examples showcasing the usage of `elem`, you can find sample implem
 
 [Check out the examples here.](./examples)
 
-### Contributing
+## Contributing
 
 Contributions are welcome! If you have ideas for improvements or new features, please open an issue or submit a pull request.
 
-### License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
