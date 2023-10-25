@@ -157,6 +157,12 @@ button := elem.Button(
 
 We provide a subpackage for htmx integration. [Read more about htmx integration here](HTMX_INTEGRATION.md).
 
+## Examples
+
+For hands-on examples showcasing the usage of `elem`, you can find sample implementations in the `examples/` folder of the repository. Dive into the examples to get a deeper understanding of how to leverage the library in various scenarios.
+
+[Check out the examples here.](./examples)
+
 ### Contributing
 
 Contributions are welcome! If you have ideas for improvements or new features, please open an issue or submit a pull request.
