@@ -159,9 +159,17 @@ We provide a subpackage for htmx integration. [Read more about htmx integration 
 
 ## Examples
 
-For hands-on examples showcasing the usage of `elem`, you can find sample implementations in the `examples/` folder of the repository. Dive into the examples to get a deeper understanding of how to leverage the library in various scenarios.
+For hands-on examples showcasing the usage of `elem-go`, you can find sample implementations in the `examples/` folder of the repository. Dive into the examples to get a deeper understanding of how to leverage the library in various scenarios.
 
 [Check out the examples here.](./examples)
+
+## Tutorials & Guides
+
+Dive deeper into the capabilities of `elem-go` and learn best practices through our collection of tutorials and guides:
+
+- [Building a Counter App with htmx, Go Fiber, and elem-go](https://dev.to/chasefleming/building-a-counter-app-with-htmx-go-fiber-and-elem-go-9jd/)
+
+Stay tuned for more tutorials and guides in the future!
 
 ## Contributing
 
