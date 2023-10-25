@@ -155,3 +155,33 @@ func Meta(props Attrs) *Element {
 func Script(props Attrs, children ...Node) *Element {
 	return NewElement("script", props, children...)
 }
+
+// ========== Semantic Elements ==========
+
+func Article(props Attrs, children ...Node) *Element {
+	return NewElement("article", props, children...)
+}
+
+func Aside(props Attrs, children ...Node) *Element {
+	return NewElement("aside", props, children...)
+}
+
+func Footer(props Attrs, children ...Node) *Element {
+	return NewElement("footer", props, children...)
+}
+
+func Header(props Attrs, children ...Node) *Element {
+	return NewElement("header", props, children...)
+}
+
+func Main(props Attrs, children ...Node) *Element {
+	return NewElement("main", props, children...)
+}
+
+func Nav(props Attrs, children ...Node) *Element {
+	return NewElement("nav", props, children...)
+}
+
+func Section(props Attrs, children ...Node) *Element {
+	return NewElement("section", props, children...)
+}
