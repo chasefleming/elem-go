@@ -91,6 +91,8 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 `elem` provides utility functions for creating common HTML elements:
 
 - `A`: Anchor `<a>`
+- `Article`: Article `<article>`
+- `Aside`: Aside `<aside>`
 - `Blockquote`: Blockquote `<blockquote>`
 - `Body`: Body `<body>`
 - `Br`: Break `<br>`
@@ -101,23 +103,29 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 - `Dt`: Description Term `<dt>`
 - `Dd`: Description Description `<dd>`
 - `Em`: Emphasis `<em>`
+- `Footer`: Footer `<footer>`
 - `Form`: Form `<form>`
 - `H1`: Heading 1 `<h1>`
 - `H2`: Heading 2 `<h2>`
 - `H3`: Heading 3 `<h3>`
 - `Head`: Head `<head>`
+- `Header`: Header `<header>`
 - `Html`: HTML `<html>`
 - `Hr`: Horizontal Rule `<hr>`
 - `Img`: Image `<img>`
 - `Input`: Input `<input>`
 - `Label`: Label `<label>`
 - `Li`: List Item `<li>`
+- `Link`: Link `<link>`
+- `Main`: Main `<main>`
 - `Meta`: Meta `<meta>`
+- `Nav`: Navigation `<nav>`
 - `Ol`: Ordered List `<ol>`
 - `Option`: Dropdown option `<option>`
 - `P`: Paragraph `<p>`
 - `Pre`: Preformatted Text `<pre>`
 - `Script`: Script `<script>`
+- `Section`: Section `<section>`
 - `Select`: Dropdown select `<select>`
 - `Span`: Span `<span>`
 - `Strong`: Strong `<strong>`
