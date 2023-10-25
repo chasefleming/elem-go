@@ -153,7 +153,7 @@ button := elem.Button(
 )
 ```
 
-#### HTMX Integration
+## HTMX Integration
 
 We provide a subpackage for htmx integration. [Read more about htmx integration here](HTMX_INTEGRATION.md).
 
