@@ -144,6 +144,10 @@ func Img(props Attrs) *Element {
 
 // ========== Meta Elements ==========
 
+func Link(props Attrs) *Element {
+	return NewElement("link", props)
+}
+
 func Meta(props Attrs) *Element {
 	return NewElement("meta", props)
 }
