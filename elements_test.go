@@ -219,3 +219,47 @@ func TestScript(t *testing.T) {
 	el := Script(Attrs{attrs.Src: "https://example.com/script.js"})
 	assert.Equal(t, expected, el.Render())
 }
+
+// ========== Semantic Elements ==========
+
+func TestArticle(t *testing.T) {
+	expected := `<article><h2>Article Title</h2><p>Article content.</p></article>`
+	el := Article(nil, H2(nil, Text("Article Title")), P(nil, Text("Article content.")))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestAside(t *testing.T) {
+	expected := `<aside><p>Sidebar content.</p></aside>`
+	el := Aside(nil, P(nil, Text("Sidebar content.")))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestFooter(t *testing.T) {
+	expected := `<footer><p>Footer content.</p></footer>`
+	el := Footer(nil, P(nil, Text("Footer content.")))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestHeader(t *testing.T) {
+	expected := `<header class="site-header"><h1>Welcome to Elem!</h1></header>`
+	el := Header(Attrs{attrs.Class: "site-header"}, H1(nil, Text("Welcome to Elem!")))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestMainElem(t *testing.T) {
+	expected := `<main><p>Main content goes here.</p></main>`
+	el := Main(nil, P(nil, Text("Main content goes here.")))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestNav(t *testing.T) {
+	expected := `<nav><a href="/home">Home</a><a href="/about">About</a></nav>`
+	el := Nav(nil, A(Attrs{attrs.Href: "/home"}, Text("Home")), A(Attrs{attrs.Href: "/about"}, Text("About")))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestSection(t *testing.T) {
+	expected := `<section><h3>Section Title</h3><p>Section content.</p></section>`
+	el := Section(nil, H3(nil, Text("Section Title")), P(nil, Text("Section content.")))
+	assert.Equal(t, expected, el.Render())
+}
