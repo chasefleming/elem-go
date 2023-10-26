@@ -185,3 +185,33 @@ func Nav(props Attrs, children ...Node) *Element {
 func Section(props Attrs, children ...Node) *Element {
 	return NewElement("section", props, children...)
 }
+
+// ========== Tables ==========
+
+func Table(props Attrs, children ...Node) *Element {
+	return NewElement("table", props, children...)
+}
+
+func THead(props Attrs, children ...Node) *Element {
+	return NewElement("thead", props, children...)
+}
+
+func TBody(props Attrs, children ...Node) *Element {
+	return NewElement("tbody", props, children...)
+}
+
+func TFoot(props Attrs, children ...Node) *Element {
+	return NewElement("tfoot", props, children...)
+}
+
+func Tr(props Attrs, children ...Node) *Element {
+	return NewElement("tr", props, children...)
+}
+
+func Th(props Attrs, children ...Node) *Element {
+	return NewElement("th", props, children...)
+}
+
+func Td(props Attrs, children ...Node) *Element {
+	return NewElement("td", props, children...)
+}
