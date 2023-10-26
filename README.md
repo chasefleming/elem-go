@@ -1,6 +1,6 @@
 # elem-go
 
-`elem` is a lightweight Go library for creating HTML elements programmatically. Utilizing the strong typing features of Go, elem ensures type safety in defining and manipulating HTML elements, minimizing potential runtime errors. It simplifies the generation of HTML views by providing a simple and intuitive way to create elements and set their attributes, properties, and content.
+`elem` is a lightweight Go library for creating HTML elements programmatically. Utilizing the strong typing features of Go, `elem` ensures type safety in defining and manipulating HTML elements, minimizing potential runtime errors. It simplifies the generation of HTML views by providing a simple and intuitive way to create elements and set their attributes, properties, and content.
 
 ## Features
 
@@ -19,7 +19,7 @@ go get github.com/chasefleming/elem-go
 
 ## Usage
 
-Import the elem package in your Go code:
+Import the `elem` package in your Go code:
 
 ```go
 import (
@@ -44,9 +44,9 @@ content := elem.Div(elem.Attrs{
 
 ### Attributes
 
-The attrs subpackage provides type-safe attribute functions that ensure you're setting valid attributes for your elements. This helps eliminate potential issues at runtime due to misspelled or unsupported attribute names.
+The `attrs` subpackage provides type-safe attribute functions that ensure you're setting valid attributes for your elements. This helps eliminate potential issues at runtime due to misspelled or unsupported attribute names.
 
-See the complete list of supported attributes in the attrs package.
+See the complete list of supported attributes in the `attrs` package.
 
 ### Rendering Elements
 
@@ -135,7 +135,7 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 
 ### Setting Styles with the styles Subpackage
 
-With the elem library, you can also programmatically define and apply CSS styles to your HTML elements using the styles subpackage. This approach leverages Go's type system to ensure that your style property names and values are correctly defined.
+With the `elem` `library, you can also programmatically define and apply CSS styles to your HTML elements using the styles subpackage. This approach leverages Go's type system to ensure that your style property names and values are correctly defined.
 
 ```go
 // Define a style
@@ -159,13 +159,13 @@ We provide a subpackage for htmx integration. [Read more about htmx integration 
 
 ## Examples
 
-For hands-on examples showcasing the usage of `elem-go`, you can find sample implementations in the `examples/` folder of the repository. Dive into the examples to get a deeper understanding of how to leverage the library in various scenarios.
+For hands-on examples showcasing the usage of `elem`, you can find sample implementations in the `examples/` folder of the repository. Dive into the examples to get a deeper understanding of how to leverage the library in various scenarios.
 
 [Check out the examples here.](./examples)
 
 ## Tutorials & Guides
 
-Dive deeper into the capabilities of `elem-go` and learn best practices through our collection of tutorials and guides:
+Dive deeper into the capabilities of `elem` and learn best practices through our collection of tutorials and guides:
 
 - [Building a Counter App with htmx, Go Fiber, and elem-go](https://dev.to/chasefleming/building-a-counter-app-with-htmx-go-fiber-and-elem-go-9jd/)
 
