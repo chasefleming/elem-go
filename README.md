@@ -112,7 +112,7 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 - `Header`: Header `<header>`
 - `Html`: HTML `<html>`
 - `Hr`: Horizontal Rule `<hr>`
-- `I`: Idiomatic Text `<i>` - _Coming Next Release_
+- `I`: Idiomatic Text `<i>`
 - `Img`: Image `<img>`
 - `Input`: Input `<input>`
 - `Label`: Label `<label>`
@@ -130,16 +130,16 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 - `Select`: Dropdown select `<select>`
 - `Span`: Span `<span>`
 - `Strong`: Strong `<strong>`
-- `Textarea`: Textarea `<textarea>`
-- `Title`: Title `<title>`
-- `Ul`: Unordered List `<ul>`
 - `Table`: Table `<table>`
-- `THead`: Table's header `<thead>`
-- `TBody`: Table's body `<tbody>`
-- `TFoot`: Table's footer `<tfoot>`
-- `Tr`: Row of cells `<tr>`
-- `Th`: Header cell `<th>`
-- `Td`: Data cell `<td>`
+- `TBody`: Table Body `<tbody>`
+- `Td`: Table Cell `<td>`
+- `Textarea`: Textarea `<textarea>`
+- `TFoot`: Table Footer `<tfoot>`
+- `Th`: Table Header Cell `<th>`
+- `THead`: Table Header `<thead>`
+- `Title`: Title `<title>`
+- `Tr`: Table Row `<tr>`
+- `Ul`: Unordered List `<ul>`
 
 ### Setting Styles with the styles Subpackage
 
