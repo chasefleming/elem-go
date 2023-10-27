@@ -298,7 +298,7 @@ func TestTBody(t *testing.T) {
 }
 
 func TestTFoot(t *testing.T) {
-	expected := `<tfoot><tr><a href="/footer">Table footer</a></tr></tfoot>`
+	expected := `<tfoot><tr><td><a href="/footer">Table footer</a></td></tr></tfoot>`
 	el := TFoot(nil, Tr(nil, A(Attrs{attrs.Href: "/footer"}, Text("Table footer"))))
 	assert.Equal(t, expected, el.Render())
 }
