@@ -16,6 +16,26 @@ func TestStyleString(t *testing.T) {
 	assert.Equal(t, "background-color: blue; color: white; font-size: 16px;", style.String())
 }
 
+func TestStyleString_Empty(t *testing.T) {
+	style := Style{}
+	assert.Equal(t, "", style.String())
+}
+
+func TestStyleString_SinglePair(t *testing.T) {
+	style := Style{
+		"color": "red",
+	}
+	assert.Equal(t, "color: red;", style.String())
+}
+
+func TestStyleString_UnorderedKeys(t *testing.T) {
+	style := Style{
+		"font-size": "16px",
+		"color":     "red",
+	}
+	assert.Equal(t, "color: red; font-size: 16px;", style.String())
+}
+
 func TestApplyStyle(t *testing.T) {
 	style := Style{
 		styles.BackgroundColor: "blue",
