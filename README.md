@@ -112,6 +112,7 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 - `Header`: Header `<header>`
 - `Html`: HTML `<html>`
 - `Hr`: Horizontal Rule `<hr>`
+- `I`: Idiomatic Text `<i>`
 - `Img`: Image `<img>`
 - `Input`: Input `<input>`
 - `Label`: Label `<label>`

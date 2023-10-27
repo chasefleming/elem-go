@@ -60,6 +60,10 @@ func Hr(props Attrs) *Element {
 	return NewElement("hr", props)
 }
 
+func I(props Attrs, children ...Node) *Element {
+	return NewElement("i", props, children...)
+}
+
 func P(props Attrs, children ...Node) *Element {
 	return NewElement("p", props, children...)
 }
