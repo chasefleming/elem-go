@@ -133,6 +133,13 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 - `Textarea`: Textarea `<textarea>`
 - `Title`: Title `<title>`
 - `Ul`: Unordered List `<ul>`
+- `Table`: Table `<table>`
+- `THead`: Table's header `<thead>`
+- `TBody`: Table's body `<tbody>`
+- `TFoot`: Table's footer `<tfoot>`
+- `Tr`: Row of cells `<tr>`
+- `Th`: Header cell `<th>`
+- `Td`: Data cell `<td>`
 
 ### Setting Styles with the styles Subpackage
 

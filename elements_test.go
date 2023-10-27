@@ -1,9 +1,10 @@
 package elem
 
 import (
+	"testing"
+
 	"github.com/chasefleming/elem-go/attrs"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 // ========== Document Structure ==========
@@ -270,5 +271,49 @@ func TestNav(t *testing.T) {
 func TestSection(t *testing.T) {
 	expected := `<section><h3>Section Title</h3><p>Section content.</p></section>`
 	el := Section(nil, H3(nil, Text("Section Title")), P(nil, Text("Section content.")))
+	assert.Equal(t, expected, el.Render())
+}
+
+// ========== Tables ==========
+
+func TestTr(t *testing.T) {
+	expected := `<tr>Row content.</tr>`
+	el := Tr(nil, Text("Row content."))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestTd(t *testing.T) {
+	expected := `<tr><td><h1>Cell one.</h1></td><td>Cell two.</td></tr>`
+	el := Tr(nil, Td(nil, H1(nil, Text("Cell one."))), Td(nil, Text("Cell two.")))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestTh(t *testing.T) {
+	expected := `<tr><th>First name</th><th>Last name</th><th>Age</th></tr>`
+	el := Tr(nil, Th(nil, Text("First name")), Th(nil, Text("Last name")), Th(nil, Text("Age")))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestTHead(t *testing.T) {
+	expected := `<thead><tr><td>Text</td><td><a href="/link">Link</a></td></tr></thead>`
+	el := THead(nil, Tr(nil, Td(nil, Text("Text")), Td(nil, A(Attrs{attrs.Href: "/link"}, Text("Link")))))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestTBody(t *testing.T) {
+	expected := `<tbody><tr><td>Table body</td></tr></tbody>`
+	el := TBody(nil, Tr(nil, Td(nil, Text("Table body"))))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestTFoot(t *testing.T) {
+	expected := `<tfoot><tr><td><a href="/footer">Table footer</a></td></tr></tfoot>`
+	el := TFoot(nil, Tr(nil, Td(nil, A(Attrs{attrs.Href: "/footer"}, Text("Table footer")))))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestTable(t *testing.T) {
+	expected := `<table><tr><th>Table header</th></tr><tr><td>Table content</td></tr></table>`
+	el := Table(nil, Tr(nil, Th(nil, Text("Table header"))), Tr(nil, Td(nil, Text("Table content"))))
 	assert.Equal(t, expected, el.Render())
 }
