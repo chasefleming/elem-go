@@ -2,6 +2,7 @@ package elem
 
 import (
 	"sort"
+	"strings"
 )
 
 type Style map[string]string
@@ -14,15 +15,20 @@ func (s Style) String() string {
 	}
 	sort.Strings(keys)
 
-	var styleStr string
+	var builder strings.Builder
 	for _, key := range keys {
-		styleStr += key + ": " + s[key] + "; "
+		builder.WriteString(key)
+		builder.WriteString(": ")
+		builder.WriteString(s[key])
+		builder.WriteString("; ")
 	}
 
 	// Trim the last space
+	var styleStr = builder.String()
 	if len(styleStr) > 0 {
 		styleStr = styleStr[:len(styleStr)-1]
 	}
+
 	return styleStr
 }
 
