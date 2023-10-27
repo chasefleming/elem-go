@@ -92,6 +92,15 @@ func TestHr(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestI(t *testing.T) {
+	expected1 := `<i>Idiomatic Text</i>`
+	expected2 := `<i class="fa-regular fa-face-smile"></i>`
+	el := I(nil, Text("Idiomatic Text"))
+	assert.Equal(t, expected1, el.Render())
+	el = I(Attrs{attrs.Class: "fa-regular fa-face-smile"})
+	assert.Equal(t, expected2, el.Render())
+}
+
 func TestP(t *testing.T) {
 	expected := `<p>Hello, Elem!</p>`
 	el := P(nil, Text("Hello, Elem!"))
