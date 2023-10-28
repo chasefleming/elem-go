@@ -1,9 +1,10 @@
 package elem
 
 import (
+	"testing"
+
 	"github.com/chasefleming/elem-go/styles"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestStyleString(t *testing.T) {
@@ -41,9 +42,10 @@ func TestApplyStyle(t *testing.T) {
 		styles.BackgroundColor: "blue",
 		styles.Color:           "white",
 		styles.FontSize:        "16px",
+		styles.OutlineStyle:    "solid",
 	}
 
-	expected := "background-color: blue; color: white; font-size: 16px;"
+	expected := "background-color: blue; color: white; font-size: 16px; outline-style: solid;"
 	actual := ApplyStyle(style)
 
 	assert.Equal(t, expected, actual)
