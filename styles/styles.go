@@ -99,6 +99,12 @@ const (
 	LetterSpacing  = "letter-spacing"
 	WhiteSpace     = "white-space"
 	TextOverflow   = "text-overflow"
+	FontStyle      = "font-style"
+	TextShadow     = "text-shadow"
+	VerticalAlign  = "vertical-align"
+	WordSpacing    = "word-spacing"
+	WordBreak      = "word-break"
+	TextIndent     = "text-indent"
 
 	// Visual Properties
 	BackgroundColor  = "background-color"
