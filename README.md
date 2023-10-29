@@ -46,7 +46,7 @@ content := elem.Div(elem.Attrs{
 
 The `attrs` subpackage provides type-safe attribute functions that ensure you're setting valid attributes for your elements. This helps eliminate potential issues at runtime due to misspelled or unsupported attribute names.
 
-See the complete list of supported attributes in the `attrs` package.
+See the complete list of supported attributes in the [`attrs` package](./attrs/attrs.go).
 
 ### Rendering Elements
 
@@ -143,7 +143,7 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 
 ### Setting Styles with the styles Subpackage
 
-With the `elem` `library, you can also programmatically define and apply CSS styles to your HTML elements using the styles subpackage. This approach leverages Go's type system to ensure that your style property names and values are correctly defined.
+With the `elem` library, you can also programmatically define and apply CSS styles to your HTML elements using the `styles` subpackage. This approach leverages Go's type system to ensure that your style property names and values are correctly defined.
 
 ```go
 // Define a style
@@ -160,6 +160,8 @@ button := elem.Button(
     elem.Text("Click Me"),
 )
 ```
+
+See the complete list of supported properties in the [`styles` package](./styles/styles.go).
 
 ## HTMX Integration
 
