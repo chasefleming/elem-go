@@ -60,4 +60,10 @@ const (
 	Draggable  = "draggable"
 	Role       = "role" // Used for ARIA roles
 	Spellcheck = "spellcheck"
+
+	// Table Attributes
+	RowSpan	       = "rowspan"
+	ColSpan	       = "colspan"
+	Scope          = "scope"
+	Headers        = "headers"
 )
