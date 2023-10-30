@@ -107,16 +107,22 @@ const (
 	TextIndent     = "text-indent"
 
 	// Visual Properties
-	BackgroundColor  = "background-color"
-	Background       = "background"
-	BackgroundImage  = "background-image"
-	BackgroundRepeat = "background-repeat"
-	BackgroundSize   = "background-size"
-	Opacity          = "opacity"
-	BoxSizing        = "box-sizing"
-	Cursor           = "cursor"
-	Transition       = "transition"
-	Transform        = "transform"
+	BackgroundColor      = "background-color"
+	Background           = "background"
+	BackgroundImage      = "background-image"
+	BackgroundRepeat     = "background-repeat"
+	BackgroundSize       = "background-size"
+	Opacity              = "opacity"
+	BoxSizing            = "box-sizing"
+	Cursor               = "cursor"
+	Transition           = "transition"
+	Transform            = "transform"
+	BackgroundPosition   = "background-position"
+	BackgroundAttachment = "background-attachment"
+	BackgroundBlendMode  = "background-blend-mode"
+	BackfaceVisibility   = "backface-visibility"
+	Perspective          = "perspective"
+	TransformOrigin      = "transform-origin"
 
 	// List properties
 	ListStyle     = "list-style"
@@ -128,6 +134,7 @@ const (
 	TableLayout    = "table-layout"
 	CaptionSide    = "caption-side"
 
+	
 	// Other Properties
 	Visibility    = "visibility"
 	Clip          = "clip"
