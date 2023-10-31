@@ -97,7 +97,7 @@ func renderTodos(todos []Todo) string {
 		styles.BackgroundColor: "#f9f9f9",
 	}
 
-	buttonStyle := elem.ApplyStyle(elem.Style{
+	buttonStyle := elem.Style{
 		styles.BackgroundColor: "#007BFF",
 		styles.Color:           "white",
 		styles.BorderStyle:     "none",
@@ -108,7 +108,7 @@ func renderTodos(todos []Todo) string {
 		styles.FontSize:        "14px",
 		styles.Height:          "36px",
 		styles.MarginRight:     "10px",
-	})
+	}
 
 	listContainerStyle := elem.Style{
 		styles.ListStyleType: "none",
@@ -144,7 +144,7 @@ func renderTodos(todos []Todo) string {
 			elem.Button(
 				elem.Attrs{
 					attrs.Type:  "submit",
-					attrs.Style: buttonStyle,
+					attrs.Style: elem.ApplyStyle(buttonStyle),
 				},
 				elem.Text("Add"),
 			),
