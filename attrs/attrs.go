@@ -67,3 +67,16 @@ const (
 	Scope          = "scope"
 	Headers        = "headers"
 )
+
+// list of supported boolean attributes
+// see https://html.spec.whatwg.org/multipage/indices.html#attributes-3 for reference
+var BooleanAttrs = map[string]struct{}{
+	Async:     {},
+	Autofocus: {},
+	Checked:   {},
+	Defer:     {},
+	Disabled:  {},
+	Multiple:  {},
+	Readonly:  {},
+	Required:  {},
+}

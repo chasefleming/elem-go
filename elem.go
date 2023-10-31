@@ -3,6 +3,8 @@ package elem
 import (
 	"sort"
 	"strings"
+
+	"github.com/chasefleming/elem-go/attrs"
 )
 
 // List of HTML5 void elements. Void elements, also known as self-closing or empty elements,
@@ -64,11 +66,11 @@ func (e *Element) RenderTo(builder *strings.Builder) {
 
 	// Append the attributes to the builder
 	for _, k := range keys {
-		builder.WriteString(` `)
-		builder.WriteString(k)
-		builder.WriteString(`="`)
-		builder.WriteString(e.Attrs[k])
-		builder.WriteString(`"`)
+		attr := e.renderAttr(k)
+		if attr != "" {
+			builder.WriteString(` `)
+			builder.WriteString(attr)
+		}
 	}
 
 	// If it's a void element, close it and return
@@ -89,6 +91,26 @@ func (e *Element) RenderTo(builder *strings.Builder) {
 	builder.WriteString(`</`)
 	builder.WriteString(e.Tag)
 	builder.WriteString(`>`)
+}
+
+// return string representation of given attribute with its value
+func (e *Element) renderAttr(attrName string) string {
+	var builder strings.Builder
+
+	if _, exists := attrs.BooleanAttrs[attrName]; exists {
+		// boolean attribute presents its name only if the value is "true"
+		if e.Attrs[attrName] == "true" {
+			builder.WriteString(attrName)
+		}
+	} else {
+		// regular attribute has a name and a value
+		builder.WriteString(attrName)
+		builder.WriteString(`="`)
+		builder.WriteString(e.Attrs[attrName])
+		builder.WriteString(`"`)
+	}
+
+	return builder.String()
 }
 
 func (e *Element) Render() string {

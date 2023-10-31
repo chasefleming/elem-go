@@ -202,6 +202,25 @@ func TestTextarea(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+// ========== Boolean attributes ==========
+func TestCheckedTrue(t *testing.T) {
+	expected := `<input checked name="allow" type="checkbox">`
+	el := Input(Attrs{attrs.Type: "checkbox", attrs.Name: "allow", attrs.Checked: "true"})
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestCheckedFalse(t *testing.T) {
+	expected := `<input name="allow" type="checkbox">`
+	el := Input(Attrs{attrs.Type: "checkbox", attrs.Name: "allow", attrs.Checked: "false"})
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestCheckedEmpty(t *testing.T) {
+	expected := `<input name="allow" type="checkbox">`
+	el := Input(Attrs{attrs.Type: "checkbox", attrs.Name: "allow", attrs.Checked: ""})
+	assert.Equal(t, expected, el.Render())
+}
+
 // ========== Hyperlinks and Multimedia ==========
 
 func TestImg(t *testing.T) {
