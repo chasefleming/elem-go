@@ -3,6 +3,8 @@ package elem
 import (
 	"sort"
 	"strings"
+
+	"github.com/chasefleming/elem-go/attrs"
 )
 
 // List of HTML5 void elements. Void elements, also known as self-closing or empty elements,
@@ -25,6 +27,20 @@ var voidElements = map[string]struct{}{
 	"source":  {},
 	"track":   {},
 	"wbr":     {},
+}
+
+// List of boolean attributes. Boolean attributes can't have literal values. The presence of an boolean 
+// attribute represents the "true" value. To represent the "false" value, the attribute has to be omitted.
+// See https://html.spec.whatwg.org/multipage/indices.html#attributes-3 for reference
+var booleanAttrs = map[string]struct{}{
+	attrs.Async:     {},
+	attrs.Autofocus: {},
+	attrs.Checked:   {},
+	attrs.Defer:     {},
+	attrs.Disabled:  {},
+	attrs.Multiple:  {},
+	attrs.Readonly:  {},
+	attrs.Required:  {},
 }
 
 type Attrs map[string]string
@@ -64,11 +80,7 @@ func (e *Element) RenderTo(builder *strings.Builder) {
 
 	// Append the attributes to the builder
 	for _, k := range keys {
-		builder.WriteString(` `)
-		builder.WriteString(k)
-		builder.WriteString(`="`)
-		builder.WriteString(e.Attrs[k])
-		builder.WriteString(`"`)
+		e.renderAttrTo(k, builder)
 	}
 
 	// If it's a void element, close it and return
@@ -89,6 +101,24 @@ func (e *Element) RenderTo(builder *strings.Builder) {
 	builder.WriteString(`</`)
 	builder.WriteString(e.Tag)
 	builder.WriteString(`>`)
+}
+
+// return string representation of given attribute with its value
+func (e *Element) renderAttrTo(attrName string, builder *strings.Builder) {
+	if _, exists := booleanAttrs[attrName]; exists {
+		// boolean attribute presents its name only if the value is "true"
+		if e.Attrs[attrName] == "true" {
+			builder.WriteString(` `)
+			builder.WriteString(attrName)
+		}
+	} else {
+		// regular attribute has a name and a value
+		builder.WriteString(` `)
+		builder.WriteString(attrName)
+		builder.WriteString(`="`)
+		builder.WriteString(e.Attrs[attrName])
+		builder.WriteString(`"`)
+	}
 }
 
 func (e *Element) Render() string {
