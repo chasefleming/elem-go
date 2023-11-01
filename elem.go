@@ -29,6 +29,20 @@ var voidElements = map[string]struct{}{
 	"wbr":     {},
 }
 
+// List of boolean attributes. Boolean attributes can't have literal values. The presence of an boolean 
+// attribute represents the "true" value. To represent the "false" value, the attribute has to be omitted.
+// See https://html.spec.whatwg.org/multipage/indices.html#attributes-3 for reference
+var booleanAttrs = map[string]struct{}{
+	attrs.Async:     {},
+	attrs.Autofocus: {},
+	attrs.Checked:   {},
+	attrs.Defer:     {},
+	attrs.Disabled:  {},
+	attrs.Multiple:  {},
+	attrs.Readonly:  {},
+	attrs.Required:  {},
+}
+
 type Attrs map[string]string
 
 type Node interface {
@@ -66,11 +80,7 @@ func (e *Element) RenderTo(builder *strings.Builder) {
 
 	// Append the attributes to the builder
 	for _, k := range keys {
-		attr := e.renderAttr(k)
-		if attr != "" {
-			builder.WriteString(` `)
-			builder.WriteString(attr)
-		}
+		e.renderAttrTo(k, builder)
 	}
 
 	// If it's a void element, close it and return
@@ -94,23 +104,21 @@ func (e *Element) RenderTo(builder *strings.Builder) {
 }
 
 // return string representation of given attribute with its value
-func (e *Element) renderAttr(attrName string) string {
-	var builder strings.Builder
-
-	if _, exists := attrs.BooleanAttrs[attrName]; exists {
+func (e *Element) renderAttrTo(attrName string, builder *strings.Builder) {
+	if _, exists := booleanAttrs[attrName]; exists {
 		// boolean attribute presents its name only if the value is "true"
 		if e.Attrs[attrName] == "true" {
+			builder.WriteString(` `)
 			builder.WriteString(attrName)
 		}
 	} else {
 		// regular attribute has a name and a value
+		builder.WriteString(` `)
 		builder.WriteString(attrName)
 		builder.WriteString(`="`)
 		builder.WriteString(e.Attrs[attrName])
 		builder.WriteString(`"`)
 	}
-
-	return builder.String()
 }
 
 func (e *Element) Render() string {
