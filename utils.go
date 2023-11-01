@@ -36,7 +36,7 @@ func ApplyStyle(s Style) string {
 	return s.String()
 }
 
-// Show conditionally renders one of the provided elements based on the condition
+// If conditionally renders one of the provided elements based on the condition
 func If[T any](condition bool, ifTrue, ifFalse T) T {
 	if condition {
 		return ifTrue
