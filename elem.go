@@ -41,6 +41,7 @@ var booleanAttrs = map[string]struct{}{
 	attrs.IsMap:      {},
 	attrs.Multiple:   {},
 	attrs.NoValidate: {},
+	attrs.Open:       {},
 	attrs.Readonly:   {},
 	attrs.Required:   {},
 	attrs.Selected:   {},

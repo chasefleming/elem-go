@@ -32,6 +32,9 @@ const (
 	Width  = "width"
 	IsMap  = "ismap"
 
+	// Semantic Text Attributes
+	DateTime = "datetime"
+
 	// Form/Input Attributes
 	Accept         = "accept"
 	Action         = "action"
@@ -56,6 +59,9 @@ const (
 	Selected       = "selected"
 	Type           = "type"
 	Value          = "value"
+
+	// Interactive Attributes
+	Open = "open"
 
 	// Miscellaneous Attributes
 	DataPrefix = "data-" // Used for custom data attributes e.g., "data-custom"
