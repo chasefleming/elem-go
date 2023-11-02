@@ -67,14 +67,13 @@ func getTodoAttributes(todo Todo) (elem.Attrs, elem.Attrs) {
 		htmx.HXPost:      "/toggle/" + strconv.Itoa(todo.ID),
 		htmx.HXTrigger:   "change",
 		htmx.HXIndicator: "#saving-indicator",
+		attrs.Checked:    strconv.FormatBool(todo.Done),
 	}
 
-	textAttributes := elem.Attrs{}
-	if todo.Done {
-		checkboxAttributes[attrs.Checked] = "checked"
-		textAttributes[attrs.Style] = elem.ApplyStyle(elem.Style{
-			styles.TextDecoration: "line-through",
-		})
+	textAttributes := elem.Attrs{
+		attrs.Style: elem.ApplyStyle(elem.Style{
+			styles.TextDecoration: elem.If(todo.Done, "line-through", "none"),
+		}),
 	}
 
 	return checkboxAttributes, textAttributes
