@@ -29,18 +29,21 @@ var voidElements = map[string]struct{}{
 	"wbr":     {},
 }
 
-// List of boolean attributes. Boolean attributes can't have literal values. The presence of an boolean 
+// List of boolean attributes. Boolean attributes can't have literal values. The presence of an boolean
 // attribute represents the "true" value. To represent the "false" value, the attribute has to be omitted.
 // See https://html.spec.whatwg.org/multipage/indices.html#attributes-3 for reference
 var booleanAttrs = map[string]struct{}{
-	attrs.Async:     {},
-	attrs.Autofocus: {},
-	attrs.Checked:   {},
-	attrs.Defer:     {},
-	attrs.Disabled:  {},
-	attrs.Multiple:  {},
-	attrs.Readonly:  {},
-	attrs.Required:  {},
+	attrs.Async:      {},
+	attrs.Autofocus:  {},
+	attrs.Checked:    {},
+	attrs.Defer:      {},
+	attrs.Disabled:   {},
+	attrs.IsMap:      {},
+	attrs.Multiple:   {},
+	attrs.NoValidate: {},
+	attrs.Readonly:   {},
+	attrs.Required:   {},
+	attrs.Selected:   {},
 }
 
 type Attrs map[string]string

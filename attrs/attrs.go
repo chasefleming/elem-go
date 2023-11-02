@@ -30,6 +30,7 @@ const (
 	// Image/Embed Attributes
 	Height = "height"
 	Width  = "width"
+	IsMap  = "ismap"
 
 	// Form/Input Attributes
 	Accept         = "accept"
@@ -47,10 +48,12 @@ const (
 	Min            = "min"
 	Multiple       = "multiple"
 	Name           = "name"
+	NoValidate     = "novalidate"
 	Placeholder    = "placeholder"
 	Readonly       = "readonly"
 	Required       = "required"
 	Rows           = "rows"
+	Selected       = "selected"
 	Type           = "type"
 	Value          = "value"
 
@@ -62,8 +65,8 @@ const (
 	Spellcheck = "spellcheck"
 
 	// Table Attributes
-	RowSpan	       = "rowspan"
-	ColSpan	       = "colspan"
-	Scope          = "scope"
-	Headers        = "headers"
+	RowSpan = "rowspan"
+	ColSpan = "colspan"
+	Scope   = "scope"
+	Headers = "headers"
 )
