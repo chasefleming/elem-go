@@ -46,6 +46,16 @@ content := elem.Div(elem.Attrs{
 
 The `attrs` subpackage provides type-safe attribute functions that ensure you're setting valid attributes for your elements. This helps eliminate potential issues at runtime due to misspelled or unsupported attribute names.
 
+For boolean attributes like `checked` and `selected`, you can simply assign them the value `"true"` or `"false"`. When set to `"true"`, the library will correctly render these attributes without needing an explicit value. For instance:
+
+```go
+// Using boolean attributes
+checkbox := elem.Input(elem.Attrs{
+    attrs.Type:    "checkbox",
+    attrs.Checked: "true",  // This will render as <input type="checkbox" checked>
+})
+```
+
 See the complete list of supported attributes in the [`attrs` package](./attrs/attrs.go).
 
 ### Rendering Elements
