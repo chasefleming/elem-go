@@ -64,7 +64,7 @@ See the complete list of supported attributes in the [`attrs` package](./attrs/a
 html := content.Render()
 ```
 
-### Generating Lists of Elements with TransformEach
+### Generating Lists of Elements with `TransformEach`
 
 With `elem`, you can easily generate lists of elements from slices of data using the `TransformEach` function. This function abstracts the repetitive task of iterating over a slice and transforming its items into elements.
 
@@ -151,7 +151,7 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 - `Tr`: Table Row `<tr>`
 - `Ul`: Unordered List `<ul>`
 
-### Setting Styles with the styles Subpackage
+### Setting Styles with the `styles` Subpackage
 
 With the `elem` library, you can also programmatically define and apply CSS styles to your HTML elements using the `styles` subpackage. This approach leverages Go's type system to ensure that your style property names and values are correctly defined.
 
