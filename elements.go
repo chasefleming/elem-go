@@ -162,6 +162,8 @@ func Script(props Attrs, children ...Node) *Element {
 
 // ========== Semantic Elements ==========
 
+// --- Semantic Sectioning Elements ---
+
 func Article(props Attrs, children ...Node) *Element {
 	return NewElement("article", props, children...)
 }
@@ -188,6 +190,36 @@ func Nav(props Attrs, children ...Node) *Element {
 
 func Section(props Attrs, children ...Node) *Element {
 	return NewElement("section", props, children...)
+}
+
+// --- Semantic Text Content Elements ---
+
+func Address(props Attrs, children ...Node) *Element {
+	return NewElement("address", props, children...)
+}
+
+func Details(props Attrs, children ...Node) *Element {
+	return NewElement("details", props, children...)
+}
+
+func FigCaption(props Attrs, children ...Node) *Element {
+	return NewElement("figcaption", props, children...)
+}
+
+func Figure(props Attrs, children ...Node) *Element {
+	return NewElement("figure", props, children...)
+}
+
+func Mark(props Attrs, children ...Node) *Element {
+	return NewElement("mark", props, children...)
+}
+
+func Summary(props Attrs, children ...Node) *Element {
+	return NewElement("summary", props, children...)
+}
+
+func Time(props Attrs, children ...Node) *Element {
+	return NewElement("time", props, children...)
 }
 
 // ========== Tables ==========

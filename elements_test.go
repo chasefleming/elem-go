@@ -251,6 +251,8 @@ func TestScript(t *testing.T) {
 
 // ========== Semantic Elements ==========
 
+// --- Semantic Sectioning Elements ---
+
 func TestArticle(t *testing.T) {
 	expected := `<article><h2>Article Title</h2><p>Article content.</p></article>`
 	el := Article(nil, H2(nil, Text("Article Title")), P(nil, Text("Article content.")))
@@ -290,6 +292,62 @@ func TestNav(t *testing.T) {
 func TestSection(t *testing.T) {
 	expected := `<section><h3>Section Title</h3><p>Section content.</p></section>`
 	el := Section(nil, H3(nil, Text("Section Title")), P(nil, Text("Section content.")))
+	assert.Equal(t, expected, el.Render())
+}
+
+// --- Semantic Text Content Elements ---
+
+func TestAddress(t *testing.T) {
+	expected := `<address>123 Example St.</address>`
+	el := Address(nil, Text("123 Example St."))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestDetails(t *testing.T) {
+	expected := `<details><summary>More Info</summary><p>Details content here.</p></details>`
+	el := Details(nil, Summary(nil, Text("More Info")), P(nil, Text("Details content here.")))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestDetailsWithOpenFalse(t *testing.T) {
+	expected := `<details><summary>More Info</summary><p>Details content here.</p></details>`
+	el := Details(Attrs{attrs.Open: "false"}, Summary(nil, Text("More Info")), P(nil, Text("Details content here.")))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestDetailsWithOpenTrue(t *testing.T) {
+	expected := `<details open><summary>More Info</summary><p>Details content here.</p></details>`
+	el := Details(Attrs{attrs.Open: "true"}, Summary(nil, Text("More Info")), P(nil, Text("Details content here.")))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestFigCaption(t *testing.T) {
+	expected := `<figcaption>Description of the figure.</figcaption>`
+	el := FigCaption(nil, Text("Description of the figure."))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestFigure(t *testing.T) {
+	expected := `<figure><img alt="An image" src="image.jpg"><figcaption>An image</figcaption></figure>`
+	el := Figure(nil, Img(Attrs{attrs.Src: "image.jpg", attrs.Alt: "An image"}), FigCaption(nil, Text("An image")))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestMark(t *testing.T) {
+	expected := `<p>You must <mark>highlight</mark> this word.</p>`
+	el := P(nil, Text("You must "), Mark(nil, Text("highlight")), Text(" this word."))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestSummary(t *testing.T) {
+	expected := `<details><summary>Summary Title</summary></details>`
+	el := Details(nil, Summary(nil, Text("Summary Title")))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestTime(t *testing.T) {
+	expected := `<time datetime="2023-01-01T00:00:00Z">New Year's Day</time>`
+	el := Time(Attrs{attrs.DateTime: "2023-01-01T00:00:00Z"}, Text("New Year's Day"))
 	assert.Equal(t, expected, el.Render())
 }
 
