@@ -98,58 +98,20 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 
 ### Supported Elements
 
-`elem` provides utility functions for creating common HTML elements:
+`elem` provides utility functions for creating HTML elements:
 
-- `A`: Anchor `<a>`
-- `Article`: Article `<article>`
-- `Aside`: Aside `<aside>`
-- `Blockquote`: Blockquote `<blockquote>`
-- `Body`: Body `<body>`
-- `Br`: Break `<br>`
-- `Button`: Button `<button>`
-- `Code`: Code `<code>`
-- `Div`: Division `<div>`
-- `Dl`: Description List `<dl>`
-- `Dt`: Description Term `<dt>`
-- `Dd`: Description Description `<dd>`
-- `Em`: Emphasis `<em>`
-- `Footer`: Footer `<footer>`
-- `Form`: Form `<form>`
-- `H1`: Heading 1 `<h1>`
-- `H2`: Heading 2 `<h2>`
-- `H3`: Heading 3 `<h3>`
-- `Head`: Head `<head>`
-- `Header`: Header `<header>`
-- `Html`: HTML `<html>`
-- `Hr`: Horizontal Rule `<hr>`
-- `I`: Idiomatic Text `<i>`
-- `Img`: Image `<img>`
-- `Input`: Input `<input>`
-- `Label`: Label `<label>`
-- `Li`: List Item `<li>`
-- `Link`: Link `<link>`
-- `Main`: Main `<main>`
-- `Meta`: Meta `<meta>`
-- `Nav`: Navigation `<nav>`
-- `Ol`: Ordered List `<ol>`
-- `Option`: Dropdown option `<option>`
-- `P`: Paragraph `<p>`
-- `Pre`: Preformatted Text `<pre>`
-- `Script`: Script `<script>`
-- `Section`: Section `<section>`
-- `Select`: Dropdown select `<select>`
-- `Span`: Span `<span>`
-- `Strong`: Strong `<strong>`
-- `Table`: Table `<table>`
-- `TBody`: Table Body `<tbody>`
-- `Td`: Table Cell `<td>`
-- `Textarea`: Textarea `<textarea>`
-- `TFoot`: Table Footer `<tfoot>`
-- `Th`: Table Header Cell `<th>`
-- `THead`: Table Header `<thead>`
-- `Title`: Title `<title>`
-- `Tr`: Table Row `<tr>`
-- `Ul`: Unordered List `<ul>`
+### Supported Elements
+
+- **Document Structure**: `Html`, `Head`, `Body`, `Title`, `Link`, `Meta`
+- **Text Content**: `H1`, `H2`, `H3`, `P`, `Blockquote`, `Pre`, `Code`, `Em`, `Strong`, `I`, `Br`, `Hr`
+- **Sectioning & Semantic Layout**: `Article`, `Aside`, `Footer`, `Header`, `Main`, `Nav`, `Section`
+- **Form Elements**: `Form`, `Input`, `Textarea`, `Button`, `Select`, `Option`, `Label`, `Fieldset`, `Legend`, `Datalist`, `Meter`, `Output`, `Progress`
+- **Interactive Elements**: `Dialog`, `Menu`
+- **Grouping Content**: `Div`, `Span`, `Li`, `Ul`, `Ol`, `Dl`, `Dt`, `Dd`
+- **Tables**: `Table`, `Tr`, `Td`, `Th`, `TBody`, `THead`, `TFoot`
+- **Embedded Content**: `Img`
+- **Script-supporting Elements**: `Script`, `Noscript`
+- **Inline Semantic**: `A`, `Strong`, `Em`, `Code`, `I`
 
 ### Setting Styles with the `styles` Subpackage
 

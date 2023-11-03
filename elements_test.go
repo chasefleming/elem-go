@@ -295,6 +295,66 @@ func TestSection(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+// --- Semantic Form Elements ---
+
+func TestFieldset(t *testing.T) {
+	expected := `<fieldset class="custom-fieldset"><legend>Personal Information</legend><input name="name" type="text"></fieldset>`
+	el := Fieldset(Attrs{attrs.Class: "custom-fieldset"}, Legend(nil, Text("Personal Information")), Input(Attrs{attrs.Type: "text", attrs.Name: "name"}))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestLegend(t *testing.T) {
+	expected := `<legend class="custom-legend">Legend Title</legend>`
+	el := Legend(Attrs{attrs.Class: "custom-legend"}, Text("Legend Title"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestDatalist(t *testing.T) {
+	expected := `<datalist id="exampleList"><option value="Option1">Option 1</option><option value="Option2">Option 2</option></datalist>`
+	el := Datalist(Attrs{attrs.ID: "exampleList"}, Option(Attrs{attrs.Value: "Option1"}, Text("Option 1")), Option(Attrs{attrs.Value: "Option2"}, Text("Option 2")))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestMeter(t *testing.T) {
+	expected := `<meter max="100" min="0" value="50">50%</meter>`
+	el := Meter(Attrs{attrs.Min: "0", attrs.Max: "100", attrs.Value: "50"}, Text("50%"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestOutput(t *testing.T) {
+	expected := `<output for="inputId" name="result">Output</output>`
+	el := Output(Attrs{attrs.For: "inputId", attrs.Name: "result"}, Text("Output"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestProgress(t *testing.T) {
+	expected := `<progress max="100" value="60"></progress>`
+	el := Progress(Attrs{attrs.Max: "100", attrs.Value: "60"})
+	assert.Equal(t, expected, el.Render())
+}
+
+// --- Semantic Interactive Elements ---
+
+func TestDialog(t *testing.T) {
+	expected := `<dialog open><p>This is an open dialog window</p></dialog>`
+	el := Dialog(Attrs{attrs.Open: "true"}, P(nil, Text("This is an open dialog window")))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestMenu(t *testing.T) {
+	expected := `<menu><li>Item One</li><li>Item Two</li></menu>`
+	el := Menu(nil, Li(nil, Text("Item One")), Li(nil, Text("Item Two")))
+	assert.Equal(t, expected, el.Render())
+}
+
+// --- Semantic Script Supporting Elements ---
+
+func TestNoScript(t *testing.T) {
+	expected := `<noscript><p>JavaScript is required for this application.</p></noscript>`
+	el := NoScript(nil, P(nil, Text("JavaScript is required for this application.")))
+	assert.Equal(t, expected, el.Render())
+}
+
 // --- Semantic Text Content Elements ---
 
 func TestAddress(t *testing.T) {

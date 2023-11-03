@@ -192,6 +192,48 @@ func Section(props Attrs, children ...Node) *Element {
 	return NewElement("section", props, children...)
 }
 
+// ========== Semantic Form Elements ==========
+
+func Fieldset(props Attrs, children ...Node) *Element {
+	return NewElement("fieldset", props, children...)
+}
+
+func Legend(props Attrs, children ...Node) *Element {
+	return NewElement("legend", props, children...)
+}
+
+func Datalist(props Attrs, children ...Node) *Element {
+	return NewElement("datalist", props, children...)
+}
+
+func Meter(props Attrs, children ...Node) *Element {
+	return NewElement("meter", props, children...)
+}
+
+func Output(props Attrs, children ...Node) *Element {
+	return NewElement("output", props, children...)
+}
+
+func Progress(props Attrs, children ...Node) *Element {
+	return NewElement("progress", props, children...)
+}
+
+// --- Semantic Interactive Elements ---
+
+func Dialog(props Attrs, children ...Node) *Element {
+	return NewElement("dialog", props, children...)
+}
+
+func Menu(props Attrs, children ...Node) *Element {
+	return NewElement("menu", props, children...)
+}
+
+// --- Semantic Script Supporting Elements ---
+
+func NoScript(props Attrs, children ...Node) *Element {
+	return NewElement("noscript", props, children...)
+}
+
 // --- Semantic Text Content Elements ---
 
 func Address(props Attrs, children ...Node) *Element {
