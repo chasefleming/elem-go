@@ -50,7 +50,7 @@ func toggleTodoRoute(c *fiber.Ctx) error {
 		}
 	}
 	c.Type("html")
-	return c.SendString(renderSingleTodo(updatedTodo))
+	return c.SendString(createTodoNode(updatedTodo).Render())
 }
 
 func addTodoRoute(c *fiber.Ctx) error {
@@ -61,29 +61,21 @@ func addTodoRoute(c *fiber.Ctx) error {
 	return c.Redirect("/")
 }
 
-func getTodoAttributes(todo Todo) (elem.Attrs, elem.Attrs) {
-	checkboxAttributes := elem.Attrs{
-		attrs.Type:       "checkbox",
-		htmx.HXPost:      "/toggle/" + strconv.Itoa(todo.ID),
-		htmx.HXTrigger:   "change",
-		htmx.HXIndicator: "#saving-indicator",
-		attrs.Checked:    strconv.FormatBool(todo.Done),
-	}
+func createTodoNode(todo Todo) elem.Node {
+	checkbox := elem.Input(elem.Attrs{
+		attrs.Type:    "checkbox",
+		attrs.Checked: strconv.FormatBool(todo.Done),
+		htmx.HXPost:   "/toggle/" + strconv.Itoa(todo.ID),
+		htmx.HXTarget: "#todo-" + strconv.Itoa(todo.ID),
+	})
 
-	textAttributes := elem.Attrs{
+	return elem.Li(elem.Attrs{
+		attrs.ID: "todo-" + strconv.Itoa(todo.ID),
+	}, checkbox, elem.Span(elem.Attrs{
 		attrs.Style: elem.ApplyStyle(elem.Style{
 			styles.TextDecoration: elem.If(todo.Done, "line-through", "none"),
 		}),
-	}
-
-	return checkboxAttributes, textAttributes
-}
-
-func renderSingleTodo(todo Todo) string {
-	checkboxAttributes, textAttributes := getTodoAttributes(todo)
-	checkbox := elem.Input(checkboxAttributes)
-	todoItem := elem.Li(nil, checkbox, elem.Span(textAttributes, elem.Text(todo.Title)))
-	return todoItem.Render()
+	}, elem.Text(todo.Title)))
 }
 
 func renderTodos(todos []Todo) string {
@@ -127,6 +119,7 @@ func renderTodos(todos []Todo) string {
 	headContent := elem.Head(nil,
 		elem.Script(elem.Attrs{attrs.Src: "https://unpkg.com/htmx.org"}),
 	)
+
 	bodyContent := elem.Div(
 		elem.Attrs{attrs.Style: elem.ApplyStyle(centerContainerStyle)},
 		elem.H1(nil, elem.Text("Todo List")),
@@ -152,13 +145,6 @@ func renderTodos(todos []Todo) string {
 			elem.Attrs{attrs.Style: elem.ApplyStyle(listContainerStyle)},
 			renderTodoItems(todos)...,
 		),
-		elem.Span(
-			elem.Attrs{
-				attrs.ID:    "saving-indicator",
-				attrs.Style: elem.ApplyStyle(elem.Style{styles.Display: "none"}),
-			},
-			elem.Text("Saving..."),
-		),
 	)
 	htmlContent := elem.Html(nil, headContent, bodyContent)
 
@@ -166,9 +152,5 @@ func renderTodos(todos []Todo) string {
 }
 
 func renderTodoItems(todos []Todo) []elem.Node {
-	return elem.TransformEach(todos, func(todo Todo) elem.Node {
-		checkboxAttributes, textAttributes := getTodoAttributes(todo)
-		checkbox := elem.Input(checkboxAttributes)
-		return elem.Li(nil, checkbox, elem.Span(textAttributes, elem.Text(todo.Title)))
-	})
+	return elem.TransformEach(todos, createTodoNode)
 }
