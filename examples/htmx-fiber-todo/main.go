@@ -62,24 +62,24 @@ func addTodoRoute(c *fiber.Ctx) error {
 }
 
 func createTodoNode(todo Todo) elem.Node {
-	checkbox := elem.Input(elem.Attrs{
+	checkbox := elem.Input(attrs.Props{
 		attrs.Type:    "checkbox",
 		attrs.Checked: strconv.FormatBool(todo.Done),
 		htmx.HXPost:   "/toggle/" + strconv.Itoa(todo.ID),
 		htmx.HXTarget: "#todo-" + strconv.Itoa(todo.ID),
 	})
 
-	return elem.Li(elem.Attrs{
+	return elem.Li(attrs.Props{
 		attrs.ID: "todo-" + strconv.Itoa(todo.ID),
-	}, checkbox, elem.Span(elem.Attrs{
-		attrs.Style: elem.ApplyStyle(elem.Style{
+	}, checkbox, elem.Span(attrs.Props{
+		attrs.Style: styles.Props{
 			styles.TextDecoration: elem.If(todo.Done, "line-through", "none"),
-		}),
+		}.ToInline(),
 	}, elem.Text(todo.Title)))
 }
 
 func renderTodos(todos []Todo) string {
-	inputButtonStyle := elem.Style{
+	inputButtonStyle := styles.Props{
 		styles.Width:           "100%",
 		styles.Padding:         "10px",
 		styles.MarginBottom:    "10px",
@@ -88,7 +88,7 @@ func renderTodos(todos []Todo) string {
 		styles.BackgroundColor: "#f9f9f9",
 	}
 
-	buttonStyle := elem.Style{
+	buttonStyle := styles.Props{
 		styles.BackgroundColor: "#007BFF",
 		styles.Color:           "white",
 		styles.BorderStyle:     "none",
@@ -101,13 +101,13 @@ func renderTodos(todos []Todo) string {
 		styles.MarginRight:     "10px",
 	}
 
-	listContainerStyle := elem.Style{
+	listContainerStyle := styles.Props{
 		styles.ListStyleType: "none",
 		styles.Padding:       "0",
 		styles.Width:         "100%",
 	}
 
-	centerContainerStyle := elem.Style{
+	centerContainerStyle := styles.Props{
 		styles.MaxWidth:        "300px",
 		styles.Margin:          "40px auto",
 		styles.Padding:         "20px",
@@ -117,35 +117,36 @@ func renderTodos(todos []Todo) string {
 	}
 
 	headContent := elem.Head(nil,
-		elem.Script(elem.Attrs{attrs.Src: "https://unpkg.com/htmx.org"}),
+		elem.Script(attrs.Props{attrs.Src: "https://unpkg.com/htmx.org"}),
 	)
 
 	bodyContent := elem.Div(
-		elem.Attrs{attrs.Style: elem.ApplyStyle(centerContainerStyle)},
+		attrs.Props{attrs.Style: centerContainerStyle.ToInline()},
 		elem.H1(nil, elem.Text("Todo List")),
 		elem.Form(
-			elem.Attrs{attrs.Method: "post", attrs.Action: "/add"},
+			attrs.Props{attrs.Method: "post", attrs.Action: "/add"},
 			elem.Input(
-				elem.Attrs{
+				attrs.Props{
 					attrs.Type:        "text",
 					attrs.Name:        "newTodo",
 					attrs.Placeholder: "Add new task...",
-					attrs.Style:       elem.ApplyStyle(inputButtonStyle),
+					attrs.Style:       inputButtonStyle.ToInline(),
 				},
 			),
 			elem.Button(
-				elem.Attrs{
+				attrs.Props{
 					attrs.Type:  "submit",
-					attrs.Style: elem.ApplyStyle(buttonStyle),
+					attrs.Style: buttonStyle.ToInline(),
 				},
 				elem.Text("Add"),
 			),
 		),
 		elem.Ul(
-			elem.Attrs{attrs.Style: elem.ApplyStyle(listContainerStyle)},
+			attrs.Props{attrs.Style: listContainerStyle.ToInline()},
 			renderTodoItems(todos)...,
 		),
 	)
+	
 	htmlContent := elem.Html(nil, headContent, bodyContent)
 
 	return htmlContent.Render()

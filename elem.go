@@ -47,8 +47,6 @@ var booleanAttrs = map[string]struct{}{
 	attrs.Selected:   {},
 }
 
-type Attrs map[string]string
-
 type Node interface {
 	RenderTo(builder *strings.Builder)
 	Render() string
@@ -66,7 +64,7 @@ func (t TextNode) Render() string {
 
 type Element struct {
 	Tag      string
-	Attrs    Attrs
+	Attrs    attrs.Props
 	Children []Node
 }
 
@@ -131,7 +129,7 @@ func (e *Element) Render() string {
 	return builder.String()
 }
 
-func NewElement(tag string, attrs Attrs, children ...Node) *Element {
+func NewElement(tag string, attrs attrs.Props, children ...Node) *Element {
 	return &Element{
 		Tag:      tag,
 		Attrs:    attrs,
