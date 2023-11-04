@@ -81,3 +81,5 @@ const (
 	Scope   = "scope"
 	Headers = "headers"
 )
+
+type Props map[string]string

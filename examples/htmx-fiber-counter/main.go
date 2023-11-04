@@ -28,11 +28,11 @@ func main() {
 
 		// Define the head with the htmx script and styling
 		head := elem.Head(nil,
-			elem.Script(elem.Attrs{attrs.Src: "https://unpkg.com/htmx.org@1.9.6"}),
+			elem.Script(attrs.Props{attrs.Src: "https://unpkg.com/htmx.org@1.9.6"}),
 		)
 
 		// Define styling
-		bodyStyle := elem.Style{
+		bodyStyle := styles.Props{
 			styles.BackgroundColor: "#f4f4f4",
 			styles.FontFamily:      "Arial, sans-serif",
 			styles.Height:          "100vh",
@@ -42,7 +42,7 @@ func main() {
 			styles.JustifyContent:  "center",
 		}
 
-		buttonStyle := elem.Style{
+		buttonStyle := styles.Props{
 			styles.Padding:         "10px 20px",
 			styles.BackgroundColor: "#007BFF",
 			styles.Color:           "#fff",
@@ -53,20 +53,20 @@ func main() {
 		}
 
 		// Define the body content for our counter page
-		body := elem.Body(elem.Attrs{
-			attrs.Style: elem.ApplyStyle(bodyStyle),
+		body := elem.Body(attrs.Props{
+			attrs.Style: bodyStyle.ToInline(),
 		},
 			elem.H1(nil, elem.Text("Counter App")),
-			elem.Div(elem.Attrs{attrs.ID: "count"}, elem.Text("0")),
-			elem.Button(elem.Attrs{
+			elem.Div(attrs.Props{attrs.ID: "count"}, elem.Text("0")),
+			elem.Button(attrs.Props{
 				htmx.HXPost:   "/increment",
 				htmx.HXTarget: "#count",
-				attrs.Style:   elem.ApplyStyle(buttonStyle),
+				attrs.Style:   buttonStyle.ToInline(),
 			}, elem.Text("+")),
-			elem.Button(elem.Attrs{
+			elem.Button(attrs.Props{
 				htmx.HXPost:   "/decrement",
 				htmx.HXTarget: "#count",
-				attrs.Style:   elem.ApplyStyle(buttonStyle),
+				attrs.Style:   buttonStyle.ToInline(),
 			}, elem.Text("-")),
 		)
 

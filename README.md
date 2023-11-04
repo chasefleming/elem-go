@@ -32,7 +32,7 @@ import (
 ### Creating Elements
 
 ```go
-content := elem.Div(elem.Attrs{
+content := elem.Div(attrs.Props{
     attrs.ID:    "container",
     attrs.Class: "my-class",
 },
@@ -42,7 +42,7 @@ content := elem.Div(elem.Attrs{
 )
 ```
 
-### Attributes
+### Attributes and Styles
 
 The `attrs` subpackage provides type-safe attribute functions that ensure you're setting valid attributes for your elements. This helps eliminate potential issues at runtime due to misspelled or unsupported attribute names.
 
@@ -50,13 +50,31 @@ For boolean attributes like `checked` and `selected`, you can simply assign them
 
 ```go
 // Using boolean attributes
-checkbox := elem.Input(elem.Attrs{
+checkbox := elem.Input(attrs.Props{
     attrs.Type:    "checkbox",
     attrs.Checked: "true",  // This will render as <input type="checkbox" checked>
 })
 ```
 
-See the complete list of supported attributes in the [`attrs` package](./attrs/attrs.go).
+For setting styles, the `styles` subpackage enables you to create style objects and convert them to inline CSS strings:
+
+```go
+// Define a style
+buttonStyle := styles.Props{
+    styles.BackgroundColor: "blue",
+    styles.Color:           "white",
+}
+
+// Convert style to inline CSS and apply it
+button := elem.Button(
+    attrs.Props{
+        attrs.Style: buttonStyle.ToInline(),
+    },
+    elem.Text("Click Me"),
+)
+```
+
+See the complete list of supported attributes in [the `attrs` package](./attrs/attrs.go) and style properties in [the `styles` package](./styles/constants.go).
 
 ### Rendering Elements
 
@@ -85,8 +103,8 @@ In this example, we transformed a slice of strings into a list of `li` elements 
 
 ```go
 isAdmin := true
-adminLink := elem.A(elem.Attrs{attrs.Href: "/admin"}, elem.Text("Admin Panel"))
-guestLink := elem.A(elem.Attrs{attrs.Href: "/login"}, elem.Text("Login"))
+adminLink := elem.A(attrs.Props{attrs.Href: "/admin"}, elem.Text("Admin Panel"))
+guestLink := elem.A(attrs.Props{attrs.Href: "/login"}, elem.Text("Login"))
 
 content := elem.Div(nil,
     elem.H1(nil, elem.Text("Dashboard")),
@@ -101,7 +119,7 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 `elem` provides utility functions for creating HTML elements:
 
 - **Document Structure**: `Html`, `Head`, `Body`, `Title`, `Link`, `Meta`
-- **Text Content**: `H1`, `H2`, `H3`, `P`, `Blockquote`, `Pre`, `Code`, `Em`, `Strong`, `I`, `Br`, `Hr`
+- **Text Content**: `H1`, `H2`, `H3`, `P`, `Blockquote`, `Pre`, `Code`, `I`, `Br`, `Hr`
 - **Sectioning & Semantic Layout**: `Article`, `Aside`, `Footer`, `Header`, `Main`, `Nav`, `Section`
 - **Form Elements**: `Form`, `Input`, `Textarea`, `Button`, `Select`, `Option`, `Label`, `Fieldset`, `Legend`, `Datalist`, `Meter`, `Output`, `Progress`
 - **Interactive Elements**: `Dialog`, `Menu`
@@ -110,28 +128,6 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 - **Embedded Content**: `Img`
 - **Script-supporting Elements**: `Script`, `Noscript`
 - **Inline Semantic**: `A`, `Strong`, `Em`, `Code`, `I`
-
-### Setting Styles with the `styles` Subpackage
-
-With the `elem` library, you can also programmatically define and apply CSS styles to your HTML elements using the `styles` subpackage. This approach leverages Go's type system to ensure that your style property names and values are correctly defined.
-
-```go
-// Define a style
-buttonStyle := elem.Style{
-    styles.BackgroundColor: "blue",
-    styles.Color:           "white",
-}
-
-// Apply the style to an element as an attribute value
-button := elem.Button(
-    elem.Attrs{
-        attrs.Style: elem.ApplyStyle(buttonStyle),
-    },
-    elem.Text("Click Me"),
-)
-```
-
-See the complete list of supported properties in the [`styles` package](./styles/styles.go).
 
 ## HTMX Integration
 

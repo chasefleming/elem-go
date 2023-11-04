@@ -1,83 +1,87 @@
 package elem
 
+import (
+	"github.com/chasefleming/elem-go/attrs"
+)
+
 // ========== Document Structure ==========
 
-func Body(props Attrs, children ...Node) *Element {
-	return NewElement("body", props, children...)
+func Body(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("body", attrs, children...)
 }
 
-func Head(props Attrs, children ...Node) *Element {
-	return NewElement("head", props, children...)
+func Head(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("head", attrs, children...)
 }
 
-func Html(props Attrs, children ...Node) *Element {
-	return NewElement("html", props, children...)
+func Html(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("html", attrs, children...)
 }
 
-func Title(props Attrs, children ...Node) *Element {
-	return NewElement("title", props, children...)
+func Title(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("title", attrs, children...)
 }
 
 // ========== Text Formatting and Structure ==========
 
-func A(props Attrs, children ...Node) *Element {
-	return NewElement("a", props, children...)
+func A(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("a", attrs, children...)
 }
 
-func Br(props Attrs) *Element {
-	return NewElement("br", props)
+func Br(attrs attrs.Props) *Element {
+	return NewElement("br", attrs)
 }
 
-func Blockquote(props Attrs, children ...Node) *Element {
-	return NewElement("blockquote", props, children...)
+func Blockquote(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("blockquote", attrs, children...)
 }
 
-func Code(props Attrs, children ...Node) *Element {
-	return NewElement("code", props, children...)
+func Code(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("code", attrs, children...)
 }
 
-func Div(props Attrs, children ...Node) *Element {
-	return NewElement("div", props, children...)
+func Div(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("div", attrs, children...)
 }
 
-func Em(props Attrs, children ...Node) *Element {
-	return NewElement("em", props, children...)
+func Em(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("em", attrs, children...)
 }
 
-func H1(props Attrs, children ...Node) *Element {
-	return NewElement("h1", props, children...)
+func H1(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("h1", attrs, children...)
 }
 
-func H2(props Attrs, children ...Node) *Element {
-	return NewElement("h2", props, children...)
+func H2(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("h2", attrs, children...)
 }
 
-func H3(props Attrs, children ...Node) *Element {
-	return NewElement("h3", props, children...)
+func H3(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("h3", attrs, children...)
 }
 
-func Hr(props Attrs) *Element {
-	return NewElement("hr", props)
+func Hr(attrs attrs.Props) *Element {
+	return NewElement("hr", attrs)
 }
 
-func I(props Attrs, children ...Node) *Element {
-	return NewElement("i", props, children...)
+func I(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("i", attrs, children...)
 }
 
-func P(props Attrs, children ...Node) *Element {
-	return NewElement("p", props, children...)
+func P(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("p", attrs, children...)
 }
 
-func Pre(props Attrs, children ...Node) *Element {
-	return NewElement("pre", props, children...)
+func Pre(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("pre", attrs, children...)
 }
 
-func Span(props Attrs, children ...Node) *Element {
-	return NewElement("span", props, children...)
+func Span(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("span", attrs, children...)
 }
 
-func Strong(props Attrs, children ...Node) *Element {
-	return NewElement("strong", props, children...)
+func Strong(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("strong", attrs, children...)
 }
 
 func Text(content string) TextNode {
@@ -86,210 +90,210 @@ func Text(content string) TextNode {
 
 // ========== Lists ==========
 
-func Li(props Attrs, children ...Node) *Element {
-	return NewElement("li", props, children...)
+func Li(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("li", attrs, children...)
 }
 
-func Ul(props Attrs, children ...Node) *Element {
-	return NewElement("ul", props, children...)
+func Ul(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("ul", attrs, children...)
 }
 
-func Ol(props Attrs, children ...Node) *Element {
-	return NewElement("ol", props, children...)
+func Ol(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("ol", attrs, children...)
 }
 
-func Dl(props Attrs, children ...Node) *Element {
-	return NewElement("dl", props, children...)
+func Dl(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("dl", attrs, children...)
 }
 
-func Dt(props Attrs, children ...Node) *Element {
-	return NewElement("dt", props, children...)
+func Dt(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("dt", attrs, children...)
 }
 
-func Dd(props Attrs, children ...Node) *Element {
-	return NewElement("dd", props, children...)
+func Dd(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("dd", attrs, children...)
 }
 
 // ========== Forms ==========
 
-func Button(props Attrs, children ...Node) *Element {
-	return NewElement("button", props, children...)
+func Button(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("button", attrs, children...)
 }
 
-func Form(attrs Attrs, children ...Node) *Element {
+func Form(attrs attrs.Props, children ...Node) *Element {
 	return NewElement("form", attrs, children...)
 }
 
-func Input(attrs Attrs) *Element {
+func Input(attrs attrs.Props) *Element {
 	return NewElement("input", attrs)
 }
 
-func Label(attrs Attrs, children ...Node) *Element {
+func Label(attrs attrs.Props, children ...Node) *Element {
 	return NewElement("label", attrs, children...)
 }
 
-func Option(attrs Attrs, content TextNode) *Element {
+func Option(attrs attrs.Props, content TextNode) *Element {
 	return NewElement("option", attrs, content)
 }
 
-func Select(attrs Attrs, children ...Node) *Element {
+func Select(attrs attrs.Props, children ...Node) *Element {
 	return NewElement("select", attrs, children...)
 }
 
-func Textarea(attrs Attrs, content TextNode) *Element {
+func Textarea(attrs attrs.Props, content TextNode) *Element {
 	return NewElement("textarea", attrs, content)
 }
 
 // ========== Hyperlinks and Multimedia ==========
 
-func Img(props Attrs) *Element {
-	return NewElement("img", props)
+func Img(attrs attrs.Props) *Element {
+	return NewElement("img", attrs)
 }
 
 // ========== Meta Elements ==========
 
-func Link(props Attrs) *Element {
-	return NewElement("link", props)
+func Link(attrs attrs.Props) *Element {
+	return NewElement("link", attrs)
 }
 
-func Meta(props Attrs) *Element {
-	return NewElement("meta", props)
+func Meta(attrs attrs.Props) *Element {
+	return NewElement("meta", attrs)
 }
 
-func Script(props Attrs, children ...Node) *Element {
-	return NewElement("script", props, children...)
+func Script(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("script", attrs, children...)
 }
 
 // ========== Semantic Elements ==========
 
 // --- Semantic Sectioning Elements ---
 
-func Article(props Attrs, children ...Node) *Element {
-	return NewElement("article", props, children...)
+func Article(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("article", attrs, children...)
 }
 
-func Aside(props Attrs, children ...Node) *Element {
-	return NewElement("aside", props, children...)
+func Aside(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("aside", attrs, children...)
 }
 
-func Footer(props Attrs, children ...Node) *Element {
-	return NewElement("footer", props, children...)
+func Footer(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("footer", attrs, children...)
 }
 
-func Header(props Attrs, children ...Node) *Element {
-	return NewElement("header", props, children...)
+func Header(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("header", attrs, children...)
 }
 
-func Main(props Attrs, children ...Node) *Element {
-	return NewElement("main", props, children...)
+func Main(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("main", attrs, children...)
 }
 
-func Nav(props Attrs, children ...Node) *Element {
-	return NewElement("nav", props, children...)
+func Nav(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("nav", attrs, children...)
 }
 
-func Section(props Attrs, children ...Node) *Element {
-	return NewElement("section", props, children...)
+func Section(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("section", attrs, children...)
 }
 
 // ========== Semantic Form Elements ==========
 
-func Fieldset(props Attrs, children ...Node) *Element {
-	return NewElement("fieldset", props, children...)
+func Fieldset(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("fieldset", attrs, children...)
 }
 
-func Legend(props Attrs, children ...Node) *Element {
-	return NewElement("legend", props, children...)
+func Legend(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("legend", attrs, children...)
 }
 
-func Datalist(props Attrs, children ...Node) *Element {
-	return NewElement("datalist", props, children...)
+func Datalist(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("datalist", attrs, children...)
 }
 
-func Meter(props Attrs, children ...Node) *Element {
-	return NewElement("meter", props, children...)
+func Meter(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("meter", attrs, children...)
 }
 
-func Output(props Attrs, children ...Node) *Element {
-	return NewElement("output", props, children...)
+func Output(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("output", attrs, children...)
 }
 
-func Progress(props Attrs, children ...Node) *Element {
-	return NewElement("progress", props, children...)
+func Progress(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("progress", attrs, children...)
 }
 
 // --- Semantic Interactive Elements ---
 
-func Dialog(props Attrs, children ...Node) *Element {
-	return NewElement("dialog", props, children...)
+func Dialog(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("dialog", attrs, children...)
 }
 
-func Menu(props Attrs, children ...Node) *Element {
-	return NewElement("menu", props, children...)
+func Menu(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("menu", attrs, children...)
 }
 
 // --- Semantic Script Supporting Elements ---
 
-func NoScript(props Attrs, children ...Node) *Element {
-	return NewElement("noscript", props, children...)
+func NoScript(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("noscript", attrs, children...)
 }
 
 // --- Semantic Text Content Elements ---
 
-func Address(props Attrs, children ...Node) *Element {
-	return NewElement("address", props, children...)
+func Address(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("address", attrs, children...)
 }
 
-func Details(props Attrs, children ...Node) *Element {
-	return NewElement("details", props, children...)
+func Details(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("details", attrs, children...)
 }
 
-func FigCaption(props Attrs, children ...Node) *Element {
-	return NewElement("figcaption", props, children...)
+func FigCaption(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("figcaption", attrs, children...)
 }
 
-func Figure(props Attrs, children ...Node) *Element {
-	return NewElement("figure", props, children...)
+func Figure(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("figure", attrs, children...)
 }
 
-func Mark(props Attrs, children ...Node) *Element {
-	return NewElement("mark", props, children...)
+func Mark(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("mark", attrs, children...)
 }
 
-func Summary(props Attrs, children ...Node) *Element {
-	return NewElement("summary", props, children...)
+func Summary(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("summary", attrs, children...)
 }
 
-func Time(props Attrs, children ...Node) *Element {
-	return NewElement("time", props, children...)
+func Time(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("time", attrs, children...)
 }
 
 // ========== Tables ==========
 
-func Table(props Attrs, children ...Node) *Element {
-	return NewElement("table", props, children...)
+func Table(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("table", attrs, children...)
 }
 
-func THead(props Attrs, children ...Node) *Element {
-	return NewElement("thead", props, children...)
+func THead(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("thead", attrs, children...)
 }
 
-func TBody(props Attrs, children ...Node) *Element {
-	return NewElement("tbody", props, children...)
+func TBody(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("tbody", attrs, children...)
 }
 
-func TFoot(props Attrs, children ...Node) *Element {
-	return NewElement("tfoot", props, children...)
+func TFoot(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("tfoot", attrs, children...)
 }
 
-func Tr(props Attrs, children ...Node) *Element {
-	return NewElement("tr", props, children...)
+func Tr(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("tr", attrs, children...)
 }
 
-func Th(props Attrs, children ...Node) *Element {
-	return NewElement("th", props, children...)
+func Th(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("th", attrs, children...)
 }
 
-func Td(props Attrs, children ...Node) *Element {
-	return NewElement("td", props, children...)
+func Td(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("td", attrs, children...)
 }
