@@ -146,6 +146,7 @@ func renderTodos(todos []Todo) string {
 			renderTodoItems(todos)...,
 		),
 	)
+	
 	htmlContent := elem.Html(nil, headContent, bodyContent)
 
 	return htmlContent.Render()
