@@ -1,6 +1,6 @@
-# Todo List Application with elem-go, htmx, and Go Fiber
+# Todo List Application with `elem-go`, `htmx`, and `Go Fiber`
 
-This project is a Todo List web application built with Go using the Go Fiber framework. It features server-side rendering of HTML with elem-go and uses htmx to handle asynchronous actions without needing to reload the page.
+This project is a Todo List web application built with Go using the `Go Fiber` framework. It features server-side rendering of HTML with `elem-go` and uses `htmx` to handle asynchronous actions without needing to reload the page.
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ Clone or download the repository, then run the following commands to download th
 go mod tidy
 ```
 
-This will install elem-go along with Go Fiber and the htmx subpackage required to run the application.
+This will install elem-go along with Go Fiber and the `htmx` subpackage required to run the application.
 
 ## Running the App
 
@@ -24,7 +24,7 @@ Navigate to the directory containing the application's source code and execute t
 go run main.go
 ```
 
-This command compiles and runs the Go program, starting the Go Fiber server on port `3000`.
+This command compiles and runs the Go program, starting the `Go Fiber` server on port `3000`.
 
 ## Features
 
@@ -39,7 +39,7 @@ This command compiles and runs the Go program, starting the Go Fiber server on p
 
 ## HTML Generation
 
-HTML content is programmatically generated using the elem-go library. This includes:
+HTML content is programmatically generated using the `elem-go` library. This includes:
 
 - A form for adding new Todos.
 - A dynamic list that renders each Todo as an `li` element with an `input` checkbox to toggle completion.
@@ -47,7 +47,7 @@ HTML content is programmatically generated using the elem-go library. This inclu
 
 ## Asynchronous Behavior
 
-Using htmx, the application performs actions like adding a new Todo or toggling the completion status without a full page reload. This provides a smoother user experience.
+Using `htmx`, the application performs actions like adding a new Todo or toggling the completion status without a full page reload. This provides a smoother user experience.
 
 ## Stopping the Server
 
