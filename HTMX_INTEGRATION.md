@@ -1,4 +1,4 @@
-# htmx Integration with `elem`
+# `htmx` Integration with `elem-go`
 
 The `htmx` subpackage within `elem` provides a seamless way to integrate the [htmx](https://htmx.org/) library, allowing for easy creation of dynamic web applications. This document outlines how to use the `htmx` subpackage and its features.
 
