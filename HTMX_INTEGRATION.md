@@ -47,22 +47,55 @@ In this example, the main `div` has htmx attributes set to fetch content from `/
 
 The `htmx` subpackage provides constants for commonly used `htmx` attributes:
 
-- **HXGet**: Represents the `hx-get` attribute.
-- **HXPost**: Represents the `hx-post` attribute.
-- **HXPut**: Represents the `hx-put` attribute.
-- **HXDelete**: Represents the `hx-delete` attribute.
-- **HXPatch**: Represents the `hx-patch` attribute.
-- **HXParams**: Represents the `hx-params` attribute.
-- **HXValues**: Represents the `hx-values` attribute.
-- **HXSwap**: Represents the `hx-swap` attribute.
-- **HXTarget**: Represents the `hx-target` attribute.
-- **HXSwapOOB**: Represents the `hx-swap-oob` attribute.
-- **HXTrigger**: Represents the `hx-trigger` attribute.
-- **HXConfirm**: Represents the `hx-confirm` attribute.
-- **HXIndicator**: Represents the `hx-indicator` attribute.
-- **HXPushURL**: Represents the `hx-push-url` attribute.
-- **HXBoost**: Represents the `hx-boost` attribute.
-- **HXError**: Represents the `hx-error` attribute.
+- **Request Modifiers**
+    - `HXGet`: URL for GET requests.
+    - `HXPost`: URL for POST requests.
+    - `HXPut`: URL for PUT requests.
+    - `HXDelete`: URL for DELETE requests.
+    - `HXPatch`: URL for PATCH requests.
+
+- **Request Headers and Content-Type**
+    - `HXHeaders`: Specifies request headers.
+    - `HXContent`: Specifies the content type of the request.
+
+- **Request Parameters**
+    - `HXParams`: Parameters to include with the request.
+    - `HXValues`: Values to include with the request.
+
+- **Request Timeout and Retries**
+    - `HXTimeout`: Timeout for the request.
+    - `HXRetry`: Number of times to retry the request.
+    - `HXRetryTimeout`: Timeout before retrying the request.
+
+- **Response Processing**
+    - `HXSwap`: How to swap the content.
+    - `HXTarget`: Where to place the content in the DOM.
+    - `HXSwapOOB`: Out-of-band swapping.
+    - `HXSelect`: CSS selector for element in returned HTML.
+    - `HXExt`: htmx extensions to use.
+    - `HXVals`: Values to process in the response.
+
+- **Events**
+    - `HXTrigger`: Event that triggers the request.
+    - `HXConfirm`: Confirmation message before sending the request.
+    - `HXOn`: Event listener on the element.
+    - `HXTriggeringElement`: Element that triggered the request.
+    - `HXTriggeringEvent`: Event that triggered the request.
+
+- **Indicators**
+    - `HXIndicator`: Element displayed as an indicator while processing.
+
+- **History**
+    - `HXPushURL`: Pushes a new URL to the browser history.
+    - `HXHistoryElt`: Element for history purposes.
+    - `HXHistoryAttr`: Attribute for history purposes.
+
+- **Error Handling**
+    - `HXBoost`: Enhances links and forms with AJAX.
+    - `HXError`: Element for displaying error messages.
+
+- **Caching**
+    - `HXCache`: Specifies caching behavior.
 
 ## Examples
 
