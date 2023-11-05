@@ -32,8 +32,8 @@ With the `htmx` subpackage, you can effortlessly add htmx-specific attributes to
 
 ```go
 content := elem.Div(attrs.Props{
-    elem.ID:       "container",
-    elem.Class:    "my-class",
+    attrs.ID:       "container",
+    attrs.Class:    "my-class",
     htmx.HXGet:    "/path-to-new-content",
     htmx.HXTarget: "#content-div",
 },
