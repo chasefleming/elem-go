@@ -21,7 +21,7 @@ To utilize the `htmx` subpackage, import it alongside the main `elem` package:
 ```go
 import (
     "github.com/chasefleming/elem-go"
-	"github.com/chasefleming/elem-go/attrs"
+    "github.com/chasefleming/elem-go/attrs"
     "github.com/chasefleming/elem-go/htmx"
 )
 ```
