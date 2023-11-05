@@ -110,7 +110,7 @@ button := elem.Button(attrs.Props{
     htmx.HXTarget: "#result-div",
 }, elem.Text("Load Content"))
 
-contentDiv := elem.Div(attrs.Props{elem.ID: "result-div"}, elem.Text("Initial content"))
+contentDiv := elem.Div(attrs.Props{attrs.ID: "result-div"}, elem.Text("Initial content"))
 
 pageContent := elem.Div(nil, button, contentDiv)
 ```
