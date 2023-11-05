@@ -1,6 +1,7 @@
 package elem
 
 import (
+	"github.com/chasefleming/elem-go/styles"
 	"testing"
 
 	"github.com/chasefleming/elem-go/attrs"
@@ -242,6 +243,13 @@ func TestMeta(t *testing.T) {
 func TestScript(t *testing.T) {
 	expected := `<script src="https://example.com/script.js"></script>`
 	el := Script(attrs.Props{attrs.Src: "https://example.com/script.js"})
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestStyle(t *testing.T) {
+	expected := `<style type="text/css">.test-class {color: #333;}</style>`
+	cssContent := `.test-class {color: #333;}`
+	el := Style(attrs.Props{attrs.Type: "text/css"}, styles.CSS(cssContent))
 	assert.Equal(t, expected, el.Render())
 }
 

@@ -118,7 +118,7 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 
 `elem` provides utility functions for creating HTML elements:
 
-- **Document Structure**: `Html`, `Head`, `Body`, `Title`, `Link`, `Meta`
+- **Document Structure**: `Html`, `Head`, `Body`, `Title`, `Link`, `Meta`, `Style`
 - **Text Content**: `H1`, `H2`, `H3`, `P`, `Blockquote`, `Pre`, `Code`, `I`, `Br`, `Hr`
 - **Sectioning & Semantic Layout**: `Article`, `Aside`, `Footer`, `Header`, `Main`, `Nav`, `Section`
 - **Form Elements**: `Form`, `Input`, `Textarea`, `Button`, `Select`, `Option`, `Label`, `Fieldset`, `Legend`, `Datalist`, `Meter`, `Output`, `Progress`
