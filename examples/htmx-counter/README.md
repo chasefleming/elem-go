@@ -1,4 +1,4 @@
-# Counter Application with elem-go and htmx
+# Simple Counter Application with elem-go and htmx
 
 A basic web application demonstrating a simple counter that can be incremented without reloading the page. It uses `elem-go` to construct HTML elements programmatically and `htmx` for handling the asynchronous increment of the counter.
 
