@@ -21,6 +21,7 @@ To utilize the `htmx` subpackage, import it alongside the main `elem` package:
 ```go
 import (
     "github.com/chasefleming/elem-go"
+	"github.com/chasefleming/elem-go/attrs"
     "github.com/chasefleming/elem-go/htmx"
 )
 ```
@@ -30,20 +31,20 @@ import (
 With the `htmx` subpackage, you can effortlessly add htmx-specific attributes to your elements:
 
 ```go
-content := elem.Div(elem.Props{
+content := elem.Div(attrs.Props{
     elem.ID:       "container",
     elem.Class:    "my-class",
     htmx.HXGet:    "/path-to-new-content",
     htmx.HXTarget: "#content-div",
 },
     elem.H1(nil, elem.Text("Hello, Elem!")),
-    elem.Div(elem.Props{elem.ID: "content-div"}, elem.Text("Initial content")),
+    elem.Div(attrs.Props{attrs.ID: "content-div"}, elem.Text("Initial content")),
 )
 ```
 
 In this example, the main `div` has htmx attributes set to fetch content from `/path-to-new-content` and place it inside a `div` with the ID `content-div`.
 
-## Supported htmx Attributes
+## Supported `htmx` Attributes
 
 The `htmx` subpackage provides constants for commonly used `htmx` attributes:
 
@@ -104,14 +105,14 @@ The `htmx` subpackage provides constants for commonly used `htmx` attributes:
 To create a button that loads content into a specific div when clicked:
 
 ```go
-button := elem.Button(elem.Props{
+button := elem.Button(attrs.Props{
     htmx.HXGet:    "/fetch-content",
     htmx.HXTarget: "#result-div",
 }, elem.Text("Load Content"))
 
-contentDiv := elem.Div(elem.Props{elem.ID: "result-div"}, elem.Text("Initial content"))
+contentDiv := elem.Div(attrs.Props{elem.ID: "result-div"}, elem.Text("Initial content"))
 
 pageContent := elem.Div(nil, button, contentDiv)
 ```
 
-When the button is clicked, htmx will fetch content from the `/fetch-content` endpoint and replace the content inside the `#result-div`.
+When the button is clicked, `htmx` will fetch content from the `/fetch-content` endpoint and replace the content inside the `#result-div`.
