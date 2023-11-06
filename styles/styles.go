@@ -5,8 +5,10 @@ import (
 	"strings"
 )
 
+// Props is a map of CSS properties
 type Props map[string]string
 
+// ToInline converts the Props to an inline style string
 func (p Props) ToInline() string {
 	// Extract the keys and sort them for deterministic order
 	keys := make([]string, 0, len(p))
@@ -32,6 +34,7 @@ func (p Props) ToInline() string {
 	return styleStr
 }
 
+// CSSNode is a Node that renders to a CSS string
 type CSSNode string
 
 // RenderTo satisfies part of the Node interface by allowing CSSNode to be written to a strings.Builder
