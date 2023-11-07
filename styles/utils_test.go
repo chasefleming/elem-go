@@ -46,10 +46,10 @@ func TestMergeThreeStyles(t *testing.T) {
 	mergedStyle := Merge(baseStyle, secondaryStyle, tertiaryStyle)
 
 	expectedStyle := Props{
-		"padding": "10px",
-		"margin":  "10px", // From secondaryStyle
-		"color":   "blue", // From tertiaryStyle
-		"border":  "1px solid black",
+		Padding: "10px",
+		Margin:  "10px", // From secondaryStyle
+		Color:   "blue", // From tertiaryStyle
+		Border:  "1px solid black",
 	}
 
 	assert.Equal(t, expectedStyle, mergedStyle)
