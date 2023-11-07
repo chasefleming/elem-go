@@ -164,6 +164,10 @@ func Script(attrs attrs.Props, children ...Node) *Element {
 	return NewElement("script", attrs, children...)
 }
 
+func Style(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("style", attrs, children...)
+}
+
 // ========== Semantic Elements ==========
 
 // --- Semantic Sectioning Elements ---
