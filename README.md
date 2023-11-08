@@ -95,6 +95,7 @@ liElements := elem.TransformEach(items, func(item string) elem.Node {
 
 ulElement := elem.Ul(nil, liElements)
 ```
+
 In this example, we transformed a slice of strings into a list of `li` elements and then wrapped them in a `ul` element.
 
 ### Conditional Rendering with `If`
@@ -125,7 +126,8 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 - **Interactive Elements**: `Dialog`, `Menu`
 - **Grouping Content**: `Div`, `Span`, `Li`, `Ul`, `Ol`, `Dl`, `Dt`, `Dd`
 - **Tables**: `Table`, `Tr`, `Td`, `Th`, `TBody`, `THead`, `TFoot`
-- **Embedded Content**: `Img`
+- **Hyperlinks and Multimedia**: `Img`
+- **Embedded Content**: `Iframe`
 - **Script-supporting Elements**: `Script`, `Noscript`
 - **Inline Semantic**: `A`, `Strong`, `Em`, `Code`, `I`
 
