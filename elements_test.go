@@ -1,8 +1,9 @@
 package elem
 
 import (
-	"github.com/chasefleming/elem-go/styles"
 	"testing"
+
+	"github.com/chasefleming/elem-go/styles"
 
 	"github.com/chasefleming/elem-go/attrs"
 	"github.com/stretchr/testify/assert"
@@ -121,6 +122,19 @@ func TestStrong(t *testing.T) {
 	expected := `<strong>Bold text</strong>`
 	el := Strong(nil, Text("Bold text"))
 	assert.Equal(t, expected, el.Render())
+}
+
+// ========== Comments ==========
+func TestComment(t *testing.T) {
+	expected := `<!-- this is a comment -->`
+	actual := Comment("this is a comment").Render()
+	assert.Equal(t, expected, actual)
+}
+
+func TestCommentInElement(t *testing.T) {
+	expected := `<div>not a comment<!-- this is a comment --></div>`
+	actual := Div(nil, Text("not a comment"), Comment("this is a comment")).Render()
+	assert.Equal(t, expected, actual)
 }
 
 // ========== Lists ==========

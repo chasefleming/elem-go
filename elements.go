@@ -88,6 +88,10 @@ func Text(content string) TextNode {
 	return TextNode(content)
 }
 
+func Comment(comment string) CommentNode {
+	return CommentNode(comment)
+}
+
 // ========== Lists ==========
 
 func Li(attrs attrs.Props, children ...Node) *Element {

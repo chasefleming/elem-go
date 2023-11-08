@@ -62,6 +62,20 @@ func (t TextNode) Render() string {
 	return string(t)
 }
 
+type CommentNode string
+
+func (c CommentNode) RenderTo(builder *strings.Builder) {
+	builder.WriteString("<!-- ")
+	builder.WriteString(string(c))
+	builder.WriteString(" -->")
+}
+
+func (c CommentNode) Render() string {
+	var builder strings.Builder
+	c.RenderTo(&builder)
+	return builder.String()
+}
+
 type Element struct {
 	Tag      string
 	Attrs    attrs.Props
