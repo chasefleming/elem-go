@@ -1,8 +1,9 @@
 package elem
 
 import (
-	"github.com/chasefleming/elem-go/styles"
 	"testing"
+
+	"github.com/chasefleming/elem-go/styles"
 
 	"github.com/chasefleming/elem-go/attrs"
 	"github.com/stretchr/testify/assert"
@@ -456,5 +457,18 @@ func TestTFoot(t *testing.T) {
 func TestTable(t *testing.T) {
 	expected := `<table><tr><th>Table header</th></tr><tr><td>Table content</td></tr></table>`
 	el := Table(nil, Tr(nil, Th(nil, Text("Table header"))), Tr(nil, Td(nil, Text("Table content"))))
+	assert.Equal(t, expected, el.Render())
+}
+
+// ========== Embedded Content ==========
+func TestEmbedLink(t *testing.T) {
+	expected := `<iframe src="https://www.youtube.com/embed/446E-r0rXHI?si=ji7WiR0cuDVSTWJ2"></iframe>`
+	el := IFrame(attrs.Props{attrs.Src: "https://www.youtube.com/embed/446E-r0rXHI?si=ji7WiR0cuDVSTWJ2"})
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestAllowFullScreen(t *testing.T) {
+	expected := `<iframe allowfullscreen src="https://www.youtube.com/embed/446E-r0rXHI?si=ji7WiR0cuDVSTWJ2"></iframe>`
+	el := IFrame(attrs.Props{attrs.Src: "https://www.youtube.com/embed/446E-r0rXHI?si=ji7WiR0cuDVSTWJ2", attrs.AllowFullScreen: "true"})
 	assert.Equal(t, expected, el.Render())
 }
