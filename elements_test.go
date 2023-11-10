@@ -476,12 +476,12 @@ func TestTable(t *testing.T) {
 // ========== Embedded Content ==========
 func TestEmbedLink(t *testing.T) {
 	expected := `<iframe src="https://www.youtube.com/embed/446E-r0rXHI"></iframe>`
-	el := IFrame(attrs.Props{attrs.Src: "https://www.youtube.com/embed/446E-r0rXHI?si=ji7WiR0cuDVSTWJ2"})
+	el := IFrame(attrs.Props{attrs.Src: "https://www.youtube.com/embed/446E-r0rXHI"})
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestAllowFullScreen(t *testing.T) {
 	expected := `<iframe allowfullscreen src="https://www.youtube.com/embed/446E-r0rXHI"></iframe>`
-	el := IFrame(attrs.Props{attrs.Src: "https://www.youtube.com/embed/446E-r0rXHI?si=ji7WiR0cuDVSTWJ2", attrs.AllowFullScreen: "true"})
+	el := IFrame(attrs.Props{attrs.Src: "https://www.youtube.com/embed/446E-r0rXHI", attrs.AllowFullScreen: "true"})
 	assert.Equal(t, expected, el.Render())
 }
