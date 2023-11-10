@@ -305,3 +305,9 @@ func Th(attrs attrs.Props, children ...Node) *Element {
 func Td(attrs attrs.Props, children ...Node) *Element {
 	return NewElement("td", attrs, children...)
 }
+
+// ========== Embedded Content ==========
+
+func IFrame(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("iframe", attrs, children...)
+}

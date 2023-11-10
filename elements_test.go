@@ -472,3 +472,16 @@ func TestTable(t *testing.T) {
 	el := Table(nil, Tr(nil, Th(nil, Text("Table header"))), Tr(nil, Td(nil, Text("Table content"))))
 	assert.Equal(t, expected, el.Render())
 }
+
+// ========== Embedded Content ==========
+func TestEmbedLink(t *testing.T) {
+	expected := `<iframe src="https://www.youtube.com/embed/446E-r0rXHI?si=ji7WiR0cuDVSTWJ2"></iframe>`
+	el := IFrame(attrs.Props{attrs.Src: "https://www.youtube.com/embed/446E-r0rXHI?si=ji7WiR0cuDVSTWJ2"})
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestAllowFullScreen(t *testing.T) {
+	expected := `<iframe allowfullscreen src="https://www.youtube.com/embed/446E-r0rXHI?si=ji7WiR0cuDVSTWJ2"></iframe>`
+	el := IFrame(attrs.Props{attrs.Src: "https://www.youtube.com/embed/446E-r0rXHI?si=ji7WiR0cuDVSTWJ2", attrs.AllowFullScreen: "true"})
+	assert.Equal(t, expected, el.Render())
+}

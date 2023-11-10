@@ -11,6 +11,7 @@ const (
 	Style           = "style"
 	Tabindex        = "tabindex"
 	Title           = "title"
+	Loading         = "loading"
 
 	// Link/Script Attributes
 	Async       = "async"
@@ -80,6 +81,14 @@ const (
 	ColSpan = "colspan"
 	Scope   = "scope"
 	Headers = "headers"
+
+	// IFrame Attributes
+	Allow           = "allow"
+	AllowFullScreen = "allowfullscreen"
+	CSP             = "csp"
+	ReferrerPolicy  = "referrerpolicy"
+	Sandbox         = "sandbox"
+	SrcDoc          = "srcdoc"
 )
 
 type Props map[string]string
