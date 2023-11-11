@@ -87,7 +87,7 @@ button := elem.Button(
 )
 ```
 
-See the complete list of supported attributes in [the `attrs` package](./attrs/attrs.go), and for a full overview of style properties and detailed information on using the `styles` subpackage for CSS styling, see [the `styles` package source](./styles/constants.go) and the [styles subpackage README](styles).
+See the complete list of supported attributes in [the `attrs` package](./attrs/attrs.go), and for a full overview of style properties and information on using the `styles` subpackage, see the [styles README](styles).
 
 ### Rendering Elements
 
