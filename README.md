@@ -8,7 +8,7 @@
 - Type-safe definition and manipulation of elements, attributes, and properties.
 - Supports common HTML elements and attributes.
 - Utilities for simplified element generation and manipulation.
-- Advanced CSS styling capabilities with the `styles` subpackage. (See [styles subpackage README](styles) for more details.)
+- Advanced CSS styling capabilities with the [styles](styles) subpackage.
 
 ## Installation
 
