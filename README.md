@@ -8,6 +8,7 @@
 - Type-safe definition and manipulation of elements, attributes, and properties.
 - Supports common HTML elements and attributes.
 - Utilities for simplified element generation and manipulation.
+- Advanced CSS styling capabilities with the `styles` subpackage. (See [styles subpackage README](styles) for more details.)
 
 ## Installation
 
@@ -86,7 +87,7 @@ button := elem.Button(
 )
 ```
 
-See the complete list of supported attributes in [the `attrs` package](./attrs/attrs.go) and style properties in [the `styles` package](./styles/constants.go).
+See the complete list of supported attributes in [the `attrs` package](./attrs/attrs.go), and for a full overview of style properties and detailed information on using the `styles` subpackage for CSS styling, see [the `styles` package source](./styles/constants.go) and the [styles subpackage README](styles).
 
 ### Rendering Elements
 
