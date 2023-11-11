@@ -131,15 +131,6 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 - **Script-supporting Elements**: `Script`, `Noscript`
 - **Inline Semantic**: `A`, `Strong`, `Em`, `Code`, `I`
 
-### Additional Utility: HTML Comments
-
-Apart from standard elements, `elem-go` also allows you to insert HTML comments using the `Comment` function:
-
-```go
-comment := elem.Comment("Section: Main Content Start")
-// Generates: <!-- Section: Main Content Start -->
-```
-
 ## HTMX Integration
 
 We provide a subpackage for htmx integration. [Read more about htmx integration here](HTMX_INTEGRATION.md).
