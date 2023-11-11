@@ -158,7 +158,7 @@ comment := elem.Comment("Section: Main Content Start")
 
 ## HTMX Integration
 
-We provide a subpackage for htmx integration. [Read more about htmx integration here](HTMX_INTEGRATION.md).
+We provide a subpackage for htmx integration. [Read more about htmx integration here](htmx/README.md).
 
 ## Examples
 
