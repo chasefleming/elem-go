@@ -485,3 +485,23 @@ func TestAllowFullScreen(t *testing.T) {
 	el := IFrame(attrs.Props{attrs.Src: "https://www.youtube.com/embed/446E-r0rXHI", attrs.AllowFullScreen: "true"})
 	assert.Equal(t, expected, el.Render())
 }
+
+func TestAudioWithSourceElementsAndFallbackText(t *testing.T) {
+	expected := `<audio controls><source src="horse.ogg" type="audio/ogg"><source src="horse.mp3" type="audio/mpeg">Your browser does not support the audio tag.</audio>`
+	el := Audio(attrs.Props{attrs.Controls: "true"},
+		Source(attrs.Props{attrs.Src: "horse.ogg", attrs.Type: "audio/ogg"}),
+		Source(attrs.Props{attrs.Src: "horse.mp3", attrs.Type: "audio/mpeg"}),
+		Text("Your browser does not support the audio tag."),
+	)
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestVideoWithSourceElementsAndFallbackText(t *testing.T) {
+	expected := `<video controls height="240" width="320"><source src="movie.mp4" type="video/mp4"><source src="movie.ogg" type="video/ogg">Your browser does not support the video tag.</video>`
+	el := Video(attrs.Props{attrs.Width: "320", attrs.Height: "240", attrs.Controls: "true"},
+		Source(attrs.Props{attrs.Src: "movie.mp4", attrs.Type: "video/mp4"}),
+		Source(attrs.Props{attrs.Src: "movie.ogg", attrs.Type: "video/ogg"}),
+		Text("Your browser does not support the video tag."),
+	)
+	assert.Equal(t, expected, el.Render())
+}
