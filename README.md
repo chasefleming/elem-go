@@ -31,6 +31,8 @@ import (
 
 ### Creating Elements
 
+Here's an example of creating a `<div>` element with nested `<h1>`, `<h2>`, and `<p>` elements using elem:
+
 ```go
 content := elem.Div(attrs.Props{
     attrs.ID:    "container",
@@ -40,6 +42,16 @@ content := elem.Div(attrs.Props{
     elem.H2(nil, elem.Text("Subheading")),
     elem.P(nil, elem.Text("This is a paragraph.")),
 )
+```
+
+When the above Go code is executed and the `.Render()` method is called, it produces the following HTML:
+
+```html
+<div id="container" class="my-class">
+    <h1>Hello, Elem!</h1>
+    <h2>Subheading</h2>
+    <p>This is a paragraph.</p>
+</div>
 ```
 
 ### Attributes and Styles
@@ -78,9 +90,13 @@ See the complete list of supported attributes in [the `attrs` package](./attrs/a
 
 ### Rendering Elements
 
+The `.Render()` method is used to convert the structured Go elements into HTML strings. This method is essential for generating the final HTML output that can be served to a web browser or integrated into templates.
+
 ```go
 html := content.Render()
 ```
+
+In this example, content refers to an elem element structure. When the `.Render()` method is called on content, it generates the HTML representation of the constructed elements.
 
 ### Generating Lists of Elements with `TransformEach`
 
@@ -127,9 +143,18 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 - **Grouping Content**: `Div`, `Span`, `Li`, `Ul`, `Ol`, `Dl`, `Dt`, `Dd`
 - **Tables**: `Table`, `Tr`, `Td`, `Th`, `TBody`, `THead`, `TFoot`
 - **Hyperlinks and Multimedia**: `Img`
-- **Embedded Content**: `Iframe`
+- **Embedded Content**: `Audio`, `Iframe`, `Source`, `Video`
 - **Script-supporting Elements**: `Script`, `Noscript`
 - **Inline Semantic**: `A`, `Strong`, `Em`, `Code`, `I`
+
+### Additional Utility: HTML Comments
+
+Apart from standard elements, `elem-go` also allows you to insert HTML comments using the `Comment` function:
+
+```go
+comment := elem.Comment("Section: Main Content Start")
+// Generates: <!-- Section: Main Content Start -->
+```
 
 ## HTMX Integration
 
