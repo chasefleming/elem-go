@@ -381,3 +381,18 @@ func Td(attrs attrs.Props, children ...Node) *Element {
 func IFrame(attrs attrs.Props, children ...Node) *Element {
 	return NewElement("iframe", attrs, children...)
 }
+
+// Audio creates an <audio> element.
+func Audio(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("audio", attrs, children...)
+}
+
+// Video creates a <video> element.
+func Video(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("video", attrs, children...)
+}
+
+// Source creates a <source> element.
+func Source(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("source", attrs, children...)
+}

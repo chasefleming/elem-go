@@ -89,6 +89,21 @@ const (
 	ReferrerPolicy  = "referrerpolicy"
 	Sandbox         = "sandbox"
 	SrcDoc          = "srcdoc"
+
+	// Audio/Video Attributes
+	Controls = "controls"
+	Loop     = "loop"
+	Muted    = "muted"
+	Preload  = "preload"
+	Autoplay = "autoplay"
+
+	// Video-Specific Attributes
+	Poster      = "poster"
+	Playsinline = "playsinline"
+
+	// Source Element-Specific Attributes
+	Media = "media"
+	Sizes = "sizes"
 )
 
 type Props map[string]string
