@@ -55,6 +55,20 @@ func TestMergeThreeStyles(t *testing.T) {
 	assert.Equal(t, expectedStyle, mergedStyle)
 }
 
+func TestEm(t *testing.T) {
+	assert.Equal(t, "100.00em", Em(100))
+	assert.Equal(t, "0.00em", Em(0))
+	assert.Equal(t, "50.00em", Em(50))
+	assert.Equal(t, "25.00em", Em(25))
+}
+
+func TestRem(t *testing.T) {
+	assert.Equal(t, "100.00rem", Rem(100))
+	assert.Equal(t, "0.00rem", Rem(0))
+	assert.Equal(t, "50.00rem", Rem(50))
+	assert.Equal(t, "25.00rem", Rem(25))
+}
+
 func TestPercent(t *testing.T) {
 	assert.Equal(t, "100%", Percent(100))
 	assert.Equal(t, "0%", Percent(0))
@@ -69,6 +83,20 @@ func TestPixels(t *testing.T) {
 	assert.Equal(t, "25px", Pixels(25))
 }
 
+func TestRGB(t *testing.T) {
+	assert.Equal(t, "rgb(100,100,100)", RGB(100, 100, 100))
+	assert.Equal(t, "rgb(0,0,0)", RGB(0, 0, 0))
+	assert.Equal(t, "rgb(50,50,50)", RGB(50, 50, 50))
+	assert.Equal(t, "rgb(25,25,25)", RGB(25, 25, 25))
+}
+
+func TestRGBA(t *testing.T) {
+	assert.Equal(t, "rgba(100,100,100,100)", RGBA(100, 100, 100, 100))
+	assert.Equal(t, "rgba(0,0,0,0)", RGBA(0, 0, 0, 0))
+	assert.Equal(t, "rgba(50,50,50,50)", RGBA(50, 50, 50, 50))
+	assert.Equal(t, "rgba(25,25,25,25)", RGBA(25, 25, 25, 25))
+}
+
 func TestViewportHeight(t *testing.T) {
 	assert.Equal(t, "100vh", ViewportHeight(100))
 	assert.Equal(t, "0vh", ViewportHeight(0))
@@ -81,18 +109,4 @@ func TestViewportWidth(t *testing.T) {
 	assert.Equal(t, "0vw", ViewportWidth(0))
 	assert.Equal(t, "50vw", ViewportWidth(50))
 	assert.Equal(t, "25vw", ViewportWidth(25))
-}
-
-func TestEm(t *testing.T) {
-	assert.Equal(t, "100.00em", Em(100))
-	assert.Equal(t, "0.00em", Em(0))
-	assert.Equal(t, "50.00em", Em(50))
-	assert.Equal(t, "25.00em", Em(25))
-}
-
-func TestRem(t *testing.T) {
-	assert.Equal(t, "100.00rem", Rem(100))
-	assert.Equal(t, "0.00rem", Rem(0))
-	assert.Equal(t, "50.00rem", Rem(50))
-	assert.Equal(t, "25.00rem", Rem(25))
 }
