@@ -64,6 +64,15 @@ func RGBA(r, g, b, a int) string {
 	return builder.String()
 }
 
+// URL returns a string representation of the given string as a CSS URL value.
+func URL(url string) string {
+	var builder strings.Builder
+	builder.WriteString("url('")
+	builder.WriteString(url)
+	builder.WriteString("')")
+	return builder.String()
+}
+
 // ViewportHeight returns a string representation of the given integer as a viewport height value.
 func ViewportHeight(value int) string {
 	return strconv.Itoa(value) + "vh"

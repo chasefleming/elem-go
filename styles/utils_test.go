@@ -97,6 +97,10 @@ func TestRGBA(t *testing.T) {
 	assert.Equal(t, "rgba(25,25,25,25)", RGBA(25, 25, 25, 25))
 }
 
+func TestURL(t *testing.T) {
+	assert.Equal(t, "url('https://example.com')", URL("https://example.com"))
+}
+
 func TestViewportHeight(t *testing.T) {
 	assert.Equal(t, "100vh", ViewportHeight(100))
 	assert.Equal(t, "0vh", ViewportHeight(0))
