@@ -28,6 +28,9 @@ func Percent(value int) string {
 
 // Pixels returns a string representation of the given integer as a pixel value.
 func Pixels(value int) string {
+	if value == 0 {
+		return "0"
+	}
 	return strconv.Itoa(value) + "px"
 }
 

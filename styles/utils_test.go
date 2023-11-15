@@ -78,7 +78,7 @@ func TestPercent(t *testing.T) {
 
 func TestPixels(t *testing.T) {
 	assert.Equal(t, "100px", Pixels(100))
-	assert.Equal(t, "0px", Pixels(0))
+	assert.Equal(t, "0", Pixels(0))
 	assert.Equal(t, "50px", Pixels(50))
 	assert.Equal(t, "25px", Pixels(25))
 }
