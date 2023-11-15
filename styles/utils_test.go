@@ -101,6 +101,10 @@ func TestURL(t *testing.T) {
 	assert.Equal(t, "url('https://example.com')", URL("https://example.com"))
 }
 
+func TestVar(t *testing.T) {
+	assert.Equal(t, "var(--primary-color)", Var("primary-color"))
+}
+
 func TestViewportHeight(t *testing.T) {
 	assert.Equal(t, "100vh", ViewportHeight(100))
 	assert.Equal(t, "0vh", ViewportHeight(0))

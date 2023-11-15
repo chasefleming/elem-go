@@ -73,6 +73,15 @@ func URL(url string) string {
 	return builder.String()
 }
 
+// Var returns a string representation of the given string as a CSS var value.
+func Var(name string) string {
+	var builder strings.Builder
+	builder.WriteString("var(--")
+	builder.WriteString(name)
+	builder.WriteString(")")
+	return builder.String()
+}
+
 // ViewportHeight returns a string representation of the given integer as a viewport height value.
 func ViewportHeight(value int) string {
 	return strconv.Itoa(value) + "vh"
