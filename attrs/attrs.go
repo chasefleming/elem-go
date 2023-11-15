@@ -63,6 +63,8 @@ const (
 	Required       = "required"
 	Rows           = "rows"
 	Selected       = "selected"
+	Size           = "size"
+	Step           = "step"
 	Type           = "type"
 	Value          = "value"
 
