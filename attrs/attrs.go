@@ -68,6 +68,7 @@ const (
 	Maxlength = "maxlength"
 	Method    = "method" // e.g., "GET", "POST"
 	Min       = "min"
+	Minlength = "minlength"
 	Multiple  = "multiple"
 	Name      = "name"
 	// Deprecated: Use Novalidate instead
