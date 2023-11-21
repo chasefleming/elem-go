@@ -148,7 +148,24 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 - **Script-supporting Elements**: `Script`, `Noscript`
 - **Inline Semantic**: `A`, `Strong`, `Em`, `Code`, `I`
 
-### Additional Utility: HTML Comments
+### Raw HTML Insertion
+
+The `Raw` function allows for the direct inclusion of raw HTML content within your document structure. This function can be used to insert HTML strings, which will be rendered as part of the final HTML output.
+
+```go
+rawHTML := `<div class="custom-html"><p>Custom HTML content</p></div>`
+content := elem.Div(nil,
+    elem.H1(nil, elem.Text("Welcome to Elem-Go")),
+    elem.Raw(rawHTML), // Inserting the raw HTML
+    elem.P(nil, elem.Text("More content here...")), 
+)
+
+htmlOutput := content.Render()
+// Output: <div><h1>Welcome to Elem-Go</h1><div class="custom-html"><p>Custom HTML content</p></div><p>More content here...</p></div>
+```
+> **NOTE**: If you are passing HTML from an untrusted source, make sure to sanitize it to prevent potential security risks such as Cross-Site Scripting (XSS) attacks.
+
+### HTML Comments
 
 Apart from standard elements, `elem-go` also allows you to insert HTML comments using the `Comment` function:
 

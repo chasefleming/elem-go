@@ -396,3 +396,10 @@ func Video(attrs attrs.Props, children ...Node) *Element {
 func Source(attrs attrs.Props, children ...Node) *Element {
 	return NewElement("source", attrs, children...)
 }
+
+// ========== Other ==========
+
+// Raw takes html content and returns a RawNode.
+func Raw(html string) RawNode {
+	return RawNode(html)
+}
