@@ -163,6 +163,7 @@ content := elem.Div(nil,
 htmlOutput := content.Render()
 // Output: <div><h1>Welcome to Elem-Go</h1><div class="custom-html"><p>Custom HTML content</p></div><p>More content here...</p></div>
 ```
+> **NOTE**: If you are passing HTML from an untrusted source, make sure to sanitize it to prevent potential security risks such as Cross-Site Scripting (XSS) attacks.
 
 ### HTML Comments
 
