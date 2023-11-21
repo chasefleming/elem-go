@@ -474,6 +474,7 @@ func TestTable(t *testing.T) {
 }
 
 // ========== Embedded Content ==========
+
 func TestEmbedLink(t *testing.T) {
 	expected := `<iframe src="https://www.youtube.com/embed/446E-r0rXHI"></iframe>`
 	el := IFrame(attrs.Props{attrs.Src: "https://www.youtube.com/embed/446E-r0rXHI"})
@@ -503,5 +504,15 @@ func TestVideoWithSourceElementsAndFallbackText(t *testing.T) {
 		Source(attrs.Props{attrs.Src: "movie.ogg", attrs.Type: "video/ogg"}),
 		Text("Your browser does not support the video tag."),
 	)
+	assert.Equal(t, expected, el.Render())
+}
+
+// ========== Other ==========
+
+func TestRaw(t *testing.T) {
+	rawHTML := `<div class="test"><p>Test paragraph</p></div>`
+	el := Raw(rawHTML)
+	expected := rawHTML
+
 	assert.Equal(t, expected, el.Render())
 }

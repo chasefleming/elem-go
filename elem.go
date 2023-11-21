@@ -68,6 +68,16 @@ func (t TextNode) Render() string {
 	return string(t)
 }
 
+type RawNode string
+
+func (r RawNode) RenderTo(builder *strings.Builder) {
+	builder.WriteString(string(r))
+}
+
+func (r RawNode) Render() string {
+	return string(r)
+}
+
 type CommentNode string
 
 func (c CommentNode) RenderTo(builder *strings.Builder) {
