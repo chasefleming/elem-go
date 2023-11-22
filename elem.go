@@ -33,7 +33,7 @@ var voidElements = map[string]struct{}{
 // attribute represents the "true" value. To represent the "false" value, the attribute has to be omitted.
 // See https://html.spec.whatwg.org/multipage/indices.html#attributes-3 for reference
 var booleanAttrs = map[string]struct{}{
-	attrs.AllowFullScreen: {},
+	attrs.AllowFullscreen: {},
 	attrs.Async:           {},
 	attrs.Autofocus:       {},
 	attrs.Autoplay:        {},
@@ -41,11 +41,11 @@ var booleanAttrs = map[string]struct{}{
 	attrs.Controls:        {},
 	attrs.Defer:           {},
 	attrs.Disabled:        {},
-	attrs.IsMap:           {},
+	attrs.Ismap:           {},
 	attrs.Loop:            {},
 	attrs.Multiple:        {},
 	attrs.Muted:           {},
-	attrs.NoValidate:      {},
+	attrs.Novalidate:      {},
 	attrs.Open:            {},
 	attrs.Playsinline:     {},
 	attrs.Readonly:        {},
