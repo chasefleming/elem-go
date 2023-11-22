@@ -509,6 +509,19 @@ func TestVideoWithSourceElementsAndFallbackText(t *testing.T) {
 
 // ========== Other ==========
 
+func TestNone(t *testing.T) {
+	el := None()
+	expected := ""
+
+	assert.Equal(t, expected, el.Render(), "None should render an empty string")
+}
+
+func TestNoneInDiv(t *testing.T) {
+	expected := `<div></div>`
+	actual := Div(nil, None()).Render()
+	assert.Equal(t, expected, actual)
+}
+
 func TestRaw(t *testing.T) {
 	rawHTML := `<div class="test"><p>Test paragraph</p></div>`
 	el := Raw(rawHTML)

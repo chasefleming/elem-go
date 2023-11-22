@@ -58,6 +58,19 @@ type Node interface {
 	Render() string
 }
 
+// NoneNode represents a node that renders nothing.
+type NoneNode struct{}
+
+// RenderTo for NoneNode does nothing.
+func (n NoneNode) RenderTo(builder *strings.Builder) {
+	// Intentionally left blank to render nothing
+}
+
+// Render for NoneNode returns an empty string.
+func (n NoneNode) Render() string {
+	return ""
+}
+
 type TextNode string
 
 func (t TextNode) RenderTo(builder *strings.Builder) {
