@@ -143,15 +143,11 @@ func renderTodos(todos []Todo) string {
 		),
 		elem.Ul(
 			attrs.Props{attrs.Style: listContainerStyle.ToInline()},
-			renderTodoItems(todos)...,
+			elem.TransformEach(todos, createTodoNode)...,
 		),
 	)
-	
+
 	htmlContent := elem.Html(nil, headContent, bodyContent)
 
 	return htmlContent.Render()
-}
-
-func renderTodoItems(todos []Todo) []elem.Node {
-	return elem.TransformEach(todos, createTodoNode)
 }
