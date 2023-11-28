@@ -132,6 +132,23 @@ content := elem.Div(nil,
 
 In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Otherwise, the `Login` link is rendered.
 
+#### `None` in Conditional Rendering
+
+`elem` provides a specialized node `None` that implements the `Node` interface but does not produce any visible output. It's particularly useful in scenarios where rendering nothing for a specific condition is required.
+
+```go
+showWelcomeMessage := false
+welcomeMessage := elem.Div(nil, elem.Text("Welcome to our website!"))
+// Using NoneNode for conditional rendering
+content := elem.Div(nil,
+    elem.If[elem.Node](showWelcomeMessage, welcomeMessage, elem.None()),
+)
+```
+
+In this example, `welcomeMessage` is rendered only if `showWelcomeMessage` is `true`. If it's `false`, `None` is rendered instead, which produces no visible output.
+
+Additionally, `None` can be used to create an empty element, as in `elem.Div(nil, elem.None())`, which results in `<div></div>`. This can be handy for creating placeholders or structuring your HTML document without adding additional content.
+
 ### Supported Elements
 
 `elem` provides utility functions for creating HTML elements:
