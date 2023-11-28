@@ -139,7 +139,7 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 ```go
 showWelcomeMessage := false
 welcomeMessage := elem.Div(nil, elem.Text("Welcome to our website!"))
-// Using NoneNode for conditional rendering
+
 content := elem.Div(nil,
     elem.If[elem.Node](showWelcomeMessage, welcomeMessage, elem.None()),
 )
