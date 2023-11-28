@@ -399,6 +399,11 @@ func Source(attrs attrs.Props, children ...Node) *Element {
 
 // ========== Other ==========
 
+// None creates a NoneNode, representing a no-operation in rendering.
+func None() NoneNode {
+	return NoneNode{}
+}
+
 // Raw takes html content and returns a RawNode.
 func Raw(html string) RawNode {
 	return RawNode(html)
