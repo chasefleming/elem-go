@@ -206,7 +206,7 @@ For hands-on examples showcasing the usage of `elem`, you can find sample implem
 Dive deeper into the capabilities of `elem` and learn best practices through our collection of tutorials and guides:
 
 - [Building a Counter App with htmx, Go Fiber, and elem-go](https://dev.to/chasefleming/building-a-counter-app-with-htmx-go-fiber-and-elem-go-9jd/)
-- [Building a Go Static Site Generator using elem-go](https://dev.to/chasefleming/building-a-go-static-site-generator-using-elem-go-3fhh)
+- [Building a Go Static Site Generator Using elem-go](https://dev.to/chasefleming/building-a-go-static-site-generator-using-elem-go-3fhh)
 
 Stay tuned for more tutorials and guides in the future!
 
