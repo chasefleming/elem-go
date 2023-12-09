@@ -207,6 +207,12 @@ func TestSelectAndOption(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestSelectAndOptgroup(t *testing.T) {
+	expected := `<select name="cars"><optgroup label="Swedish Cars"><option value="volvo">Volvo</option><option value="saab">Saab</option></optgroup><optgroup label="German Cars"><option value="mercedes">Mercedes</option><option value="audi">Audi</option></optgroup></select>`
+	el := Select(attrs.Props{attrs.Name: "cars"}, Optgroup(attrs.Props{attrs.Label: "Swedish Cars"}, Option(attrs.Props{attrs.Value: "volvo"}, Text("Volvo")), Option(attrs.Props{attrs.Value: "saab"}, Text("Saab"))), Optgroup(attrs.Props{attrs.Label: "German Cars"}, Option(attrs.Props{attrs.Value: "mercedes"}, Text("Mercedes")), Option(attrs.Props{attrs.Value: "audi"}, Text("Audi"))))
+	assert.Equal(t, expected, el.Render())
+}
+
 func TestTextarea(t *testing.T) {
 	expected := `<textarea name="comment" rows="5">Leave a comment...</textarea>`
 	el := Textarea(attrs.Props{attrs.Name: "comment", attrs.Rows: "5"}, Text("Leave a comment..."))

@@ -167,6 +167,11 @@ func Label(attrs attrs.Props, children ...Node) *Element {
 	return NewElement("label", attrs, children...)
 }
 
+// Optgroup creates an <optgroup> element to group <option>s within a <select> element.
+func Optgroup(attrs attrs.Props, children ...Node) *Element {
+	return NewElement("optgroup", attrs, children...)
+}
+
 // Option creates an <option> element.
 func Option(attrs attrs.Props, content TextNode) *Element {
 	return NewElement("option", attrs, content)
