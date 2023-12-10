@@ -59,6 +59,7 @@ const (
 	Disabled       = "disabled"
 	For            = "for"
 	Form           = "form"
+	Label          = "label"
 	List           = "list"
 	Low            = "low"
 	High           = "high"
