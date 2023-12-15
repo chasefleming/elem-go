@@ -172,7 +172,7 @@ func (e *Element) Render() string {
 	return builder.String()
 }
 
-func NewElement(tag string, attrs attrs.Props, children ...Node) *Element {
+func newElement(tag string, attrs attrs.Props, children ...Node) *Element {
 	return &Element{
 		Tag:      tag,
 		Attrs:    attrs,
