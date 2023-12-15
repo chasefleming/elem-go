@@ -18,7 +18,7 @@ func TestBody(t *testing.T) {
 }
 
 func TestHtml(t *testing.T) {
-	expected := `<html lang="en"><head><meta charset="UTF-8"><title>Elem Page</title></head><body><p>Welcome to Elem!</p></body></html>`
+	expected := `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Elem Page</title></head><body><p>Welcome to Elem!</p></body></html>`
 	el := Html(attrs.Props{attrs.Lang: "en"},
 		Head(nil,
 			Meta(attrs.Props{attrs.Charset: "UTF-8"}),

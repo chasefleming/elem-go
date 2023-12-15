@@ -112,6 +112,13 @@ type Element struct {
 }
 
 func (e *Element) RenderTo(builder *strings.Builder) {
+	// The HTML tag needs a doctype preamble in order to ensure
+	// browsers don't render in legacy/quirks mode
+	// https://developer.mozilla.org/en-US/docs/Glossary/Doctype
+	if e.Tag == "html" {
+		builder.WriteString("<!DOCTYPE html>")
+	}
+
 	// Start with opening tag
 	builder.WriteString("<")
 	builder.WriteString(e.Tag)
