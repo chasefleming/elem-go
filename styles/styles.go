@@ -3,6 +3,8 @@ package styles
 import (
 	"sort"
 	"strings"
+
+	"github.com/chasefleming/elem-go"
 )
 
 // Props is a map of CSS properties
@@ -38,7 +40,7 @@ func (p Props) ToInline() string {
 type CSSNode string
 
 // RenderTo satisfies part of the Node interface by allowing CSSNode to be written to a strings.Builder
-func (cn CSSNode) RenderTo(builder *strings.Builder) {
+func (cn CSSNode) RenderTo(builder *strings.Builder, opts elem.RenderOptions) {
 	builder.WriteString(string(cn))
 }
 
