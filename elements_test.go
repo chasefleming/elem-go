@@ -3,8 +3,6 @@ package elem
 import (
 	"testing"
 
-	"github.com/chasefleming/elem-go/styles"
-
 	"github.com/chasefleming/elem-go/attrs"
 	"github.com/stretchr/testify/assert"
 )
@@ -27,6 +25,18 @@ func TestHtml(t *testing.T) {
 		Body(nil, P(nil, Text("Welcome to Elem!"))),
 	)
 	assert.Equal(t, expected, el.Render())
+}
+
+func TestHtmlWithOptions(t *testing.T) {
+	expected := `<html lang="en"><head><meta charset="UTF-8"><title>Elem Page</title></head><body><p>Welcome to Elem!</p></body></html>`
+	el := Html(attrs.Props{attrs.Lang: "en"},
+		Head(nil,
+			Meta(attrs.Props{attrs.Charset: "UTF-8"}),
+			Title(nil, Text("Elem Page")),
+		),
+		Body(nil, P(nil, Text("Welcome to Elem!"))),
+	)
+	assert.Equal(t, expected, el.RenderWithOptions(RenderOptions{DisableHtmlPreamble: true}))
 }
 
 // ========== Text Formatting and Structure ==========
@@ -269,7 +279,7 @@ func TestScript(t *testing.T) {
 func TestStyle(t *testing.T) {
 	expected := `<style type="text/css">.test-class {color: #333;}</style>`
 	cssContent := `.test-class {color: #333;}`
-	el := Style(attrs.Props{attrs.Type: "text/css"}, styles.CSS(cssContent))
+	el := Style(attrs.Props{attrs.Type: "text/css"}, TextNode(cssContent))
 	assert.Equal(t, expected, el.Render())
 }
 
