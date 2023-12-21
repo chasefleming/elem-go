@@ -97,7 +97,20 @@ The `.Render()` method is used to convert the structured Go elements into HTML s
 html := content.Render()
 ```
 
-In this example, content refers to an elem element structure. When the `.Render()` method is called on content, it generates the HTML representation of the constructed elements.
+In this example, `content` refers to an `elem` element structure. When the `.Render()` method is called on content, it generates the HTML representation of the constructed elements.
+
+> NOTE: When using an <html> element, this method automatically includes a <!DOCTYPE html> preamble in the rendered HTML, ensuring compliance with modern web standards.
+
+#### Custom Rendering Options
+
+For more control over the rendering process, such as disabling the HTML preamble, use the `RenderWithOptions` method. This method accepts a `RenderOptions` struct, allowing you to specify various rendering preferences.
+
+```go
+options := RenderOptions{DisableHtmlPreamble: true}
+htmlString := myHtmlElement.RenderWithOptions(options)
+```
+
+This flexibility is particularly useful in scenarios where default rendering behaviors need to be overridden or customized.
 
 ### Generating Lists of Elements with `TransformEach`
 
