@@ -526,7 +526,7 @@ func TestVideoWithSourceElementsAndFallbackText(t *testing.T) {
 // ========== Image Map Elements ==========
 
 func TestMapAndArea(t *testing.T) {
-	expectedMap := `<map name="map-name"><area href="#area1" alt="Area 1" shape="rect" coords="34,44,270,350"></map>`
+	expectedMap := `<map name="map-name"><area alt="Area 1" coords="34,44,270,350" href="#area1" shape="rect"></map>`
 	mapEl := Map(attrs.Props{attrs.Name: "map-name"},
 		Area(attrs.Props{
 			attrs.Href:   "#area1",
