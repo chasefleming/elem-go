@@ -173,7 +173,7 @@ Additionally, `None` can be used to create an empty element, as in `elem.Div(nil
 - **Interactive Elements**: `Dialog`, `Menu`
 - **Grouping Content**: `Div`, `Span`, `Li`, `Ul`, `Ol`, `Dl`, `Dt`, `Dd`
 - **Tables**: `Table`, `Tr`, `Td`, `Th`, `TBody`, `THead`, `TFoot`
-- **Hyperlinks and Multimedia**: `Img`
+- **Hyperlinks and Multimedia**: `Img`, `Map`, `Area`
 - **Embedded Content**: `Audio`, `Iframe`, `Source`, `Video`
 - **Script-supporting Elements**: `Script`, `Noscript`
 - **Inline Semantic**: `A`, `Strong`, `Em`, `Code`, `I`
