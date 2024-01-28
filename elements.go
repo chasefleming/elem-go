@@ -402,6 +402,18 @@ func Source(attrs attrs.Props, children ...Node) *Element {
 	return newElement("source", attrs, children...)
 }
 
+// ========== Image Map Elements ==========
+
+// Map creates a <map> element.
+func Map(attrs attrs.Props, children ...Node) *Element {
+	return newElement("map", attrs, children...)
+}
+
+// Area creates an <area> element.
+func Area(attrs attrs.Props) *Element {
+	return newElement("area", attrs)
+}
+
 // ========== Other ==========
 
 // None creates a NoneNode, representing a no-operation in rendering.
