@@ -523,6 +523,21 @@ func TestVideoWithSourceElementsAndFallbackText(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+// ========== Image Map Elements ==========
+
+func TestMapAndArea(t *testing.T) {
+	expectedMap := `<map name="map-name"><area href="#area1" alt="Area 1" shape="rect" coords="34,44,270,350"></map>`
+	mapEl := Map(attrs.Props{attrs.Name: "map-name"},
+		Area(attrs.Props{
+			attrs.Href:   "#area1",
+			attrs.Alt:    "Area 1",
+			attrs.Shape:  "rect",
+			attrs.Coords: "34,44,270,350",
+		}),
+	)
+	assert.Equal(t, expectedMap, mapEl.Render())
+}
+
 // ========== Other ==========
 
 func TestNone(t *testing.T) {

@@ -38,8 +38,9 @@ const (
 	Height = "height"
 	Width  = "width"
 	// Deprecated: Use Ismap instead
-	IsMap = "ismap"
-	Ismap = "ismap"
+	IsMap  = "ismap"
+	Ismap  = "ismap"
+	Usemap = "usemap"
 
 	// Semantic Text Attributes
 
@@ -89,6 +90,10 @@ const (
 	// Interactive Attributes
 
 	Open = "open"
+
+	// Area-Specific Attributes
+	Shape  = "shape"
+	Coords = "coords"
 
 	// Miscellaneous Attributes
 
