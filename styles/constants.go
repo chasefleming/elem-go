@@ -121,6 +121,7 @@ const (
 	BackgroundAttachment = "background-attachment"
 	BackgroundBlendMode  = "background-blend-mode"
 	BackfaceVisibility   = "backface-visibility"
+	BackdropFilter       = "backdrop-filter"
 	Perspective          = "perspective"
 	TransformOrigin      = "transform-origin"
 
