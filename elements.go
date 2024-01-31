@@ -73,7 +73,7 @@ func H3(attrs attrs.Props, children ...Node) *Element {
 	return newElement("h3", attrs, children...)
 }
 
-// H4 creates an <h4> element.
+// Hr creates an <hr> element.
 func Hr(attrs attrs.Props) *Element {
 	return newElement("hr", attrs)
 }
