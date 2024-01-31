@@ -88,6 +88,11 @@ func H6(attrs attrs.Props, children ...Node) *Element {
 	return newElement("h6", attrs, children...)
 }
 
+// Hgroup creates an <hgroup> element.
+func Hgroup(attrs attrs.Props, children ...Node) *Element {
+	return newElement("hgroup", attrs, children...)
+}
+
 // Hr creates an <hr> element.
 func Hr(attrs attrs.Props) *Element {
 	return newElement("hr", attrs)
