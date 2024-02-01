@@ -329,6 +329,12 @@ func TestSection(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestHgroup(t *testing.T) {
+	expected := `<hgroup><h1>Frankenstein</h1><p>Or: The Modern Prometheus</p></hgroup>`
+	el := Hgroup(nil, H1(nil, Text("Frankenstein")), P(nil, Text("Or: The Modern Prometheus")))
+	assert.Equal(t, expected, el.Render())
+}
+
 // --- Semantic Form Elements ---
 
 func TestFieldset(t *testing.T) {

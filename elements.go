@@ -74,6 +74,26 @@ func H3(attrs attrs.Props, children ...Node) *Element {
 }
 
 // H4 creates an <h4> element.
+func H4(attrs attrs.Props, children ...Node) *Element {
+	return newElement("h4", attrs, children...)
+}
+
+// H5 creates an <h5> element.
+func H5(attrs attrs.Props, children ...Node) *Element {
+	return newElement("h5", attrs, children...)
+}
+
+// H6 creates an <h6> element.
+func H6(attrs attrs.Props, children ...Node) *Element {
+	return newElement("h6", attrs, children...)
+}
+
+// Hgroup creates an <hgroup> element.
+func Hgroup(attrs attrs.Props, children ...Node) *Element {
+	return newElement("hgroup", attrs, children...)
+}
+
+// Hr creates an <hr> element.
 func Hr(attrs attrs.Props) *Element {
 	return newElement("hr", attrs)
 }
