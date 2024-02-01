@@ -95,6 +95,24 @@ func TestH3(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestH4(t *testing.T) {
+	expected := `<h4>Hello, Elem!</h4>`
+	el := H4(nil, Text("Hello, Elem!"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestH5(t *testing.T) {
+	expected := `<h5>Hello, Elem!</h5>`
+	el := H5(nil, Text("Hello, Elem!"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestH6(t *testing.T) {
+	expected := `<h6>Hello, Elem!</h6>`
+	el := H6(nil, Text("Hello, Elem!"))
+	assert.Equal(t, expected, el.Render())
+}
+
 func TestHr(t *testing.T) {
 	expected := `<hr>`
 	el := Hr(nil)
