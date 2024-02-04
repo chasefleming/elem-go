@@ -136,6 +136,10 @@ const (
 	TableLayout    = "table-layout"
 	CaptionSide    = "caption-side"
 
+	// Resource Attributes
+	Integrity   = "integrity"
+	Crossorigin = "crossorigin"
+
 	// Other Properties
 	Visibility    = "visibility"
 	Clip          = "clip"
