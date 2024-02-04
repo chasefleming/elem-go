@@ -9,6 +9,9 @@ const (
 	HXDelete = "hx-delete"
 	HXPatch  = "hx-patch"
 
+	// WebSocket
+	HXWS = "hx-ws"
+
 	// Request Headers, Content-Type, additional data and request control
 	HXHeaders  = "hx-headers"
 	HXContent  = "hx-content"
