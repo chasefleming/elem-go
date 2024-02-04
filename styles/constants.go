@@ -112,6 +112,7 @@ const (
 	BackgroundImage      = "background-image"
 	BackgroundRepeat     = "background-repeat"
 	BackgroundSize       = "background-size"
+	ObjectFit            = "object-fit"
 	Opacity              = "opacity"
 	BoxSizing            = "box-sizing"
 	Cursor               = "cursor"
