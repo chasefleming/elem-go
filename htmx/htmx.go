@@ -38,7 +38,6 @@ const (
 	// Events
 	HXTrigger           = "hx-trigger"
 	HXConfirm           = "hx-confirm"
-	HXOn                = "hx-on"
 	HXTriggeringElement = "hx-triggering-element"
 	HXTriggeringEvent   = "hx-triggering-event"
 
@@ -64,7 +63,6 @@ const (
 	HXDisabledElt = "hx-disabled-elt"
 	HXDisinherit  = "hx-disinherit"
 	HXEncoding    = "hx-encoding"
-	HXExt         = "hx-ext"
 	HXPreserve    = "hx-preserve"
 	HXPrompt      = "hx-prompt"
 
