@@ -9,9 +9,6 @@ const (
 	HXDelete = "hx-delete"
 	HXPatch  = "hx-patch"
 
-	// WebSocket
-	HXWS = "hx-ws"
-
 	// Request Headers, Content-Type, additional data and request control
 	HXHeaders  = "hx-headers"
 	HXContent  = "hx-content"
@@ -68,6 +65,15 @@ const (
 	HXEncoding    = "hx-encoding"
 	HXPreserve    = "hx-preserve"
 	HXPrompt      = "hx-prompt"
+
+	// Server side events
+	HXSSE      = "hx-sse"
+	SSEConnect = "sse-connect"
+	SSESwap    = "sse-swap"
+
+	// WebSockets
+	HXWS      = "hx-ws"
+	WSConnect = "ws-connect"
 
 	// HTMX Events, Reference: https://htmx.org/reference/#events
 	// Reference for hx-on attribute: https://htmx.org/attributes/hx-on/
