@@ -152,6 +152,30 @@ func TestStrong(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestSub(t *testing.T) {
+	expected := `<sub>2</sub>`
+	el := Sub(nil, Text("2"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestSup(t *testing.T) {
+	expected := `<sup>2</sup>`
+	el := Sup(nil, Text("2"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestB(t *testing.T) {
+	expected := `<b>Important text</b>`
+	el := B(nil, Text("Important text"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestU(t *testing.T) {
+	expected := `<u>Unarticulated text</u>`
+	el := U(nil, Text("Unarticulated text"))
+	assert.Equal(t, expected, el.Render())
+}
+
 // ========== Comments ==========
 func TestComment(t *testing.T) {
 	expected := `<!-- this is a comment -->`

@@ -123,6 +123,26 @@ func Strong(attrs attrs.Props, children ...Node) *Element {
 	return newElement("strong", attrs, children...)
 }
 
+// Sub creates a <sub> element.
+func Sub(attrs attrs.Props, children ...Node) *Element {
+	return newElement("sub", attrs, children...)
+}
+
+// Sup creates a <sub> element.
+func Sup(attrs attrs.Props, children ...Node) *Element {
+	return newElement("sup", attrs, children...)
+}
+
+// B creates a <b> element.
+func B(attrs attrs.Props, children ...Node) *Element {
+	return newElement("b", attrs, children...)
+}
+
+// U creates a <u> element.
+func U(attrs attrs.Props, children ...Node) *Element {
+	return newElement("u", attrs, children...)
+}
+
 // Text creates a TextNode.
 func Text(content string) TextNode {
 	return TextNode(content)
