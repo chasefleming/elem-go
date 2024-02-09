@@ -348,9 +348,24 @@ func NoScript(attrs attrs.Props, children ...Node) *Element {
 
 // --- Semantic Text Content Elements ---
 
+// Abbr creates an <abbr> element.
+func Abbr(attrs attrs.Props, children ...Node) *Element {
+	return newElement("abbr", attrs, children...)
+}
+
 // Address creates an <address> element.
 func Address(attrs attrs.Props, children ...Node) *Element {
 	return newElement("address", attrs, children...)
+}
+
+// Cite creates a <cite> element.
+func Cite(attrs attrs.Props, children ...Node) *Element {
+	return newElement("cite", attrs, children...)
+}
+
+// Data creates a <data> element.
+func Data(attrs attrs.Props, children ...Node) *Element {
+	return newElement("data", attrs, children...)
 }
 
 // Details creates a <details> element.
@@ -368,9 +383,29 @@ func Figure(attrs attrs.Props, children ...Node) *Element {
 	return newElement("figure", attrs, children...)
 }
 
+// Kbd creates a <kbd> element.
+func Kbd(attrs attrs.Props, children ...Node) *Element {
+	return newElement("kbd", attrs, children...)
+}
+
 // Mark creates a <mark> element.
 func Mark(attrs attrs.Props, children ...Node) *Element {
 	return newElement("mark", attrs, children...)
+}
+
+// Q creates a <q> element.
+func Q(attrs attrs.Props, children ...Node) *Element {
+	return newElement("q", attrs, children...)
+}
+
+// Samp creates a <samp> element.
+func Samp(attrs attrs.Props, children ...Node) *Element {
+	return newElement("samp", attrs, children...)
+}
+
+// Small creates a <small> element.
+func Small(attrs attrs.Props, children ...Node) *Element {
+	return newElement("small", attrs, children...)
 }
 
 // Summary creates a <summary> element.
@@ -381,6 +416,11 @@ func Summary(attrs attrs.Props, children ...Node) *Element {
 // Time creates a <time> element.
 func Time(attrs attrs.Props, children ...Node) *Element {
 	return newElement("time", attrs, children...)
+}
+
+// Var creates a <var> element.
+func Var(attrs attrs.Props, children ...Node) *Element {
+	return newElement("var", attrs, children...)
 }
 
 // ========== Tables ==========
