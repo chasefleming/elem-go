@@ -44,6 +44,7 @@ const (
 
 	// Semantic Text Attributes
 
+	Cite = "cite"
 	// Deprecated: Use Datetime instead
 	DateTime = "datetime"
 	Datetime = "datetime"

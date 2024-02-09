@@ -439,9 +439,21 @@ func TestNoScript(t *testing.T) {
 
 // --- Semantic Text Content Elements ---
 
+func TestAbbr(t *testing.T) {
+	expected := `<abbr title="Web Hypertext Application Technology Working Group">WHATWG</abbr>`
+	el := Abbr(attrs.Props{attrs.Title: "Web Hypertext Application Technology Working Group"}, Text("WHATWG"))
+	assert.Equal(t, expected, el.Render())
+}
+
 func TestAddress(t *testing.T) {
 	expected := `<address>123 Example St.</address>`
 	el := Address(nil, Text("123 Example St."))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestCite(t *testing.T) {
+	expected := `<p>My favorite book is <cite>The Reality Dysfunction</cite> by Peter F. Hamilton.</p>`
+	el := P(nil, Text("My favorite book is "), Cite(nil, Text("The Reality Dysfunction")), Text(" by Peter F. Hamilton."))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -463,6 +475,12 @@ func TestDetailsWithOpenTrue(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestData(t *testing.T) {
+	expected := `<data value="8">Eight</data>`
+	el := Data(attrs.Props{attrs.Value: "8"}, Text("Eight"))
+	assert.Equal(t, expected, el.Render())
+}
+
 func TestFigCaption(t *testing.T) {
 	expected := `<figcaption>Description of the figure.</figcaption>`
 	el := FigCaption(nil, Text("Description of the figure."))
@@ -475,9 +493,33 @@ func TestFigure(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestKbd(t *testing.T) {
+	expected := `<p>To make George eat an apple, select <kbd>File | Eat Apple...</kbd></p>`
+	el := P(nil, Text("To make George eat an apple, select "), Kbd(nil, Text("File | Eat Apple...")))
+	assert.Equal(t, expected, el.Render())
+}
+
 func TestMark(t *testing.T) {
 	expected := `<p>You must <mark>highlight</mark> this word.</p>`
 	el := P(nil, Text("You must "), Mark(nil, Text("highlight")), Text(" this word."))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestQ(t *testing.T) {
+	expected := `<p>The W3C's mission is <q cite="https://www.w3.org/Consortium/">To lead the World Wide Web to its full potential</q>.</p>`
+	el := P(nil, Text("The W3C's mission is "), Q(attrs.Props{attrs.Cite: "https://www.w3.org/Consortium/"}, Text("To lead the World Wide Web to its full potential")), Text("."))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestSamp(t *testing.T) {
+	expected := `<p>The computer said <samp>Too much cheese in tray two</samp> but I didn't know what that meant.</p>`
+	el := P(nil, Text("The computer said "), Samp(nil, Text("Too much cheese in tray two")), Text(" but I didn't know what that meant."))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestSmall(t *testing.T) {
+	expected := `<p>Single room <small>breakfast included, VAT not included</small></p>`
+	el := P(nil, Text("Single room "), Small(nil, Text("breakfast included, VAT not included")))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -489,7 +531,13 @@ func TestSummary(t *testing.T) {
 
 func TestTime(t *testing.T) {
 	expected := `<time datetime="2023-01-01T00:00:00Z">New Year's Day</time>`
-	el := Time(attrs.Props{attrs.DateTime: "2023-01-01T00:00:00Z"}, Text("New Year's Day"))
+	el := Time(attrs.Props{attrs.Datetime: "2023-01-01T00:00:00Z"}, Text("New Year's Day"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestVar(t *testing.T) {
+	expected := `<p>After a few moment's thought, she wrote <var>E</var>.</p>`
+	el := P(nil, Text("After a few moment's thought, she wrote "), Var(nil, Text("E")), Text("."))
 	assert.Equal(t, expected, el.Render())
 }
 
