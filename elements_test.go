@@ -541,6 +541,24 @@ func TestVar(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestRuby(t *testing.T) {
+	expected := `<ruby>漢</ruby>`
+	el := Ruby(nil, Text("漢"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestRt(t *testing.T) {
+	expected := `<ruby> 漢 <rp>(</rp><rt>kan</rt><rp>)</rp> 字 <rp>(</rp><rt>ji</rt><rp>)</rp> </ruby>`
+	el := Ruby(nil, Text(" 漢 "), Rp(nil, Text("(")), Rt(nil, Text("kan")), Rp(nil, Text(")")), Text(" 字 "), Rp(nil, Text("(")), Rt(nil, Text("ji")), Rp(nil, Text(")")), Text(" "))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestRp(t *testing.T) {
+	expected := `<ruby> 漢 <rp>(</rp> 字 <rp>)</rp> </ruby>`
+	el := Ruby(nil, Text(" 漢 "), Rp(nil, Text("(")), Text(" 字 "), Rp(nil, Text(")")), Text(" "))
+	assert.Equal(t, expected, el.Render())
+}
+
 // ========== Tables ==========
 
 func TestTr(t *testing.T) {

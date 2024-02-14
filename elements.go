@@ -295,6 +295,16 @@ func Section(attrs attrs.Props, children ...Node) *Element {
 	return newElement("section", attrs, children...)
 }
 
+// Details creates a <details> element.
+func Details(attrs attrs.Props, children ...Node) *Element {
+	return newElement("details", attrs, children...)
+}
+
+// Summary creates a <summary> element.
+func Summary(attrs attrs.Props, children ...Node) *Element {
+	return newElement("summary", attrs, children...)
+}
+
 // ========== Semantic Form Elements ==========
 
 // Fieldset creates a <fieldset> element.
@@ -368,11 +378,6 @@ func Data(attrs attrs.Props, children ...Node) *Element {
 	return newElement("data", attrs, children...)
 }
 
-// Details creates a <details> element.
-func Details(attrs attrs.Props, children ...Node) *Element {
-	return newElement("details", attrs, children...)
-}
-
 // FigCaption creates a <figcaption> element.
 func FigCaption(attrs attrs.Props, children ...Node) *Element {
 	return newElement("figcaption", attrs, children...)
@@ -408,11 +413,6 @@ func Small(attrs attrs.Props, children ...Node) *Element {
 	return newElement("small", attrs, children...)
 }
 
-// Summary creates a <summary> element.
-func Summary(attrs attrs.Props, children ...Node) *Element {
-	return newElement("summary", attrs, children...)
-}
-
 // Time creates a <time> element.
 func Time(attrs attrs.Props, children ...Node) *Element {
 	return newElement("time", attrs, children...)
@@ -421,6 +421,21 @@ func Time(attrs attrs.Props, children ...Node) *Element {
 // Var creates a <var> element.
 func Var(attrs attrs.Props, children ...Node) *Element {
 	return newElement("var", attrs, children...)
+}
+
+// Ruby creates a <ruby> element.
+func Ruby(attrs attrs.Props, children ...Node) *Element {
+	return newElement("ruby", attrs, children...)
+}
+
+// Rt creates a <rt> element.
+func Rt(attrs attrs.Props, children ...Node) *Element {
+	return newElement("rt", attrs, children...)
+}
+
+// Rp creates a <rp> element.
+func Rp(attrs attrs.Props, children ...Node) *Element {
+	return newElement("rp", attrs, children...)
 }
 
 // ========== Tables ==========
