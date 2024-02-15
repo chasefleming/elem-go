@@ -170,7 +170,7 @@ Additionally, `None` can be used to create an empty element, as in `elem.Div(nil
 - **Text Content**: `H1`, `H2`, `H3`, `H4`, `H5`, `H6`, `P`, `Blockquote`, `Pre`, `Code`, `I`, `Br`, `Hr`
 - **Sectioning & Semantic Layout**: `Article`, `Aside`, `FigCaption`, `Figure`, `Footer`, `Header`, `Hgroup`, `Main`, `Mark`, `Nav`, `Section`
 - **Form Elements**: `Form`, `Input`, `Textarea`, `Button`, `Select`, `Optgroup`, `Option`, `Label`, `Fieldset`, `Legend`, `Datalist`, `Meter`, `Output`, `Progress`
-- **Interactive Elements**: `Dialog`, `Menu`
+- **Interactive Elements**: `Details`, `Dialog`, `Menu`, `Summary`
 - **Grouping Content**: `Div`, `Span`, `Li`, `Ul`, `Ol`, `Dl`, `Dt`, `Dd`
 - **Tables**: `Table`, `Tr`, `Td`, `Th`, `TBody`, `THead`, `TFoot`
 - **Hyperlinks and Multimedia**: `Img`, `Map`, `Area`
