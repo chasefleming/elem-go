@@ -36,6 +36,19 @@ func TestGenerateCSS(t *testing.T) {
 	assert.True(t, strings.HasSuffix(css, "} "), "CSS should end with } ")
 }
 
+func TestAnimationKeyframes(t *testing.T) {
+	sm := NewStyleManager()
+	keyframes := Keyframes{
+		"from": Style{styles.Color: "red"},
+		"to":   Style{styles.Color: "blue"},
+	}
+	exampleAnimation := sm.AddAnimation(keyframes)
+
+	assert.NotEmpty(t, exampleAnimation)
+	assert.Contains(t, sm.animationCache, exampleAnimation)
+	assert.Equal(t, keyframes, sm.animationCache[exampleAnimation])
+}
+
 func TestAddStyleDeduplication(t *testing.T) {
 	sm := NewStyleManager()
 	style := Style{"color": "red"}
