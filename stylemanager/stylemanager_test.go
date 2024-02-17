@@ -24,6 +24,19 @@ func TestAddStyle(t *testing.T) {
 	assert.Equal(t, style, sm.styles[className])
 }
 
+func TestAnimationKeyframes(t *testing.T) {
+	sm := NewStyleManager()
+	keyframes := Keyframes{
+		"from": Style{styles.Color: "red"},
+		"to":   Style{styles.Color: "blue"},
+	}
+	exampleAnimation := sm.AddAnimation(keyframes)
+
+	assert.NotEmpty(t, exampleAnimation)
+	assert.Contains(t, sm.animationCache, exampleAnimation)
+	assert.Equal(t, keyframes, sm.animationCache[exampleAnimation])
+}
+
 func TestGenerateCSS(t *testing.T) {
 	sm := NewStyleManager()
 
@@ -61,19 +74,6 @@ func TestGenerateCSS(t *testing.T) {
 	assert.Contains(t, css, fmt.Sprintf(".%s {", className), "CSS should contain the class that uses the animation")
 	assert.Contains(t, css, fmt.Sprintf("animation-name: %s;", animationName), "CSS should apply the animation name to the class")
 	assert.Contains(t, css, "animation-duration: 2s;", "CSS should apply the animation duration to the class")
-}
-
-func TestAnimationKeyframes(t *testing.T) {
-	sm := NewStyleManager()
-	keyframes := Keyframes{
-		"from": Style{styles.Color: "red"},
-		"to":   Style{styles.Color: "blue"},
-	}
-	exampleAnimation := sm.AddAnimation(keyframes)
-
-	assert.NotEmpty(t, exampleAnimation)
-	assert.Contains(t, sm.animationCache, exampleAnimation)
-	assert.Equal(t, keyframes, sm.animationCache[exampleAnimation])
 }
 
 func TestAddStyleDeduplication(t *testing.T) {
