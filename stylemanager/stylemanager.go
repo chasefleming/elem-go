@@ -64,6 +64,7 @@ func (sm *StyleManager) AddAnimation(keyframes Keyframes) string {
 // GenerateCSS generates the CSS string for all styles managed by StyleManager.
 func (sm *StyleManager) GenerateCSS() string {
 	var builder strings.Builder
+
 	for className, style := range sm.styles {
 		builder.WriteString(fmt.Sprintf(".%s { ", className))
 		for prop, value := range style {
@@ -71,5 +72,18 @@ func (sm *StyleManager) GenerateCSS() string {
 		}
 		builder.WriteString("} ")
 	}
+
+	for animationName, keyframes := range sm.animationCache {
+		builder.WriteString(fmt.Sprintf("@keyframes %s { ", animationName))
+		for key, style := range keyframes {
+			builder.WriteString(fmt.Sprintf("%s { ", key))
+			for prop, value := range style {
+				builder.WriteString(fmt.Sprintf("%s: %s; ", prop, value))
+			}
+			builder.WriteString("} ")
+		}
+		builder.WriteString("} ")
+	}
+
 	return builder.String()
 }
