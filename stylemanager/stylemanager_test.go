@@ -37,6 +37,24 @@ func TestAnimationKeyframes(t *testing.T) {
 	assert.Equal(t, keyframes, sm.animationCache[exampleAnimation])
 }
 
+func TestAddCompositeStyle(t *testing.T) {
+	sm := NewStyleManager()
+
+	compositeStyle := CompositeStyle{
+		Default: Style{styles.Color: "red"},
+		PseudoClasses: map[string]Style{
+			":hover": Style{styles.Color: "blue"},
+		},
+	}
+
+	className := sm.AddCompositeStyle(compositeStyle)
+
+	assert.NotEmpty(t, className)
+	assert.Contains(t, sm.compositeCache, className)
+	assert.Equal(t, compositeStyle.Default, sm.compositeCache[className].Default)
+	assert.Equal(t, compositeStyle.PseudoClasses, sm.compositeCache[className].PseudoClasses)
+}
+
 func TestGenerateCSS(t *testing.T) {
 	sm := NewStyleManager()
 
@@ -55,25 +73,34 @@ func TestGenerateCSS(t *testing.T) {
 	className := sm.AddStyle(styleUsingAnimation)
 
 	// Add some additional basic styles.
-	sm.AddStyle(Style{styles.Color: "red"})
-	sm.AddStyle(Style{styles.Background: "blue"})
+	styleOneClass := sm.AddStyle(Style{styles.Color: "red"})
+	styleTwoClass := sm.AddStyle(Style{styles.Background: "blue"})
+
+	// Add a composite style
+	compositeClassName := sm.AddCompositeStyle(CompositeStyle{
+		Default: Style{styles.Color: "pink"},
+		PseudoClasses: map[string]Style{
+			"hover": Style{styles.Color: "blue"},
+		},
+	})
 
 	// Generate the CSS.
 	css := sm.GenerateCSS()
+	fmt.Println(css)
 
 	// Assertions for basic styles.
-	assert.Contains(t, css, "color: red", "CSS should contain color style")
-	assert.Contains(t, css, "background: blue", "CSS should contain background style")
+	assert.Contains(t, css, fmt.Sprintf(".%s { color: red; }", styleOneClass), "CSS should contain style one")
+	assert.Contains(t, css, fmt.Sprintf(".%s { background: blue; }", styleTwoClass), "CSS should contain style two")
 
 	// Assertions for animations.
-	assert.Contains(t, css, fmt.Sprintf("@keyframes %s {", animationName), "CSS should contain the animation keyframes")
-	assert.Contains(t, css, "from { color: red; }", "CSS should contain the 'from' keyframe")
-	assert.Contains(t, css, "to { color: blue; }", "CSS should contain the 'to' keyframe")
+	assert.Contains(t, css, fmt.Sprintf("@keyframes %s { from { color: red; } to { color: blue; } }", animationName), "CSS should contain the keyframes for the animation")
 
 	// Assertions for the usage of the animation in a style.
-	assert.Contains(t, css, fmt.Sprintf(".%s {", className), "CSS should contain the class that uses the animation")
-	assert.Contains(t, css, fmt.Sprintf("animation-name: %s;", animationName), "CSS should apply the animation name to the class")
-	assert.Contains(t, css, "animation-duration: 2s;", "CSS should apply the animation duration to the class")
+	assert.Contains(t, css, fmt.Sprintf(".%s { animation-duration: 2s; animation-name: %s; }", className, animationName), "CSS should contain the style using the animation")
+
+	// Assertions for the usage of composite styles.
+	assert.Contains(t, css, fmt.Sprintf(".%s { color: pink; }", compositeClassName), "CSS should contain the composite default")
+	assert.Contains(t, css, fmt.Sprintf(".%s:hover { color: blue; }", compositeClassName), "CSS should contain the composite hover")
 }
 
 func TestAddStyleDeduplication(t *testing.T) {
