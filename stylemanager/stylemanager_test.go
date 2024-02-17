@@ -33,8 +33,8 @@ func TestAnimationKeyframes(t *testing.T) {
 	exampleAnimation := sm.AddAnimation(keyframes)
 
 	assert.NotEmpty(t, exampleAnimation)
-	assert.Contains(t, sm.animationCache, exampleAnimation)
-	assert.Equal(t, keyframes, sm.animationCache[exampleAnimation])
+	assert.Contains(t, sm.animations, exampleAnimation)
+	assert.Equal(t, keyframes, sm.animations[exampleAnimation])
 }
 
 func TestAddCompositeStyle(t *testing.T) {
@@ -50,9 +50,9 @@ func TestAddCompositeStyle(t *testing.T) {
 	className := sm.AddCompositeStyle(compositeStyle)
 
 	assert.NotEmpty(t, className)
-	assert.Contains(t, sm.compositeCache, className)
-	assert.Equal(t, compositeStyle.Default, sm.compositeCache[className].Default)
-	assert.Equal(t, compositeStyle.PseudoClasses, sm.compositeCache[className].PseudoClasses)
+	assert.Contains(t, sm.compositeStyles, className)
+	assert.Equal(t, compositeStyle.Default, sm.compositeStyles[className].Default)
+	assert.Equal(t, compositeStyle.PseudoClasses, sm.compositeStyles[className].PseudoClasses)
 }
 
 func TestGenerateCSS(t *testing.T) {

@@ -23,17 +23,17 @@ type StyleSheet map[string]Style
 
 // StyleManager manages styles and generates CSS classes.
 type StyleManager struct {
-	styles         StyleSheet
-	compositeCache map[string]CompositeStyle
-	animationCache map[string]Keyframes
+	styles          StyleSheet
+	compositeStyles map[string]CompositeStyle
+	animations      map[string]Keyframes
 }
 
 // NewStyleManager creates a new instance of StyleManager.
 func NewStyleManager() *StyleManager {
 	return &StyleManager{
-		styles:         make(StyleSheet),
-		animationCache: make(map[string]Keyframes),
-		compositeCache: make(map[string]CompositeStyle),
+		styles:          make(StyleSheet),
+		animations:      make(map[string]Keyframes),
+		compositeStyles: make(map[string]CompositeStyle),
 	}
 }
 
@@ -58,8 +58,8 @@ func (sm *StyleManager) AddAnimation(keyframes Keyframes) string {
 	hash := sha1.Sum([]byte(keyframesStr))
 	animationName := fmt.Sprintf("anim_%x", hash[:5]) // Use first 5 bytes of hash for animation name.
 
-	if _, exists := sm.animationCache[animationName]; !exists {
-		sm.animationCache[animationName] = keyframes
+	if _, exists := sm.animations[animationName]; !exists {
+		sm.animations[animationName] = keyframes
 	}
 
 	return animationName
@@ -71,8 +71,8 @@ func (sm *StyleManager) AddCompositeStyle(composite CompositeStyle) string {
 	hash := sha1.Sum([]byte(compositeStr))
 	className := fmt.Sprintf("cls_%x", hash[:5]) // Use first 5 bytes of hash for class name.
 
-	if _, exists := sm.compositeCache[className]; !exists {
-		sm.compositeCache[className] = composite
+	if _, exists := sm.compositeStyles[className]; !exists {
+		sm.compositeStyles[className] = composite
 	}
 
 	return className
@@ -90,7 +90,7 @@ func (sm *StyleManager) GenerateCSS() string {
 		builder.WriteString("} ")
 	}
 
-	for animationName, keyframes := range sm.animationCache {
+	for animationName, keyframes := range sm.animations {
 		builder.WriteString(fmt.Sprintf("@keyframes %s { ", animationName))
 		for key, style := range keyframes {
 			builder.WriteString(fmt.Sprintf("%s { ", key))
@@ -102,7 +102,7 @@ func (sm *StyleManager) GenerateCSS() string {
 		builder.WriteString("} ")
 	}
 
-	for className, composite := range sm.compositeCache {
+	for className, composite := range sm.compositeStyles {
 		builder.WriteString(fmt.Sprintf(".%s { ", className))
 		for prop, value := range composite.Default {
 			builder.WriteString(fmt.Sprintf("%s: %s; ", prop, value))
