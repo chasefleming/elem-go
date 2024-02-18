@@ -55,13 +55,38 @@ func TestAddCompositeStyle(t *testing.T) {
 	assert.Equal(t, compositeStyle.PseudoClasses, sm.compositeStyles[className].PseudoClasses)
 }
 
+func TestMediaQuery(t *testing.T) {
+	sm := NewStyleManager()
+
+	// Define a media query for tablets
+	tabletQuery := "@media (min-width: 768px) and (max-width: 1024px)"
+
+	compositeStyle := CompositeStyle{
+		Default: Style{
+			"padding": "10px",
+		},
+		MediaQueries: map[string]Style{
+			tabletQuery: Style{
+				"padding": "20px",
+			},
+		},
+	}
+
+	compositeClassName := sm.AddCompositeStyle(compositeStyle)
+
+	assert.NotEmpty(t, compositeClassName)
+	assert.Contains(t, sm.compositeStyles, compositeClassName)
+	assert.Equal(t, compositeStyle.Default, sm.compositeStyles[compositeClassName].Default)
+	assert.Equal(t, compositeStyle.MediaQueries, sm.compositeStyles[compositeClassName].MediaQueries)
+}
+
 func TestGenerateCSS(t *testing.T) {
 	sm := NewStyleManager()
 
 	// Define and add keyframes for an animation.
 	keyframes := Keyframes{
-		"from": {styles.Color: "red"},
-		"to":   {styles.Color: "blue"},
+		"from": {"color": "red"},
+		"to":   {"color": "blue"},
 	}
 	animationName := sm.AddAnimation(keyframes)
 
@@ -73,14 +98,18 @@ func TestGenerateCSS(t *testing.T) {
 	className := sm.AddStyle(styleUsingAnimation)
 
 	// Add some additional basic styles.
-	styleOneClass := sm.AddStyle(Style{styles.Color: "red"})
-	styleTwoClass := sm.AddStyle(Style{styles.Background: "blue"})
+	styleOneClass := sm.AddStyle(Style{"color": "red"})
+	styleTwoClass := sm.AddStyle(Style{"background": "blue"})
 
 	// Add a composite style
 	compositeClassName := sm.AddCompositeStyle(CompositeStyle{
-		Default: Style{styles.Color: "pink"},
+		Default: Style{"color": "pink"},
 		PseudoClasses: map[string]Style{
-			"hover": Style{styles.Color: "blue"},
+			"hover": Style{"color": "blue"},
+		},
+		MediaQueries: map[string]Style{
+			"@media (min-width: 768px)":  Style{"color": "green", "background": "yellow"},
+			"@media (min-width: 1024px)": Style{"color": "purple", "background": "orange"},
 		},
 	})
 
@@ -101,6 +130,10 @@ func TestGenerateCSS(t *testing.T) {
 	// Assertions for the usage of composite styles.
 	assert.Contains(t, css, fmt.Sprintf(".%s { color: pink; }", compositeClassName), "CSS should contain the composite default")
 	assert.Contains(t, css, fmt.Sprintf(".%s:hover { color: blue; }", compositeClassName), "CSS should contain the composite hover")
+
+	// Assertions for media queries.
+	assert.Contains(t, css, fmt.Sprintf("@media (min-width: 768px) { .%s { color: green; background: yellow; } }", compositeClassName), "CSS should contain the media query")
+	assert.Contains(t, css, fmt.Sprintf("@media (min-width: 1024px) { .%s { color: purple; background: orange; } }", compositeClassName), "CSS should contain the media query")
 }
 
 func TestAddStyleDeduplication(t *testing.T) {

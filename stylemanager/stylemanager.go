@@ -16,6 +16,7 @@ type Keyframes map[string]Style
 type CompositeStyle struct {
 	Default       Style
 	PseudoClasses map[string]Style
+	MediaQueries  map[string]Style
 }
 
 // StyleSheet represents a collection of styles mapped to class names.
@@ -26,6 +27,7 @@ type StyleManager struct {
 	styles          StyleSheet
 	compositeStyles map[string]CompositeStyle
 	animations      map[string]Keyframes
+	mediaQueries    map[string]Style
 }
 
 // NewStyleManager creates a new instance of StyleManager.
@@ -34,6 +36,7 @@ func NewStyleManager() *StyleManager {
 		styles:          make(StyleSheet),
 		animations:      make(map[string]Keyframes),
 		compositeStyles: make(map[string]CompositeStyle),
+		mediaQueries:    make(map[string]Style),
 	}
 }
 
@@ -120,6 +123,20 @@ func (sm *StyleManager) GenerateCSS() string {
 				builder.WriteString(fmt.Sprintf("%s: %s; ", prop, value))
 			}
 			builder.WriteString("} ")
+		}
+
+		for mediaQuery, style := range composite.MediaQueries {
+			if strings.HasPrefix(mediaQuery, "@media") {
+				builder.WriteString(fmt.Sprintf("%s { ", mediaQuery))
+			} else {
+				builder.WriteString(fmt.Sprintf("@media %s { ", mediaQuery))
+			}
+
+			builder.WriteString(fmt.Sprintf(".%s { ", className))
+			for prop, value := range style {
+				builder.WriteString(fmt.Sprintf("%s: %s; ", prop, value))
+			}
+			builder.WriteString("} } ")
 		}
 	}
 
