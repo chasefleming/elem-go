@@ -3,6 +3,7 @@ package stylemanager
 import (
 	"crypto/sha1"
 	"fmt"
+	"sort"
 	"strings"
 )
 
@@ -86,9 +87,10 @@ func (sm *StyleManager) GenerateCSS() string {
 	var builder strings.Builder
 
 	for className, style := range sm.styles {
+		keys := sortedKeys(style)
 		builder.WriteString(fmt.Sprintf(".%s { ", className))
-		for prop, value := range style {
-			builder.WriteString(fmt.Sprintf("%s: %s; ", prop, value))
+		for _, prop := range keys {
+			builder.WriteString(fmt.Sprintf("%s: %s; ", prop, style[prop]))
 		}
 		builder.WriteString("} ")
 	}
@@ -106,39 +108,61 @@ func (sm *StyleManager) GenerateCSS() string {
 	}
 
 	for className, composite := range sm.compositeStyles {
+		keys := sortedKeys(composite.Default)
 		builder.WriteString(fmt.Sprintf(".%s { ", className))
-		for prop, value := range composite.Default {
-			builder.WriteString(fmt.Sprintf("%s: %s; ", prop, value))
+		for _, prop := range keys {
+			builder.WriteString(fmt.Sprintf("%s: %s; ", prop, composite.Default[prop]))
 		}
 		builder.WriteString("} ")
 
 		for pseudoClass, style := range composite.PseudoClasses {
-			// Check if pseudoClass already starts with a colon
-			if strings.HasPrefix(pseudoClass, ":") {
-				builder.WriteString(fmt.Sprintf(".%s%s { ", className, pseudoClass))
-			} else {
-				builder.WriteString(fmt.Sprintf(".%s:%s { ", className, pseudoClass))
-			}
-			for prop, value := range style {
-				builder.WriteString(fmt.Sprintf("%s: %s; ", prop, value))
+			// Ensure pseudoClass starts with a colon
+			formattedPseudoClass := fmt.Sprintf("%s%s", className, ensureLeadingColon(pseudoClass))
+			keys := sortedKeys(style)
+			builder.WriteString(fmt.Sprintf(".%s { ", formattedPseudoClass))
+			for _, prop := range keys {
+				builder.WriteString(fmt.Sprintf("%s: %s; ", prop, style[prop]))
 			}
 			builder.WriteString("} ")
 		}
 
 		for mediaQuery, style := range composite.MediaQueries {
-			if strings.HasPrefix(mediaQuery, "@media") {
-				builder.WriteString(fmt.Sprintf("%s { ", mediaQuery))
-			} else {
-				builder.WriteString(fmt.Sprintf("@media %s { ", mediaQuery))
-			}
-
-			builder.WriteString(fmt.Sprintf(".%s { ", className))
-			for prop, value := range style {
-				builder.WriteString(fmt.Sprintf("%s: %s; ", prop, value))
+			// Ensure mediaQuery is correctly prefixed
+			formattedMediaQuery := ensureMediaPrefix(mediaQuery)
+			builder.WriteString(fmt.Sprintf("%s { .%s { ", formattedMediaQuery, className))
+			keys := sortedKeys(style)
+			for _, prop := range keys {
+				builder.WriteString(fmt.Sprintf("%s: %s; ", prop, style[prop]))
 			}
 			builder.WriteString("} } ")
 		}
 	}
 
 	return builder.String()
+}
+
+// ensureLeadingColon ensures that the pseudoClass starts with a colon.
+func ensureLeadingColon(pseudoClass string) string {
+	if strings.HasPrefix(pseudoClass, ":") {
+		return pseudoClass
+	}
+	return ":" + pseudoClass
+}
+
+// ensureMediaPrefix ensures that the mediaQuery starts with "@media".
+func ensureMediaPrefix(mediaQuery string) string {
+	if !strings.HasPrefix(mediaQuery, "@media") {
+		return "@media " + mediaQuery
+	}
+	return mediaQuery
+}
+
+// sortedKeys returns the keys of the map sorted alphabetically.
+func sortedKeys(style Style) []string {
+	keys := make([]string, 0, len(style))
+	for key := range style {
+		keys = append(keys, key)
+	}
+	sort.Strings(keys)
+	return keys
 }

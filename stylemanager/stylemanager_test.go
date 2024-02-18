@@ -132,8 +132,8 @@ func TestGenerateCSS(t *testing.T) {
 	assert.Contains(t, css, fmt.Sprintf(".%s:hover { color: blue; }", compositeClassName), "CSS should contain the composite hover")
 
 	// Assertions for media queries.
-	assert.Contains(t, css, fmt.Sprintf("@media (min-width: 768px) { .%s { color: green; background: yellow; } }", compositeClassName), "CSS should contain the media query")
-	assert.Contains(t, css, fmt.Sprintf("@media (min-width: 1024px) { .%s { color: purple; background: orange; } }", compositeClassName), "CSS should contain the media query")
+	assert.Contains(t, css, fmt.Sprintf("@media (min-width: 768px) { .%s { background: yellow; color: green; } }", compositeClassName), "CSS should contain the first media query")
+	assert.Contains(t, css, fmt.Sprintf("@media (min-width: 1024px) { .%s { background: orange; color: purple; } }", compositeClassName), "CSS should contain the second media query")
 }
 
 func TestAddStyleDeduplication(t *testing.T) {
