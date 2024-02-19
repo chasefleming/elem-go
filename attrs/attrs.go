@@ -144,6 +144,18 @@ const (
 	Media = "media"
 	Sizes = "sizes"
 
+	// Animation Attributes
+
+	Animation               = "animation"
+	AnimationDelay          = "animation-delay"
+	AnimationDirection      = "animation-direction"
+	AnimationDuration       = "animation-duration"
+	AnimationFillMode       = "animation-fill-mode"
+	AnimationIterationCount = "animation-iteration-count"
+	AnimationPlayState      = "animation-play-state"
+	AnimationName           = "animation-name"
+	AnimationTimingFunction = "animation-timing-function"
+
 	// ARIA Attributes
 
 	AriaActivedescendant = "aria-activedescendant"
