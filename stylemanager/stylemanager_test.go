@@ -115,7 +115,6 @@ func TestGenerateCSS(t *testing.T) {
 
 	// Generate the CSS.
 	css := sm.GenerateCSS()
-	fmt.Println(css)
 
 	// Assertions for basic styles.
 	assert.Contains(t, css, fmt.Sprintf(".%s { color: red; }", styleOneClass), "CSS should contain style one")
