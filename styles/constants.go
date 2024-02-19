@@ -136,9 +136,17 @@ const (
 	TableLayout    = "table-layout"
 	CaptionSide    = "caption-side"
 
-	// Resource Attributes
-	Integrity   = "integrity"
-	Crossorigin = "crossorigin"
+	// Animation Properties
+
+	Animation               = "animation"
+	AnimationDelay          = "animation-delay"
+	AnimationDirection      = "animation-direction"
+	AnimationDuration       = "animation-duration"
+	AnimationFillMode       = "animation-fill-mode"
+	AnimationIterationCount = "animation-iteration-count"
+	AnimationPlayState      = "animation-play-state"
+	AnimationName           = "animation-name"
+	AnimationTimingFunction = "animation-timing-function"
 
 	// Other Properties
 	Visibility    = "visibility"
