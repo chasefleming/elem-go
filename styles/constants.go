@@ -148,6 +148,10 @@ const (
 	AnimationName           = "animation-name"
 	AnimationTimingFunction = "animation-timing-function"
 
+	// Keyframes for animations (used within CSS, not directly as HTML attributes)
+	KeyframesFrom = "from"
+	KeyframesTo   = "to"
+
 	// Other Properties
 	Visibility    = "visibility"
 	Clip          = "clip"
