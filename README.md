@@ -167,7 +167,7 @@ Additionally, `None` can be used to create an empty element, as in `elem.Div(nil
 `elem` provides utility functions for creating HTML elements:
 
 - **Document Structure**: `Html`, `Head`, `Body`, `Title`, `Link`, `Meta`, `Style`
-- **Text Content**: `H1`, `H2`, `H3`, `H4`, `H5`, `H6`, `P`, `Blockquote`, `Pre`, `Code`, `I`, `Br`, `Hr`
+- **Text Content**: `H1`, `H2`, `H3`, `H4`, `H5`, `H6`, `P`, `Blockquote`, `Pre`, `Code`, `I`, `Br`, `Hr`, `Small`, `Q`, `Cite`, `Abbr`, `Data`, `Time`, `Var`, `Samp`, `Kbd`
 - **Sectioning & Semantic Layout**: `Article`, `Aside`, `FigCaption`, `Figure`, `Footer`, `Header`, `Hgroup`, `Main`, `Mark`, `Nav`, `Section`
 - **Form Elements**: `Form`, `Input`, `Textarea`, `Button`, `Select`, `Optgroup`, `Option`, `Label`, `Fieldset`, `Legend`, `Datalist`, `Meter`, `Output`, `Progress`
 - **Interactive Elements**: `Details`, `Dialog`, `Menu`, `Summary`
@@ -176,7 +176,7 @@ Additionally, `None` can be used to create an empty element, as in `elem.Div(nil
 - **Hyperlinks and Multimedia**: `Img`, `Map`, `Area`
 - **Embedded Content**: `Audio`, `Iframe`, `Source`, `Video`
 - **Script-supporting Elements**: `Script`, `Noscript`
-- **Inline Semantic**: `A`, `Strong`, `Em`, `Code`, `I`
+- **Inline Semantic**: `A`, `Strong`, `Em`, `Code`, `I`, `B`, `U`, `Sub`, `Sup`, `Ruby`, `Rt`, `Rp`
 
 ### Raw HTML Insertion
 
