@@ -327,7 +327,7 @@ func TestScript(t *testing.T) {
 func TestStyle(t *testing.T) {
 	expected := `<style type="text/css">.test-class {color: #333;}</style>`
 	cssContent := `.test-class {color: #333;}`
-	el := Style(attrs.Props{attrs.Type: "text/css"}, TextNode(cssContent))
+	el := Style(attrs.Props{attrs.Type: "text/css"}, CSS(cssContent))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -678,5 +678,12 @@ func TestRaw(t *testing.T) {
 	el := Raw(rawHTML)
 	expected := rawHTML
 
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestCSS(t *testing.T) {
+	cssContent := `.test-class {color: #333;}`
+	expected := `.test-class {color: #333;}`
+	el := CSS(cssContent)
 	assert.Equal(t, expected, el.Render())
 }

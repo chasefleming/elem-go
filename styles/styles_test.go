@@ -6,13 +6,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCSS(t *testing.T) {
-	cssContent := `.test-class {color: #333;}`
-	expected := `.test-class {color: #333;}`
-	el := CSS(cssContent)
-	assert.Equal(t, expected, el.Render())
-}
-
 func TestStyleToInline(t *testing.T) {
 	style := Props{
 		BackgroundColor: "blue",
@@ -44,4 +37,3 @@ func TestStyleString_UnorderedKeys(t *testing.T) {
 	}
 	assert.Equal(t, "background-color: blue; color: white; font-size: 16px; outline-style: solid;", style.ToInline())
 }
-

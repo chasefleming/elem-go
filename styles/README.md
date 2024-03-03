@@ -108,7 +108,7 @@ These functions facilitate the embedding of CSS into HTML documents, particularl
 cssContent := `/* ... */`
 
 // Creating a <style> tag
-styleTag := elem.Style(nil, styles.CSS(cssContent))
+styleTag := elem.Style(nil, elem.CSS(cssContent))
 
 // Incorporating the <style> tag in an HTML document
 document := elem.Html(nil, elem.Head(nil, styleTag), /* ... */)
