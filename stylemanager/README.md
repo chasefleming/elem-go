@@ -41,6 +41,21 @@ Initialize `stylemanager` to start managing your styles:
 styleMgr := stylemanager.NewStyleManager()
 ```
 
+Now, when you render your HTML elements, all you have to do is use `RenderWithOptions` instead of `Render` and provide the `stylemanager` instance:
+
+```go
+html := elem.Div(
+    nil,
+    elem.Text("Hello, World!"),
+)
+
+html.RenderWithOptions(elem.RenderOptions{
+    StyleManager: styleMgr,
+})
+```
+
+> Note: This will inject the generated CSS into the HTML output in a `<style>` tag. You cannot manually inject the CSS into your HTML, as the styles may not all exist until the time of rendering.
+
 ### Adding Styles
 
 Define styles using `StyleManager` and receive a unique class name for application:
