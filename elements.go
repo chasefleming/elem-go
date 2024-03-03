@@ -234,7 +234,12 @@ func Img(attrs attrs.Props) *Element {
 	return newElement("img", attrs)
 }
 
-// ========== Meta Elements ==========
+// ========== Head Elements ==========
+
+// Base creates a <base> element.
+func Base(attrs attrs.Props) *Element {
+	return newElement("base", attrs)
+}
 
 // Link creates a <link> element.
 func Link(attrs attrs.Props) *Element {
