@@ -520,3 +520,8 @@ func None() NoneNode {
 func Raw(html string) RawNode {
 	return RawNode(html)
 }
+
+// CSS takes css content and returns a TextNode.
+func CSS(content string) TextNode {
+	return TextNode(content)
+}
