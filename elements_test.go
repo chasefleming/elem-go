@@ -298,7 +298,13 @@ func TestImg(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
-// ========== Meta Elements ==========
+// ========== Head Elements ==========
+
+func TestBase(t *testing.T) {
+	expected := `<base href="https://example.com">`
+	el := Base(attrs.Props{attrs.Href: "https://example.com"})
+	assert.Equal(t, expected, el.Render())
+}
 
 func TestLink(t *testing.T) {
 	expected := `<link href="https://example.com/styles.css" rel="stylesheet">`
