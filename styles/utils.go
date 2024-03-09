@@ -1,6 +1,7 @@
 package styles
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -19,6 +20,16 @@ func Merge(styleMaps ...Props) Props {
 // Em returns a string representation of the given float as an em value.
 func Em(value float64) string {
 	return strconv.FormatFloat(value, 'f', 2, 64) + "em"
+}
+
+// Float returns a string representation of the float with 2 decimal places
+func Float(value float64) string {
+	return fmt.Sprintf("%.2f", value)
+}
+
+// Int returns a string representation of the int
+func Int(value int) string {
+	return strconv.Itoa(value)
 }
 
 // Percent returns a string representation of the given integer as a percentage.

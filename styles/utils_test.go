@@ -62,6 +62,23 @@ func TestEm(t *testing.T) {
 	assert.Equal(t, "25.00em", Em(25))
 }
 
+func TestFloat(t *testing.T) {
+	assert.Equal(t, "100.00", Float(100))
+	assert.Equal(t, "0.00", Float(0))
+	assert.Equal(t, "50.00", Float(50))
+	assert.Equal(t, "25.00", Float(25))
+
+	// Longer float
+	assert.Equal(t, "100.12", Float(100.123456))
+}
+
+func TestInt(t *testing.T) {
+	assert.Equal(t, "100", Int(100))
+	assert.Equal(t, "0", Int(0))
+	assert.Equal(t, "50", Int(50))
+	assert.Equal(t, "25", Int(25))
+}
+
 func TestRem(t *testing.T) {
 	assert.Equal(t, "100.00rem", Rem(100))
 	assert.Equal(t, "0.00rem", Rem(0))
