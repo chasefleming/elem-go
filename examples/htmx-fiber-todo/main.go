@@ -8,6 +8,7 @@ import (
 	"github.com/chasefleming/elem-go/attrs"
 	"github.com/chasefleming/elem-go/styles"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/utils"
 )
 
 // Todo model
@@ -54,7 +55,7 @@ func toggleTodoRoute(c *fiber.Ctx) error {
 }
 
 func addTodoRoute(c *fiber.Ctx) error {
-	newTitle := c.FormValue("newTodo")
+	newTitle := utils.CopyString(c.FormValue("newTodo"))
 	if newTitle != "" {
 		todos = append(todos, Todo{ID: len(todos) + 1, Title: newTitle, Done: false})
 	}
@@ -143,15 +144,11 @@ func renderTodos(todos []Todo) string {
 		),
 		elem.Ul(
 			attrs.Props{attrs.Style: listContainerStyle.ToInline()},
-			renderTodoItems(todos)...,
+			elem.TransformEach(todos, createTodoNode)...,
 		),
 	)
-	
+
 	htmlContent := elem.Html(nil, headContent, bodyContent)
 
 	return htmlContent.Render()
-}
-
-func renderTodoItems(todos []Todo) []elem.Node {
-	return elem.TransformEach(todos, createTodoNode)
 }

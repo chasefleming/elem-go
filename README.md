@@ -97,7 +97,20 @@ The `.Render()` method is used to convert the structured Go elements into HTML s
 html := content.Render()
 ```
 
-In this example, content refers to an elem element structure. When the `.Render()` method is called on content, it generates the HTML representation of the constructed elements.
+In this example, `content` refers to an `elem` element structure. When the `.Render()` method is called on content, it generates the HTML representation of the constructed elements.
+
+> NOTE: When using an <html> element, this method automatically includes a <!DOCTYPE html> preamble in the rendered HTML, ensuring compliance with modern web standards.
+
+#### Custom Rendering Options
+
+For more control over the rendering process, such as disabling the HTML preamble, use the `RenderWithOptions` method. This method accepts a `RenderOptions` struct, allowing you to specify various rendering preferences.
+
+```go
+options := RenderOptions{DisableHtmlPreamble: true}
+htmlString := myHtmlElement.RenderWithOptions(options)
+```
+
+This flexibility is particularly useful in scenarios where default rendering behaviors need to be overridden or customized.
 
 ### Generating Lists of Elements with `TransformEach`
 
@@ -132,23 +145,57 @@ content := elem.Div(nil,
 
 In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Otherwise, the `Login` link is rendered.
 
+#### `None` in Conditional Rendering
+
+`elem` provides a specialized node `None` that implements the `Node` interface but does not produce any visible output. It's particularly useful in scenarios where rendering nothing for a specific condition is required.
+
+```go
+showWelcomeMessage := false
+welcomeMessage := elem.Div(nil, elem.Text("Welcome to our website!"))
+
+content := elem.Div(nil,
+    elem.If[elem.Node](showWelcomeMessage, welcomeMessage, elem.None()),
+)
+```
+
+In this example, `welcomeMessage` is rendered only if `showWelcomeMessage` is `true`. If it's `false`, `None` is rendered instead, which produces no visible output.
+
+Additionally, `None` can be used to create an empty element, as in `elem.Div(nil, elem.None())`, which results in `<div></div>`. This can be handy for creating placeholders or structuring your HTML document without adding additional content.
+
 ### Supported Elements
 
 `elem` provides utility functions for creating HTML elements:
 
-- **Document Structure**: `Html`, `Head`, `Body`, `Title`, `Link`, `Meta`, `Style`
-- **Text Content**: `H1`, `H2`, `H3`, `P`, `Blockquote`, `Pre`, `Code`, `I`, `Br`, `Hr`
-- **Sectioning & Semantic Layout**: `Article`, `Aside`, `FigCaption`, `Figure`, `Footer`, `Header`, `Main`, `Mark`, `Nav`, `Section`
-- **Form Elements**: `Form`, `Input`, `Textarea`, `Button`, `Select`, `Option`, `Label`, `Fieldset`, `Legend`, `Datalist`, `Meter`, `Output`, `Progress`
-- **Interactive Elements**: `Dialog`, `Menu`
+- **Document Structure**: `Html`, `Head`, `Body`, `Title`, `Link`, `Meta`, `Style`, `Base`
+- **Text Content**: `H1`, `H2`, `H3`, `H4`, `H5`, `H6`, `P`, `Blockquote`, `Pre`, `Code`, `I`, `Br`, `Hr`, `Small`, `Q`, `Cite`, `Abbr`, `Data`, `Time`, `Var`, `Samp`, `Kbd`
+- **Sectioning & Semantic Layout**: `Article`, `Aside`, `FigCaption`, `Figure`, `Footer`, `Header`, `Hgroup`, `Main`, `Mark`, `Nav`, `Section`
+- **Form Elements**: `Form`, `Input`, `Textarea`, `Button`, `Select`, `Optgroup`, `Option`, `Label`, `Fieldset`, `Legend`, `Datalist`, `Meter`, `Output`, `Progress`
+- **Interactive Elements**: `Details`, `Dialog`, `Menu`, `Summary`
 - **Grouping Content**: `Div`, `Span`, `Li`, `Ul`, `Ol`, `Dl`, `Dt`, `Dd`
 - **Tables**: `Table`, `Tr`, `Td`, `Th`, `TBody`, `THead`, `TFoot`
-- **Hyperlinks and Multimedia**: `Img`
+- **Hyperlinks and Multimedia**: `Img`, `Map`, `Area`
 - **Embedded Content**: `Audio`, `Iframe`, `Source`, `Video`
 - **Script-supporting Elements**: `Script`, `Noscript`
-- **Inline Semantic**: `A`, `Strong`, `Em`, `Code`, `I`
+- **Inline Semantic**: `A`, `Strong`, `Em`, `Code`, `I`, `B`, `U`, `Sub`, `Sup`, `Ruby`, `Rt`, `Rp`
 
-### Additional Utility: HTML Comments
+### Raw HTML Insertion
+
+The `Raw` function allows for the direct inclusion of raw HTML content within your document structure. This function can be used to insert HTML strings, which will be rendered as part of the final HTML output.
+
+```go
+rawHTML := `<div class="custom-html"><p>Custom HTML content</p></div>`
+content := elem.Div(nil,
+    elem.H1(nil, elem.Text("Welcome to Elem-Go")),
+    elem.Raw(rawHTML), // Inserting the raw HTML
+    elem.P(nil, elem.Text("More content here...")), 
+)
+
+htmlOutput := content.Render()
+// Output: <div><h1>Welcome to Elem-Go</h1><div class="custom-html"><p>Custom HTML content</p></div><p>More content here...</p></div>
+```
+> **NOTE**: If you are passing HTML from an untrusted source, make sure to sanitize it to prevent potential security risks such as Cross-Site Scripting (XSS) attacks.
+
+### HTML Comments
 
 Apart from standard elements, `elem-go` also allows you to insert HTML comments using the `Comment` function:
 
@@ -172,6 +219,7 @@ For hands-on examples showcasing the usage of `elem`, you can find sample implem
 Dive deeper into the capabilities of `elem` and learn best practices through our collection of tutorials and guides:
 
 - [Building a Counter App with htmx, Go Fiber, and elem-go](https://dev.to/chasefleming/building-a-counter-app-with-htmx-go-fiber-and-elem-go-9jd/)
+- [Building a Go Static Site Generator Using elem-go](https://dev.to/chasefleming/building-a-go-static-site-generator-using-elem-go-3fhh)
 
 Stay tuned for more tutorials and guides in the future!
 

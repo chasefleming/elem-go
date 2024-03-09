@@ -8,99 +8,139 @@ import (
 
 // Body creates a <body> element.
 func Body(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("body", attrs, children...)
+	return newElement("body", attrs, children...)
 }
 
 // Head creates a <head> element.
 func Head(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("head", attrs, children...)
+	return newElement("head", attrs, children...)
 }
 
 // Html creates an <html> element.
 func Html(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("html", attrs, children...)
+	return newElement("html", attrs, children...)
 }
 
 // Title creates a <title> element.
 func Title(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("title", attrs, children...)
+	return newElement("title", attrs, children...)
 }
 
 // ========== Text Formatting and Structure ==========
 
 // A creates an <a> element.
 func A(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("a", attrs, children...)
+	return newElement("a", attrs, children...)
 }
 
 // Br creates a <br> element.
 func Br(attrs attrs.Props) *Element {
-	return NewElement("br", attrs)
+	return newElement("br", attrs)
 }
 
 // Blockquote creates a <blockquote> element.
 func Blockquote(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("blockquote", attrs, children...)
+	return newElement("blockquote", attrs, children...)
 }
 
 // Code creates a <code> element.
 func Code(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("code", attrs, children...)
+	return newElement("code", attrs, children...)
 }
 
 // Div creates a <div> element.
 func Div(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("div", attrs, children...)
+	return newElement("div", attrs, children...)
 }
 
 // Em creates an <em> element.
 func Em(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("em", attrs, children...)
+	return newElement("em", attrs, children...)
 }
 
 // H1 creates an <h1> element.
 func H1(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("h1", attrs, children...)
+	return newElement("h1", attrs, children...)
 }
 
 // H2 creates an <h2> element.
 func H2(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("h2", attrs, children...)
+	return newElement("h2", attrs, children...)
 }
 
 // H3 creates an <h3> element.
 func H3(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("h3", attrs, children...)
+	return newElement("h3", attrs, children...)
 }
 
 // H4 creates an <h4> element.
+func H4(attrs attrs.Props, children ...Node) *Element {
+	return newElement("h4", attrs, children...)
+}
+
+// H5 creates an <h5> element.
+func H5(attrs attrs.Props, children ...Node) *Element {
+	return newElement("h5", attrs, children...)
+}
+
+// H6 creates an <h6> element.
+func H6(attrs attrs.Props, children ...Node) *Element {
+	return newElement("h6", attrs, children...)
+}
+
+// Hgroup creates an <hgroup> element.
+func Hgroup(attrs attrs.Props, children ...Node) *Element {
+	return newElement("hgroup", attrs, children...)
+}
+
+// Hr creates an <hr> element.
 func Hr(attrs attrs.Props) *Element {
-	return NewElement("hr", attrs)
+	return newElement("hr", attrs)
 }
 
 // I creates an <i> element.
 func I(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("i", attrs, children...)
+	return newElement("i", attrs, children...)
 }
 
 // P creates a <p> element.
 func P(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("p", attrs, children...)
+	return newElement("p", attrs, children...)
 }
 
 // Pre creates a <pre> element.
 func Pre(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("pre", attrs, children...)
+	return newElement("pre", attrs, children...)
 }
 
 // Span creates a <span> element.
 func Span(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("span", attrs, children...)
+	return newElement("span", attrs, children...)
 }
 
 // Strong creates a <strong> element.
 func Strong(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("strong", attrs, children...)
+	return newElement("strong", attrs, children...)
+}
+
+// Sub creates a <sub> element.
+func Sub(attrs attrs.Props, children ...Node) *Element {
+	return newElement("sub", attrs, children...)
+}
+
+// Sup creates a <sub> element.
+func Sup(attrs attrs.Props, children ...Node) *Element {
+	return newElement("sup", attrs, children...)
+}
+
+// B creates a <b> element.
+func B(attrs attrs.Props, children ...Node) *Element {
+	return newElement("b", attrs, children...)
+}
+
+// U creates a <u> element.
+func U(attrs attrs.Props, children ...Node) *Element {
+	return newElement("u", attrs, children...)
 }
 
 // Text creates a TextNode.
@@ -117,98 +157,108 @@ func Comment(comment string) CommentNode {
 
 // Li creates an <li> element.
 func Li(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("li", attrs, children...)
+	return newElement("li", attrs, children...)
 }
 
 // Ul creates a <ul> element.
 func Ul(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("ul", attrs, children...)
+	return newElement("ul", attrs, children...)
 }
 
 // Ol creates an <ol> element.
 func Ol(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("ol", attrs, children...)
+	return newElement("ol", attrs, children...)
 }
 
 // Dl creates a <dl> element.
 func Dl(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("dl", attrs, children...)
+	return newElement("dl", attrs, children...)
 }
 
 // Dt creates a <dt> element.
 func Dt(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("dt", attrs, children...)
+	return newElement("dt", attrs, children...)
 }
 
 // Dd creates a <dd> element.
 func Dd(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("dd", attrs, children...)
+	return newElement("dd", attrs, children...)
 }
 
 // ========== Forms ==========
 
 // Button creates a <button> element.
 func Button(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("button", attrs, children...)
+	return newElement("button", attrs, children...)
 }
 
 // Form creates a <form> element.
 func Form(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("form", attrs, children...)
+	return newElement("form", attrs, children...)
 }
 
 // Input creates an <input> element.
 func Input(attrs attrs.Props) *Element {
-	return NewElement("input", attrs)
+	return newElement("input", attrs)
 }
 
 // Label creates a <label> element.
 func Label(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("label", attrs, children...)
+	return newElement("label", attrs, children...)
+}
+
+// Optgroup creates an <optgroup> element to group <option>s within a <select> element.
+func Optgroup(attrs attrs.Props, children ...Node) *Element {
+	return newElement("optgroup", attrs, children...)
 }
 
 // Option creates an <option> element.
 func Option(attrs attrs.Props, content TextNode) *Element {
-	return NewElement("option", attrs, content)
+	return newElement("option", attrs, content)
 }
 
 // Select creates a <select> element.
 func Select(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("select", attrs, children...)
+	return newElement("select", attrs, children...)
 }
 
 // Textarea creates a <textarea> element.
 func Textarea(attrs attrs.Props, content TextNode) *Element {
-	return NewElement("textarea", attrs, content)
+	return newElement("textarea", attrs, content)
 }
 
 // ========== Hyperlinks and Multimedia ==========
 
 // Img creates an <img> element.
 func Img(attrs attrs.Props) *Element {
-	return NewElement("img", attrs)
+	return newElement("img", attrs)
 }
 
-// ========== Meta Elements ==========
+// ========== Head Elements ==========
+
+// Base creates a <base> element.
+func Base(attrs attrs.Props) *Element {
+	return newElement("base", attrs)
+}
 
 // Link creates a <link> element.
 func Link(attrs attrs.Props) *Element {
-	return NewElement("link", attrs)
+	return newElement("link", attrs)
 }
 
 // Meta creates a <meta> element.
 func Meta(attrs attrs.Props) *Element {
-	return NewElement("meta", attrs)
+	return newElement("meta", attrs)
 }
 
 // Script creates a <script> element.
 func Script(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("script", attrs, children...)
+	return newElement("script", attrs, children...)
 }
 
 // Style creates a <style> element.
 func Style(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("style", attrs, children...)
+	return newElement("style", attrs, children...)
 }
 
 // ========== Semantic Elements ==========
@@ -217,182 +267,266 @@ func Style(attrs attrs.Props, children ...Node) *Element {
 
 // Article creates an <article> element.
 func Article(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("article", attrs, children...)
+	return newElement("article", attrs, children...)
 }
 
 // Aside creates an <aside> element.
 func Aside(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("aside", attrs, children...)
+	return newElement("aside", attrs, children...)
 }
 
 // Footer creates a <footer> element.
 func Footer(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("footer", attrs, children...)
+	return newElement("footer", attrs, children...)
 }
 
 // Header creates a <header> element.
 func Header(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("header", attrs, children...)
+	return newElement("header", attrs, children...)
 }
 
 // Main creates a <main> element.
 func Main(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("main", attrs, children...)
+	return newElement("main", attrs, children...)
 }
 
 // Nav creates a <nav> element.
 func Nav(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("nav", attrs, children...)
+	return newElement("nav", attrs, children...)
 }
 
 // Section creates a <section> element.
 func Section(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("section", attrs, children...)
+	return newElement("section", attrs, children...)
+}
+
+// Details creates a <details> element.
+func Details(attrs attrs.Props, children ...Node) *Element {
+	return newElement("details", attrs, children...)
+}
+
+// Summary creates a <summary> element.
+func Summary(attrs attrs.Props, children ...Node) *Element {
+	return newElement("summary", attrs, children...)
 }
 
 // ========== Semantic Form Elements ==========
 
 // Fieldset creates a <fieldset> element.
 func Fieldset(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("fieldset", attrs, children...)
+	return newElement("fieldset", attrs, children...)
 }
 
 // Legend creates a <legend> element.
 func Legend(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("legend", attrs, children...)
+	return newElement("legend", attrs, children...)
 }
 
 // Datalist creates a <datalist> element.
 func Datalist(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("datalist", attrs, children...)
+	return newElement("datalist", attrs, children...)
 }
 
 // Meter creates a <meter> element.
 func Meter(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("meter", attrs, children...)
+	return newElement("meter", attrs, children...)
 }
 
 // Output creates an <output> element.
 func Output(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("output", attrs, children...)
+	return newElement("output", attrs, children...)
 }
 
 // Progress creates a <progress> element.
 func Progress(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("progress", attrs, children...)
+	return newElement("progress", attrs, children...)
 }
 
 // --- Semantic Interactive Elements ---
 
 // Dialog creates a <dialog> element.
 func Dialog(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("dialog", attrs, children...)
+	return newElement("dialog", attrs, children...)
 }
 
 // Menu creates a <menu> element.
 func Menu(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("menu", attrs, children...)
+	return newElement("menu", attrs, children...)
 }
 
 // --- Semantic Script Supporting Elements ---
 
 // NoScript creates a <noscript> element.
 func NoScript(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("noscript", attrs, children...)
+	return newElement("noscript", attrs, children...)
 }
 
 // --- Semantic Text Content Elements ---
 
-// Address creates an <address> element.
-func Address(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("address", attrs, children...)
+// Abbr creates an <abbr> element.
+func Abbr(attrs attrs.Props, children ...Node) *Element {
+	return newElement("abbr", attrs, children...)
 }
 
-// Details creates a <details> element.
-func Details(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("details", attrs, children...)
+// Address creates an <address> element.
+func Address(attrs attrs.Props, children ...Node) *Element {
+	return newElement("address", attrs, children...)
+}
+
+// Cite creates a <cite> element.
+func Cite(attrs attrs.Props, children ...Node) *Element {
+	return newElement("cite", attrs, children...)
+}
+
+// Data creates a <data> element.
+func Data(attrs attrs.Props, children ...Node) *Element {
+	return newElement("data", attrs, children...)
 }
 
 // FigCaption creates a <figcaption> element.
 func FigCaption(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("figcaption", attrs, children...)
+	return newElement("figcaption", attrs, children...)
 }
 
 // Figure creates a <figure> element.
 func Figure(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("figure", attrs, children...)
+	return newElement("figure", attrs, children...)
+}
+
+// Kbd creates a <kbd> element.
+func Kbd(attrs attrs.Props, children ...Node) *Element {
+	return newElement("kbd", attrs, children...)
 }
 
 // Mark creates a <mark> element.
 func Mark(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("mark", attrs, children...)
+	return newElement("mark", attrs, children...)
 }
 
-// Summary creates a <summary> element.
-func Summary(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("summary", attrs, children...)
+// Q creates a <q> element.
+func Q(attrs attrs.Props, children ...Node) *Element {
+	return newElement("q", attrs, children...)
+}
+
+// Samp creates a <samp> element.
+func Samp(attrs attrs.Props, children ...Node) *Element {
+	return newElement("samp", attrs, children...)
+}
+
+// Small creates a <small> element.
+func Small(attrs attrs.Props, children ...Node) *Element {
+	return newElement("small", attrs, children...)
 }
 
 // Time creates a <time> element.
 func Time(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("time", attrs, children...)
+	return newElement("time", attrs, children...)
+}
+
+// Var creates a <var> element.
+func Var(attrs attrs.Props, children ...Node) *Element {
+	return newElement("var", attrs, children...)
+}
+
+// Ruby creates a <ruby> element.
+func Ruby(attrs attrs.Props, children ...Node) *Element {
+	return newElement("ruby", attrs, children...)
+}
+
+// Rt creates a <rt> element.
+func Rt(attrs attrs.Props, children ...Node) *Element {
+	return newElement("rt", attrs, children...)
+}
+
+// Rp creates a <rp> element.
+func Rp(attrs attrs.Props, children ...Node) *Element {
+	return newElement("rp", attrs, children...)
 }
 
 // ========== Tables ==========
 
 // Table creates a <table> element.
 func Table(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("table", attrs, children...)
+	return newElement("table", attrs, children...)
 }
 
 // THead creates a <thead> element.
 func THead(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("thead", attrs, children...)
+	return newElement("thead", attrs, children...)
 }
 
 // TBody creates a <tbody> element.
 func TBody(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("tbody", attrs, children...)
+	return newElement("tbody", attrs, children...)
 }
 
 // TFoot creates a <tfoot> element.
 func TFoot(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("tfoot", attrs, children...)
+	return newElement("tfoot", attrs, children...)
 }
 
 // Tr creates a <tr> element.
 func Tr(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("tr", attrs, children...)
+	return newElement("tr", attrs, children...)
 }
 
 // Th creates a <th> element.
 func Th(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("th", attrs, children...)
+	return newElement("th", attrs, children...)
 }
 
 // Td creates a <td> element.
 func Td(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("td", attrs, children...)
+	return newElement("td", attrs, children...)
 }
 
 // ========== Embedded Content ==========
 
 // IFrames creates an <iframe> element.
 func IFrame(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("iframe", attrs, children...)
+	return newElement("iframe", attrs, children...)
 }
 
 // Audio creates an <audio> element.
 func Audio(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("audio", attrs, children...)
+	return newElement("audio", attrs, children...)
 }
 
 // Video creates a <video> element.
 func Video(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("video", attrs, children...)
+	return newElement("video", attrs, children...)
 }
 
 // Source creates a <source> element.
 func Source(attrs attrs.Props, children ...Node) *Element {
-	return NewElement("source", attrs, children...)
+	return newElement("source", attrs, children...)
+}
+
+// ========== Image Map Elements ==========
+
+// Map creates a <map> element.
+func Map(attrs attrs.Props, children ...Node) *Element {
+	return newElement("map", attrs, children...)
+}
+
+// Area creates an <area> element.
+func Area(attrs attrs.Props) *Element {
+	return newElement("area", attrs)
+}
+
+// ========== Other ==========
+
+// None creates a NoneNode, representing a no-operation in rendering.
+func None() NoneNode {
+	return NoneNode{}
+}
+
+// Raw takes html content and returns a RawNode.
+func Raw(html string) RawNode {
+	return RawNode(html)
+}
+
+// CSS takes css content and returns a TextNode.
+func CSS(content string) TextNode {
+	return TextNode(content)
 }

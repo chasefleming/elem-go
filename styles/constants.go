@@ -112,6 +112,7 @@ const (
 	BackgroundImage      = "background-image"
 	BackgroundRepeat     = "background-repeat"
 	BackgroundSize       = "background-size"
+	ObjectFit            = "object-fit"
 	Opacity              = "opacity"
 	BoxSizing            = "box-sizing"
 	Cursor               = "cursor"
@@ -121,6 +122,7 @@ const (
 	BackgroundAttachment = "background-attachment"
 	BackgroundBlendMode  = "background-blend-mode"
 	BackfaceVisibility   = "backface-visibility"
+	BackdropFilter       = "backdrop-filter"
 	Perspective          = "perspective"
 	TransformOrigin      = "transform-origin"
 
@@ -133,6 +135,10 @@ const (
 	BorderSpacing  = "border-spacing"
 	TableLayout    = "table-layout"
 	CaptionSide    = "caption-side"
+
+	// Resource Attributes
+	Integrity   = "integrity"
+	Crossorigin = "crossorigin"
 
 	// Other Properties
 	Visibility    = "visibility"

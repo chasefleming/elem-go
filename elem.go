@@ -33,7 +33,7 @@ var voidElements = map[string]struct{}{
 // attribute represents the "true" value. To represent the "false" value, the attribute has to be omitted.
 // See https://html.spec.whatwg.org/multipage/indices.html#attributes-3 for reference
 var booleanAttrs = map[string]struct{}{
-	attrs.AllowFullScreen: {},
+	attrs.AllowFullscreen: {},
 	attrs.Async:           {},
 	attrs.Autofocus:       {},
 	attrs.Autoplay:        {},
@@ -41,11 +41,11 @@ var booleanAttrs = map[string]struct{}{
 	attrs.Controls:        {},
 	attrs.Defer:           {},
 	attrs.Disabled:        {},
-	attrs.IsMap:           {},
+	attrs.Ismap:           {},
 	attrs.Loop:            {},
 	attrs.Multiple:        {},
 	attrs.Muted:           {},
-	attrs.NoValidate:      {},
+	attrs.Novalidate:      {},
 	attrs.Open:            {},
 	attrs.Playsinline:     {},
 	attrs.Readonly:        {},
@@ -53,14 +53,38 @@ var booleanAttrs = map[string]struct{}{
 	attrs.Selected:        {},
 }
 
+type RenderOptions struct {
+	// DisableHtmlPreamble disables the doctype preamble for the HTML tag if it exists in the rendering tree
+	DisableHtmlPreamble bool
+}
+
 type Node interface {
-	RenderTo(builder *strings.Builder)
+	RenderTo(builder *strings.Builder, opts RenderOptions)
 	Render() string
+	RenderWithOptions(opts RenderOptions) string
+}
+
+// NoneNode represents a node that renders nothing.
+type NoneNode struct{}
+
+// RenderTo for NoneNode does nothing.
+func (n NoneNode) RenderTo(builder *strings.Builder, opts RenderOptions) {
+	// Intentionally left blank to render nothing
+}
+
+// Render for NoneNode returns an empty string.
+func (n NoneNode) Render() string {
+	return ""
+}
+
+// RenderWithOptions for NoneNode returns an empty string.
+func (n NoneNode) RenderWithOptions(opts RenderOptions) string {
+	return ""
 }
 
 type TextNode string
 
-func (t TextNode) RenderTo(builder *strings.Builder) {
+func (t TextNode) RenderTo(builder *strings.Builder, opts RenderOptions) {
 	builder.WriteString(string(t))
 }
 
@@ -68,17 +92,39 @@ func (t TextNode) Render() string {
 	return string(t)
 }
 
+func (t TextNode) RenderWithOptions(opts RenderOptions) string {
+	return string(t)
+}
+
+type RawNode string
+
+func (r RawNode) RenderTo(builder *strings.Builder, opts RenderOptions) {
+	builder.WriteString(string(r))
+}
+
+func (r RawNode) Render() string {
+	return string(r)
+}
+
+func (t RawNode) RenderWithOptions(opts RenderOptions) string {
+	return string(t)
+}
+
 type CommentNode string
 
-func (c CommentNode) RenderTo(builder *strings.Builder) {
+func (c CommentNode) RenderTo(builder *strings.Builder, opts RenderOptions) {
 	builder.WriteString("<!-- ")
 	builder.WriteString(string(c))
 	builder.WriteString(" -->")
 }
 
 func (c CommentNode) Render() string {
+	return c.RenderWithOptions(RenderOptions{})
+}
+
+func (c CommentNode) RenderWithOptions(opts RenderOptions) string {
 	var builder strings.Builder
-	c.RenderTo(&builder)
+	c.RenderTo(&builder, opts)
 	return builder.String()
 }
 
@@ -88,7 +134,14 @@ type Element struct {
 	Children []Node
 }
 
-func (e *Element) RenderTo(builder *strings.Builder) {
+func (e *Element) RenderTo(builder *strings.Builder, opts RenderOptions) {
+	// The HTML tag needs a doctype preamble in order to ensure
+	// browsers don't render in legacy/quirks mode
+	// https://developer.mozilla.org/en-US/docs/Glossary/Doctype
+	if !opts.DisableHtmlPreamble && e.Tag == "html" {
+		builder.WriteString("<!DOCTYPE html>")
+	}
+
 	// Start with opening tag
 	builder.WriteString("<")
 	builder.WriteString(e.Tag)
@@ -116,7 +169,7 @@ func (e *Element) RenderTo(builder *strings.Builder) {
 
 	// Build the content
 	for _, child := range e.Children {
-		child.RenderTo(builder)
+		child.RenderTo(builder, opts)
 	}
 
 	// Append closing tag
@@ -144,12 +197,16 @@ func (e *Element) renderAttrTo(attrName string, builder *strings.Builder) {
 }
 
 func (e *Element) Render() string {
+	return e.RenderWithOptions(RenderOptions{})
+}
+
+func (e *Element) RenderWithOptions(opts RenderOptions) string {
 	var builder strings.Builder
-	e.RenderTo(&builder)
+	e.RenderTo(&builder, opts)
 	return builder.String()
 }
 
-func NewElement(tag string, attrs attrs.Props, children ...Node) *Element {
+func newElement(tag string, attrs attrs.Props, children ...Node) *Element {
 	return &Element{
 		Tag:      tag,
 		Attrs:    attrs,
