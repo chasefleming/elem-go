@@ -76,7 +76,7 @@ defaultButtonAttrs := attrs.Props{
 }
 
 primaryButtonAttrs := attrs.Props{
-    attrs.Class: "btn btn-primary", // Overriding the class attribute
+    attrs.Class: "btn btn-primary", // Overrides the Class attribute from defaultButtonAttrs
     attrs.ID:    "submitBtn",
 }
 
