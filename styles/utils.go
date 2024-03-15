@@ -64,7 +64,7 @@ func RGB(r, g, b int) string {
 }
 
 // RGBA returns a string representation of the given RGBA values as a CSS RGBA value.
-func RGBA(r, g, b, a int) string {
+func RGBA(r, g, b int, a float64) string {
 	var builder strings.Builder
 	builder.WriteString("rgba(")
 	builder.WriteString(strconv.Itoa(r))
@@ -73,7 +73,10 @@ func RGBA(r, g, b, a int) string {
 	builder.WriteString(",")
 	builder.WriteString(strconv.Itoa(b))
 	builder.WriteString(",")
-	builder.WriteString(strconv.Itoa(a))
+
+	// Convert the alpha float value to a string with desired precision
+	alphaStr := strconv.FormatFloat(a, 'f', -1, 64)
+	builder.WriteString(alphaStr)
 	builder.WriteString(")")
 	return builder.String()
 }
