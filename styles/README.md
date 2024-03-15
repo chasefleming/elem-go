@@ -130,12 +130,12 @@ emValue := styles.Em(2.5) // Returns "2.5em"
 remValue := styles.Rem(1.5) // Returns "1.5rem"
 ```
 
-##### `Px(value int) string`
+##### `Pixels(value int) string`
 
 This function returns a string representation of the given value with the "px" unit.
 
 ```go
-pxValue := styles.Px(10) // Returns "10px"
+pxValue := styles.Pixels(10) // Returns "10px"
 ```
 
 ##### `Percent(value int) string`
