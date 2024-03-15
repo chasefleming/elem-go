@@ -157,6 +157,15 @@ vhValue := styles.ViewportHeight(50) // Returns "50vh"
 vwValue := styles.ViewportWidth(25) // Returns "25vw"
 ```
 
+##### `ViewportMin(value int) string` and `ViewportMax(value int) string`
+
+These functions return a string representation of the given value with the "vmin" and "vmax" units, respectively.
+
+```go
+vminValue := styles.ViewportMin(10) // Returns "10vmin"
+vmaxValue := styles.ViewportMax(20) // Returns "20vmax"
+```
+
 #### Color Functions
 
 ##### `RGB(r, g, b int) string`

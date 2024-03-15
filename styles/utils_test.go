@@ -135,3 +135,17 @@ func TestViewportWidth(t *testing.T) {
 	assert.Equal(t, "50vw", ViewportWidth(50))
 	assert.Equal(t, "25vw", ViewportWidth(25))
 }
+
+func TestViewportMin(t *testing.T) {
+	assert.Equal(t, "100vmin", ViewportMin(100))
+	assert.Equal(t, "0vmin", ViewportMin(0))
+	assert.Equal(t, "50vmin", ViewportMin(50))
+	assert.Equal(t, "25vmin", ViewportMin(25))
+}
+
+func TestViewportMax(t *testing.T) {
+	assert.Equal(t, "100vmax", ViewportMax(100))
+	assert.Equal(t, "0vmax", ViewportMax(0))
+	assert.Equal(t, "50vmax", ViewportMax(50))
+	assert.Equal(t, "25vmax", ViewportMax(25))
+}

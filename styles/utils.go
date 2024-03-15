@@ -105,3 +105,13 @@ func ViewportHeight(value int) string {
 func ViewportWidth(value int) string {
 	return strconv.Itoa(value) + "vw"
 }
+
+// ViewportMin returns a string representation of the given integer as a viewport minimum value.
+func ViewportMin(value int) string {
+	return strconv.Itoa(value) + "vmin"
+}
+
+// ViewportMax returns a string representation of the given integer as a viewport maximum value.
+func ViewportMax(value int) string {
+	return strconv.Itoa(value) + "vmax"
+}
