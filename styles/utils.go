@@ -75,7 +75,7 @@ func RGBA(r, g, b int, a float64) string {
 	builder.WriteString(",")
 
 	// Convert the alpha float value to a string with desired precision
-	alphaStr := strconv.FormatFloat(a, 'f', -1, 64)
+	alphaStr := strconv.FormatFloat(a, 'f', 1, 64)
 	builder.WriteString(alphaStr)
 	builder.WriteString(")")
 	return builder.String()

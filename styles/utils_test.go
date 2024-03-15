@@ -108,10 +108,10 @@ func TestRGB(t *testing.T) {
 }
 
 func TestRGBA(t *testing.T) {
-	assert.Equal(t, "rgba(100,100,100,100)", RGBA(100, 100, 100, 100))
-	assert.Equal(t, "rgba(0,0,0,0)", RGBA(0, 0, 0, 0))
+	assert.Equal(t, "rgba(100,100,100,100.0)", RGBA(100, 100, 100, 100))
+	assert.Equal(t, "rgba(0,0,0,0.0)", RGBA(0, 0, 0, 0))
 	assert.Equal(t, "rgba(50,50,50,0.5)", RGBA(50, 50, 50, 0.5))
-	assert.Equal(t, "rgba(25,25,25,25)", RGBA(25, 25, 25, 25.0))
+	assert.Equal(t, "rgba(25,25,25,25.0)", RGBA(25, 25, 25, 25.0))
 }
 
 func TestURL(t *testing.T) {
