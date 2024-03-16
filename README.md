@@ -57,7 +57,7 @@ When the above Go code is executed and the `.Render()` method is called, it prod
 
 ### Attributes and Styles
 
-The `attrs` subpackage provides type-safe attribute functions that ensure you're setting valid attributes for your elements. This helps eliminate potential issues at runtime due to misspelled or unsupported attribute names.
+The [`attrs`](attrs/README.md) subpackage provides type-safe attribute functions that ensure you're setting valid attributes for your elements. This helps eliminate potential issues at runtime due to misspelled or unsupported attribute names.
 
 For boolean attributes like `checked` and `selected`, you can simply assign them the value `"true"` or `"false"`. When set to `"true"`, the library will correctly render these attributes without needing an explicit value. For instance:
 
