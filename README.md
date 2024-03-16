@@ -69,7 +69,7 @@ checkbox := elem.Input(attrs.Props{
 })
 ```
 
-For setting styles, the `styles` subpackage enables you to create style objects and convert them to inline CSS strings:
+For setting styles, the [`styles`](styles/README.md) subpackage enables you to create style objects and convert them to inline CSS strings:
 
 ```go
 // Define a style
