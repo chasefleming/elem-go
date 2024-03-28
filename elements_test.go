@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/chasefleming/elem-go/attrs"
+	"github.com/chasefleming/elem-go/options"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -11,18 +12,18 @@ import (
 
 func TestBody(t *testing.T) {
 	expected := `<body class="page-body"><p>Welcome to Elem!</p></body>`
-	el := Body(attrs.Props{attrs.Class: "page-body"}, P(nil, Text("Welcome to Elem!")))
+	el := Body(attrs.Props{attrs.Class: "page-body"}, P(Text("Welcome to Elem!")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestHtml(t *testing.T) {
 	expected := `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Elem Page</title></head><body><p>Welcome to Elem!</p></body></html>`
 	el := Html(attrs.Props{attrs.Lang: "en"},
-		Head(nil,
+		Head(
 			Meta(attrs.Props{attrs.Charset: "UTF-8"}),
-			Title(nil, Text("Elem Page")),
+			Title(Text("Elem Page")),
 		),
-		Body(nil, P(nil, Text("Welcome to Elem!"))),
+		Body(P(Text("Welcome to Elem!"))),
 	)
 	assert.Equal(t, expected, el.Render())
 }
@@ -30,13 +31,13 @@ func TestHtml(t *testing.T) {
 func TestHtmlWithOptions(t *testing.T) {
 	expected := `<html lang="en"><head><meta charset="UTF-8"><title>Elem Page</title></head><body><p>Welcome to Elem!</p></body></html>`
 	el := Html(attrs.Props{attrs.Lang: "en"},
-		Head(nil,
+		Head(
 			Meta(attrs.Props{attrs.Charset: "UTF-8"}),
-			Title(nil, Text("Elem Page")),
+			Title(Text("Elem Page")),
 		),
-		Body(nil, P(nil, Text("Welcome to Elem!"))),
+		Body(P(Text("Welcome to Elem!"))),
 	)
-	assert.Equal(t, expected, el.RenderWithOptions(RenderOptions{DisableHtmlPreamble: true}))
+	assert.Equal(t, expected, el.RenderWithOptions(options.RenderOptions{DisableHtmlPreamble: true}))
 }
 
 // ========== Text Formatting and Structure ==========
@@ -49,7 +50,7 @@ func TestA(t *testing.T) {
 
 func TestBlockquote(t *testing.T) {
 	expected := `<blockquote>Quote text</blockquote>`
-	el := Blockquote(nil, Text("Quote text"))
+	el := Blockquote(Text("Quote text"))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -61,7 +62,7 @@ func TestBr(t *testing.T) {
 
 func TestCode(t *testing.T) {
 	expected := `<code>Code snippet</code>`
-	el := Code(nil, Text("Code snippet"))
+	el := Code(Text("Code snippet"))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -73,7 +74,7 @@ func TestDiv(t *testing.T) {
 
 func TestEm(t *testing.T) {
 	expected := `<em>Italic text</em>`
-	el := Em(nil, Text("Italic text"))
+	el := Em(Text("Italic text"))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -91,25 +92,25 @@ func TestH2(t *testing.T) {
 
 func TestH3(t *testing.T) {
 	expected := `<h3>Hello, Elem!</h3>`
-	el := H3(nil, Text("Hello, Elem!"))
+	el := H3(Text("Hello, Elem!"))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestH4(t *testing.T) {
 	expected := `<h4>Hello, Elem!</h4>`
-	el := H4(nil, Text("Hello, Elem!"))
+	el := H4(Text("Hello, Elem!"))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestH5(t *testing.T) {
 	expected := `<h5>Hello, Elem!</h5>`
-	el := H5(nil, Text("Hello, Elem!"))
+	el := H5(Text("Hello, Elem!"))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestH6(t *testing.T) {
 	expected := `<h6>Hello, Elem!</h6>`
-	el := H6(nil, Text("Hello, Elem!"))
+	el := H6(Text("Hello, Elem!"))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -122,7 +123,7 @@ func TestHr(t *testing.T) {
 func TestI(t *testing.T) {
 	expected1 := `<i>Idiomatic Text</i>`
 	expected2 := `<i class="fa-regular fa-face-smile"></i>`
-	el := I(nil, Text("Idiomatic Text"))
+	el := I(Text("Idiomatic Text"))
 	assert.Equal(t, expected1, el.Render())
 	el = I(attrs.Props{attrs.Class: "fa-regular fa-face-smile"})
 	assert.Equal(t, expected2, el.Render())
@@ -130,13 +131,13 @@ func TestI(t *testing.T) {
 
 func TestP(t *testing.T) {
 	expected := `<p>Hello, Elem!</p>`
-	el := P(nil, Text("Hello, Elem!"))
+	el := P(Text("Hello, Elem!"))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestPre(t *testing.T) {
 	expected := `<pre>Preformatted text</pre>`
-	el := Pre(nil, Text("Preformatted text"))
+	el := Pre(Text("Preformatted text"))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -148,31 +149,31 @@ func TestSpan(t *testing.T) {
 
 func TestStrong(t *testing.T) {
 	expected := `<strong>Bold text</strong>`
-	el := Strong(nil, Text("Bold text"))
+	el := Strong(Text("Bold text"))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestSub(t *testing.T) {
 	expected := `<sub>2</sub>`
-	el := Sub(nil, Text("2"))
+	el := Sub(Text("2"))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestSup(t *testing.T) {
 	expected := `<sup>2</sup>`
-	el := Sup(nil, Text("2"))
+	el := Sup(Text("2"))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestB(t *testing.T) {
 	expected := `<b>Important text</b>`
-	el := B(nil, Text("Important text"))
+	el := B(Text("Important text"))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestU(t *testing.T) {
 	expected := `<u>Unarticulated text</u>`
-	el := U(nil, Text("Unarticulated text"))
+	el := U(Text("Unarticulated text"))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -185,7 +186,7 @@ func TestComment(t *testing.T) {
 
 func TestCommentInElement(t *testing.T) {
 	expected := `<div>not a comment<!-- this is a comment --></div>`
-	actual := Div(nil, Text("not a comment"), Comment("this is a comment")).Render()
+	actual := Div(Text("not a comment"), Comment("this is a comment")).Render()
 	assert.Equal(t, expected, actual)
 }
 
@@ -193,37 +194,37 @@ func TestCommentInElement(t *testing.T) {
 
 func TestLi(t *testing.T) {
 	expected := `<li>Item 1</li>`
-	el := Li(nil, Text("Item 1"))
+	el := Li(Text("Item 1"))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestUl(t *testing.T) {
 	expected := `<ul><li>Item 1</li><li>Item 2</li></ul>`
-	el := Ul(nil, Li(nil, Text("Item 1")), Li(nil, Text("Item 2")))
+	el := Ul(Li(Text("Item 1")), Li(Text("Item 2")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestOl(t *testing.T) {
 	expected := `<ol><li>Item 1</li><li>Item 2</li></ol>`
-	el := Ol(nil, Li(nil, Text("Item 1")), Li(nil, Text("Item 2")))
+	el := Ol(Li(Text("Item 1")), Li(Text("Item 2")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestDl(t *testing.T) {
 	expected := `<dl><dt>Term 1</dt><dd>Description 1</dd><dt>Term 2</dt><dd>Description 2</dd></dl>`
-	el := Dl(nil, Dt(nil, Text("Term 1")), Dd(nil, Text("Description 1")), Dt(nil, Text("Term 2")), Dd(nil, Text("Description 2")))
+	el := Dl(Dt(Text("Term 1")), Dd(Text("Description 1")), Dt(Text("Term 2")), Dd(Text("Description 2")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestDt(t *testing.T) {
 	expected := `<dt>Term 1</dt>`
-	el := Dt(nil, Text("Term 1"))
+	el := Dt(Text("Term 1"))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestDd(t *testing.T) {
 	expected := `<dd>Description 1</dd>`
-	el := Dd(nil, Text("Description 1"))
+	el := Dd(Text("Description 1"))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -337,49 +338,49 @@ func TestStyle(t *testing.T) {
 
 func TestArticle(t *testing.T) {
 	expected := `<article><h2>Article Title</h2><p>Article content.</p></article>`
-	el := Article(nil, H2(nil, Text("Article Title")), P(nil, Text("Article content.")))
+	el := Article(H2(Text("Article Title")), P(Text("Article content.")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestAside(t *testing.T) {
 	expected := `<aside><p>Sidebar content.</p></aside>`
-	el := Aside(nil, P(nil, Text("Sidebar content.")))
+	el := Aside(P(Text("Sidebar content.")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestFooter(t *testing.T) {
 	expected := `<footer><p>Footer content.</p></footer>`
-	el := Footer(nil, P(nil, Text("Footer content.")))
+	el := Footer(P(Text("Footer content.")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestHeader(t *testing.T) {
 	expected := `<header class="site-header"><h1>Welcome to Elem!</h1></header>`
-	el := Header(attrs.Props{attrs.Class: "site-header"}, H1(nil, Text("Welcome to Elem!")))
+	el := Header(attrs.Props{attrs.Class: "site-header"}, H1(Text("Welcome to Elem!")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestMainElem(t *testing.T) {
 	expected := `<main><p>Main content goes here.</p></main>`
-	el := Main(nil, P(nil, Text("Main content goes here.")))
+	el := Main(P(Text("Main content goes here.")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestNav(t *testing.T) {
 	expected := `<nav><a href="/home">Home</a><a href="/about">About</a></nav>`
-	el := Nav(nil, A(attrs.Props{attrs.Href: "/home"}, Text("Home")), A(attrs.Props{attrs.Href: "/about"}, Text("About")))
+	el := Nav(A(attrs.Props{attrs.Href: "/home"}, Text("Home")), A(attrs.Props{attrs.Href: "/about"}, Text("About")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestSection(t *testing.T) {
 	expected := `<section><h3>Section Title</h3><p>Section content.</p></section>`
-	el := Section(nil, H3(nil, Text("Section Title")), P(nil, Text("Section content.")))
+	el := Section(H3(Text("Section Title")), P(Text("Section content.")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestHgroup(t *testing.T) {
 	expected := `<hgroup><h1>Frankenstein</h1><p>Or: The Modern Prometheus</p></hgroup>`
-	el := Hgroup(nil, H1(nil, Text("Frankenstein")), P(nil, Text("Or: The Modern Prometheus")))
+	el := Hgroup(H1(Text("Frankenstein")), P(Text("Or: The Modern Prometheus")))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -387,7 +388,7 @@ func TestHgroup(t *testing.T) {
 
 func TestFieldset(t *testing.T) {
 	expected := `<fieldset class="custom-fieldset"><legend>Personal Information</legend><input name="name" type="text"></fieldset>`
-	el := Fieldset(attrs.Props{attrs.Class: "custom-fieldset"}, Legend(nil, Text("Personal Information")), Input(attrs.Props{attrs.Type: "text", attrs.Name: "name"}))
+	el := Fieldset(attrs.Props{attrs.Class: "custom-fieldset"}, Legend(Text("Personal Information")), Input(attrs.Props{attrs.Type: "text", attrs.Name: "name"}))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -425,13 +426,13 @@ func TestProgress(t *testing.T) {
 
 func TestDialog(t *testing.T) {
 	expected := `<dialog open><p>This is an open dialog window</p></dialog>`
-	el := Dialog(attrs.Props{attrs.Open: "true"}, P(nil, Text("This is an open dialog window")))
+	el := Dialog(attrs.Props{attrs.Open: "true"}, P(Text("This is an open dialog window")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestMenu(t *testing.T) {
 	expected := `<menu><li>Item One</li><li>Item Two</li></menu>`
-	el := Menu(nil, Li(nil, Text("Item One")), Li(nil, Text("Item Two")))
+	el := Menu(Li(Text("Item One")), Li(Text("Item Two")))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -439,7 +440,7 @@ func TestMenu(t *testing.T) {
 
 func TestNoScript(t *testing.T) {
 	expected := `<noscript><p>JavaScript is required for this application.</p></noscript>`
-	el := NoScript(nil, P(nil, Text("JavaScript is required for this application.")))
+	el := NoScript(P(Text("JavaScript is required for this application.")))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -453,31 +454,31 @@ func TestAbbr(t *testing.T) {
 
 func TestAddress(t *testing.T) {
 	expected := `<address>123 Example St.</address>`
-	el := Address(nil, Text("123 Example St."))
+	el := Address(Text("123 Example St."))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestCite(t *testing.T) {
 	expected := `<p>My favorite book is <cite>The Reality Dysfunction</cite> by Peter F. Hamilton.</p>`
-	el := P(nil, Text("My favorite book is "), Cite(nil, Text("The Reality Dysfunction")), Text(" by Peter F. Hamilton."))
+	el := P(Text("My favorite book is "), Cite(Text("The Reality Dysfunction")), Text(" by Peter F. Hamilton."))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestDetails(t *testing.T) {
 	expected := `<details><summary>More Info</summary><p>Details content here.</p></details>`
-	el := Details(nil, Summary(nil, Text("More Info")), P(nil, Text("Details content here.")))
+	el := Details(Summary(Text("More Info")), P(Text("Details content here.")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestDetailsWithOpenFalse(t *testing.T) {
 	expected := `<details><summary>More Info</summary><p>Details content here.</p></details>`
-	el := Details(attrs.Props{attrs.Open: "false"}, Summary(nil, Text("More Info")), P(nil, Text("Details content here.")))
+	el := Details(attrs.Props{attrs.Open: "false"}, Summary(Text("More Info")), P(Text("Details content here.")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestDetailsWithOpenTrue(t *testing.T) {
 	expected := `<details open><summary>More Info</summary><p>Details content here.</p></details>`
-	el := Details(attrs.Props{attrs.Open: "true"}, Summary(nil, Text("More Info")), P(nil, Text("Details content here.")))
+	el := Details(attrs.Props{attrs.Open: "true"}, Summary(Text("More Info")), P(Text("Details content here.")))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -489,49 +490,49 @@ func TestData(t *testing.T) {
 
 func TestFigCaption(t *testing.T) {
 	expected := `<figcaption>Description of the figure.</figcaption>`
-	el := FigCaption(nil, Text("Description of the figure."))
+	el := FigCaption(Text("Description of the figure."))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestFigure(t *testing.T) {
 	expected := `<figure><img alt="An image" src="image.jpg"><figcaption>An image</figcaption></figure>`
-	el := Figure(nil, Img(attrs.Props{attrs.Src: "image.jpg", attrs.Alt: "An image"}), FigCaption(nil, Text("An image")))
+	el := Figure(Img(attrs.Props{attrs.Src: "image.jpg", attrs.Alt: "An image"}), FigCaption(Text("An image")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestKbd(t *testing.T) {
 	expected := `<p>To make George eat an apple, select <kbd>File | Eat Apple...</kbd></p>`
-	el := P(nil, Text("To make George eat an apple, select "), Kbd(nil, Text("File | Eat Apple...")))
+	el := P(Text("To make George eat an apple, select "), Kbd(Text("File | Eat Apple...")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestMark(t *testing.T) {
 	expected := `<p>You must <mark>highlight</mark> this word.</p>`
-	el := P(nil, Text("You must "), Mark(nil, Text("highlight")), Text(" this word."))
+	el := P(Text("You must "), Mark(Text("highlight")), Text(" this word."))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestQ(t *testing.T) {
 	expected := `<p>The W3C's mission is <q cite="https://www.w3.org/Consortium/">To lead the World Wide Web to its full potential</q>.</p>`
-	el := P(nil, Text("The W3C's mission is "), Q(attrs.Props{attrs.Cite: "https://www.w3.org/Consortium/"}, Text("To lead the World Wide Web to its full potential")), Text("."))
+	el := P(Text("The W3C's mission is "), Q(attrs.Props{attrs.Cite: "https://www.w3.org/Consortium/"}, Text("To lead the World Wide Web to its full potential")), Text("."))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestSamp(t *testing.T) {
 	expected := `<p>The computer said <samp>Too much cheese in tray two</samp> but I didn't know what that meant.</p>`
-	el := P(nil, Text("The computer said "), Samp(nil, Text("Too much cheese in tray two")), Text(" but I didn't know what that meant."))
+	el := P(Text("The computer said "), Samp(Text("Too much cheese in tray two")), Text(" but I didn't know what that meant."))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestSmall(t *testing.T) {
 	expected := `<p>Single room <small>breakfast included, VAT not included</small></p>`
-	el := P(nil, Text("Single room "), Small(nil, Text("breakfast included, VAT not included")))
+	el := P(Text("Single room "), Small(Text("breakfast included, VAT not included")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestSummary(t *testing.T) {
 	expected := `<details><summary>Summary Title</summary></details>`
-	el := Details(nil, Summary(nil, Text("Summary Title")))
+	el := Details(Summary(Text("Summary Title")))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -543,25 +544,25 @@ func TestTime(t *testing.T) {
 
 func TestVar(t *testing.T) {
 	expected := `<p>After a few moment's thought, she wrote <var>E</var>.</p>`
-	el := P(nil, Text("After a few moment's thought, she wrote "), Var(nil, Text("E")), Text("."))
+	el := P(Text("After a few moment's thought, she wrote "), Var(Text("E")), Text("."))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestRuby(t *testing.T) {
 	expected := `<ruby>漢</ruby>`
-	el := Ruby(nil, Text("漢"))
+	el := Ruby(Text("漢"))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestRt(t *testing.T) {
 	expected := `<ruby> 漢 <rp>(</rp><rt>kan</rt><rp>)</rp> 字 <rp>(</rp><rt>ji</rt><rp>)</rp> </ruby>`
-	el := Ruby(nil, Text(" 漢 "), Rp(nil, Text("(")), Rt(nil, Text("kan")), Rp(nil, Text(")")), Text(" 字 "), Rp(nil, Text("(")), Rt(nil, Text("ji")), Rp(nil, Text(")")), Text(" "))
+	el := Ruby(Text(" 漢 "), Rp(Text("(")), Rt(Text("kan")), Rp(Text(")")), Text(" 字 "), Rp(Text("(")), Rt(Text("ji")), Rp(Text(")")), Text(" "))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestRp(t *testing.T) {
 	expected := `<ruby> 漢 <rp>(</rp> 字 <rp>)</rp> </ruby>`
-	el := Ruby(nil, Text(" 漢 "), Rp(nil, Text("(")), Text(" 字 "), Rp(nil, Text(")")), Text(" "))
+	el := Ruby(Text(" 漢 "), Rp(Text("(")), Text(" 字 "), Rp(Text(")")), Text(" "))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -569,43 +570,43 @@ func TestRp(t *testing.T) {
 
 func TestTr(t *testing.T) {
 	expected := `<tr>Row content.</tr>`
-	el := Tr(nil, Text("Row content."))
+	el := Tr(Text("Row content."))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestTd(t *testing.T) {
 	expected := `<tr><td><h1>Cell one.</h1></td><td>Cell two.</td></tr>`
-	el := Tr(nil, Td(nil, H1(nil, Text("Cell one."))), Td(nil, Text("Cell two.")))
+	el := Tr(Td(H1(Text("Cell one."))), Td(Text("Cell two.")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestTh(t *testing.T) {
 	expected := `<tr><th>First name</th><th>Last name</th><th>Age</th></tr>`
-	el := Tr(nil, Th(nil, Text("First name")), Th(nil, Text("Last name")), Th(nil, Text("Age")))
+	el := Tr(Th(Text("First name")), Th(Text("Last name")), Th(Text("Age")))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestTHead(t *testing.T) {
 	expected := `<thead><tr><td>Text</td><td><a href="/link">Link</a></td></tr></thead>`
-	el := THead(nil, Tr(nil, Td(nil, Text("Text")), Td(nil, A(attrs.Props{attrs.Href: "/link"}, Text("Link")))))
+	el := THead(Tr(Td(Text("Text")), Td(A(attrs.Props{attrs.Href: "/link"}, Text("Link")))))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestTBody(t *testing.T) {
 	expected := `<tbody><tr><td>Table body</td></tr></tbody>`
-	el := TBody(nil, Tr(nil, Td(nil, Text("Table body"))))
+	el := TBody(Tr(Td(Text("Table body"))))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestTFoot(t *testing.T) {
 	expected := `<tfoot><tr><td><a href="/footer">Table footer</a></td></tr></tfoot>`
-	el := TFoot(nil, Tr(nil, Td(nil, A(attrs.Props{attrs.Href: "/footer"}, Text("Table footer")))))
+	el := TFoot(Tr(Td(A(attrs.Props{attrs.Href: "/footer"}, Text("Table footer")))))
 	assert.Equal(t, expected, el.Render())
 }
 
 func TestTable(t *testing.T) {
 	expected := `<table><tr><th>Table header</th></tr><tr><td>Table content</td></tr></table>`
-	el := Table(nil, Tr(nil, Th(nil, Text("Table header"))), Tr(nil, Td(nil, Text("Table content"))))
+	el := Table(Tr(Th(Text("Table header"))), Tr(Td(Text("Table content"))))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -669,7 +670,7 @@ func TestNone(t *testing.T) {
 
 func TestNoneInDiv(t *testing.T) {
 	expected := `<div></div>`
-	actual := Div(nil, None()).Render()
+	actual := Div(None()).Render()
 	assert.Equal(t, expected, actual)
 }
 

@@ -1,5 +1,12 @@
 package attrs
 
+import (
+	"sort"
+	"strings"
+
+	"github.com/chasefleming/elem-go/options"
+)
+
 const (
 	// Universal Attributes
 
@@ -181,4 +188,70 @@ const (
 	AriaValuetext        = "aria-valuetext"
 )
 
+// List of boolean attributes. Boolean attributes can't have literal values. The presence of an boolean
+// attribute represents the "true" value. To represent the "false" value, the attribute has to be omitted.
+// See https://html.spec.whatwg.org/multipage/indices.html#attributes-3 for reference
+var booleanAttrs = map[string]struct{}{
+	AllowFullscreen: {},
+	Async:           {},
+	Autofocus:       {},
+	Autoplay:        {},
+	Checked:         {},
+	Controls:        {},
+	Defer:           {},
+	Disabled:        {},
+	Ismap:           {},
+	Loop:            {},
+	Multiple:        {},
+	Muted:           {},
+	Novalidate:      {},
+	Open:            {},
+	Playsinline:     {},
+	Readonly:        {},
+	Required:        {},
+	Selected:        {},
+}
+
 type Props map[string]string
+
+func (p Props) RenderTo(builder *strings.Builder, opts options.RenderOptions) {
+	// Sort the keys for consistent order
+	keys := make([]string, 0, len(p))
+	for k := range p {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+
+	// Append the attributes to the builder
+	for _, k := range keys {
+		p.renderAttrTo(k, builder)
+	}
+}
+
+// return string representation of given attribute with its value
+func (p Props) renderAttrTo(attrName string, builder *strings.Builder) {
+	if _, exists := booleanAttrs[attrName]; exists {
+		// boolean attribute presents its name only if the value is "true"
+		if p[attrName] == "true" {
+			builder.WriteString(` `)
+			builder.WriteString(attrName)
+		}
+	} else {
+		// regular attribute has a name and a value
+		builder.WriteString(` `)
+		builder.WriteString(attrName)
+		builder.WriteString(`="`)
+		builder.WriteString(p[attrName])
+		builder.WriteString(`"`)
+	}
+}
+
+func (p Props) Render() string {
+	return p.RenderWithOptions(options.RenderOptions{})
+}
+
+func (p Props) RenderWithOptions(opts options.RenderOptions) string {
+	var builder strings.Builder
+	p.RenderTo(&builder, opts)
+	return builder.String()
+}
