@@ -1,10 +1,10 @@
 package elem
 
 import (
-	"sort"
 	"strings"
 
 	"github.com/chasefleming/elem-go/attrs"
+	"github.com/chasefleming/elem-go/options"
 )
 
 // List of HTML5 void elements. Void elements, also known as self-closing or empty elements,
@@ -29,46 +29,17 @@ var voidElements = map[string]struct{}{
 	"wbr":     {},
 }
 
-// List of boolean attributes. Boolean attributes can't have literal values. The presence of an boolean
-// attribute represents the "true" value. To represent the "false" value, the attribute has to be omitted.
-// See https://html.spec.whatwg.org/multipage/indices.html#attributes-3 for reference
-var booleanAttrs = map[string]struct{}{
-	attrs.AllowFullscreen: {},
-	attrs.Async:           {},
-	attrs.Autofocus:       {},
-	attrs.Autoplay:        {},
-	attrs.Checked:         {},
-	attrs.Controls:        {},
-	attrs.Defer:           {},
-	attrs.Disabled:        {},
-	attrs.Ismap:           {},
-	attrs.Loop:            {},
-	attrs.Multiple:        {},
-	attrs.Muted:           {},
-	attrs.Novalidate:      {},
-	attrs.Open:            {},
-	attrs.Playsinline:     {},
-	attrs.Readonly:        {},
-	attrs.Required:        {},
-	attrs.Selected:        {},
-}
-
-type RenderOptions struct {
-	// DisableHtmlPreamble disables the doctype preamble for the HTML tag if it exists in the rendering tree
-	DisableHtmlPreamble bool
-}
-
 type Node interface {
-	RenderTo(builder *strings.Builder, opts RenderOptions)
+	RenderTo(builder *strings.Builder, opts options.RenderOptions)
 	Render() string
-	RenderWithOptions(opts RenderOptions) string
+	RenderWithOptions(opts options.RenderOptions) string
 }
 
 // NoneNode represents a node that renders nothing.
 type NoneNode struct{}
 
 // RenderTo for NoneNode does nothing.
-func (n NoneNode) RenderTo(builder *strings.Builder, opts RenderOptions) {
+func (n NoneNode) RenderTo(builder *strings.Builder, opts options.RenderOptions) {
 	// Intentionally left blank to render nothing
 }
 
@@ -78,13 +49,13 @@ func (n NoneNode) Render() string {
 }
 
 // RenderWithOptions for NoneNode returns an empty string.
-func (n NoneNode) RenderWithOptions(opts RenderOptions) string {
+func (n NoneNode) RenderWithOptions(opts options.RenderOptions) string {
 	return ""
 }
 
 type TextNode string
 
-func (t TextNode) RenderTo(builder *strings.Builder, opts RenderOptions) {
+func (t TextNode) RenderTo(builder *strings.Builder, opts options.RenderOptions) {
 	builder.WriteString(string(t))
 }
 
@@ -92,13 +63,13 @@ func (t TextNode) Render() string {
 	return string(t)
 }
 
-func (t TextNode) RenderWithOptions(opts RenderOptions) string {
+func (t TextNode) RenderWithOptions(opts options.RenderOptions) string {
 	return string(t)
 }
 
 type RawNode string
 
-func (r RawNode) RenderTo(builder *strings.Builder, opts RenderOptions) {
+func (r RawNode) RenderTo(builder *strings.Builder, opts options.RenderOptions) {
 	builder.WriteString(string(r))
 }
 
@@ -106,23 +77,23 @@ func (r RawNode) Render() string {
 	return string(r)
 }
 
-func (t RawNode) RenderWithOptions(opts RenderOptions) string {
+func (t RawNode) RenderWithOptions(opts options.RenderOptions) string {
 	return string(t)
 }
 
 type CommentNode string
 
-func (c CommentNode) RenderTo(builder *strings.Builder, opts RenderOptions) {
+func (c CommentNode) RenderTo(builder *strings.Builder, opts options.RenderOptions) {
 	builder.WriteString("<!-- ")
 	builder.WriteString(string(c))
 	builder.WriteString(" -->")
 }
 
 func (c CommentNode) Render() string {
-	return c.RenderWithOptions(RenderOptions{})
+	return c.RenderWithOptions(options.RenderOptions{})
 }
 
-func (c CommentNode) RenderWithOptions(opts RenderOptions) string {
+func (c CommentNode) RenderWithOptions(opts options.RenderOptions) string {
 	var builder strings.Builder
 	c.RenderTo(&builder, opts)
 	return builder.String()
@@ -134,7 +105,7 @@ type Element struct {
 	Children []Node
 }
 
-func (e *Element) RenderTo(builder *strings.Builder, opts RenderOptions) {
+func (e *Element) RenderTo(builder *strings.Builder, opts options.RenderOptions) {
 	// The HTML tag needs a doctype preamble in order to ensure
 	// browsers don't render in legacy/quirks mode
 	// https://developer.mozilla.org/en-US/docs/Glossary/Doctype
@@ -146,18 +117,7 @@ func (e *Element) RenderTo(builder *strings.Builder, opts RenderOptions) {
 	builder.WriteString("<")
 	builder.WriteString(e.Tag)
 
-	// Sort the keys for consistent order
-	keys := make([]string, 0, len(e.Attrs))
-	for k := range e.Attrs {
-		keys = append(keys, k)
-	}
-	sort.Strings(keys)
-
-	// Append the attributes to the builder
-	for _, k := range keys {
-		e.renderAttrTo(k, builder)
-	}
-
+	e.Attrs.RenderTo(builder, opts)
 	// If it's a void element, close it and return
 	if _, exists := voidElements[e.Tag]; exists {
 		builder.WriteString(`>`)
@@ -169,6 +129,9 @@ func (e *Element) RenderTo(builder *strings.Builder, opts RenderOptions) {
 
 	// Build the content
 	for _, child := range e.Children {
+		if child == nil {
+			continue
+		}
 		child.RenderTo(builder, opts)
 	}
 
@@ -178,35 +141,23 @@ func (e *Element) RenderTo(builder *strings.Builder, opts RenderOptions) {
 	builder.WriteString(`>`)
 }
 
-// return string representation of given attribute with its value
-func (e *Element) renderAttrTo(attrName string, builder *strings.Builder) {
-	if _, exists := booleanAttrs[attrName]; exists {
-		// boolean attribute presents its name only if the value is "true"
-		if e.Attrs[attrName] == "true" {
-			builder.WriteString(` `)
-			builder.WriteString(attrName)
-		}
-	} else {
-		// regular attribute has a name and a value
-		builder.WriteString(` `)
-		builder.WriteString(attrName)
-		builder.WriteString(`="`)
-		builder.WriteString(e.Attrs[attrName])
-		builder.WriteString(`"`)
-	}
-}
-
 func (e *Element) Render() string {
-	return e.RenderWithOptions(RenderOptions{})
+	return e.RenderWithOptions(options.RenderOptions{})
 }
 
-func (e *Element) RenderWithOptions(opts RenderOptions) string {
+func (e *Element) RenderWithOptions(opts options.RenderOptions) string {
 	var builder strings.Builder
 	e.RenderTo(&builder, opts)
 	return builder.String()
 }
 
-func newElement(tag string, attrs attrs.Props, children ...Node) *Element {
+func newElement(tag string, children ...Node) *Element {
+	attrs, ok := children[0].(attrs.Props)
+
+	if ok {
+		children = children[1:]
+	}
+
 	return &Element{
 		Tag:      tag,
 		Attrs:    attrs,
