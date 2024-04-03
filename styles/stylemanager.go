@@ -1,4 +1,4 @@
-package stylemanager
+package styles
 
 import (
 	"crypto/sha1"
@@ -7,28 +7,25 @@ import (
 	"strings"
 )
 
-// Style represents CSS properties for an element.
-type Style map[string]string
-
 // Keyframes represents CSS keyframes for an animation.
-type Keyframes map[string]Style
+type Keyframes map[string]Props
 
 // CompositeStyle represents a collection of styles.
 type CompositeStyle struct {
-	Default       Style
-	PseudoClasses map[string]Style
-	MediaQueries  map[string]Style
+	Default       Props
+	PseudoClasses map[string]Props
+	MediaQueries  map[string]Props
 }
 
 // StyleSheet represents a collection of styles mapped to class names.
-type StyleSheet map[string]Style
+type StyleSheet map[string]Props
 
 // StyleManager manages styles and generates CSS classes.
 type StyleManager struct {
 	styles          StyleSheet
 	compositeStyles map[string]CompositeStyle
 	animations      map[string]Keyframes
-	mediaQueries    map[string]Style
+	mediaQueries    map[string]Props
 }
 
 // NewStyleManager creates a new instance of StyleManager.
@@ -37,12 +34,12 @@ func NewStyleManager() *StyleManager {
 		styles:          make(StyleSheet),
 		animations:      make(map[string]Keyframes),
 		compositeStyles: make(map[string]CompositeStyle),
-		mediaQueries:    make(map[string]Style),
+		mediaQueries:    make(map[string]Props),
 	}
 }
 
 // AddStyle adds a new style to the manager and returns a class name.
-func (sm *StyleManager) AddStyle(style Style) string {
+func (sm *StyleManager) AddStyle(style Props) string {
 	// Convert style to a string to generate hash.
 	styleStr := fmt.Sprintf("%v", style)
 	hash := sha1.Sum([]byte(styleStr))
@@ -158,7 +155,7 @@ func ensureMediaPrefix(mediaQuery string) string {
 }
 
 // sortedKeys returns the keys of the map sorted alphabetically.
-func sortedKeys(style Style) []string {
+func sortedKeys(style Props) []string {
 	keys := make([]string, 0, len(style))
 	for key := range style {
 		keys = append(keys, key)

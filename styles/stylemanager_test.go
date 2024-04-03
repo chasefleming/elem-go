@@ -1,11 +1,9 @@
-package stylemanager
+package styles
 
 import (
 	"fmt"
-	"github.com/chasefleming/elem-go/styles"
-	"testing"
-
 	"github.com/stretchr/testify/assert"
+	"testing"
 )
 
 func TestNewStyleManager(t *testing.T) {
@@ -16,7 +14,7 @@ func TestNewStyleManager(t *testing.T) {
 
 func TestAddStyle(t *testing.T) {
 	sm := NewStyleManager()
-	style := Style{"color": "red"}
+	style := Props{"color": "red"}
 	className := sm.AddStyle(style)
 
 	assert.NotEmpty(t, className)
@@ -27,8 +25,8 @@ func TestAddStyle(t *testing.T) {
 func TestAnimationKeyframes(t *testing.T) {
 	sm := NewStyleManager()
 	keyframes := Keyframes{
-		"from": Style{styles.Color: "red"},
-		"to":   Style{styles.Color: "blue"},
+		"from": Props{Color: "red"},
+		"to":   Props{Color: "blue"},
 	}
 	exampleAnimation := sm.AddAnimation(keyframes)
 
@@ -41,9 +39,9 @@ func TestAddCompositeStyle(t *testing.T) {
 	sm := NewStyleManager()
 
 	compositeStyle := CompositeStyle{
-		Default: Style{styles.Color: "red"},
-		PseudoClasses: map[string]Style{
-			":hover": Style{styles.Color: "blue"},
+		Default: Props{Color: "red"},
+		PseudoClasses: map[string]Props{
+			":hover": Props{Color: "blue"},
 		},
 	}
 
@@ -62,11 +60,11 @@ func TestMediaQuery(t *testing.T) {
 	tabletQuery := "@media (min-width: 768px) and (max-width: 1024px)"
 
 	compositeStyle := CompositeStyle{
-		Default: Style{
+		Default: Props{
 			"padding": "10px",
 		},
-		MediaQueries: map[string]Style{
-			tabletQuery: Style{
+		MediaQueries: map[string]Props{
+			tabletQuery: Props{
 				"padding": "20px",
 			},
 		},
@@ -91,25 +89,25 @@ func TestGenerateCSS(t *testing.T) {
 	animationName := sm.AddAnimation(keyframes)
 
 	// Add a style that uses the animation.
-	styleUsingAnimation := Style{
+	styleUsingAnimation := Props{
 		"animation-name":     animationName,
 		"animation-duration": "2s",
 	}
 	className := sm.AddStyle(styleUsingAnimation)
 
 	// Add some additional basic styles.
-	styleOneClass := sm.AddStyle(Style{"color": "red"})
-	styleTwoClass := sm.AddStyle(Style{"background": "blue"})
+	styleOneClass := sm.AddStyle(Props{"color": "red"})
+	styleTwoClass := sm.AddStyle(Props{"background": "blue"})
 
 	// Add a composite style
 	compositeClassName := sm.AddCompositeStyle(CompositeStyle{
-		Default: Style{"color": "pink"},
-		PseudoClasses: map[string]Style{
-			"hover": Style{"color": "blue"},
+		Default: Props{"color": "pink"},
+		PseudoClasses: map[string]Props{
+			"hover": Props{"color": "blue"},
 		},
-		MediaQueries: map[string]Style{
-			"@media (min-width: 768px)":  Style{"color": "green", "background": "yellow"},
-			"@media (min-width: 1024px)": Style{"color": "purple", "background": "orange"},
+		MediaQueries: map[string]Props{
+			"@media (min-width: 768px)":  Props{"color": "green", "background": "yellow"},
+			"@media (min-width: 1024px)": Props{"color": "purple", "background": "orange"},
 		},
 	})
 
@@ -137,7 +135,7 @@ func TestGenerateCSS(t *testing.T) {
 
 func TestAddStyleDeduplication(t *testing.T) {
 	sm := NewStyleManager()
-	style := Style{"color": "red"}
+	style := Props{"color": "red"}
 	firstClassName := sm.AddStyle(style)
 	secondClassName := sm.AddStyle(style)
 
