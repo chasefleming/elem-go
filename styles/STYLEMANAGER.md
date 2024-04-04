@@ -1,6 +1,6 @@
-# `stylemanager` Subpackage in `elem-go`
+# Advanced CSS Features with `StyleManager` in `elem-go`
 
-The `stylemanager` subpackage is a powerful addition to elem-go, providing developers with the tools to programmatically manage CSS styles with advanced features like pseudo-classes, animations, and media queries. This enables the creation of dynamic and responsive web applications directly in Go.
+`StyleManager` within the `styles` package, is a powerful addition to elem-go, providing developers with the tools to programmatically manage CSS styles with advanced features like pseudo-classes, animations, and media queries. This enables the creation of dynamic and responsive web applications directly in Go.
 
 ## Table of Contents
 
@@ -21,27 +21,26 @@ The `StyleManager` provides a robust solution for managing CSS in Go-based web a
 
 ## Installation
 
-To use the `stylemanager` subpackage, import it alongside the main `elem` package:
+To leverage `StyleManager`, ensure you're importing the `styles` package along with the core `elem` package:
 
 ```go
 import (
     "github.com/chasefleming/elem-go"
     "github.com/chasefleming/elem-go/styles"
-    "github.com/chasefleming/elem-go/stylemanager"
 )
 ```
 
 ## Usage
 
-### Creating a StyleManager
+### Creating a `StyleManager`
 
-Initialize `stylemanager` to start managing your styles:
+Initialize a `StyleManager` using `NewStyleManager()` to start managing your styles:
 
 ```go
 styleMgr := stylemanager.NewStyleManager()
 ```
 
-Now, when you render your HTML elements, all you have to do is use `RenderWithOptions` instead of `Render` and provide the `stylemanager` instance:
+Now, when you render your HTML elements, all you have to do is use `RenderWithOptions` instead of `Render` and provide the `StyleManager` instance:
 
 ```go
 html := elem.Div(
@@ -61,7 +60,7 @@ html.RenderWithOptions(elem.RenderOptions{
 Define styles using `StyleManager` and receive a unique class name for application:
 
 ```go
-className := styleMgr.AddStyle(stylemanager.Style{
+className := styleMgr.AddStyle(styles.Props{
     styles.BackgroundColor: "blue",
     styles.Color:           "white",
 })
@@ -83,9 +82,9 @@ button := elem.Button(
 Define styles with pseudo-classes for interactive styling:
 
 ```go
-compositeClassName := styleMgr.AddCompositeStyle(stylemanager.CompositeStyle{
-    Default: stylemanager.Style{styles.Color: "pink"},
-    PseudoClasses: map[string]stylemanager.Style{
+compositeClassName := styleMgr.AddCompositeStyle(styles.CompositeStyle{
+    Default: styles.Props{styles.Color: "pink"},
+    PseudoClasses: map[string]styles.Props{
         styles.PseudoHover: {styles.Color: "blue"},
     },
 })
@@ -107,7 +106,7 @@ link := elem.A(
 Create animations and apply them to styles with the returned animation name:
 
 ```go
-animationName := styleMgr.AddAnimation(stylemanager.Keyframes{
+animationName := styleMgr.AddAnimation(styles.Keyframes{
     attrs.From: {styles.Color: "red"},
     attrs.To:   {styles.Color: "blue"},
 })
@@ -116,7 +115,7 @@ animationName := styleMgr.AddAnimation(stylemanager.Keyframes{
 Then, apply the animation to your styles using the generated animation name:
 
 ```go
-styleWithAnimationClassName := styleMgr.AddStyle(stylemanager.Style{
+styleWithAnimationClassName := styleMgr.AddStyle(styles.Props{
     styles.AnimationName: animationName,
 	styles.AnimationDuration: "2s",
 })
@@ -127,9 +126,9 @@ styleWithAnimationClassName := styleMgr.AddStyle(stylemanager.Style{
 Apply styles conditionally based on media queries:
 
 ```go
-classNameWithMediaQuery := styleMgr.AddCompositeStyle(stylemanager.CompositeStyle{
-    Default: stylemanager.Style{styles.Padding: "10px"},
-    MediaQueries: map[string]stylemanager.Style{
+classNameWithMediaQuery := styleMgr.AddCompositeStyle(styles.CompositeStyle{
+    Default: styles.Props{styles.Padding: "10px"},
+    MediaQueries: map[string]styles.Props{
         "@media (min-width: 768px) and (max-width: 1024px)": {"padding": "20px"},
     },
 })

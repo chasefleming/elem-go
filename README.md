@@ -8,7 +8,8 @@
 - Type-safe definition and manipulation of elements, attributes, and properties.
 - Supports common HTML elements and attributes.
 - Utilities for simplified element generation and manipulation.
-- Advanced CSS styling capabilities with the [styles](styles/README.md) and [stylemanager](stylemanager/README.md) subpackages.
+- Advanced CSS styling capabilities with the [styles](styles/README.md) subpackage.
+- Use the [`StyleManager`](styles/STYLEMANAGER.md) for advanced CSS features like pseudo-classes, animations, and media queries.
 
 ## Installation
 
