@@ -8,12 +8,13 @@ The `styles` subpackage within `elem-go` offers enhanced functionality for CSS s
 - [Usage](#usage)
 - [Styling Elements with `styles.Props`](#styling-elements-with-stylesprops)
 - [Features](#features)
-    - [`Merge` Function](#merge-function)
     - [`Style` and `CSS` Functions](#style-and-css-functions)
+    - [`Merge` Function](#merge-function)
+    - [Type-Safe CSS Values](#type-safe-css-values)
 - [Advanced Styling with `StyleManager`](#advanced-styling-with-stylemanager)
-  - [Key Features of `StyleManager`](#key-features-of-stylemanager)
-  - [Example: Implementing a Hover Effect](#example-implementing-a-hover-effect)
-  - [Detailed Usage](stylemanager/README.md)
+    - [Key Features of `StyleManager`](#key-features-of-stylemanager)
+    - [Example: Implementing a Hover Effect](#example-implementing-a-hover-effect)
+    - [Detailed Usage](stylemanager/README.md)
 
 ## Introduction
 
@@ -112,10 +113,113 @@ These functions facilitate the embedding of CSS into HTML documents, particularl
 cssContent := `/* ... */`
 
 // Creating a <style> tag
-styleTag := elem.Style(nil, styles.CSS(cssContent))
+styleTag := elem.Style(nil, elem.CSS(cssContent))
 
 // Incorporating the <style> tag in an HTML document
 document := elem.Html(nil, elem.Head(nil, styleTag), /* ... */)
+```
+
+### Type-Safe CSS Values
+
+This suite of functions provides a type-safe approach to defining CSS values, ensuring that only valid CSS values are used.
+
+#### Length and Size Functions
+
+##### `Em(value float64) string` and `Rem(value float64) string`
+
+These functions return a string representation of the given value with the "em" and "rem" units, respectively.
+
+```go
+emValue := styles.Em(2.5) // Returns "2.5em"
+remValue := styles.Rem(1.5) // Returns "1.5rem"
+```
+
+##### `Pixels(value int) string`
+
+This function returns a string representation of the given value with the "px" unit.
+
+```go
+pxValue := styles.Pixels(10) // Returns "10px"
+```
+
+##### `Percent(value int) string`
+
+This function returns a string representation of the given value with the "%" unit.
+
+```go
+percentValue := styles.Percent(50) // Returns "50%"
+```
+
+#### Viewport Functions
+
+##### `ViewportHeight(value int) string` and `ViewportWidth(value int) string`
+
+These functions return a string representation of the given value with the "vh" and "vw" units, respectively.
+
+```go
+vhValue := styles.ViewportHeight(50) // Returns "50vh"
+vwValue := styles.ViewportWidth(25) // Returns "25vw"
+```
+
+##### `ViewportMin(value int) string` and `ViewportMax(value int) string`
+
+These functions return a string representation of the given value with the "vmin" and "vmax" units, respectively.
+
+```go
+vminValue := styles.ViewportMin(10) // Returns "10vmin"
+vmaxValue := styles.ViewportMax(20) // Returns "20vmax"
+```
+
+#### Color Functions
+
+##### `RGB(r, g, b int) string`
+
+This function returns a string representation of the given RGB color.
+
+```go
+rgbColor := styles.RGB(255, 0, 0) // Returns "rgb(255, 0, 0)"
+```
+
+##### `RGBA(r, g, b int, a float64) string`
+
+This function returns a string representation of the given RGBA color.
+
+```go
+rgbaColor := styles.RGBA(255, 0, 0, 0.5) // Returns "rgba(255, 0, 0, 0.5)"
+```
+
+#### Other Functions
+
+##### `Int(value int) string`
+
+This function returns a string representation of the given integer value.
+
+```go
+intValue := styles.Int(100) // Returns "100"
+```
+
+##### `Float(value float64) string`
+
+This function returns a string representation of the given float value.
+
+```go
+floatValue := styles.Float(3.14) // Returns "3.14"
+```
+
+##### `URL(url string) string`
+
+This function returns a string representation as a formatted CSS URL.
+
+```go
+urlValue := styles.URL("https://example.com/image.jpg") // Returns "url('https://example.com/image.jpg')"
+```
+
+##### `Var(name string) string`
+
+This function returns a string representation as a CSS variable.
+
+```go
+varValue := styles.Var("primary-color") // Returns "var(--primary-color)"
 ```
 
 ## Advanced Styling with `StyleManager`

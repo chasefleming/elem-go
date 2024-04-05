@@ -9,6 +9,9 @@ The `attrs` subpackage within `elem-go` offers a comprehensive set of constants 
 - [Available HTML Attributes](#available-html-attributes)
 - [Using `Props` Type](#using-props-type)
 - [Examples](#examples)
+- [Utilities](#utilities)
+  - [`Merge`](#merge)
+  - [`DataAttr`](#dataattr)
 
 ## Introduction
 
@@ -55,3 +58,45 @@ button := elem.Button(buttonAttrs, elem.Text("Submit"))
 ```
 
 In this example, attributes for the button element are defined using the attrs.Props map with attrs constants.
+
+## Utilities
+
+The `attrs` subpackage also includes utility functions to enhance the attribute manipulation process.
+
+### `Merge`
+
+The `Merge` function allows you to merge multiple `attrs.Props` maps into a single map. This is useful when you want to combine attribute maps for an element. Note that if there are conflicting keys, the last map's value will override the previous ones.
+
+#### Usage
+
+```go
+defaultButtonAttrs := attrs.Props{
+    attrs.Class: "btn",
+    attrs.Type:  "button",
+}
+
+primaryButtonAttrs := attrs.Props{
+    attrs.Class: "btn btn-primary", // Overrides the Class attribute from defaultButtonAttrs
+    attrs.ID:    "submitBtn",
+}
+
+mergedButtonAttrs := attrs.Merge(defaultButtonAttrs, primaryButtonAttrs)
+
+button := elem.Button(mergedButtonAttrs, elem.Text("Submit"))
+```
+
+In this example, the `Merge` function is used to combine the default button attributes with the primary button attributes. The `Class` attribute from the `primaryButtonAttrs` map overrides the `Class` attribute from the `defaultButtonAttrs` map.
+
+### `DataAttr`
+
+The `DataAttr` function is a convenient way to define `data-*` attributes for HTML elements. It takes the attribute name and value as arguments and returns a map of `data-*` attributes.
+
+#### Usage
+
+```go
+dataAttrs := attrs.DataAttr("foobar") // Outputs "data-foobar"
+```
+
+In this example, the `DataAttr` function is used to define a `data-foobar` attribute key for an HTML element.
+
+By using the `attrs` subpackage, you can ensure type safety and correctness when working with HTML attributes in Go, making your development process smoother and more efficient.

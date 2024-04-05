@@ -234,7 +234,12 @@ func Img(attrs attrs.Props) *Element {
 	return newElement("img", attrs)
 }
 
-// ========== Meta Elements ==========
+// ========== Head Elements ==========
+
+// Base creates a <base> element.
+func Base(attrs attrs.Props) *Element {
+	return newElement("base", attrs)
+}
 
 // Link creates a <link> element.
 func Link(attrs attrs.Props) *Element {
@@ -293,6 +298,16 @@ func Nav(attrs attrs.Props, children ...Node) *Element {
 // Section creates a <section> element.
 func Section(attrs attrs.Props, children ...Node) *Element {
 	return newElement("section", attrs, children...)
+}
+
+// Details creates a <details> element.
+func Details(attrs attrs.Props, children ...Node) *Element {
+	return newElement("details", attrs, children...)
+}
+
+// Summary creates a <summary> element.
+func Summary(attrs attrs.Props, children ...Node) *Element {
+	return newElement("summary", attrs, children...)
 }
 
 // ========== Semantic Form Elements ==========
@@ -368,11 +383,6 @@ func Data(attrs attrs.Props, children ...Node) *Element {
 	return newElement("data", attrs, children...)
 }
 
-// Details creates a <details> element.
-func Details(attrs attrs.Props, children ...Node) *Element {
-	return newElement("details", attrs, children...)
-}
-
 // FigCaption creates a <figcaption> element.
 func FigCaption(attrs attrs.Props, children ...Node) *Element {
 	return newElement("figcaption", attrs, children...)
@@ -408,11 +418,6 @@ func Small(attrs attrs.Props, children ...Node) *Element {
 	return newElement("small", attrs, children...)
 }
 
-// Summary creates a <summary> element.
-func Summary(attrs attrs.Props, children ...Node) *Element {
-	return newElement("summary", attrs, children...)
-}
-
 // Time creates a <time> element.
 func Time(attrs attrs.Props, children ...Node) *Element {
 	return newElement("time", attrs, children...)
@@ -421,6 +426,21 @@ func Time(attrs attrs.Props, children ...Node) *Element {
 // Var creates a <var> element.
 func Var(attrs attrs.Props, children ...Node) *Element {
 	return newElement("var", attrs, children...)
+}
+
+// Ruby creates a <ruby> element.
+func Ruby(attrs attrs.Props, children ...Node) *Element {
+	return newElement("ruby", attrs, children...)
+}
+
+// Rt creates a <rt> element.
+func Rt(attrs attrs.Props, children ...Node) *Element {
+	return newElement("rt", attrs, children...)
+}
+
+// Rp creates a <rp> element.
+func Rp(attrs attrs.Props, children ...Node) *Element {
+	return newElement("rp", attrs, children...)
 }
 
 // ========== Tables ==========
@@ -504,4 +524,9 @@ func None() NoneNode {
 // Raw takes html content and returns a RawNode.
 func Raw(html string) RawNode {
 	return RawNode(html)
+}
+
+// CSS takes css content and returns a TextNode.
+func CSS(content string) TextNode {
+	return TextNode(content)
 }

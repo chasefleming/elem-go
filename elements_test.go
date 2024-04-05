@@ -298,7 +298,13 @@ func TestImg(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
-// ========== Meta Elements ==========
+// ========== Head Elements ==========
+
+func TestBase(t *testing.T) {
+	expected := `<base href="https://example.com">`
+	el := Base(attrs.Props{attrs.Href: "https://example.com"})
+	assert.Equal(t, expected, el.Render())
+}
 
 func TestLink(t *testing.T) {
 	expected := `<link href="https://example.com/styles.css" rel="stylesheet">`
@@ -321,7 +327,7 @@ func TestScript(t *testing.T) {
 func TestStyle(t *testing.T) {
 	expected := `<style type="text/css">.test-class {color: #333;}</style>`
 	cssContent := `.test-class {color: #333;}`
-	el := Style(attrs.Props{attrs.Type: "text/css"}, TextNode(cssContent))
+	el := Style(attrs.Props{attrs.Type: "text/css"}, CSS(cssContent))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -541,6 +547,24 @@ func TestVar(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestRuby(t *testing.T) {
+	expected := `<ruby>漢</ruby>`
+	el := Ruby(nil, Text("漢"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestRt(t *testing.T) {
+	expected := `<ruby> 漢 <rp>(</rp><rt>kan</rt><rp>)</rp> 字 <rp>(</rp><rt>ji</rt><rp>)</rp> </ruby>`
+	el := Ruby(nil, Text(" 漢 "), Rp(nil, Text("(")), Rt(nil, Text("kan")), Rp(nil, Text(")")), Text(" 字 "), Rp(nil, Text("(")), Rt(nil, Text("ji")), Rp(nil, Text(")")), Text(" "))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestRp(t *testing.T) {
+	expected := `<ruby> 漢 <rp>(</rp> 字 <rp>)</rp> </ruby>`
+	el := Ruby(nil, Text(" 漢 "), Rp(nil, Text("(")), Text(" 字 "), Rp(nil, Text(")")), Text(" "))
+	assert.Equal(t, expected, el.Render())
+}
+
 // ========== Tables ==========
 
 func TestTr(t *testing.T) {
@@ -654,5 +678,12 @@ func TestRaw(t *testing.T) {
 	el := Raw(rawHTML)
 	expected := rawHTML
 
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestCSS(t *testing.T) {
+	cssContent := `.test-class {color: #333;}`
+	expected := `.test-class {color: #333;}`
+	el := CSS(cssContent)
 	assert.Equal(t, expected, el.Render())
 }

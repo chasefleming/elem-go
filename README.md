@@ -58,7 +58,7 @@ When the above Go code is executed and the `.Render()` method is called, it prod
 
 ### Attributes and Styles
 
-The `attrs` subpackage provides type-safe attribute functions that ensure you're setting valid attributes for your elements. This helps eliminate potential issues at runtime due to misspelled or unsupported attribute names.
+The [`attrs`](attrs/README.md) subpackage provides type-safe attribute functions that ensure you're setting valid attributes for your elements. This helps eliminate potential issues at runtime due to misspelled or unsupported attribute names.
 
 For boolean attributes like `checked` and `selected`, you can simply assign them the value `"true"` or `"false"`. When set to `"true"`, the library will correctly render these attributes without needing an explicit value. For instance:
 
@@ -70,7 +70,7 @@ checkbox := elem.Input(attrs.Props{
 })
 ```
 
-For setting styles, the `styles` subpackage enables you to create style objects and convert them to inline CSS strings:
+For setting styles, the [`styles`](styles/README.md) subpackage enables you to create style objects and convert them to inline CSS strings:
 
 ```go
 // Define a style
@@ -167,17 +167,17 @@ Additionally, `None` can be used to create an empty element, as in `elem.Div(nil
 
 `elem` provides utility functions for creating HTML elements:
 
-- **Document Structure**: `Html`, `Head`, `Body`, `Title`, `Link`, `Meta`, `Style`
-- **Text Content**: `H1`, `H2`, `H3`, `H4`, `H5`, `H6`, `P`, `Blockquote`, `Pre`, `Code`, `I`, `Br`, `Hr`
+- **Document Structure**: `Html`, `Head`, `Body`, `Title`, `Link`, `Meta`, `Style`, `Base`
+- **Text Content**: `H1`, `H2`, `H3`, `H4`, `H5`, `H6`, `P`, `Blockquote`, `Pre`, `Code`, `I`, `Br`, `Hr`, `Small`, `Q`, `Cite`, `Abbr`, `Data`, `Time`, `Var`, `Samp`, `Kbd`
 - **Sectioning & Semantic Layout**: `Article`, `Aside`, `FigCaption`, `Figure`, `Footer`, `Header`, `Hgroup`, `Main`, `Mark`, `Nav`, `Section`
 - **Form Elements**: `Form`, `Input`, `Textarea`, `Button`, `Select`, `Optgroup`, `Option`, `Label`, `Fieldset`, `Legend`, `Datalist`, `Meter`, `Output`, `Progress`
-- **Interactive Elements**: `Dialog`, `Menu`
+- **Interactive Elements**: `Details`, `Dialog`, `Menu`, `Summary`
 - **Grouping Content**: `Div`, `Span`, `Li`, `Ul`, `Ol`, `Dl`, `Dt`, `Dd`
 - **Tables**: `Table`, `Tr`, `Td`, `Th`, `TBody`, `THead`, `TFoot`
 - **Hyperlinks and Multimedia**: `Img`, `Map`, `Area`
 - **Embedded Content**: `Audio`, `Iframe`, `Source`, `Video`
 - **Script-supporting Elements**: `Script`, `Noscript`
-- **Inline Semantic**: `A`, `Strong`, `Em`, `Code`, `I`
+- **Inline Semantic**: `A`, `Strong`, `Em`, `Code`, `I`, `B`, `U`, `Sub`, `Sup`, `Ruby`, `Rt`, `Rp`
 
 ### Raw HTML Insertion
 
