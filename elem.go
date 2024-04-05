@@ -1,6 +1,7 @@
 package elem
 
 import (
+	"fmt"
 	"sort"
 	"strings"
 
@@ -53,9 +54,14 @@ var booleanAttrs = map[string]struct{}{
 	attrs.Selected:        {},
 }
 
+type CSSGenerator interface {
+	GenerateCSS() string // TODO: Change to CSS()
+}
+
 type RenderOptions struct {
 	// DisableHtmlPreamble disables the doctype preamble for the HTML tag if it exists in the rendering tree
 	DisableHtmlPreamble bool
+	StyleManager        CSSGenerator
 }
 
 type Node interface {
@@ -203,6 +209,38 @@ func (e *Element) Render() string {
 func (e *Element) RenderWithOptions(opts RenderOptions) string {
 	var builder strings.Builder
 	e.RenderTo(&builder, opts)
+
+	if opts.StyleManager != nil {
+		htmlContent := builder.String()
+		cssContent := opts.StyleManager.GenerateCSS()
+
+		// Define the <style> element with the generated CSS content
+		styleElement := fmt.Sprintf("<style>%s</style>", cssContent)
+
+		// Check if a <head> tag exists in the HTML content
+		headStartIndex := strings.Index(htmlContent, "<head>")
+		headEndIndex := strings.Index(htmlContent, "</head>")
+
+		if headStartIndex != -1 && headEndIndex != -1 {
+			// If <head> exists, inject the style content just before </head>
+			beforeHead := htmlContent[:headEndIndex]
+			afterHead := htmlContent[headEndIndex:]
+			modifiedHTML := beforeHead + styleElement + afterHead
+			return modifiedHTML
+		} else {
+			// If <head> does not exist, create it and inject the style content
+			// Assuming <html> tag exists and injecting <head> immediately after <html>
+			htmlTagEnd := strings.Index(htmlContent, ">") + 1
+			if htmlTagEnd > 0 {
+				beforeHTML := htmlContent[:htmlTagEnd]
+				afterHTML := htmlContent[htmlTagEnd:]
+				modifiedHTML := beforeHTML + "<head>" + styleElement + "</head>" + afterHTML
+				return modifiedHTML
+			}
+		}
+	}
+
+	// Return the original HTML content if no modifications were made
 	return builder.String()
 }
 

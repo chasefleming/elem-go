@@ -9,6 +9,7 @@
 - Supports common HTML elements and attributes.
 - Utilities for simplified element generation and manipulation.
 - Advanced CSS styling capabilities with the [styles](styles/README.md) subpackage.
+- Use the [`StyleManager`](styles/STYLEMANAGER.md) for advanced CSS features like pseudo-classes, animations, and media queries.
 
 ## Installation
 
@@ -203,6 +204,12 @@ Apart from standard elements, `elem-go` also allows you to insert HTML comments 
 comment := elem.Comment("Section: Main Content Start")
 // Generates: <!-- Section: Main Content Start -->
 ```
+
+## Advanced CSS Styling with `StyleManager`
+
+For projects requiring advanced CSS styling capabilities, including support for animations, pseudo-classes, and responsive design via media queries, the `stylemanager` subpackage offers a powerful solution. Integrated seamlessly with `elem-go`, it allows developers to programmatically create and manage complex CSS styles within the type-safe environment of Go.
+
+Explore the [`stylemanager` subpackage](stylemanager/README.md) to leverage advanced styling features in your web applications.
 
 ## HTMX Integration
 

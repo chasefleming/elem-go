@@ -136,9 +136,21 @@ const (
 	TableLayout    = "table-layout"
 	CaptionSide    = "caption-side"
 
-	// Resource Attributes
-	Integrity   = "integrity"
-	Crossorigin = "crossorigin"
+	// Animation Properties
+
+	Animation               = "animation"
+	AnimationDelay          = "animation-delay"
+	AnimationDirection      = "animation-direction"
+	AnimationDuration       = "animation-duration"
+	AnimationFillMode       = "animation-fill-mode"
+	AnimationIterationCount = "animation-iteration-count"
+	AnimationPlayState      = "animation-play-state"
+	AnimationName           = "animation-name"
+	AnimationTimingFunction = "animation-timing-function"
+
+	// Keyframes for animations (used within CSS, not directly as HTML attributes)
+	KeyframesFrom = "from"
+	KeyframesTo   = "to"
 
 	// Other Properties
 	Visibility    = "visibility"
@@ -148,4 +160,55 @@ const (
 	PointerEvents = "pointer-events"
 	Resize        = "resize"
 	UserSelect    = "user-select"
+
+	// Interaction pseudo-classes
+	PseudoHover        = ":hover"
+	PseudoActive       = ":active"
+	PseudoFocus        = ":focus"
+	PseudoFocusVisible = ":focus-visible"
+	PseudoFocusWithin  = ":focus-within"
+
+	// Location pseudo-classes
+	PseudoLink    = ":link"
+	PseudoVisited = ":visited"
+	PseudoTarget  = ":target"
+
+	// Input pseudo-classes
+	PseudoEnabled          = ":enabled"
+	PseudoDisabled         = ":disabled"
+	PseudoChecked          = ":checked"
+	PseudoIndeterminate    = ":indeterminate"
+	PseudoDefault          = ":default"
+	PseudoValid            = ":valid"
+	PseudoInvalid          = ":invalid"
+	PseudoPlaceholderShown = ":placeholder-shown"
+	PseudoReadOnly         = ":read-only"
+	PseudoReadWrite        = ":read-write"
+	PseudoRequired         = ":required"
+	PseudoOptional         = ":optional"
+
+	// Tree-structural pseudo-classes
+	PseudoFirstChild    = ":first-child"
+	PseudoLastChild     = ":last-child"
+	PseudoOnlyChild     = ":only-child"
+	PseudoFirstOfType   = ":first-of-type"
+	PseudoLastOfType    = ":last-of-type"
+	PseudoOnlyOfType    = ":only-of-type"
+	PseudoEmpty         = ":empty"
+	PseudoNthChild      = ":nth-child"
+	PseudoNthLastChild  = ":nth-last-child"
+	PseudoNthOfType     = ":nth-of-type"
+	PseudoNthLastOfType = ":nth-last-of-type"
+	PseudoNot           = ":not()"
+	PseudoRoot          = ":root"
+
+	// Linguistic pseudo-classes
+	PseudoLang = ":lang"
+
+	// Fullscreen pseudo-class
+	PseudoFullScreen = ":fullscreen"
+
+	// Animations pseudo-classes
+	PseudoPlaying = ":playing"
+	PseudoPaused  = ":paused"
 )
