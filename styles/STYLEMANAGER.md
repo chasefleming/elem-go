@@ -14,6 +14,7 @@
     - [Media Queries](#media-queries)
 - [Features](#features)
 - [Integration with `elem-go`](#integration-with-elem-go)
+- [Examples](#examples)
 
 ## Introduction
 
@@ -153,7 +154,10 @@ div := elem.Div(
 - **Automatic Class Name Generation**: Generates unique class names based on style content, abstracting away the need for manually naming classes and reducing the likelihood of naming collisions.
 - **Type-Safe Style References**: By utilizing variables for class names, animation names, and other identifiers instead of plain strings, the system enhances code readability and maintainability. This approach reduces errors, such as typos in class or animation names, and improves the developer experience by offering autocomplete and refactoring support in IDEs. It ensures that references to styles, animations, and media queries are checked at compile time, leading to fewer runtime errors and a more robust codebase.
 
-
 ## Integration with `elem-go`
 
 `StyleManager` integrates smoothly with `elem-go`, enabling you to apply generated class names directly to your HTML elements, enhancing the dynamic capabilities of your web applications.
+
+## Examples
+
+For more examples and detailed usage of `StyleManager`, refer to the [`StyleManager` demo application](../examples/stylemanager-demo).
