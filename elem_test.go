@@ -33,7 +33,7 @@ func TestRenderWithOptionsInjectsCSSIntoHead(t *testing.T) {
 	htmlOutput := e.RenderWithOptions(opts)
 
 	// Construct the expected HTML string with the CSS injected
-	expectedHTML := "<html><head><style>body { background-color: #fff; }</style></head><body></body></html>"
+	expectedHTML := "<!DOCTYPE html><html><head><style>body { background-color: #fff; }</style></head><body></body></html>"
 
 	// Use testify's assert.Equal to check if the HTML output matches the expected HTML
 	assert.Equal(t, expectedHTML, htmlOutput, "The generated HTML should include the CSS in the <head> section")
