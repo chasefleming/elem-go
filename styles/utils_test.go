@@ -154,13 +154,13 @@ func TestViewportMax(t *testing.T) {
 func TestSeconds(t *testing.T) {
 	assert.Equal(t, "100.00s", Seconds(100.00))
 	assert.Equal(t, "1.25s", Seconds(1.25))
-	assert.Equal(t, "0s", Rem(0))
-	assert.Equal(t, "0.25s", Rem(0.25))
+	assert.Equal(t, "0s", Seconds(0))
+	assert.Equal(t, "0.25s", Seconds(0.25))
 }
 
 func TestMilliseconds(t *testing.T) {
-	assert.Equal(t, "25ms", Seconds(25))
-	assert.Equal(t, "1ms", Seconds(1))
-	assert.Equal(t, "0ms", Rem(0))
-	assert.Equal(t, "110ms", Rem(110))
+	assert.Equal(t, "25ms", Milliseconds(25))
+	assert.Equal(t, "1ms", Milliseconds(1))
+	assert.Equal(t, "0ms", Milliseconds(0))
+	assert.Equal(t, "110ms", Milliseconds(110))
 }
