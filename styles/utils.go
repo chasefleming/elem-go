@@ -118,3 +118,19 @@ func ViewportMin(value int) string {
 func ViewportMax(value int) string {
 	return strconv.Itoa(value) + "vmax"
 }
+
+// Seconds returns a string representation of the given float64
+func Seconds(value interface{}) string {
+	switch v := value.(type) {
+	case int:
+		return strconv.Itoa(v) + "s"
+	case float64:
+		return strconv.FormatFloat(v, 'f', 2, 64) + "s"
+	default:
+		return "0s"
+	}
+}
+
+func Milliseconds(value int) string {
+	return strconv.Itoa(value) + "ms"
+}

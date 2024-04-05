@@ -1,8 +1,9 @@
 package styles
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestMerge(t *testing.T) {
@@ -148,4 +149,18 @@ func TestViewportMax(t *testing.T) {
 	assert.Equal(t, "0vmax", ViewportMax(0))
 	assert.Equal(t, "50vmax", ViewportMax(50))
 	assert.Equal(t, "25vmax", ViewportMax(25))
+}
+
+func TestSeconds(t *testing.T) {
+	assert.Equal(t, "100.00s", Seconds(100.00))
+	assert.Equal(t, "1.25s", Seconds(1.25))
+	assert.Equal(t, "0s", Rem(0))
+	assert.Equal(t, "0.25s", Rem(0.25))
+}
+
+func TestMilliseconds(t *testing.T) {
+	assert.Equal(t, "25ms", Seconds(25))
+	assert.Equal(t, "1ms", Seconds(1))
+	assert.Equal(t, "0ms", Rem(0))
+	assert.Equal(t, "110ms", Rem(110))
 }
