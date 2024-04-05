@@ -83,6 +83,8 @@ func TestRem(t *testing.T) {
 	assert.Equal(t, "100.00rem", Rem(100))
 	assert.Equal(t, "0.00rem", Rem(0))
 	assert.Equal(t, "50.00rem", Rem(50))
+	assert.Equal(t, "50.00rem", Rem(50.0))
+	assert.Equal(t, "50.00rem", Rem(50.00))
 	assert.Equal(t, "25.00rem", Rem(25))
 }
 
