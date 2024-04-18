@@ -1,3 +1,5 @@
+![elem logo](./logo.png)
+
 # elem-go
 
 `elem` is a lightweight Go library for creating HTML elements programmatically. Utilizing the strong typing features of Go, `elem` ensures type safety in defining and manipulating HTML elements, minimizing potential runtime errors. It simplifies the generation of HTML views by providing a simple and intuitive way to create elements and set their attributes, properties, and content.
