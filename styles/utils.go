@@ -128,3 +128,30 @@ func Seconds(value float64) string {
 func Milliseconds(value int) string {
 	return strconv.Itoa(value) + "ms"
 }
+
+func HSL(hue, saturation, lightness int) string {
+	var builder strings.Builder
+	builder.WriteString("hsl(")
+	builder.WriteString(strconv.FormatInt(int64(hue), 10))
+	builder.WriteString(",")
+	builder.WriteString(strconv.FormatInt(int64(saturation), 10))
+	builder.WriteString("%,")
+	builder.WriteString(strconv.FormatInt(int64(lightness), 10))
+	builder.WriteString("%")
+	builder.WriteString(")")
+	return builder.String()
+}
+
+func HSLA(hue, saturation, lightness int, alpha float64) string {
+	var builder strings.Builder
+	builder.WriteString("hsla(")
+	builder.WriteString(strconv.FormatInt(int64(hue), 10))
+	builder.WriteString(",")
+	builder.WriteString(strconv.FormatInt(int64(saturation), 10))
+	builder.WriteString("%,")
+	builder.WriteString(strconv.FormatInt(int64(lightness), 10))
+	builder.WriteString("%,")
+	builder.WriteString(strconv.FormatFloat(alpha, 'f', 2, 64))
+	builder.WriteString(")")
+	return builder.String()
+}

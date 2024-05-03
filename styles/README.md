@@ -188,6 +188,23 @@ This function returns a string representation of the given RGBA color.
 rgbaColor := styles.RGBA(255, 0, 0, 0.5) // Returns "rgba(255, 0, 0, 0.5)"
 ```
 
+##### `HSL(h, s, l int) string`
+
+This function returns a string representation of the given HSL color.
+
+```go
+hslColor := styles.HSL(120, 100, 50) // Returns "hsl(120, 100%, 50%)"
+```
+
+##### `HSLA(h, s, l int, a float64) string`
+
+This function returns a string representation of the given HSLA color.
+
+```go
+hslaColor := styles.HSLA(120, 100, 50, 0.5) // Returns "hsla(120, 100%, 50%, 0.5)"
+```
+
+
 #### Other Functions
 
 ##### `Int(value int) string`

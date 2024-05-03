@@ -166,3 +166,18 @@ func TestMilliseconds(t *testing.T) {
 	assert.Equal(t, "0ms", Milliseconds(0))
 	assert.Equal(t, "110ms", Milliseconds(110))
 }
+
+func TestHSL(t *testing.T) {
+	assert.Equal(t, "hsl(100,50%,25%)", HSL(100, 50, 25))
+	assert.Equal(t, "hsl(0,0%,0%)", HSL(0, 0, 0))
+	assert.Equal(t, "hsl(50,70%,80%)", HSL(50, 70, 80))
+	assert.Equal(t, "hsl(20,40%,60%)", HSL(20, 40, 60))
+}
+
+func TestHSLA(t *testing.T) {
+	assert.Equal(t, "hsla(90,50%,30%,1.00)", HSLA(90, 50, 30, 1))
+	assert.Equal(t, "hsla(0,0%,0%,0.10)", HSLA(0, 0, 0, 0.1))
+	assert.Equal(t, "hsla(50,60%,70%,0.50)", HSLA(50, 60, 70, 0.5000))
+	assert.Equal(t, "hsla(25,35%,45%,0.25)", HSLA(25, 35, 45, 0.2500))
+	assert.Equal(t, "hsla(20,50%,80%,0.00)", HSLA(20, 50, 80, 0))
+}
