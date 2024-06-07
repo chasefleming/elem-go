@@ -105,6 +105,7 @@ const (
 	WordSpacing    = "word-spacing"
 	WordBreak      = "word-break"
 	TextIndent     = "text-indent"
+	FontVariant    = "font-variant"
 
 	// Visual Properties
 	BackgroundColor      = "background-color"
