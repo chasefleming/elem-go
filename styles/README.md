@@ -204,6 +204,23 @@ This function returns a string representation of the given HSLA color.
 hslaColor := styles.HSLA(120, 100, 50, 0.5) // Returns "hsla(120, 100%, 50%, 0.5)"
 ```
 
+#### Time Duration Functions
+
+##### `Seconds(value float64) string`
+
+This function returns a string representation of the given time duration in seconds.
+
+```go
+secondsValue := styles.Seconds(2.5) // Returns "2.5s"
+```
+
+##### `Milliseconds(value int) string`
+
+This function returns a string representation of the given time duration in milliseconds.
+
+```go
+millisecondsValue := styles.Milliseconds(500) // Returns "500ms"
+```
 
 #### Other Functions
 
