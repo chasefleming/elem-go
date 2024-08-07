@@ -687,3 +687,12 @@ func TestCSS(t *testing.T) {
 	el := CSS(cssContent)
 	assert.Equal(t, expected, el.Render())
 }
+
+func TestSingleQuote(t *testing.T) {
+	expected := `<div data-values='{"quantity": 5}'></div>`
+	el := Div(attrs.Props{
+		"data-values": `'{"quantity": 5}'`,
+	})
+	actual := el.Render()
+	assert.Equal(t, expected, actual)
+}
