@@ -194,11 +194,22 @@ func (e *Element) renderAttrTo(attrName string, builder *strings.Builder) {
 		}
 	} else {
 		// regular attribute has a name and a value
+		attrVal := e.Attrs[attrName]
+
+		// A necessary check to to avoid adding extra quotes around values that are already single-quoted
+		// An example is '{"quantity": 5}'
+		isSingleQuoted := strings.HasPrefix(attrVal, "'") && strings.HasSuffix(attrVal, "'")
+
 		builder.WriteString(` `)
 		builder.WriteString(attrName)
-		builder.WriteString(`="`)
-		builder.WriteString(e.Attrs[attrName])
-		builder.WriteString(`"`)
+		builder.WriteString(`=`)
+		if !isSingleQuoted {
+			builder.WriteString(`"`)
+		}
+		builder.WriteString(attrVal)
+		if !isSingleQuoted {
+			builder.WriteString(`"`)
+		}
 	}
 }
 
