@@ -148,9 +148,13 @@ func (e *Element) RenderTo(builder *strings.Builder, opts RenderOptions) {
 		builder.WriteString("<!DOCTYPE html>")
 	}
 
+	isFragment := e.Tag == "fragment"
+
 	// Start with opening tag
-	builder.WriteString("<")
-	builder.WriteString(e.Tag)
+	if !isFragment {
+		builder.WriteString("<")
+		builder.WriteString(e.Tag)
+	}
 
 	// Sort the keys for consistent order
 	keys := make([]string, 0, len(e.Attrs))
@@ -170,18 +174,22 @@ func (e *Element) RenderTo(builder *strings.Builder, opts RenderOptions) {
 		return
 	}
 
-	// Close opening tag
-	builder.WriteString(`>`)
+	if !isFragment {
+		// Close opening tag
+		builder.WriteString(`>`)
+	}
 
 	// Build the content
 	for _, child := range e.Children {
 		child.RenderTo(builder, opts)
 	}
 
-	// Append closing tag
-	builder.WriteString(`</`)
-	builder.WriteString(e.Tag)
-	builder.WriteString(`>`)
+	if !isFragment {
+		// Append closing tag
+		builder.WriteString(`</`)
+		builder.WriteString(e.Tag)
+		builder.WriteString(`>`)
+	}
 }
 
 // return string representation of given attribute with its value

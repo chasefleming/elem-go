@@ -696,3 +696,32 @@ func TestSingleQuote(t *testing.T) {
 	actual := el.Render()
 	assert.Equal(t, expected, actual)
 }
+
+func TestFragment(t *testing.T) {
+	expected := `<div><p>0</p><p>1</p><p>2</p><p>3</p><p>4</p></div>`
+	nodes1 := []Node{
+		P(nil,
+			Text("1"),
+		),
+		P(nil,
+			Text("2"),
+		),
+	}
+	nodes2 := []Node{
+		P(nil,
+			Text("3"),
+		),
+		P(nil,
+			Text("4"),
+		),
+	}
+	el := Div(nil,
+		P(nil,
+			Text("0"),
+		),
+		Fragment(nodes1...),
+		Fragment(nodes2...),
+	)
+	actual := el.Render()
+	assert.Equal(t, expected, actual)
+}
