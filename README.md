@@ -205,6 +205,25 @@ comment := elem.Comment("Section: Main Content Start")
 // Generates: <!-- Section: Main Content Start -->
 ```
 
+### Grouping Elements with Fragment
+
+The `Fragment` function allows you to group multiple elements together without adding an extra wrapper element to the DOM. This is particularly useful when you want to merge multiple nodes into the same parent element without any additional structure.
+
+```go
+nodes := []elem.Node{
+    elem.P(nil, elem.Text("1")),
+    elem.P(nil, elem.Text("2")),
+}
+
+content := elem.Div(nil,
+    elem.P(nil, elem.Text("0")),
+    elem.Fragment(nodes...),
+    elem.P(nil, elem.Text("3")),
+)
+```
+
+In this example, the Fragment function is used to insert the nodes into the parent div without introducing any additional wrapper elements. This keeps the HTML output clean and simple.
+
 ## Advanced CSS Styling with `StyleManager`
 
 For projects requiring advanced CSS styling capabilities, including support for animations, pseudo-classes, and responsive design via media queries, the `stylemanager` subpackage offers a powerful solution. Integrated seamlessly with `elem-go`, it allows developers to programmatically create and manage complex CSS styles within the type-safe environment of Go.
