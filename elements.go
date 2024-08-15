@@ -530,3 +530,8 @@ func Raw(html string) RawNode {
 func CSS(content string) TextNode {
 	return TextNode(content)
 }
+
+// Fragments are a way to group multiple elements together without adding an extra node to the DOM.
+func Fragment(children ...Node) *Element {
+	return newElement("fragment", attrs.Props{}, children...)
+}
