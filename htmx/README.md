@@ -116,3 +116,14 @@ pageContent := elem.Div(nil, button, contentDiv)
 ```
 
 When the button is clicked, `htmx` will fetch content from the `/fetch-content` endpoint and replace the content inside the `#result-div`.
+
+## Handling JSON Strings in Attributes
+
+When using attributes like `hx-vals` that require JSON strings, ensure the JSON is wrapped in single quotes. This is necessary for correct rendering by `htmx`. For example:
+
+```go
+content := elem.Div(attrs.Props{
+    htmx.HXGet:  "/example",
+    htmx.HXVals: `'{"myVal": "My Value"}'`,
+}, elem.Text("Get Some HTML, Including A Value in the Request"))
+```

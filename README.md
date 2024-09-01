@@ -224,6 +224,18 @@ content := elem.Div(nil,
 
 In this example, the Fragment function is used to insert the nodes into the parent div without introducing any additional wrapper elements. This keeps the HTML output clean and simple.
 
+### Handling JSON Strings and Special Characters in Attributes
+
+When using attributes that require JSON strings or special characters (like quotes), make sure to wrap these strings in single quotes. This prevents the library from adding extra quotes around your value. For example:
+
+```go
+content := elem.Div(attrs.Props{
+    attrs.ID:    "my-div",
+    attrs.Class: "special 'class'",
+    attrs.Data:  `'{"key": "value"}'`,
+}, elem.Text("Content"))
+```
+
 ## Advanced CSS Styling with `StyleManager`
 
 For projects requiring advanced CSS styling capabilities, including support for animations, pseudo-classes, and responsive design via media queries, the `stylemanager` subpackage offers a powerful solution. Integrated seamlessly with `elem-go`, it allows developers to programmatically create and manage complex CSS styles within the type-safe environment of Go.
