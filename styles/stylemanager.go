@@ -14,6 +14,7 @@ type Keyframes map[string]Props
 type CompositeStyle struct {
 	Default       Props
 	PseudoClasses map[string]Props
+	PseudoElements map[string]Props
 	MediaQueries  map[string]Props
 }
 
@@ -123,6 +124,17 @@ func (sm *StyleManager) GenerateCSS() string {
 			builder.WriteString("} ")
 		}
 
+		for pseudoElement, style := range composite.PseudoElements {
+			// Ensure pseudoElement starts with a double colon
+			formattedPseudoElement := fmt.Sprintf("%s%s", className, ensureDoubleLeadingColon(pseudoElement))
+			keys := sortedKeys(style)
+			builder.WriteString(fmt.Sprintf(".%s { ", formattedPseudoElement))
+			for _, prop := range keys {
+				builder.WriteString(fmt.Sprintf("%s: %s; ", prop, style[prop]))
+			}
+			builder.WriteString("} ")
+		}
+
 		for mediaQuery, style := range composite.MediaQueries {
 			// Ensure mediaQuery is correctly prefixed
 			formattedMediaQuery := ensureMediaPrefix(mediaQuery)
@@ -144,6 +156,14 @@ func ensureLeadingColon(pseudoClass string) string {
 		return pseudoClass
 	}
 	return ":" + pseudoClass
+}
+
+// ensureDoubleLeadingColon ensures that the pseudoElement starts with a double colon.
+func ensureDoubleLeadingColon(pseudoElement string) string {
+	if strings.HasPrefix(pseudoElement, "::") {
+		return pseudoElement
+	}
+	return "::" + pseudoElement
 }
 
 // ensureMediaPrefix ensures that the mediaQuery starts with "@media".
