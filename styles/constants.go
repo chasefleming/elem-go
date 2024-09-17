@@ -212,4 +212,8 @@ const (
 	// Animations pseudo-classes
 	PseudoPlaying = ":playing"
 	PseudoPaused  = ":paused"
+
+	// Content pseudo-elements
+	PseudoBefore = "::before"
+	PseudoAfter = "::after"
 )

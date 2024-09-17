@@ -105,6 +105,9 @@ func TestGenerateCSS(t *testing.T) {
 		PseudoClasses: map[string]Props{
 			"hover": Props{"color": "blue"},
 		},
+		PseudoElements: map[string]Props{
+			"before": Props{"content": "'[x] '"},
+		},
 		MediaQueries: map[string]Props{
 			"@media (min-width: 768px)":  Props{"color": "green", "background": "yellow"},
 			"@media (min-width: 1024px)": Props{"color": "purple", "background": "orange"},
@@ -127,6 +130,9 @@ func TestGenerateCSS(t *testing.T) {
 	// Assertions for the usage of composite styles.
 	assert.Contains(t, css, fmt.Sprintf(".%s { color: pink; }", compositeClassName), "CSS should contain the composite default")
 	assert.Contains(t, css, fmt.Sprintf(".%s:hover { color: blue; }", compositeClassName), "CSS should contain the composite hover")
+
+	// Assertion for the usage of pseudo elements.
+	assert.Contains(t, css, fmt.Sprintf(".%s::before { content: '[x] '; }", compositeClassName), "CSS should contain the composite before")
 
 	// Assertions for media queries.
 	assert.Contains(t, css, fmt.Sprintf("@media (min-width: 768px) { .%s { background: yellow; color: green; } }", compositeClassName), "CSS should contain the first media query")
