@@ -214,6 +214,21 @@ const (
 	PseudoPaused  = ":paused"
 
 	// Content pseudo-elements
-	PseudoBefore = "::before"
-	PseudoAfter = "::after"
+	PseudoBefore              = "::before"
+	PseudoAfter               = "::after"
+	PseudoFirstLine           = "::first-line"
+	PseudoFirstLetter         = "::first-letter"
+	PseudoSelection           = "::selection"
+	PseudoBackdrop            = "::backdrop"
+	PseudoPlaceholder         = "::placeholder"
+	PseudoMarker              = "::marker"
+	PseudoCues                = "::cues"
+	PseudoCueRegion           = "::cue-region"
+	PseudoResizer             = "::resizer"
+	PseudoScrollbar           = "::scrollbar"
+	PseudoScrollbarThumb      = "::scrollbar-thumb"
+	PseudoScrollbarTrack      = "::scrollbar-track"
+	PseudoScrollbarTrackPiece = "::scrollbar-track-piece"
+	PseudoScrollbarButton     = "::scrollbar-button"
+	PseudoScrollbarCorner     = "::scrollbar-corner"
 )

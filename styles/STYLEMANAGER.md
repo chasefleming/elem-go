@@ -10,6 +10,7 @@
     - [Creating a StyleManager](#creating-a-stylemanager)
     - [Adding Styles](#adding-styles)
     - [Pseudo-Classes](#pseudo-classes)
+    - [Pseudo-Elements](#pseudo-elements)
     - [Animations](#animations)
     - [Media Queries](#media-queries)
 - [Features](#features)
@@ -101,6 +102,25 @@ link := elem.A(
     elem.Text("Hover over me"),
 )
 ```
+
+### Pseudo-Elements
+
+Define styles with pseudo-elements to insert content or style specific parts of an element:
+
+```go
+compositeClassName := styleMgr.AddCompositeStyle(styles.CompositeStyle{
+    Default: styles.Props{
+		styles.Position: "relative"
+	},
+    PseudoElements: map[string]styles.Props{
+        styles.PseudoBefore: {
+			styles.Content: "'Before Text'"
+		},
+    },
+})
+```
+
+In this example, the `::before` pseudo-element will insert the text "Before Text" before the content of the element.
 
 ### Animations
 
