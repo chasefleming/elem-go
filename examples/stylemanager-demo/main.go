@@ -58,11 +58,41 @@ func generateWebContent() string {
 		},
 	})
 
+	pseudoElementClass := styleMgr.AddCompositeStyle(styles.CompositeStyle{
+		Default: styles.Props{
+			styles.Color:           "black",
+			styles.BackgroundColor: "white",
+			styles.Padding:         "10px",
+			styles.Margin:          "10px",
+			styles.Border:          "1px solid gray",
+			styles.Position:        "relative",
+		},
+		PseudoElements: map[string]styles.Props{
+			styles.PseudoBefore: {
+				styles.Content:    `"Before "`,
+				styles.Color:      "red",
+				styles.FontWeight: "bold",
+				styles.Position:   "absolute",
+				styles.Left:       "10px",
+				styles.Top:        "-20px",
+			},
+			styles.PseudoAfter: {
+				styles.Content:    `" After"`,
+				styles.Color:      "blue",
+				styles.FontWeight: "bold",
+				styles.Position:   "absolute",
+				styles.Right:      "10px",
+				styles.Bottom:     "-20px",
+			},
+		},
+	})
+
 	// Composing the page
 	pageContent := elem.Div(nil,
 		elem.Button(attrs.Props{attrs.Class: buttonClass}, elem.Text("Hover Over Me")),
 		elem.Div(attrs.Props{attrs.Class: animatedClass}, elem.Text("I animate!")),
 		elem.Div(attrs.Props{attrs.Class: responsiveClass}, elem.Text("Resize the window")),
+		elem.Div(attrs.Props{attrs.Class: pseudoElementClass}, elem.Text("I have pseudo-elements")),
 	)
 
 	// Render with StyleManager
