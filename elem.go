@@ -46,6 +46,7 @@ var booleanAttrs = map[string]struct{}{
 	attrs.Loop:            {},
 	attrs.Multiple:        {},
 	attrs.Muted:           {},
+	attrs.Nomodule:        {},
 	attrs.Novalidate:      {},
 	attrs.Open:            {},
 	attrs.Playsinline:     {},
