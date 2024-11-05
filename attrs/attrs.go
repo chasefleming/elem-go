@@ -16,6 +16,7 @@ const (
 
 	// Link/Script Attributes
 
+	As    = "as"
 	Async = "async"
 	// Deprecated: Use Crossorigin instead
 	CrossOrigin = "crossorigin"
