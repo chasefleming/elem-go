@@ -24,6 +24,7 @@ const (
 	Defer       = "defer"
 	Href        = "href"
 	Integrity   = "integrity"
+	Nomodule    = "nomodule"
 	Rel         = "rel"
 	Src         = "src"
 	Target      = "target"
