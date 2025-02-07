@@ -12,7 +12,7 @@ import (
 func main() {
 	app := fiber.New()
 
-	var count int
+	count := 0
 
 	app.Post("/increment", func(c *fiber.Ctx) error {
 		count++
@@ -57,7 +57,7 @@ func main() {
 			attrs.Style: bodyStyle.ToInline(),
 		},
 			elem.H1(nil, elem.Text("Counter App")),
-			elem.Div(attrs.Props{attrs.ID: "count"}, elem.Text("0")),
+			elem.Div(attrs.Props{attrs.ID: "count"}, elem.Text(fmt.Sprintf("%d", count))),
 			elem.Button(attrs.Props{
 				htmx.HXPost:   "/increment",
 				htmx.HXTarget: "#count",
