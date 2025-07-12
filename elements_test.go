@@ -673,6 +673,24 @@ func TestNoneInDiv(t *testing.T) {
 	assert.Equal(t, expected, actual)
 }
 
+func TestText(t *testing.T) {
+	expected := `<p>Hello, World!</p>`
+	el := P(nil, Text("Hello, World!"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestTextWithEscaping(t *testing.T) {
+	expected := `<p>Hello, &lt;em&gt;World!&lt;/em&gt;</p>`
+	el := P(nil, Text("Hello, <em>World!</em>"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestTextWithNoQuotesEscaping(t *testing.T) {
+	expected := `<p>'Hello,' "World!"</p>`
+	el := P(nil, Text(`'Hello,' "World!"`))
+	assert.Equal(t, expected, el.Render())
+}
+
 func TestRaw(t *testing.T) {
 	rawHTML := `<div class="test"><p>Test paragraph</p></div>`
 	el := Raw(rawHTML)
