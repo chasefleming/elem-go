@@ -121,7 +121,7 @@ type CommentNode string
 
 func (c CommentNode) RenderTo(builder *strings.Builder, opts RenderOptions) {
 	builder.WriteString("<!-- ")
-	builder.WriteString(string(c))
+	builder.WriteString(EscapeCommentContents(string(c)))
 	builder.WriteString(" -->")
 }
 

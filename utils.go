@@ -32,3 +32,23 @@ func TransformEach[T any](items []T, fn func(T) Node) []Node {
 func EscapeNodeContents(s string) string {
 	return nodeContentReplacer.Replace(s)
 }
+
+// EscapeCommentContents escapes the contents of a comment node to ensure safe rendering according to https://html.spec.whatwg.org/multipage/syntax.html#comments
+func EscapeCommentContents(s string) string {
+	// escape disallowed sequences
+	s = strings.ReplaceAll(s, "<!--", "&lt;!--")
+	s = strings.ReplaceAll(s, "-->", "--&gt;")
+	s = strings.ReplaceAll(s, "--!>", "--!&gt;")
+
+	// comments cannot start or end with specific character sequences
+	if strings.HasPrefix(s, ">") {
+		s = "&gt;" + s[1:]
+	}
+	if strings.HasPrefix(s, "->") {
+		s = "-&gt;" + s[2:]
+	}
+	if strings.HasSuffix(s, "<!-") {
+		s = s[:len(s)-3] + "&lt;!-"
+	}
+	return s
+}
