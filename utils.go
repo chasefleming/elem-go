@@ -11,6 +11,13 @@ var nodeContentReplacer = strings.NewReplacer(
 	">", "&gt;",
 )
 
+// commentContentsReplacer handles escaping of disallowed sequences in HTML comments
+var commentContentsReplacer = strings.NewReplacer(
+	"<!--", "&lt;!--",
+	"-->", "--&gt;",
+	"--!>", "--!&gt;",
+)
+
 // If conditionally renders one of the provided elements based on the condition
 func If[T any](condition bool, ifTrue, ifFalse T) T {
 	if condition {
@@ -35,20 +42,19 @@ func EscapeNodeContents(s string) string {
 
 // EscapeCommentContents escapes the contents of a comment node to ensure safe rendering according to https://html.spec.whatwg.org/multipage/syntax.html#comments
 func EscapeCommentContents(s string) string {
-	// escape disallowed sequences
-	s = strings.ReplaceAll(s, "<!--", "&lt;!--")
-	s = strings.ReplaceAll(s, "-->", "--&gt;")
-	s = strings.ReplaceAll(s, "--!>", "--!&gt;")
+	s = commentContentsReplacer.Replace(s)
 
-	// comments cannot start or end with specific character sequences
-	if strings.HasPrefix(s, ">") {
-		s = "&gt;" + s[1:]
-	}
+	// comments cannot start with specific character sequences
 	if strings.HasPrefix(s, "->") {
 		s = "-&gt;" + s[2:]
+	} else if strings.HasPrefix(s, ">") {
+		s = "&gt;" + s[1:]
 	}
+
+	// comments cannot end with specific character sequences
 	if strings.HasSuffix(s, "<!-") {
 		s = s[:len(s)-3] + "&lt;!-"
 	}
+
 	return s
 }
