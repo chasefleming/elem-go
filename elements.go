@@ -143,7 +143,8 @@ func U(attrs attrs.Props, children ...Node) *Element {
 	return newElement("u", attrs, children...)
 }
 
-// Text creates a TextNode.
+// Text creates a TextNode, content is automatically escaped to ensure safe rendering.
+// For unescaped HTML, use Raw function instead.
 func Text(content string) TextNode {
 	return TextNode(content)
 }

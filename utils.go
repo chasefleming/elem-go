@@ -1,5 +1,16 @@
 package elem
 
+import "strings"
+
+// nodeContentReplacer handles escaping of HTML special characters in text nodes
+// note that single and double quotes (', ") do not need escaping in HTML5 text nodes
+var nodeContentReplacer = strings.NewReplacer(
+	"&", "&amp;",
+	"<", "&lt;",
+	// technically, > does not need escaping in HTML5, but we do it for consistency
+	">", "&gt;",
+)
+
 // If conditionally renders one of the provided elements based on the condition
 func If[T any](condition bool, ifTrue, ifFalse T) T {
 	if condition {
@@ -15,4 +26,9 @@ func TransformEach[T any](items []T, fn func(T) Node) []Node {
 		nodes = append(nodes, fn(item))
 	}
 	return nodes
+}
+
+// EscapeNodeContents escapes HTML5 special characters in a string to ensure safe rendering as a text node
+func EscapeNodeContents(s string) string {
+	return nodeContentReplacer.Replace(s)
 }
