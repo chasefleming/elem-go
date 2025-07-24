@@ -189,6 +189,24 @@ func TestCommentInElement(t *testing.T) {
 	assert.Equal(t, expected, actual)
 }
 
+func TestCommentEscaping(t *testing.T) {
+	expected := `<!-- &lt;!-- this is a comment with some disallowed character sequences --&gt; --!&gt; -->`
+	actual := Comment("<!-- this is a comment with some disallowed character sequences --> --!>").Render()
+	assert.Equal(t, expected, actual)
+
+	expected = `<!-- &gt; comment cannot start with this string -->`
+	actual = Comment("> comment cannot start with this string").Render()
+	assert.Equal(t, expected, actual)
+
+	expected = `<!-- -&gt; comment cannot start with this string either -->`
+	actual = Comment("-> comment cannot start with this string either").Render()
+	assert.Equal(t, expected, actual)
+
+	expected = `<!-- comment cannot end with this string &lt;!- -->`
+	actual = Comment("comment cannot end with this string <!-").Render()
+	assert.Equal(t, expected, actual)
+}
+
 // ========== Lists ==========
 
 func TestLi(t *testing.T) {
