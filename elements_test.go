@@ -205,6 +205,52 @@ func TestCommentEscaping(t *testing.T) {
 	expected = `<!-- comment cannot end with this string &lt;!- -->`
 	actual = Comment("comment cannot end with this string <!-").Render()
 	assert.Equal(t, expected, actual)
+
+	// Test double dashes anywhere in comment
+	expected = `<!-- This comment has -&#45; double dashes -&#45; in it -->`
+	actual = Comment("This comment has -- double dashes -- in it").Render()
+	assert.Equal(t, expected, actual)
+
+	// Test null characters
+	expected = `<!-- This comment has &#0; null character -->`
+	actual = Comment("This comment has \x00 null character").Render()
+	assert.Equal(t, expected, actual)
+
+	// Test empty comment
+	expected = `<!--  -->`
+	actual = Comment("").Render()
+	assert.Equal(t, expected, actual)
+
+	// Test whitespace-only comment
+	expected = `<!--    -->`
+	actual = Comment("  ").Render()
+	assert.Equal(t, expected, actual)
+
+	// Test complex case with multiple escaping patterns
+	expected = `<!-- &lt;!-- -&#45; complex -&#45; case -&#45; with &#0; null --&gt; --!&gt; -->`
+	actual = Comment("<!-- -- complex -- case -- with \x00 null --> --!>").Render()
+	assert.Equal(t, expected, actual)
+
+	// Test edge cases that might be missing
+	// Comments that start with <! but not <!--
+	expected = `<!-- &lt;! test -->`
+	actual = Comment("<! test").Render()
+	assert.Equal(t, expected, actual)
+
+	// Comments that contain <! sequences
+	expected = `<!-- test &lt;! test -->`
+	actual = Comment("test <! test").Render()
+	assert.Equal(t, expected, actual)
+
+	// Comments that end with single dash
+	expected = `<!-- test - -->`
+	actual = Comment("test -").Render()
+	assert.Equal(t, expected, actual)
+
+	// Comments that start with single dash
+	expected = `<!-- - test -->`
+	actual = Comment("- test").Render()
+	assert.Equal(t, expected, actual)
 }
 
 // ========== Lists ==========

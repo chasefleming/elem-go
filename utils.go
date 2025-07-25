@@ -16,6 +16,9 @@ var commentContentsReplacer = strings.NewReplacer(
 	"<!--", "&lt;!--",
 	"-->", "--&gt;",
 	"--!>", "--!&gt;",
+	"--", "-&#45;",
+	"\x00", "&#0;",
+	"<", "&lt;",
 )
 
 // If conditionally renders one of the provided elements based on the condition
