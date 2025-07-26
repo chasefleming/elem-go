@@ -40,6 +40,15 @@ func EscapeNodeContents(s string) string {
 	return nodeContentReplacer.Replace(s)
 }
 
+// EscapeCdataContents escapes the contents of a CDATA section to ensure safe rendering
+func EscapeCdataContents(s string) string {
+	// text in cdata must not contain the string "]]>"
+	if strings.Contains(s, "]]>") {
+		s = strings.ReplaceAll(s, "]]>", "]]&gt;")
+	}
+	return s
+}
+
 // EscapeCommentContents escapes the contents of a comment node to ensure safe rendering according to https://html.spec.whatwg.org/multipage/syntax.html#comments
 func EscapeCommentContents(s string) string {
 	s = commentContentsReplacer.Replace(s)

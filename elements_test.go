@@ -176,6 +176,23 @@ func TestU(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+// ========= Cdata ==========
+func TestCdata(t *testing.T) {
+	expected := `<![CDATA[Some CDATA content]]>`
+	actual := CdataNode("Some CDATA content").Render()
+	assert.Equal(t, expected, actual)
+}
+
+func TestCdataEscaping (t *testing.T) {
+	expected := `<![CDATA[Some CDATA content with ]]&gt; in it]]>`
+	actual := CdataNode("Some CDATA content with ]]> in it").Render()
+	assert.Equal(t, expected, actual)
+
+	expected = `<![CDATA[These < and > should not be escaped]]>`
+	actual = CdataNode("These < and > should not be escaped").Render()
+	assert.Equal(t, expected, actual)
+}
+
 // ========== Comments ==========
 func TestComment(t *testing.T) {
 	expected := `<!-- this is a comment -->`
