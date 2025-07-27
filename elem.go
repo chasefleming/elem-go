@@ -117,6 +117,24 @@ func (t RawNode) RenderWithOptions(opts RenderOptions) string {
 	return string(t)
 }
 
+type CdataNode string
+
+func (t CdataNode) RenderTo(builder *strings.Builder, opts RenderOptions) {
+	builder.WriteString("<![CDATA[")
+	builder.WriteString(EscapeCdataContents(string(t)))
+	builder.WriteString("]]>")
+}
+
+func (t CdataNode) Render() string {
+	return t.RenderWithOptions(RenderOptions{})
+}
+
+func (t CdataNode) RenderWithOptions(opts RenderOptions) string {
+	var builder strings.Builder
+	t.RenderTo(&builder, opts)
+	return builder.String()
+}
+
 type CommentNode string
 
 func (c CommentNode) RenderTo(builder *strings.Builder, opts RenderOptions) {
