@@ -18,6 +18,12 @@ var commentContentsReplacer = strings.NewReplacer(
 	"--!>", "--!&gt;",
 )
 
+var scriptContentsReplaces = strings.NewReplacer(
+	"<!--", "\\x3C!--",
+	"<script", "\\x3Cscript",
+	"</script", "\\x3C/script",
+)
+
 // If conditionally renders one of the provided elements based on the condition
 func If[T any](condition bool, ifTrue, ifFalse T) T {
 	if condition {
@@ -66,4 +72,9 @@ func EscapeCommentContents(s string) string {
 	}
 
 	return s
+}
+
+// EscapeScriptContents escapes the contents of a script node according to https://html.spec.whatwg.org/multipage/scripting.html#restrictions-for-contents-of-script-elements
+func EscapeScriptContents(s string) string {
+	return scriptContentsReplaces.Replace(s)
 }

@@ -117,6 +117,29 @@ func (t RawNode) RenderWithOptions(opts RenderOptions) string {
 	return string(t)
 }
 
+type ScriptNode struct {
+	node Node
+}
+
+func NewScriptNode(node Node) ScriptNode {
+	return ScriptNode{node}
+}
+
+func (t ScriptNode) RenderTo(builder *strings.Builder, opts RenderOptions) {
+	scriptContents := EscapeScriptContents(t.node.Render())
+	builder.WriteString(scriptContents)
+}
+
+func (t ScriptNode) Render() string {
+	return t.RenderWithOptions(RenderOptions{})
+}
+
+func (t ScriptNode) RenderWithOptions(opts RenderOptions) string {
+	var builder strings.Builder
+	t.RenderTo(&builder, opts)
+	return builder.String()
+}
+
 type CdataNode string
 
 func (t CdataNode) RenderTo(builder *strings.Builder, opts RenderOptions) {
