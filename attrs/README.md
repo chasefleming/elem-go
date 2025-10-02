@@ -66,7 +66,7 @@ The `attrs` subpackage also includes utility functions to enhance the attribute 
 
 ### `ClassNames`
 
-The `ClassNames` function joins multiple class name strings together, filtering out empty strings and trimming whitespace. This is particularly useful for conditionally applying CSS classes.
+The `ClassNames` function joins multiple class name strings together, filtering out empty strings, and trimming whitespace. This is particularly useful for conditionally applying CSS classes.
 
 #### Usage
 
