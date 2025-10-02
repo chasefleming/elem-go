@@ -10,6 +10,7 @@ The `attrs` subpackage within `elem-go` offers a comprehensive set of constants 
 - [Using `Props` Type](#using-props-type)
 - [Examples](#examples)
 - [Utilities](#utilities)
+  - [`ClassNames`](#classnames)
   - [`Merge`](#merge)
   - [`DataAttr`](#dataattr)
 
@@ -62,6 +63,33 @@ In this example, attributes for the button element are defined using the attrs.P
 ## Utilities
 
 The `attrs` subpackage also includes utility functions to enhance the attribute manipulation process.
+
+### `ClassNames`
+
+The `ClassNames` function joins multiple class name strings together, filtering out empty strings and trimming whitespace. This is particularly useful for conditionally applying CSS classes.
+
+#### Usage
+
+```go
+import "github.com/chasefleming/elem-go"
+
+isPrimary := true
+isDisabled := false
+
+buttonClass := attrs.ClassNames(
+    "btn",
+    elem.If(isPrimary, "btn-primary", ""),
+    elem.If(isDisabled, "btn-disabled", ""),
+)
+
+button := elem.Button(
+    attrs.Props{attrs.Class: buttonClass},
+    elem.Text("Submit"),
+)
+// Renders: <button class="btn btn-primary">Submit</button>
+```
+
+In this example, the `ClassNames` function combines the base "btn" class with conditionally applied classes based on boolean flags. Empty strings are automatically filtered out.
 
 ### `Merge`
 
