@@ -33,3 +33,26 @@ func TestMerge(t *testing.T) {
 
 	assert.Equal(t, expectedMergedStyle, mergedStyle)
 }
+
+func TestMergeDataAttrs(t *testing.T) {
+	dataAttrs := map[string]string{
+		"user-id":   "123",
+		"user-name": "john",
+		"role":      "admin",
+	}
+
+	result := MergeDataAttrs(dataAttrs)
+
+	expected := Props{
+		"data-user-id":   "123",
+		"data-user-name": "john",
+		"data-role":      "admin",
+	}
+
+	assert.Equal(t, expected, result)
+}
+
+func TestMergeDataAttrs_Empty(t *testing.T) {
+	result := MergeDataAttrs(map[string]string{})
+	assert.Empty(t, result)
+}

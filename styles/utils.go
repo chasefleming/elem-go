@@ -155,3 +155,74 @@ func HSLA(hue, saturation, lightness int, alpha float64) string {
 	builder.WriteString(")")
 	return builder.String()
 }
+
+// Calc returns a CSS calc() function string.
+func Calc(expression string) string {
+	return "calc(" + expression + ")"
+}
+
+// Min returns a CSS min() function string.
+func Min(values ...string) string {
+	return "min(" + strings.Join(values, ", ") + ")"
+}
+
+// Max returns a CSS max() function string.
+func Max(values ...string) string {
+	return "max(" + strings.Join(values, ", ") + ")"
+}
+
+// Clamp returns a CSS clamp() function string.
+func Clamp(min, preferred, max string) string {
+	return "clamp(" + min + ", " + preferred + ", " + max + ")"
+}
+
+// IsValidHexColor validates if a string is a valid hex color.
+func IsValidHexColor(color string) bool {
+	if !strings.HasPrefix(color, "#") {
+		return false
+	}
+
+	color = strings.TrimPrefix(color, "#")
+	length := len(color)
+
+	if length != 3 && length != 6 {
+		return false
+	}
+
+	for _, char := range color {
+		if !((char >= '0' && char <= '9') ||
+			(char >= 'a' && char <= 'f') ||
+			(char >= 'A' && char <= 'F')) {
+			return false
+		}
+	}
+
+	return true
+}
+
+// IsValidRGBColor validates if a string is a valid RGB color format.
+func IsValidRGBColor(color string) bool {
+	color = strings.TrimSpace(color)
+
+	if !strings.HasPrefix(color, "rgb(") || !strings.HasSuffix(color, ")") {
+		return false
+	}
+
+	// Extract values between parentheses
+	values := strings.TrimSuffix(strings.TrimPrefix(color, "rgb("), ")")
+	parts := strings.Split(values, ",")
+
+	if len(parts) != 3 {
+		return false
+	}
+
+	for _, part := range parts {
+		value := strings.TrimSpace(part)
+		num, err := strconv.Atoi(value)
+		if err != nil || num < 0 || num > 255 {
+			return false
+		}
+	}
+
+	return true
+}

@@ -181,3 +181,53 @@ func TestHSLA(t *testing.T) {
 	assert.Equal(t, "hsla(25,35%,45%,0.25)", HSLA(25, 35, 45, 0.2500))
 	assert.Equal(t, "hsla(20,50%,80%,0.00)", HSLA(20, 50, 80, 0))
 }
+
+func TestCalc(t *testing.T) {
+	assert.Equal(t, "calc(100% - 50px)", Calc("100% - 50px"))
+	assert.Equal(t, "calc(100vw / 2)", Calc("100vw / 2"))
+}
+
+func TestMin(t *testing.T) {
+	assert.Equal(t, "min(100px, 50%)", Min("100px", "50%"))
+	assert.Equal(t, "min(1rem, 2rem, 3rem)", Min("1rem", "2rem", "3rem"))
+}
+
+func TestMax(t *testing.T) {
+	assert.Equal(t, "max(100px, 50%)", Max("100px", "50%"))
+	assert.Equal(t, "max(1rem, 2rem)", Max("1rem", "2rem"))
+}
+
+func TestClamp(t *testing.T) {
+	assert.Equal(t, "clamp(1rem, 2vw, 3rem)", Clamp("1rem", "2vw", "3rem"))
+	assert.Equal(t, "clamp(10px, 5%, 100px)", Clamp("10px", "5%", "100px"))
+}
+
+func TestIsValidHexColor(t *testing.T) {
+	// Valid cases
+	assert.True(t, IsValidHexColor("#FFF"))
+	assert.True(t, IsValidHexColor("#FFFFFF"))
+	assert.True(t, IsValidHexColor("#000"))
+	assert.True(t, IsValidHexColor("#abc123"))
+
+	// Invalid cases
+	assert.False(t, IsValidHexColor("FFF"))
+	assert.False(t, IsValidHexColor("#FF"))
+	assert.False(t, IsValidHexColor("#GGGGGG"))
+	assert.False(t, IsValidHexColor("#12345"))
+	assert.False(t, IsValidHexColor(""))
+}
+
+func TestIsValidRGBColor(t *testing.T) {
+	// Valid cases
+	assert.True(t, IsValidRGBColor("rgb(255, 0, 0)"))
+	assert.True(t, IsValidRGBColor("rgb(0,0,0)"))
+	assert.True(t, IsValidRGBColor("rgb(128, 128, 128)"))
+
+	// Invalid cases
+	assert.False(t, IsValidRGBColor("rgb(256, 0, 0)"))
+	assert.False(t, IsValidRGBColor("rgb(-1, 0, 0)"))
+	assert.False(t, IsValidRGBColor("rgb(255, 0)"))
+	assert.False(t, IsValidRGBColor("rgb(255, 0, 0, 1)"))
+	assert.False(t, IsValidRGBColor("rgba(255, 0, 0, 0.5)"))
+	assert.False(t, IsValidRGBColor(""))
+}

@@ -20,3 +20,12 @@ func Merge(attrMaps ...Props) Props {
 	}
 	return mergedAttrs
 }
+
+// MergeDataAttrs creates a Props map with multiple data attributes.
+func MergeDataAttrs(dataAttrs map[string]string) Props {
+	result := Props{}
+	for key, value := range dataAttrs {
+		result[DataAttr(key)] = value
+	}
+	return result
+}
