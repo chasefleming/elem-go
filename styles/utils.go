@@ -176,7 +176,7 @@ func Clamp(min, preferred, max string) string {
 	return "clamp(" + min + ", " + preferred + ", " + max + ")"
 }
 
-// IsValidHexColor validates if a string is a valid hex color.
+// IsValidHexColor validates if a string is a valid hex color. Supports 3 or 6 digit hex codes.
 func IsValidHexColor(color string) bool {
 	if !strings.HasPrefix(color, "#") {
 		return false
