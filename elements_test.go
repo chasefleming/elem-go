@@ -368,6 +368,10 @@ func TestScriptEscaping(t *testing.T) {
 	el = Script(attrs.Props{}, Raw(`alert("<script> and </script> tags must be properly escaped");`))
 	assert.Equal(t, expected, el.Render())
 
+	expected = `<script>alert("\x3CScripT> and \x3C/ScRiPt> are case-insensitive");</script>`
+	el = Script(attrs.Props{}, Raw(`alert("<ScripT> and </ScRiPt> are case-insensitive");`))
+	assert.Equal(t, expected, el.Render())
+
 	expected = `<script>alert("\x3C!-- comment openings must be escaped too");</script>`
 	el = Script(attrs.Props{}, Raw(`alert("<!-- comment openings must be escaped too");`))
 	assert.Equal(t, expected, el.Render())
