@@ -95,7 +95,9 @@ func (sm *StyleManager) GenerateCSS() string {
 
 	for animationName, keyframes := range sm.animations {
 		builder.WriteString(fmt.Sprintf("@keyframes %s { ", animationName))
-		for key, style := range keyframes {
+		keys := sortedKeys(keyframes)
+		for _, key := range keys {
+			style := keyframes[key]
 			builder.WriteString(fmt.Sprintf("%s { ", key))
 			for prop, value := range style {
 				builder.WriteString(fmt.Sprintf("%s: %s; ", prop, value))
@@ -174,10 +176,10 @@ func ensureMediaPrefix(mediaQuery string) string {
 	return mediaQuery
 }
 
-// sortedKeys returns the keys of the map sorted alphabetically.
-func sortedKeys(style Props) []string {
-	keys := make([]string, 0, len(style))
-	for key := range style {
+// sortedKeys returns the keys of the map sorted alphanumerically
+func sortedKeys[T any](m map[string]T) []string {
+	keys := make([]string, 0, len(m))
+	for key := range m {
 		keys = append(keys, key)
 	}
 	sort.Strings(keys)
