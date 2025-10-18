@@ -253,8 +253,16 @@ func Meta(attrs attrs.Props) *Element {
 }
 
 // Script creates a <script> element.
+// According to https://html.spec.whatwg.org/multipage/scripting.html#the-script-element, no tags or comments are allowed inside the <script> element.
+// Additionally, if the src attribute is present, children must be either empty or contain only script comments. However, the original version of this function
+// allowed the use of any number of arbitrary elements. This is left as-is for backwards compatibility.
 func Script(attrs attrs.Props, children ...Node) *Element {
-	return newElement("script", attrs, children...)
+	// Transform children to ScriptNodes to implement content escaping
+	scriptChildren := make([]Node, len(children))
+	for i := range children {
+		scriptChildren[i] = NewScriptNode(children[i])
+	}
+	return newElement("script", attrs, scriptChildren...)
 }
 
 // Style creates a <style> element.

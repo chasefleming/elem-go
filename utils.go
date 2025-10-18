@@ -1,6 +1,9 @@
 package elem
 
-import "strings"
+import (
+	"regexp"
+	"strings"
+)
 
 // nodeContentReplacer handles escaping of HTML special characters in text nodes
 // note that single and double quotes (', ") do not need escaping in HTML5 text nodes
@@ -65,5 +68,15 @@ func EscapeCommentContents(s string) string {
 		s = s[:len(s)-3] + "&lt;!-"
 	}
 
+	return s
+}
+
+// scriptContentsRegexp matches <script and </script case-insensitively
+var scriptContentsRegexp = regexp.MustCompile(`(?i)<(/?)(script)`)
+
+// EscapeScriptContents escapes the contents of a script node according to https://html.spec.whatwg.org/multipage/scripting.html#restrictions-for-contents-of-script-elements
+func EscapeScriptContents(s string) string {
+	s = strings.ReplaceAll(s, `<!--`, `\x3C!--`)
+	s = scriptContentsRegexp.ReplaceAllString(s, `\x3C$1$2`)
 	return s
 }

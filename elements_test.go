@@ -359,6 +359,24 @@ func TestScript(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestScriptEscaping(t *testing.T) {
+	expected := `<script>\x3C/script>loose text between tags\x3Cscript></script>`
+	el := Script(attrs.Props{}, Raw("</script>loose text between tags<script>"))
+	assert.Equal(t, expected, el.Render())
+
+	expected = `<script>alert("\x3Cscript> and \x3C/script> tags must be properly escaped");</script>`
+	el = Script(attrs.Props{}, Raw(`alert("<script> and </script> tags must be properly escaped");`))
+	assert.Equal(t, expected, el.Render())
+
+	expected = `<script>alert("\x3CScripT> and \x3C/ScRiPt> are case-insensitive");</script>`
+	el = Script(attrs.Props{}, Raw(`alert("<ScripT> and </ScRiPt> are case-insensitive");`))
+	assert.Equal(t, expected, el.Render())
+
+	expected = `<script>alert("\x3C!-- comment openings must be escaped too");</script>`
+	el = Script(attrs.Props{}, Raw(`alert("<!-- comment openings must be escaped too");`))
+	assert.Equal(t, expected, el.Render())
+}
+
 func TestStyle(t *testing.T) {
 	expected := `<style type="text/css">.test-class {color: #333;}</style>`
 	cssContent := `.test-class {color: #333;}`
