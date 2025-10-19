@@ -89,6 +89,26 @@ func TestRem(t *testing.T) {
 	assert.Equal(t, "25.00rem", Rem(25))
 }
 
+func TestCh(t *testing.T) {
+	assert.Equal(t, "100.00ch", Ch(100))
+	assert.Equal(t, "0.00ch", Ch(0))
+	assert.Equal(t, "50.00ch", Ch(50))
+	assert.Equal(t, "50.00ch", Ch(50.0))
+	assert.Equal(t, "50.00ch", Ch(50.00))
+	assert.Equal(t, "25.00ch", Ch(25))
+	assert.Equal(t, "2.50ch", Ch(2.5))
+}
+
+func TestEx(t *testing.T) {
+	assert.Equal(t, "100.00ex", Ex(100))
+	assert.Equal(t, "0.00ex", Ex(0))
+	assert.Equal(t, "50.00ex", Ex(50))
+	assert.Equal(t, "50.00ex", Ex(50.0))
+	assert.Equal(t, "50.00ex", Ex(50.00))
+	assert.Equal(t, "25.00ex", Ex(25))
+	assert.Equal(t, "2.50ex", Ex(2.5))
+}
+
 func TestPercent(t *testing.T) {
 	assert.Equal(t, "100%", Percent(100))
 	assert.Equal(t, "0%", Percent(0))
