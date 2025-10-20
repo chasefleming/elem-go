@@ -50,6 +50,16 @@ func Rem(value float64) string {
 	return strconv.FormatFloat(value, 'f', 2, 64) + "rem"
 }
 
+// Ch returns a string representation of the given float as a character unit value.
+func Ch(value float64) string {
+	return strconv.FormatFloat(value, 'f', 2, 64) + "ch"
+}
+
+// Ex returns a string representation of the given float as an x-height unit value.
+func Ex(value float64) string {
+	return strconv.FormatFloat(value, 'f', 2, 64) + "ex"
+}
+
 // RGB returns a string representation of the given RGB values as a CSS RGB value.
 func RGB(r, g, b int) string {
 	var builder strings.Builder
