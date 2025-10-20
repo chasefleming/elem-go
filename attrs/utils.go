@@ -10,6 +10,24 @@ func DataAttr(name string) string {
 	return builder.String()
 }
 
+// ClassNames joins multiple class name strings, filtering out empty strings.
+// This is useful for conditionally applying CSS classes.
+func ClassNames(classes ...string) string {
+	var builder strings.Builder
+	first := true
+	for _, class := range classes {
+		trimmed := strings.TrimSpace(class)
+		if trimmed != "" {
+			if !first {
+				builder.WriteString(" ")
+			}
+			builder.WriteString(trimmed)
+			first = false
+		}
+	}
+	return builder.String()
+}
+
 // Merge merges multiple attribute maps into a single map, with later maps overriding earlier ones.
 func Merge(attrMaps ...Props) Props {
 	mergedAttrs := Props{}
