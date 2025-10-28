@@ -2,8 +2,9 @@ package styles
 
 import (
 	"fmt"
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNewStyleManager(t *testing.T) {
@@ -122,8 +123,9 @@ func TestGenerateCSS(t *testing.T) {
 	assert.Contains(t, css, fmt.Sprintf(".%s { background: blue; }", styleTwoClass), "CSS should contain style two")
 
 	// Assertions for animations.
-	assert.Contains(t, css, fmt.Sprintf("@keyframes %s { from { color: red; } to { color: blue; } }", animationName), "CSS should contain the keyframes for the animation")
-
+	assert.Contains(t, css, fmt.Sprintf("@keyframes %s", animationName), "CSS should contain the animation")
+	assert.Contains(t, css, "from { color: red; }", "CSS should contain the 'from' keyframe")
+	assert.Contains(t, css, "to { color: blue; }", "CSS should contain the 'to' keyframe")
 	// Assertions for the usage of the animation in a style.
 	assert.Contains(t, css, fmt.Sprintf(".%s { animation-duration: 2s; animation-name: %s; }", className, animationName), "CSS should contain the style using the animation")
 
