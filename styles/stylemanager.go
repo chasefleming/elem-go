@@ -41,10 +41,7 @@ func NewStyleManager() *StyleManager {
 
 // AddStyle adds a new style to the manager and returns a class name.
 func (sm *StyleManager) AddStyle(style Props) string {
-	// Convert style to a string to generate hash.
-	styleStr := fmt.Sprintf("%v", style)
-	hash := sha1.Sum([]byte(styleStr))
-	className := fmt.Sprintf("cls_%x", hash[:5]) // Use first 5 bytes of hash for class name.
+	className := fmt.Sprintf("cls_%x", entityHash(style))
 
 	if _, exists := sm.styles[className]; !exists {
 		sm.styles[className] = style
@@ -55,10 +52,7 @@ func (sm *StyleManager) AddStyle(style Props) string {
 
 // AddAnimation adds a new keyframes animation to the manager and returns an animation name.
 func (sm *StyleManager) AddAnimation(keyframes Keyframes) string {
-	// Convert keyframes to a string to generate hash.
-	keyframesStr := fmt.Sprintf("%v", keyframes)
-	hash := sha1.Sum([]byte(keyframesStr))
-	animationName := fmt.Sprintf("anim_%x", hash[:5]) // Use first 5 bytes of hash for animation name.
+	animationName := fmt.Sprintf("anim_%x", entityHash(keyframes))
 
 	if _, exists := sm.animations[animationName]; !exists {
 		sm.animations[animationName] = keyframes
@@ -68,10 +62,7 @@ func (sm *StyleManager) AddAnimation(keyframes Keyframes) string {
 }
 
 func (sm *StyleManager) AddCompositeStyle(composite CompositeStyle) string {
-	// Convert composite to a string to generate hash.
-	compositeStr := fmt.Sprintf("%v", composite)
-	hash := sha1.Sum([]byte(compositeStr))
-	className := fmt.Sprintf("cls_%x", hash[:5]) // Use first 5 bytes of hash for class name.
+	className := fmt.Sprintf("cls_%x", entityHash(composite))
 
 	if _, exists := sm.compositeStyles[className]; !exists {
 		sm.compositeStyles[className] = composite
@@ -184,4 +175,13 @@ func sortedKeys[T any](m map[string]T) []string {
 	}
 	sort.Strings(keys)
 	return keys
+}
+
+// entityHash generates a deterministic unique hash for CSS entities
+// While result is deterministic, it is not guaranteed to be the same in future versions of the package
+func entityHash[T any](x T) []byte {
+	styleStr := fmt.Sprintf("%v", x) // since go1.12 this is deterministic
+	hash := sha1.Sum([]byte(styleStr))
+	// Use first 5 bytes of hash for brevity. The probability that these short hashes collide is very low
+	return hash[:5]
 }
