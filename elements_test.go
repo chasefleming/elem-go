@@ -696,6 +696,16 @@ func TestVideoWithSourceElementsAndFallbackText(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestTrack(t *testing.T) {
+	expected := `<track kind="captions" src="captions.vtt" srclang="en">`
+	el := Track(attrs.Props{
+		attrs.Src: "captions.vtt",
+		"kind":    "captions",
+		"srclang": "en",
+	})
+	assert.Equal(t, expected, el.Render())
+}
+
 // ========== Image Map Elements ==========
 
 func TestMapAndArea(t *testing.T) {
