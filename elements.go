@@ -138,6 +138,18 @@ func B(attrs attrs.Props, children ...Node) *Element {
 	return newElement("b", attrs, children...)
 }
 
+// Bdi creates a <bdi> element, isolating a span of text whose directionality
+// may differ from the surrounding text.
+func Bdi(attrs attrs.Props, children ...Node) *Element {
+	return newElement("bdi", attrs, children...)
+}
+
+// Bdo creates a <bdo> element, overriding the current directionality of text
+// (its dir attribute is required for it to do anything useful).
+func Bdo(attrs attrs.Props, children ...Node) *Element {
+	return newElement("bdo", attrs, children...)
+}
+
 // U creates a <u> element.
 func U(attrs attrs.Props, children ...Node) *Element {
 	return newElement("u", attrs, children...)

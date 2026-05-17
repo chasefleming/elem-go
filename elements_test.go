@@ -170,6 +170,18 @@ func TestB(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestBdi(t *testing.T) {
+	expected := `<bdi>السلام عليكم</bdi>`
+	el := Bdi(nil, Text("السلام عليكم"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestBdo(t *testing.T) {
+	expected := `<bdo dir="rtl">Reversed text</bdo>`
+	el := Bdo(attrs.Props{attrs.Dir: "rtl"}, Text("Reversed text"))
+	assert.Equal(t, expected, el.Render())
+}
+
 func TestU(t *testing.T) {
 	expected := `<u>Unarticulated text</u>`
 	el := U(nil, Text("Unarticulated text"))
