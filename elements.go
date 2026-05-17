@@ -235,6 +235,12 @@ func Img(attrs attrs.Props) *Element {
 	return newElement("img", attrs)
 }
 
+// Picture creates a <picture> element. Typical usage wraps zero or more
+// <source> children and a final <img> fallback.
+func Picture(attrs attrs.Props, children ...Node) *Element {
+	return newElement("picture", attrs, children...)
+}
+
 // ========== Head Elements ==========
 
 // Base creates a <base> element.
