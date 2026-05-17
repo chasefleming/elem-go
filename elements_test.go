@@ -59,6 +59,12 @@ func TestBr(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestWbr(t *testing.T) {
+	expected := `<wbr>`
+	el := Wbr(nil)
+	assert.Equal(t, expected, el.Render())
+}
+
 func TestCode(t *testing.T) {
 	expected := `<code>Code snippet</code>`
 	el := Code(nil, Text("Code snippet"))
