@@ -38,6 +38,11 @@ func Br(attrs attrs.Props) *Element {
 	return newElement("br", attrs)
 }
 
+// Wbr creates a <wbr> element. <wbr> is a void element, so it never has children.
+func Wbr(attrs attrs.Props) *Element {
+	return newElement("wbr", attrs)
+}
+
 // Blockquote creates a <blockquote> element.
 func Blockquote(attrs attrs.Props, children ...Node) *Element {
 	return newElement("blockquote", attrs, children...)
