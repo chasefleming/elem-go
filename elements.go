@@ -511,6 +511,11 @@ func Source(attrs attrs.Props, children ...Node) *Element {
 	return newElement("source", attrs, children...)
 }
 
+// Track creates a <track> element. <track> is a void element, so it never has children.
+func Track(attrs attrs.Props) *Element {
+	return newElement("track", attrs)
+}
+
 // ========== Image Map Elements ==========
 
 // Map creates a <map> element.
