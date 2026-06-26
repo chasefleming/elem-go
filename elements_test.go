@@ -339,6 +339,15 @@ func TestImg(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestPicture(t *testing.T) {
+	expected := `<picture><source media="(min-width:650px)" srcset="large.jpg"><img alt="A picture" src="small.jpg"></picture>`
+	el := Picture(nil,
+		Source(attrs.Props{"media": "(min-width:650px)", "srcset": "large.jpg"}),
+		Img(attrs.Props{attrs.Src: "small.jpg", attrs.Alt: "A picture"}),
+	)
+	assert.Equal(t, expected, el.Render())
+}
+
 // ========== Head Elements ==========
 
 func TestBase(t *testing.T) {
