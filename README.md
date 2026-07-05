@@ -168,16 +168,16 @@ Additionally, `None` can be used to create an empty element, as in `elem.Div(nil
 `elem` provides utility functions for creating HTML elements:
 
 - **Document Structure**: `Html`, `Head`, `Body`, `Title`, `Link`, `Meta`, `Style`, `Base`
-- **Text Content**: `H1`, `H2`, `H3`, `H4`, `H5`, `H6`, `P`, `Blockquote`, `Pre`, `Code`, `I`, `Br`, `Hr`, `Small`, `Q`, `Cite`, `Abbr`, `Data`, `Time`, `Var`, `Samp`, `Kbd`
+- **Text Content**: `H1`, `H2`, `H3`, `H4`, `H5`, `H6`, `P`, `Blockquote`, `Pre`, `Code`, `I`, `Br`, `Wbr`, `Hr`, `Small`, `Q`, `Cite`, `Abbr`, `Data`, `Time`, `Var`, `Samp`, `Kbd`
 - **Sectioning & Semantic Layout**: `Article`, `Aside`, `FigCaption`, `Figure`, `Footer`, `Header`, `Hgroup`, `Main`, `Mark`, `Nav`, `Section`
 - **Form Elements**: `Form`, `Input`, `Textarea`, `Button`, `Select`, `Optgroup`, `Option`, `Label`, `Fieldset`, `Legend`, `Datalist`, `Meter`, `Output`, `Progress`
 - **Interactive Elements**: `Details`, `Dialog`, `Menu`, `Summary`
 - **Grouping Content**: `Div`, `Span`, `Li`, `Ul`, `Ol`, `Dl`, `Dt`, `Dd`
 - **Tables**: `Table`, `Tr`, `Td`, `Th`, `TBody`, `THead`, `TFoot`
-- **Hyperlinks and Multimedia**: `Img`, `Map`, `Area`
-- **Embedded Content**: `Audio`, `Iframe`, `Source`, `Video`
+- **Hyperlinks and Multimedia**: `Img`, `Picture`, `Map`, `Area`
+- **Embedded Content**: `Audio`, `Iframe`, `Source`, `Track`, `Video`
 - **Script-supporting Elements**: `Script`, `Noscript`
-- **Inline Semantic**: `A`, `Strong`, `Em`, `Code`, `I`, `B`, `U`, `Sub`, `Sup`, `Ruby`, `Rt`, `Rp`
+- **Inline Semantic**: `A`, `Strong`, `Em`, `Code`, `I`, `B`, `Bdi`, `Bdo`, `U`, `Sub`, `Sup`, `Ruby`, `Rt`, `Rp`
 
 ### Raw HTML Insertion
 
@@ -203,6 +203,15 @@ Apart from standard elements, `elem-go` also allows you to insert HTML comments 
 ```go
 comment := elem.Comment("Section: Main Content Start")
 // Generates: <!-- Section: Main Content Start -->
+```
+
+### Script Content Escaping
+
+When you pass content to the `Script` function, `elem-go` automatically escapes the sequences that would otherwise terminate the `<script>` element early—`</script>`, `<script`, and `<!--` (all case-insensitive)—by replacing the leading `<` with its `\x3C` escape, as required by the [HTML specification](https://html.spec.whatwg.org/multipage/scripting.html#restrictions-for-contents-of-script-elements). This keeps inline scripts from accidentally breaking out of their element.
+
+```go
+script := elem.Script(nil, elem.Raw(`alert("</script>")`))
+// Renders: <script>alert("\x3C/script>")</script>
 ```
 
 ### Grouping Elements with Fragment

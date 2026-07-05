@@ -12,6 +12,7 @@ The `attrs` subpackage within `elem-go` offers a comprehensive set of constants 
 - [Utilities](#utilities)
   - [`Merge`](#merge)
   - [`DataAttr`](#dataattr)
+  - [`ClassNames`](#classnames)
 
 ## Introduction
 
@@ -98,5 +99,30 @@ dataAttrs := attrs.DataAttr("foobar") // Outputs "data-foobar"
 ```
 
 In this example, the `DataAttr` function is used to define a `data-foobar` attribute key for an HTML element.
+
+### `ClassNames`
+
+The `ClassNames` function joins multiple class names into a single space-separated string. Empty and whitespace-only entries are skipped, and each entry is trimmed of surrounding whitespace. This makes it easy to build conditional class lists inline—typically together with [`elem.If`](../README.md#conditional-rendering-with-if)—without having to manage spacing yourself.
+
+#### Usage
+
+```go
+isPrimary := true
+isDisabled := false
+
+button := elem.Button(
+    attrs.Props{
+        attrs.Class: attrs.ClassNames(
+            "btn",
+            elem.If(isPrimary, "btn-primary", ""),
+            elem.If(isDisabled, "btn-disabled", ""),
+        ),
+    },
+    elem.Text("Submit"),
+)
+// The button's class attribute renders as "btn btn-primary"
+```
+
+Because empty and whitespace-only entries are dropped, a falsy `elem.If` branch that returns `""` simply contributes nothing—no leading, trailing, or doubled spaces are left behind.
 
 By using the `attrs` subpackage, you can ensure type safety and correctness when working with HTML attributes in Go, making your development process smoother and more efficient.

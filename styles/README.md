@@ -134,6 +134,15 @@ emValue := styles.Em(2.5) // Returns "2.5em"
 remValue := styles.Rem(1.5) // Returns "1.5rem"
 ```
 
+##### `Ch(value float64) string` and `Ex(value float64) string`
+
+These functions return a string representation of the given value with the "ch" (character advance) and "ex" (x-height) units, respectively.
+
+```go
+chValue := styles.Ch(2.5) // Returns "2.50ch"
+exValue := styles.Ex(1.5) // Returns "1.50ex"
+```
+
 ##### `Pixels(value int) string`
 
 This function returns a string representation of the given value with the "px" unit.
