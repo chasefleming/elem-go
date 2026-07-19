@@ -1,6 +1,7 @@
 package elem
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/chasefleming/elem-go/attrs"
@@ -74,6 +75,23 @@ func TestCode(t *testing.T) {
 func TestDiv(t *testing.T) {
 	expected := `<div class="container">Hello, Elem!</div>`
 	el := Div(attrs.Props{attrs.Class: "container"}, Text("Hello, Elem!"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestDivWithManyAttributes(t *testing.T) {
+	// More than 16 attributes so rendering takes the heap-allocated
+	// key-sorting path rather than the stack-array fast path.
+	props := attrs.Props{}
+	expected := `<div`
+	for i := 1; i <= 20; i++ {
+		key := fmt.Sprintf("data-key-%02d", i)
+		value := fmt.Sprintf("value-%02d", i)
+		props[key] = value
+		expected += fmt.Sprintf(` %s="%s"`, key, value)
+	}
+	expected += `></div>`
+
+	el := Div(props)
 	assert.Equal(t, expected, el.Render())
 }
 
