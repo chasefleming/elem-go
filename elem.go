@@ -198,16 +198,23 @@ func (e *Element) RenderTo(builder *strings.Builder, opts RenderOptions) {
 		builder.WriteString(e.Tag)
 	}
 
-	// Sort the keys for consistent order
-	keys := make([]string, 0, len(e.Attrs))
-	for k := range e.Attrs {
-		keys = append(keys, k)
-	}
-	sort.Strings(keys)
-
-	// Append the attributes to the builder
-	for _, k := range keys {
-		e.renderAttrTo(k, builder)
+	// Append the attributes to the builder in sorted order for consistent
+	// output. Elements with zero or one attribute skip the sort entirely.
+	switch len(e.Attrs) {
+	case 0:
+	case 1:
+		for k := range e.Attrs {
+			e.renderAttrTo(k, builder)
+		}
+	default:
+		keys := make([]string, 0, len(e.Attrs))
+		for k := range e.Attrs {
+			keys = append(keys, k)
+		}
+		sort.Strings(keys)
+		for _, k := range keys {
+			e.renderAttrTo(k, builder)
+		}
 	}
 
 	// If it's a void element, close it and return
@@ -267,8 +274,28 @@ func (e *Element) Render() string {
 	return e.RenderWithOptions(RenderOptions{})
 }
 
+// estimateSize walks the tree and returns an approximate rendered length,
+// used to preallocate the output buffer and avoid repeated growth copies.
+func (e *Element) estimateSize() int {
+	// Attributes are estimated at a flat average rather than iterated,
+	// since ranging over the map costs more than an occasional resize.
+	size := 2*len(e.Tag) + 5 + len(e.Attrs)*24
+	for _, child := range e.Children {
+		switch c := child.(type) {
+		case *Element:
+			size += c.estimateSize()
+		case TextNode:
+			size += len(c)
+		case RawNode:
+			size += len(c)
+		}
+	}
+	return size
+}
+
 func (e *Element) RenderWithOptions(opts RenderOptions) string {
 	var builder strings.Builder
+	builder.Grow(e.estimateSize())
 	e.RenderTo(&builder, opts)
 
 	if opts.StyleManager != nil {

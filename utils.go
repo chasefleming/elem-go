@@ -31,7 +31,7 @@ func If[T any](condition bool, ifTrue, ifFalse T) T {
 
 // TransformEach maps a slice of items to a slice of Elements using the provided function
 func TransformEach[T any](items []T, fn func(T) Node) []Node {
-	var nodes []Node
+	nodes := make([]Node, 0, len(items))
 	for _, item := range items {
 		nodes = append(nodes, fn(item))
 	}
