@@ -1,4 +1,4 @@
-module htmx-fiber-counter
+module htmx-fiber-form
 
 go 1.21.1
 
