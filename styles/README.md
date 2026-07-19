@@ -14,7 +14,7 @@ The `styles` subpackage within `elem-go` offers enhanced functionality for CSS s
 - [Advanced Styling with `StyleManager`](#advanced-styling-with-stylemanager)
     - [Key Features of `StyleManager`](#key-features-of-stylemanager)
     - [Example: Implementing a Hover Effect](#example-implementing-a-hover-effect)
-    - [Detailed Usage](stylemanager/README.md)
+    - [Detailed Usage](STYLEMANAGER.md)
 
 ## Introduction
 
