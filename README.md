@@ -252,7 +252,7 @@ See the [`StyleManager` documentation](styles/STYLEMANAGER.md) for details.
 
 ## HTMX Integration
 
-The [htmx subpackage](htmx/README.md) provides typed helpers for htmx attributes, so you can build dynamic server-rendered pages without writing JavaScript.
+The [htmx subpackage](htmx/README.md) provides typed helpers for htmx attributes, so you can build dynamic server-rendered pages without writing JavaScript. It targets htmx 2.x, with deprecated constants preserved for code written against htmx 1.x.
 
 ## Examples
 

@@ -5,6 +5,7 @@ The `htmx` subpackage within `elem` provides a seamless way to integrate the [ht
 ## Table of Contents
 
 - [Introduction](#introduction)
+- [htmx Version Compatibility](#htmx-version-compatibility)
 - [Usage](#usage)
 - [Creating Elements with htmx Attributes](#creating-elements-with-htmx-attributes)
 - [Supported htmx Attributes](#supported-htmx-attributes)
@@ -13,6 +14,18 @@ The `htmx` subpackage within `elem` provides a seamless way to integrate the [ht
 ## Introduction
 
 The `htmx` subpackage offers constants and utility functions tailored for htmx-specific attributes. This makes it easier to add dynamic behaviors to your web elements without writing verbose attribute strings.
+
+## htmx Version Compatibility
+
+This package targets **htmx 2.x**. To include htmx in your page, use the CDN script recommended by the [htmx docs](https://htmx.org/docs/#installing):
+
+```go
+elem.Script(attrs.Props{
+    attrs.Src: "https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.min.js",
+})
+```
+
+A few constants from the htmx 1.x era (such as `HXSSE`, `HXWS`, and the bare `HXOn`) are deprecated because the corresponding attributes were removed in htmx 2.0 — their godoc comments point to the 2.x replacements. If you are upgrading an app from htmx 1.x, see the official [htmx migration guide](https://htmx.org/migration-guide-htmx-1/).
 
 ## Usage
 
@@ -46,57 +59,51 @@ In this example, the main `div` has htmx attributes set to fetch content from `/
 
 ## Supported `htmx` Attributes
 
-The `htmx` subpackage provides constants for commonly used `htmx` attributes:
+The `htmx` subpackage provides constants for the `htmx` attributes, mirroring the [htmx reference](https://htmx.org/reference/):
 
-- **Request Modifiers**
+- **Core Attributes**
     - `HXGet`: URL for GET requests.
     - `HXPost`: URL for POST requests.
-    - `HXPut`: URL for PUT requests.
-    - `HXDelete`: URL for DELETE requests.
-    - `HXPatch`: URL for PATCH requests.
-
-- **Request Headers and Content-Type**
-    - `HXHeaders`: Specifies request headers.
-    - `HXContent`: Specifies the content type of the request.
-
-- **Request Parameters**
-    - `HXParams`: Parameters to include with the request.
-    - `HXValues`: Values to include with the request.
-
-- **Request Timeout and Retries**
-    - `HXTimeout`: Timeout for the request.
-    - `HXRetry`: Number of times to retry the request.
-    - `HXRetryTimeout`: Timeout before retrying the request.
-
-- **Response Processing**
-    - `HXSwap`: How to swap the content.
+    - `HXPushURL`: Pushes a new URL into the browser history.
+    - `HXSelect`: CSS selector for the content to swap in from the response.
+    - `HXSelectOOB`: CSS selectors for out-of-band content in the response.
+    - `HXSwap`: How the response is swapped in (`innerHTML`, `outerHTML`, `textContent`, etc.).
+    - `HXSwapOOB`: Marks response content for out-of-band swapping.
     - `HXTarget`: Where to place the content in the DOM.
-    - `HXSwapOOB`: Out-of-band swapping.
-    - `HXSelect`: CSS selector for element in returned HTML.
-    - `HXExt`: htmx extensions to use.
-    - `HXVals`: Values to process in the response.
-
-- **Events**
     - `HXTrigger`: Event that triggers the request.
-    - `HXConfirm`: Confirmation message before sending the request.
-    - `HXOn`: Event listener on the element.
-    - `HXTriggeringElement`: Element that triggered the request.
-    - `HXTriggeringEvent`: Event that triggered the request.
+    - `HXVals`: Values to submit with the request.
 
-- **Indicators**
-    - `HXIndicator`: Element displayed as an indicator while processing.
-
-- **History**
-    - `HXPushURL`: Pushes a new URL to the browser history.
-    - `HXHistoryElt`: Element for history purposes.
-    - `HXHistoryAttr`: Attribute for history purposes.
-
-- **Error Handling**
+- **Additional Attributes**
     - `HXBoost`: Enhances links and forms with AJAX.
-    - `HXError`: Element for displaying error messages.
+    - `HXConfirm`: Confirmation message before sending the request.
+    - `HXDelete`: URL for DELETE requests.
+    - `HXDisable`: Disables htmx processing for an element and its children.
+    - `HXDisabledElt`: Elements to disable while a request is in flight.
+    - `HXDisinherit`: Controls which attributes are not inherited by children.
+    - `HXEncoding`: Changes the request encoding (e.g. `multipart/form-data`).
+    - `HXExt`: htmx extensions to use.
+    - `HXHeaders`: Specifies request headers.
+    - `HXHistory`: Prevents snapshotting the page into the history cache.
+    - `HXHistoryElt`: Element to snapshot and restore for history navigation.
+    - `HXInclude`: Additional elements whose values are included in the request.
+    - `HXIndicator`: Element displayed as an indicator while processing.
+    - `HXInherit`: Controls which attributes are inherited by children (htmx 2.0+).
+    - `HXParams`: Filters the parameters submitted with the request.
+    - `HXPatch`: URL for PATCH requests.
+    - `HXPreserve`: Keeps an element unchanged between requests.
+    - `HXPrompt`: Prompts the user for input before the request.
+    - `HXPut`: URL for PUT requests.
+    - `HXReplaceURL`: Replaces the current URL in the browser history.
+    - `HXRequest`: Configures the request (timeout, credentials, headers).
+    - `HXSync`: Synchronizes requests between elements.
+    - `HXValidate`: Forces validation before the request.
 
-- **Caching**
-    - `HXCache`: Specifies caching behavior.
+- **Extension Attributes** (require the [SSE](https://htmx.org/extensions/sse/) / [WebSockets](https://htmx.org/extensions/ws/) extensions)
+    - `SSEConnect`, `SSESwap`, `SSEClose`: Server Sent Events.
+    - `WSConnect`, `WSSend`: WebSockets.
+
+- **Event Handlers**
+    - `HXOnBeforeRequest`, `HXOnAfterSwap`, and the other `HXOn*` constants: inline handlers for [htmx events](https://htmx.org/reference/#events), rendered in the `hx-on--<event>` form.
 
 ## Examples
 

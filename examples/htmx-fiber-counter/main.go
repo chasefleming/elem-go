@@ -28,7 +28,11 @@ func main() {
 
 		// Define the head with the htmx script and styling
 		head := elem.Head(nil,
-			elem.Script(attrs.Props{attrs.Src: "https://unpkg.com/htmx.org@1.9.6"}),
+			elem.Script(attrs.Props{
+				attrs.Src:         "https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.min.js",
+				attrs.Integrity:   "sha384-H5SrcfygHmAuTDZphMHqBJLc3FhssKjG7w/CeCpFReSfwBWDTKpkzPP8c+cLsK+V",
+				attrs.Crossorigin: "anonymous",
+			}),
 		)
 
 		// Define styling
