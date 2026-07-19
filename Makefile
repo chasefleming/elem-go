@@ -1,4 +1,4 @@
-.PHONY: test tidy
+.PHONY: test tidy bench
 
 tidy:
 	@echo "Tidying up module..."
@@ -7,3 +7,7 @@ tidy:
 test:
 	@echo "Running tests..."
 	go test ./...
+
+bench:
+	@echo "Running benchmarks..."
+	go test -run='^$$' -bench=. -benchmem .
