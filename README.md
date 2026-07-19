@@ -1,6 +1,8 @@
 ![elem-go logo](./logo.png)
 
-`elem` is a lightweight Go library for creating HTML elements programmatically. Utilizing the strong typing features of Go, `elem` ensures type safety in defining and manipulating HTML elements, minimizing potential runtime errors. It simplifies the generation of HTML views by providing a simple and intuitive way to create elements and set their attributes, properties, and content.
+**Type-safe HTML for Go: no templates, no code generation, no build step.**
+
+`elem-go` lets you build HTML views in pure Go: every element is a Go function and every attribute a typed constant, so typos fail at compile time instead of at runtime in production. And because views are plain Go code rather than a separate template language, the tools you already use work on them unchanged: autocomplete, refactoring, tests, the debugger.
 
 ## Features
 
@@ -8,6 +10,8 @@
 - Type-safe definition and manipulation of elements, attributes, and properties.
 - Supports common HTML elements and attributes.
 - Utilities for simplified element generation and manipulation.
+- Automatic HTML escaping of text content (use `Raw` to opt out).
+- Zero runtime dependencies.
 - Advanced CSS styling capabilities with the [styles](styles/README.md) subpackage.
 - Use the [`StyleManager`](styles/STYLEMANAGER.md) for advanced CSS features like pseudo-classes, animations, and media queries.
 
