@@ -29,7 +29,7 @@ This command compiles and runs the Go program, starting the `Go Fiber` server on
 ## Features
 
 - **Add Todos**: Enter a new task in the text box and click "Add" or press enter to add a new Todo to the list.
-- **Toggle Todos**: Click on a Todo item to toggle its Done status. Items marked as done will have a line-through style.
+- **Toggle Todos**: Click a Todo's checkbox to toggle its Done status. Items marked as done will have a line-through style.
 
 ## Structure
 
