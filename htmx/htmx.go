@@ -106,6 +106,9 @@ const (
 // Deprecated constants, kept so existing code keeps compiling. They will be
 // removed in a future release.
 const (
+	// Deprecated: hx-vars is deprecated in htmx itself. Use HXVals instead.
+	HXVars = "hx-vars"
+
 	// Deprecated: hx-content is not an htmx attribute and has no effect.
 	HXContent = "hx-content"
 
