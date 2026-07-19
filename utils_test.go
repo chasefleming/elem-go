@@ -41,3 +41,10 @@ func TestTransformEach(t *testing.T) {
 		assert.Equal(t, expected, el.Render())
 	}
 }
+
+func TestTransformEachEmpty(t *testing.T) {
+	toLi := func(item string) Node { return Li(nil, Text(item)) }
+
+	assert.Nil(t, TransformEach([]string{}, toLi), "TransformEach should return nil for an empty slice")
+	assert.Nil(t, TransformEach(nil, toLi), "TransformEach should return nil for a nil slice")
+}

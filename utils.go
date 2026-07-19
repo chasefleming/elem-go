@@ -31,6 +31,11 @@ func If[T any](condition bool, ifTrue, ifFalse T) T {
 
 // TransformEach maps a slice of items to a slice of Elements using the provided function
 func TransformEach[T any](items []T, fn func(T) Node) []Node {
+	// Return nil for empty input to match the historical behavior of the
+	// unallocated slice; only preallocate when there are items to hold.
+	if len(items) == 0 {
+		return nil
+	}
 	nodes := make([]Node, 0, len(items))
 	for _, item := range items {
 		nodes = append(nodes, fn(item))
