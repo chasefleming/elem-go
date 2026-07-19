@@ -6,18 +6,17 @@
 
 ## Features
 
-- Easily create HTML elements with Go code.
-- Type-safe definition and manipulation of elements, attributes, and properties.
-- Supports common HTML elements and attributes.
-- Utilities for simplified element generation and manipulation.
+- Type-safe constructors for nearly every standard HTML5 element and attribute.
+- Utilities like `If` and `TransformEach` for conditional and list rendering.
 - Automatic HTML escaping of text content (use `Raw` to opt out).
 - Zero runtime dependencies.
-- Advanced CSS styling capabilities with the [styles](styles/README.md) subpackage.
-- Use the [`StyleManager`](styles/STYLEMANAGER.md) for advanced CSS features like pseudo-classes, animations, and media queries.
+- Inline CSS styling with the [styles](styles/README.md) subpackage.
+- Advanced CSS features (pseudo-classes, animations, media queries) with [`StyleManager`](styles/STYLEMANAGER.md).
+- htmx attribute helpers in the [htmx](htmx/README.md) subpackage.
 
 ## Installation
 
-To install `elem`, use `go get`:
+To install `elem-go`, use `go get`:
 
 ```bash
 go get github.com/chasefleming/elem-go
@@ -37,7 +36,7 @@ import (
 
 ### Creating Elements
 
-Here's an example of creating a `<div>` element with nested `<h1>`, `<h2>`, and `<p>` elements using elem:
+Here's an example of creating a `<div>` element with nested `<h1>`, `<h2>`, and `<p>` elements using `elem-go`:
 
 ```go
 content := elem.Div(attrs.Props{
@@ -50,7 +49,7 @@ content := elem.Div(attrs.Props{
 )
 ```
 
-When the above Go code is executed and the `.Render()` method is called, it produces the following HTML:
+Calling the `.Render()` method on this element produces the following HTML:
 
 ```html
 <div id="container" class="my-class">
@@ -64,7 +63,7 @@ When the above Go code is executed and the `.Render()` method is called, it prod
 
 The [`attrs`](attrs/README.md) subpackage provides type-safe attribute functions that ensure you're setting valid attributes for your elements. This helps eliminate potential issues at runtime due to misspelled or unsupported attribute names.
 
-For boolean attributes like `checked` and `selected`, you can simply assign them the value `"true"` or `"false"`. When set to `"true"`, the library will correctly render these attributes without needing an explicit value. For instance:
+For boolean attributes like `checked` and `selected`, assign the value `"true"` or `"false"`. When set to `"true"`, the attribute renders without an explicit value:
 
 ```go
 // Using boolean attributes
@@ -96,30 +95,26 @@ See the complete list of supported attributes in [the `attrs` package](./attrs/a
 
 ### Rendering Elements
 
-The `.Render()` method is used to convert the structured Go elements into HTML strings. This method is essential for generating the final HTML output that can be served to a web browser or integrated into templates.
+The `.Render()` method converts an element tree into an HTML string, ready to serve to a browser.
 
 ```go
 html := content.Render()
 ```
 
-In this example, `content` refers to an `elem` element structure. When the `.Render()` method is called on content, it generates the HTML representation of the constructed elements.
-
 > NOTE: When using an <html> element, this method automatically includes a <!DOCTYPE html> preamble in the rendered HTML, ensuring compliance with modern web standards.
 
 #### Custom Rendering Options
 
-For more control over the rendering process, such as disabling the HTML preamble, use the `RenderWithOptions` method. This method accepts a `RenderOptions` struct, allowing you to specify various rendering preferences.
+For more control over rendering, such as disabling the `<!DOCTYPE html>` preamble, use `RenderWithOptions` with a `RenderOptions` struct:
 
 ```go
 options := elem.RenderOptions{DisableHtmlPreamble: true}
 htmlString := myHtmlElement.RenderWithOptions(options)
 ```
 
-This flexibility is particularly useful in scenarios where default rendering behaviors need to be overridden or customized.
-
 ### Generating Lists of Elements with `TransformEach`
 
-With `elem`, you can easily generate lists of elements from slices of data using the `TransformEach` function. This function abstracts the repetitive task of iterating over a slice and transforming its items into elements.
+The `TransformEach` function turns a slice of data into a slice of elements:
 
 ```go
 items := []string{"Item 1", "Item 2", "Item 3"}
@@ -135,7 +130,7 @@ In this example, we transformed a slice of strings into a list of `li` elements 
 
 ### Conditional Rendering with `If`
 
-`elem` provides a utility function `If` for conditional rendering of elements.
+`elem-go` provides a utility function `If` for conditional rendering of elements.
 
 ```go
 isAdmin := true
@@ -152,7 +147,7 @@ In this example, if `isAdmin` is `true`, the `Admin Panel` link is rendered. Oth
 
 #### `None` in Conditional Rendering
 
-`elem` provides a specialized node `None` that implements the `Node` interface but does not produce any visible output. It's particularly useful in scenarios where rendering nothing for a specific condition is required.
+`elem-go` provides a specialized node `None` that implements the `Node` interface but produces no output, for cases where a condition should render nothing.
 
 ```go
 showWelcomeMessage := false
@@ -165,11 +160,11 @@ content := elem.Div(nil,
 
 In this example, `welcomeMessage` is rendered only if `showWelcomeMessage` is `true`. If it's `false`, `None` is rendered instead, which produces no visible output.
 
-Additionally, `None` can be used to create an empty element, as in `elem.Div(nil, elem.None())`, which results in `<div></div>`. This can be handy for creating placeholders or structuring your HTML document without adding additional content.
+Additionally, `None` can be used to create an empty element, as in `elem.Div(nil, elem.None())`, which results in `<div></div>`.
 
 ### Supported Elements
 
-`elem` provides utility functions for creating HTML elements:
+`elem-go` provides constructor functions for HTML elements:
 
 - **Document Structure**: `Html`, `Head`, `Body`, `Title`, `Link`, `Meta`, `Style`, `Base`
 - **Text Content**: `H1`, `H2`, `H3`, `H4`, `H5`, `H6`, `P`, `Blockquote`, `Pre`, `Code`, `I`, `Br`, `Wbr`, `Hr`, `Small`, `Q`, `Cite`, `Abbr`, `Data`, `Time`, `Var`, `Samp`, `Kbd`
@@ -185,7 +180,7 @@ Additionally, `None` can be used to create an empty element, as in `elem.Div(nil
 
 ### Raw HTML Insertion
 
-The `Raw` function allows for the direct inclusion of raw HTML content within your document structure. This function can be used to insert HTML strings, which will be rendered as part of the final HTML output.
+The `Raw` function inserts raw HTML verbatim into your document structure:
 
 ```go
 rawHTML := `<div class="custom-html"><p>Custom HTML content</p></div>`
@@ -211,7 +206,7 @@ comment := elem.Comment("Section: Main Content Start")
 
 ### Script Content Escaping
 
-When you pass content to the `Script` function, `elem-go` automatically escapes the sequences that would otherwise terminate the `<script>` element early—`</script>`, `<script`, and `<!--` (all case-insensitive)—by replacing the leading `<` with its `\x3C` escape, as required by the [HTML specification](https://html.spec.whatwg.org/multipage/scripting.html#restrictions-for-contents-of-script-elements). This keeps inline scripts from accidentally breaking out of their element.
+When you pass content to the `Script` function, `elem-go` automatically escapes the sequences that would otherwise terminate the `<script>` element early (`</script>`, `<script`, and `<!--`, all case-insensitive) by replacing the leading `<` with its `\x3C` escape, as required by the [HTML specification](https://html.spec.whatwg.org/multipage/scripting.html#restrictions-for-contents-of-script-elements). This keeps inline scripts from accidentally breaking out of their element.
 
 ```go
 script := elem.Script(nil, elem.Raw(`alert("</script>")`))
@@ -235,7 +230,7 @@ content := elem.Div(nil,
 )
 ```
 
-In this example, the Fragment function is used to insert the nodes into the parent div without introducing any additional wrapper elements. This keeps the HTML output clean and simple.
+Here, the nodes are inserted directly into the parent `div` with no additional wrapper elements in the output.
 
 ### Handling JSON Strings and Special Characters in Attributes
 
@@ -251,28 +246,24 @@ content := elem.Div(attrs.Props{
 
 ## Advanced CSS Styling with `StyleManager`
 
-For projects requiring advanced CSS styling capabilities, including support for animations, pseudo-classes, and responsive design via media queries, the `StyleManager` in the `styles` subpackage offers a powerful solution. Integrated seamlessly with `elem-go`, it allows developers to programmatically create and manage complex CSS styles within the type-safe environment of Go.
+For advanced CSS styling, including animations, pseudo-classes, and responsive design via media queries, use `StyleManager` from the `styles` subpackage. It lets you create and manage complex CSS programmatically, with the same type safety as the rest of `elem-go`.
 
-Explore the [`StyleManager` documentation](styles/STYLEMANAGER.md) to leverage advanced styling features in your web applications.
+See the [`StyleManager` documentation](styles/STYLEMANAGER.md) for details.
 
 ## HTMX Integration
 
-We provide a subpackage for htmx integration. [Read more about htmx integration here](htmx/README.md).
+The [htmx subpackage](htmx/README.md) provides typed helpers for htmx attributes, so you can build dynamic server-rendered pages without writing JavaScript.
 
 ## Examples
 
-For hands-on examples showcasing the usage of `elem`, you can find sample implementations in the `examples/` folder of the repository. Dive into the examples to get a deeper understanding of how to leverage the library in various scenarios.
-
-[Check out the examples here.](./examples)
+For hands-on sample implementations, see the [`examples/` folder](./examples).
 
 ## Tutorials & Guides
 
-Dive deeper into the capabilities of `elem` and learn best practices through our collection of tutorials and guides:
+Dive deeper into `elem-go` with these tutorials and guides:
 
 - [Building a Counter App with htmx, Go Fiber, and elem-go](https://dev.to/chasefleming/building-a-counter-app-with-htmx-go-fiber-and-elem-go-9jd/)
 - [Building a Go Static Site Generator Using elem-go](https://dev.to/chasefleming/building-a-go-static-site-generator-using-elem-go-3fhh)
-
-Stay tuned for more tutorials and guides in the future!
 
 ## Contributing
 
