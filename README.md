@@ -111,7 +111,7 @@ In this example, `content` refers to an `elem` element structure. When the `.Ren
 For more control over the rendering process, such as disabling the HTML preamble, use the `RenderWithOptions` method. This method accepts a `RenderOptions` struct, allowing you to specify various rendering preferences.
 
 ```go
-options := RenderOptions{DisableHtmlPreamble: true}
+options := elem.RenderOptions{DisableHtmlPreamble: true}
 htmlString := myHtmlElement.RenderWithOptions(options)
 ```
 
@@ -128,7 +128,7 @@ liElements := elem.TransformEach(items, func(item string) elem.Node {
     return elem.Li(nil, elem.Text(item))
 })
 
-ulElement := elem.Ul(nil, liElements)
+ulElement := elem.Ul(nil, liElements...)
 ```
 
 In this example, we transformed a slice of strings into a list of `li` elements and then wrapped them in a `ul` element.
@@ -251,9 +251,9 @@ content := elem.Div(attrs.Props{
 
 ## Advanced CSS Styling with `StyleManager`
 
-For projects requiring advanced CSS styling capabilities, including support for animations, pseudo-classes, and responsive design via media queries, the `stylemanager` subpackage offers a powerful solution. Integrated seamlessly with `elem-go`, it allows developers to programmatically create and manage complex CSS styles within the type-safe environment of Go.
+For projects requiring advanced CSS styling capabilities, including support for animations, pseudo-classes, and responsive design via media queries, the `StyleManager` in the `styles` subpackage offers a powerful solution. Integrated seamlessly with `elem-go`, it allows developers to programmatically create and manage complex CSS styles within the type-safe environment of Go.
 
-Explore the [`stylemanager` subpackage](stylemanager/README.md) to leverage advanced styling features in your web applications.
+Explore the [`StyleManager` documentation](styles/STYLEMANAGER.md) to leverage advanced styling features in your web applications.
 
 ## HTMX Integration
 
