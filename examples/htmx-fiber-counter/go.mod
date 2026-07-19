@@ -4,7 +4,7 @@ go 1.21.1
 
 require (
 	github.com/chasefleming/elem-go v0.1.0
-	github.com/gofiber/fiber/v2 v2.52.9
+	github.com/gofiber/fiber/v2 v2.52.14
 )
 
 require (
