@@ -10,6 +10,7 @@ The `htmx` subpackage within `elem` provides a seamless way to integrate the [ht
 - [Creating Elements with htmx Attributes](#creating-elements-with-htmx-attributes)
 - [Supported htmx Attributes](#supported-htmx-attributes)
 - [Examples](#examples)
+- [Handling JSON Strings in Attributes](#handling-json-strings-in-attributes)
 
 ## Introduction
 
