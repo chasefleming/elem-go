@@ -2,7 +2,7 @@ package elem
 
 import (
 	"fmt"
-	"sort"
+	"slices"
 	"strings"
 
 	"github.com/chasefleming/elem-go/attrs"
@@ -92,7 +92,9 @@ func (n NoneNode) RenderWithOptions(opts RenderOptions) string {
 type TextNode string
 
 func (t TextNode) RenderTo(builder *strings.Builder, opts RenderOptions) {
-	builder.WriteString(EscapeNodeContents(string(t)))
+	// Stream the escaped text directly into the builder to avoid
+	// allocating an intermediate escaped string.
+	nodeContentReplacer.WriteString(builder, string(t))
 }
 
 func (t TextNode) Render() string {
@@ -203,17 +205,25 @@ func (e *Element) RenderTo(builder *strings.Builder, opts RenderOptions) {
 	switch len(e.Attrs) {
 	case 0:
 	case 1:
-		for k := range e.Attrs {
-			e.renderAttrTo(k, builder)
+		for k, v := range e.Attrs {
+			renderAttrTo(k, v, builder)
 		}
 	default:
-		keys := make([]string, 0, len(e.Attrs))
+		// Use a stack-allocated array for typical attribute counts so
+		// sorting the keys doesn't allocate.
+		var keysArr [16]string
+		var keys []string
+		if len(e.Attrs) <= len(keysArr) {
+			keys = keysArr[:0]
+		} else {
+			keys = make([]string, 0, len(e.Attrs))
+		}
 		for k := range e.Attrs {
 			keys = append(keys, k)
 		}
-		sort.Strings(keys)
+		slices.Sort(keys)
 		for _, k := range keys {
-			e.renderAttrTo(k, builder)
+			renderAttrTo(k, e.Attrs[k], builder)
 		}
 	}
 
@@ -242,17 +252,14 @@ func (e *Element) RenderTo(builder *strings.Builder, opts RenderOptions) {
 }
 
 // return string representation of given attribute with its value
-func (e *Element) renderAttrTo(attrName string, builder *strings.Builder) {
+func renderAttrTo(attrName, attrVal string, builder *strings.Builder) {
 	if _, exists := booleanAttrs[attrName]; exists {
 		// boolean attribute presents its name only if the value is "true"
-		if e.Attrs[attrName] == "true" {
+		if attrVal == "true" {
 			builder.WriteString(` `)
 			builder.WriteString(attrName)
 		}
 	} else {
-		// regular attribute has a name and a value
-		attrVal := e.Attrs[attrName]
-
 		// A necessary check to to avoid adding extra quotes around values that are already single-quoted
 		// An example is '{"quantity": 5}'
 		isSingleQuoted := strings.HasPrefix(attrVal, "'") && strings.HasSuffix(attrVal, "'")
