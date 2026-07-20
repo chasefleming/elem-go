@@ -100,6 +100,7 @@ const (
 
 	// Miscellaneous Attributes
 
+	Data       = "data"  // Used for the <object> element's resource URL
 	DataPrefix = "data-" // Used for custom data attributes e.g., "data-custom"
 	Download   = "download"
 	Draggable  = "draggable"
@@ -110,6 +111,7 @@ const (
 
 	RowSpan = "rowspan"
 	ColSpan = "colspan"
+	Span    = "span"
 	Scope   = "scope"
 	Headers = "headers"
 

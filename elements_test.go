@@ -219,7 +219,7 @@ func TestCdata(t *testing.T) {
 	assert.Equal(t, expected, actual)
 }
 
-func TestCdataEscaping (t *testing.T) {
+func TestCdataEscaping(t *testing.T) {
 	expected := `<![CDATA[Some CDATA content with ]]&gt; in it]]>`
 	actual := CdataNode("Some CDATA content with ]]> in it").Render()
 	assert.Equal(t, expected, actual)
@@ -475,6 +475,12 @@ func TestSection(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestSearch(t *testing.T) {
+	expected := `<search><form action="/search"><input name="q" type="search"></form></search>`
+	el := Search(nil, Form(attrs.Props{attrs.Action: "/search"}, Input(attrs.Props{attrs.Type: "search", attrs.Name: "q"})))
+	assert.Equal(t, expected, el.Render())
+}
+
 func TestHgroup(t *testing.T) {
 	expected := `<hgroup><h1>Frankenstein</h1><p>Or: The Modern Prometheus</p></hgroup>`
 	el := Hgroup(nil, H1(nil, Text("Frankenstein")), P(nil, Text("Or: The Modern Prometheus")))
@@ -541,6 +547,18 @@ func TestNoScript(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestSlot(t *testing.T) {
+	expected := `<slot name="header">Default header</slot>`
+	el := Slot(attrs.Props{attrs.Name: "header"}, Text("Default header"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestTemplate(t *testing.T) {
+	expected := `<template id="row-template"><p>Row content</p></template>`
+	el := Template(attrs.Props{attrs.ID: "row-template"}, P(nil, Text("Row content")))
+	assert.Equal(t, expected, el.Render())
+}
+
 // --- Semantic Text Content Elements ---
 
 func TestAbbr(t *testing.T) {
@@ -585,6 +603,18 @@ func TestData(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestDel(t *testing.T) {
+	expected := `<del cite="edits.html" datetime="2024-01-01T00:00:00Z">removed text</del>`
+	el := Del(attrs.Props{attrs.Cite: "edits.html", attrs.Datetime: "2024-01-01T00:00:00Z"}, Text("removed text"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestDfn(t *testing.T) {
+	expected := `<p><dfn>HTML</dfn> is the standard markup language for web pages.</p>`
+	el := P(nil, Dfn(nil, Text("HTML")), Text(" is the standard markup language for web pages."))
+	assert.Equal(t, expected, el.Render())
+}
+
 func TestFigCaption(t *testing.T) {
 	expected := `<figcaption>Description of the figure.</figcaption>`
 	el := FigCaption(nil, Text("Description of the figure."))
@@ -594,6 +624,12 @@ func TestFigCaption(t *testing.T) {
 func TestFigure(t *testing.T) {
 	expected := `<figure><img alt="An image" src="image.jpg"><figcaption>An image</figcaption></figure>`
 	el := Figure(nil, Img(attrs.Props{attrs.Src: "image.jpg", attrs.Alt: "An image"}), FigCaption(nil, Text("An image")))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestIns(t *testing.T) {
+	expected := `<ins cite="edits.html" datetime="2024-01-01T00:00:00Z">inserted text</ins>`
+	el := Ins(attrs.Props{attrs.Cite: "edits.html", attrs.Datetime: "2024-01-01T00:00:00Z"}, Text("inserted text"))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -612,6 +648,12 @@ func TestMark(t *testing.T) {
 func TestQ(t *testing.T) {
 	expected := `<p>The W3C's mission is <q cite="https://www.w3.org/Consortium/">To lead the World Wide Web to its full potential</q>.</p>`
 	el := P(nil, Text("The W3C's mission is "), Q(attrs.Props{attrs.Cite: "https://www.w3.org/Consortium/"}, Text("To lead the World Wide Web to its full potential")), Text("."))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestS(t *testing.T) {
+	expected := `<p><s>Was $50</s> Now $25!</p>`
+	el := P(nil, S(nil, Text("Was $50")), Text(" Now $25!"))
 	assert.Equal(t, expected, el.Render())
 }
 
@@ -707,6 +749,24 @@ func TestTable(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestCaption(t *testing.T) {
+	expected := `<table><caption>Monthly savings</caption><tr><td>January</td></tr></table>`
+	el := Table(nil, Caption(nil, Text("Monthly savings")), Tr(nil, Td(nil, Text("January"))))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestColgroup(t *testing.T) {
+	expected := `<colgroup span="2"></colgroup>`
+	el := Colgroup(attrs.Props{attrs.Span: "2"})
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestCol(t *testing.T) {
+	expected := `<colgroup><col span="2"><col></colgroup>`
+	el := Colgroup(nil, Col(attrs.Props{attrs.Span: "2"}), Col(nil))
+	assert.Equal(t, expected, el.Render())
+}
+
 // ========== Embedded Content ==========
 
 func TestEmbedLink(t *testing.T) {
@@ -748,6 +808,30 @@ func TestTrack(t *testing.T) {
 		"kind":    "captions",
 		"srclang": "en",
 	})
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestCanvas(t *testing.T) {
+	expected := `<canvas height="200" id="chart" width="300">Your browser does not support the canvas tag.</canvas>`
+	el := Canvas(attrs.Props{attrs.ID: "chart", attrs.Width: "300", attrs.Height: "200"}, Text("Your browser does not support the canvas tag."))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestEmbed(t *testing.T) {
+	expected := `<embed height="200" src="video.mp4" type="video/mp4" width="300">`
+	el := Embed(attrs.Props{attrs.Src: "video.mp4", attrs.Type: "video/mp4", attrs.Width: "300", attrs.Height: "200"})
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestObject(t *testing.T) {
+	expected := `<object data="document.pdf" height="200" name="doc" type="application/pdf" width="300">Fallback content</object>`
+	el := Object(attrs.Props{
+		attrs.Data:   "document.pdf",
+		attrs.Type:   "application/pdf",
+		attrs.Name:   "doc",
+		attrs.Width:  "300",
+		attrs.Height: "200",
+	}, Text("Fallback content"))
 	assert.Equal(t, expected, el.Render())
 }
 

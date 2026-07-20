@@ -332,6 +332,11 @@ func Section(attrs attrs.Props, children ...Node) *Element {
 	return newElement("section", attrs, children...)
 }
 
+// Search creates a <search> element.
+func Search(attrs attrs.Props, children ...Node) *Element {
+	return newElement("search", attrs, children...)
+}
+
 // Details creates a <details> element.
 func Details(attrs attrs.Props, children ...Node) *Element {
 	return newElement("details", attrs, children...)
@@ -393,6 +398,17 @@ func NoScript(attrs attrs.Props, children ...Node) *Element {
 	return newElement("noscript", attrs, children...)
 }
 
+// Slot creates a <slot> element.
+func Slot(attrs attrs.Props, children ...Node) *Element {
+	return newElement("slot", attrs, children...)
+}
+
+// Template creates a <template> element. Its children are rendered inline
+// like any other element; the library does not treat its contents specially.
+func Template(attrs attrs.Props, children ...Node) *Element {
+	return newElement("template", attrs, children...)
+}
+
 // --- Semantic Text Content Elements ---
 
 // Abbr creates an <abbr> element.
@@ -415,6 +431,17 @@ func Data(attrs attrs.Props, children ...Node) *Element {
 	return newElement("data", attrs, children...)
 }
 
+// Del creates a <del> element, representing text that has been deleted
+// from a document.
+func Del(attrs attrs.Props, children ...Node) *Element {
+	return newElement("del", attrs, children...)
+}
+
+// Dfn creates a <dfn> element.
+func Dfn(attrs attrs.Props, children ...Node) *Element {
+	return newElement("dfn", attrs, children...)
+}
+
 // FigCaption creates a <figcaption> element.
 func FigCaption(attrs attrs.Props, children ...Node) *Element {
 	return newElement("figcaption", attrs, children...)
@@ -423,6 +450,12 @@ func FigCaption(attrs attrs.Props, children ...Node) *Element {
 // Figure creates a <figure> element.
 func Figure(attrs attrs.Props, children ...Node) *Element {
 	return newElement("figure", attrs, children...)
+}
+
+// Ins creates an <ins> element, representing text that has been inserted
+// into a document.
+func Ins(attrs attrs.Props, children ...Node) *Element {
+	return newElement("ins", attrs, children...)
 }
 
 // Kbd creates a <kbd> element.
@@ -438,6 +471,12 @@ func Mark(attrs attrs.Props, children ...Node) *Element {
 // Q creates a <q> element.
 func Q(attrs attrs.Props, children ...Node) *Element {
 	return newElement("q", attrs, children...)
+}
+
+// S creates an <s> element, rendering text with a strikethrough for content
+// that is no longer accurate or relevant.
+func S(attrs attrs.Props, children ...Node) *Element {
+	return newElement("s", attrs, children...)
 }
 
 // Samp creates a <samp> element.
@@ -480,6 +519,22 @@ func Rp(attrs attrs.Props, children ...Node) *Element {
 // Table creates a <table> element.
 func Table(attrs attrs.Props, children ...Node) *Element {
 	return newElement("table", attrs, children...)
+}
+
+// Caption creates a <caption> element.
+func Caption(attrs attrs.Props, children ...Node) *Element {
+	return newElement("caption", attrs, children...)
+}
+
+// Colgroup creates a <colgroup> element. Per the HTML spec, it takes either
+// a span attribute or <col> children, but not both.
+func Colgroup(attrs attrs.Props, children ...Node) *Element {
+	return newElement("colgroup", attrs, children...)
+}
+
+// Col creates a <col> element. <col> is a void element, so it never has children.
+func Col(attrs attrs.Props) *Element {
+	return newElement("col", attrs)
 }
 
 // THead creates a <thead> element.
@@ -537,6 +592,21 @@ func Source(attrs attrs.Props, children ...Node) *Element {
 // Track creates a <track> element. <track> is a void element, so it never has children.
 func Track(attrs attrs.Props) *Element {
 	return newElement("track", attrs)
+}
+
+// Canvas creates a <canvas> element.
+func Canvas(attrs attrs.Props, children ...Node) *Element {
+	return newElement("canvas", attrs, children...)
+}
+
+// Embed creates an <embed> element. <embed> is a void element, so it never has children.
+func Embed(attrs attrs.Props) *Element {
+	return newElement("embed", attrs)
+}
+
+// Object creates an <object> element.
+func Object(attrs attrs.Props, children ...Node) *Element {
+	return newElement("object", attrs, children...)
 }
 
 // ========== Image Map Elements ==========
