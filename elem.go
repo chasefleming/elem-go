@@ -260,18 +260,20 @@ func renderAttrTo(attrName, attrVal string, builder *strings.Builder) {
 			builder.WriteString(attrName)
 		}
 	} else {
-		// A necessary check to to avoid adding extra quotes around values that are already single-quoted
+		// A necessary check to avoid adding extra quotes around values that are already single-quoted
 		// An example is '{"quantity": 5}'
-		isSingleQuoted := strings.HasPrefix(attrVal, "'") && strings.HasSuffix(attrVal, "'")
+		isSingleQuoted := len(attrVal) >= 2 && strings.HasPrefix(attrVal, "'") && strings.HasSuffix(attrVal, "'")
 
 		builder.WriteString(` `)
 		builder.WriteString(attrName)
 		builder.WriteString(`=`)
-		if !isSingleQuoted {
+		if isSingleQuoted {
+			builder.WriteString(`'`)
+			singleQuoteAttrReplacer.WriteString(builder, attrVal[1:len(attrVal)-1])
+			builder.WriteString(`'`)
+		} else {
 			builder.WriteString(`"`)
-		}
-		builder.WriteString(attrVal)
-		if !isSingleQuoted {
+			doubleQuoteAttrReplacer.WriteString(builder, attrVal)
 			builder.WriteString(`"`)
 		}
 	}
