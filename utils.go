@@ -103,3 +103,13 @@ func EscapeScriptContents(s string) string {
 	s = scriptContentsRegexp.ReplaceAllString(s, `\x3C$1$2`)
 	return s
 }
+
+// styleContentsRegexp matches <style and </style case-insensitively
+var styleContentsRegexp = regexp.MustCompile(`(?i)<(/?)(style)`)
+
+// EscapeStyleContents escapes the contents of a style node according to https://html.spec.whatwg.org/multipage/semantics.html#the-style-element
+func EscapeStyleContents(s string) string {
+	s = strings.ReplaceAll(s, `<!--`, `\x3C!--`)
+	s = styleContentsRegexp.ReplaceAllString(s, `\x3C$1$2`)
+	return s
+}

@@ -142,6 +142,29 @@ func (t ScriptNode) RenderWithOptions(opts RenderOptions) string {
 	return builder.String()
 }
 
+type CSSNode struct {
+	node Node
+}
+
+func NewCSSNode(node Node) CSSNode {
+	return CSSNode{node}
+}
+
+func (c CSSNode) RenderTo(builder *strings.Builder, opts RenderOptions) {
+	styleContents := EscapeStyleContents(c.node.Render())
+	builder.WriteString(styleContents)
+}
+
+func (c CSSNode) Render() string {
+	return c.RenderWithOptions(RenderOptions{})
+}
+
+func (c CSSNode) RenderWithOptions(opts RenderOptions) string {
+	var builder strings.Builder
+	c.RenderTo(&builder, opts)
+	return builder.String()
+}
+
 type CdataNode string
 
 func (t CdataNode) RenderTo(builder *strings.Builder, opts RenderOptions) {

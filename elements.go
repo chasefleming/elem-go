@@ -289,8 +289,18 @@ func Script(attrs attrs.Props, children ...Node) *Element {
 }
 
 // Style creates a <style> element.
+// According to https://html.spec.whatwg.org/multipage/semantics.html#the-style-element, restrictions apply to contents.
 func Style(attrs attrs.Props, children ...Node) *Element {
-	return newElement("style", attrs, children...)
+	// Transform children to CSSNodes to implement content escaping
+	styleChildren := make([]Node, len(children))
+	for i := range children {
+		if cn, ok := children[i].(CSSNode); ok {
+			styleChildren[i] = cn
+		} else {
+			styleChildren[i] = NewCSSNode(children[i])
+		}
+	}
+	return newElement("style", attrs, styleChildren...)
 }
 
 // ========== Semantic Elements ==========
@@ -633,9 +643,9 @@ func Raw(html string) RawNode {
 	return RawNode(html)
 }
 
-// CSS takes css content and returns a TextNode.
-func CSS(content string) TextNode {
-	return TextNode(content)
+// CSS takes css content and returns a CSSNode.
+func CSS(content string) CSSNode {
+	return NewCSSNode(Raw(content))
 }
 
 // Fragments are a way to group multiple elements together without adding an extra node to the DOM.
