@@ -898,7 +898,7 @@ func TestCSS(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
-func TestSingleQuote(t *testing.T) {
+func TestAttributeValueSingleQuote(t *testing.T) {
 	expected := `<div data-values='{"quantity": 5}'></div>`
 	el := Div(attrs.Props{
 		"data-values": `'{"quantity": 5}'`,
@@ -907,13 +907,62 @@ func TestSingleQuote(t *testing.T) {
 	assert.Equal(t, expected, actual)
 }
 
-func TestSingleQuoteWithSingleQuotesInValue(t *testing.T) {
+func TestAttributeValueSingleQuoteWithSingleQuotes(t *testing.T) {
 	expected := `<div data-values='{"quantity": 5, "name": "Joe&#39;s BBQ"}'></div>`
 	el := Div(attrs.Props{
 		"data-values": `'{"quantity": 5, "name": "Joe's BBQ"}'`,
 	})
 	actual := el.Render()
 	assert.Equal(t, expected, actual)
+}
+
+func TestAttributeValueDoubleQuoteEscaping(t *testing.T) {
+	expected := `<input type="text" value="27&quot; Monitor">`
+	el := Input(attrs.Props{
+		attrs.Type:  "text",
+		attrs.Value: `27" Monitor`,
+	})
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestAttributeValueAmpersandEscaping(t *testing.T) {
+	expected := `<a href="/search?q=a&amp;page=2">Search</a>`
+	el := A(attrs.Props{
+		attrs.Href: "/search?q=a&page=2",
+	}, Text("Search"))
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestAttributeValueXSSInjection(t *testing.T) {
+	expected := `<input value="foo&quot; onfocus=&quot;alert(1)">`
+	el := Input(attrs.Props{
+		attrs.Value: `foo" onfocus="alert(1)`,
+	})
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestAttributeValueSingleQuotedBreakout(t *testing.T) {
+	expected := `<div data-values='foo&#39; onclick=&#39;alert(1)'></div>`
+	el := Div(attrs.Props{
+		"data-values": `'foo' onclick='alert(1)'`,
+	})
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestAttributeValueLoneSingleQuote(t *testing.T) {
+	expected := `<div title="'"></div>`
+	el := Div(attrs.Props{
+		attrs.Title: "'",
+	})
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestAttributeValueTagsEscape(t *testing.T) {
+	expected := `<div title="&lt;/div&gt;"></div>`
+	el := Div(attrs.Props{
+		attrs.Title: "</div>",
+	})
+	assert.Equal(t, expected, el.Render())
 }
 
 func TestFragment(t *testing.T) {
@@ -943,37 +992,4 @@ func TestFragment(t *testing.T) {
 	)
 	actual := el.Render()
 	assert.Equal(t, expected, actual)
-}
-
-func TestAttributeValueDoubleQuoteEscaping(t *testing.T) {
-	expected := `<input type="text" value="27&quot; Monitor">`
-	el := Input(attrs.Props{
-		attrs.Type:  "text",
-		attrs.Value: `27" Monitor`,
-	})
-	assert.Equal(t, expected, el.Render())
-}
-
-func TestAttributeValueXSSInjection(t *testing.T) {
-	expected := `<input value="foo&quot; onfocus=&quot;alert(1)">`
-	el := Input(attrs.Props{
-		attrs.Value: `foo" onfocus="alert(1)`,
-	})
-	assert.Equal(t, expected, el.Render())
-}
-
-func TestAttributeValueQuotesInTitle(t *testing.T) {
-	expected := `<button title="Click &quot;Continue&quot; to continue">Continue</button>`
-	el := Button(attrs.Props{
-		attrs.Title: `Click "Continue" to continue`,
-	}, Text("Continue"))
-	assert.Equal(t, expected, el.Render())
-}
-
-func TestSingleQuotedAttributeBreakout(t *testing.T) {
-	expected := `<div data-values='foo&#39; onclick=&#39;alert(1)'></div>`
-	el := Div(attrs.Props{
-		"data-values": `'foo' onclick='alert(1)'`,
-	})
-	assert.Equal(t, expected, el.Render())
 }
