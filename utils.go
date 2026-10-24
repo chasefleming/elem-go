@@ -21,6 +21,24 @@ var commentContentsReplacer = strings.NewReplacer(
 	"--!>", "--!&gt;",
 )
 
+// doubleQuoteAttrReplacer handles escaping of HTML special characters in double-quoted attribute values.
+// Note that single quotes (') do not need escaping inside double-quoted attributes in HTML5.
+var doubleQuoteAttrReplacer = strings.NewReplacer(
+	"&", "&amp;",
+	`"`, "&quot;",
+	"<", "&lt;",
+	">", "&gt;",
+)
+
+// singleQuoteAttrReplacer handles escaping of HTML special characters in single-quoted attribute values.
+// Note that double quotes (") do not need escaping inside single-quoted attributes in HTML5.
+var singleQuoteAttrReplacer = strings.NewReplacer(
+	"&", "&amp;",
+	`'`, "&#39;",
+	"<", "&lt;",
+	">", "&gt;",
+)
+
 // If conditionally renders one of the provided elements based on the condition
 func If[T any](condition bool, ifTrue, ifFalse T) T {
 	if condition {
