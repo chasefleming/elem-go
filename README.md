@@ -8,7 +8,7 @@
 
 - Type-safe constructors for nearly every standard HTML5 element and attribute.
 - Utilities like `If` and `TransformEach` for conditional and list rendering.
-- Automatic HTML escaping of text content (use `Raw` to opt out).
+- Automatic HTML escaping of text content and attribute values (use `Raw` to opt out of text escaping).
 - Zero runtime dependencies.
 - Inline CSS styling with the [styles](styles/README.md) subpackage.
 - Advanced CSS features (pseudo-classes, animations, media queries) with [`StyleManager`](styles/STYLEMANAGER.md).
@@ -232,6 +232,23 @@ content := elem.Div(nil,
 
 Here, the nodes are inserted directly into the parent `div` with no additional wrapper elements in the output.
 
+### Attribute Value Escaping
+
+Attribute values are escaped automatically, so a value cannot terminate its attribute or inject new ones. Inside double-quoted values `&`, `"`, `<` and `>` are replaced with their HTML entities:
+
+```go
+input := elem.Input(attrs.Props{
+    attrs.Type:  "text",
+    attrs.Value: `27" Monitor`,
+})
+// Renders: <input type="text" value="27&quot; Monitor">
+
+link := elem.A(attrs.Props{attrs.Href: "/search?q=a&page=2"}, elem.Text("Search"))
+// Renders: <a href="/search?q=a&amp;page=2">Search</a>
+```
+
+Pass attribute values unescaped. A value that already contains entities such as `&amp;` is escaped again, producing `&amp;amp;` in the output. Unlike text content, there is no `Raw` equivalent for attributes.
+
 ### Handling JSON Strings and Special Characters in Attributes
 
 When using attributes that require JSON strings or special characters (like quotes), make sure to wrap these strings in single quotes. This prevents the library from adding extra quotes around your value. For example:
@@ -242,6 +259,15 @@ content := elem.Div(attrs.Props{
     attrs.Class: "special 'class'",
     attrs.Data:  `'{"key": "value"}'`,
 }, elem.Text("Content"))
+```
+
+The content between the single quotes is still escaped (`&`, `'`, `<` and `>`), while the double quotes inside the JSON are left as they are:
+
+```go
+content := elem.Div(attrs.Props{
+    attrs.Data: `'{"name": "Joe's BBQ"}'`,
+})
+// Renders: <div data='{"name": "Joe&#39;s BBQ"}'></div>
 ```
 
 ## Advanced CSS Styling with `StyleManager`
