@@ -429,6 +429,16 @@ func TestStyle(t *testing.T) {
 	assert.Equal(t, expected, el.Render())
 }
 
+func TestStyleEscaping(t *testing.T) {
+	expected := `<style>\x3C/style>loose text between tags\x3Cstyle></style>`
+	el := Style(attrs.Props{}, Raw("</style>loose text between tags<style>"))
+	assert.Equal(t, expected, el.Render())
+
+	expected = `<style>.alert { content: "\x3C/StYlE>"; }</style>`
+	el = Style(attrs.Props{}, Raw(`.alert { content: "</StYlE>"; }`))
+	assert.Equal(t, expected, el.Render())
+}
+
 // ========== Semantic Elements ==========
 
 // --- Semantic Sectioning Elements ---
@@ -895,6 +905,20 @@ func TestCSS(t *testing.T) {
 	cssContent := `.test-class {color: #333;}`
 	expected := `.test-class {color: #333;}`
 	el := CSS(cssContent)
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestCSSWithChildCombinator(t *testing.T) {
+	cssContent := `div > p { color: #333; }`
+	expected := `div > p { color: #333; }`
+	el := CSS(cssContent)
+	assert.Equal(t, expected, el.Render())
+}
+
+func TestStyleWithCSSCombinator(t *testing.T) {
+	cssContent := `nav > ul > li { margin: 0; }`
+	expected := `<style>nav > ul > li { margin: 0; }</style>`
+	el := Style(nil, CSS(cssContent))
 	assert.Equal(t, expected, el.Render())
 }
 
